@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  dateToday:number = new Date().getFullYear()
+  submitLoading:boolean = false
+
+
+  submit(){
+    this.submitLoading = true
+  }
+
 
 }
