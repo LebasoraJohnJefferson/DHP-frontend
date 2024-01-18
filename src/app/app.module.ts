@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { PrimengModule } from './primeng/primeng.module';
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -17,6 +18,7 @@ import { PrimengModule } from './primeng/primeng.module';
     CoreModule,
     PrimengModule
   ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })

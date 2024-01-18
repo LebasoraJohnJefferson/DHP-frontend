@@ -6,7 +6,7 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
-  {path:'forget-password',component:ForgetPasswordComponent},
+  {path:'forgot-password',component:ForgetPasswordComponent},
   {path:'reset-password',component:ResetPasswordComponent}
 ];
 

@@ -6,17 +6,22 @@ import { LoginComponent } from './pages/login/login.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BackBtnComponent } from './components/back-btn/back-btn.component';
+
 
 @NgModule({
   declarations: [
-  
     LoginComponent,
-       ForgetPasswordComponent,
-       ResetPasswordComponent
+    ForgetPasswordComponent,
+    ResetPasswordComponent,
+    BackBtnComponent,
   ],
   imports: [
     CommonModule,
-    CoreRoutingModule
+    CoreRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CoreModule { }
