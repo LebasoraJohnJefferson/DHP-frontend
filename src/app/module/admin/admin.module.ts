@@ -9,6 +9,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutComponent } from './components/layout/layout.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { PrimengModule } from '../../primeng/primeng.module';
+import { AnalyticsComponent } from './pages/analytics/analytics.component';
+import { PersonnelComponent } from './pages/personnel/personnel.component';
+import { EventsComponent } from './pages/events/events.component';
+import { DocumentsComponent } from './pages/documents/documents.component';
+import { LogsComponent } from './pages/logs/logs.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +21,12 @@ import { PrimengModule } from '../../primeng/primeng.module';
     SidebarComponent,
     DashboardComponent,
     HeaderComponent,
-    NotificationComponent
+    NotificationComponent,
+    AnalyticsComponent,
+    PersonnelComponent,
+    EventsComponent,
+    DocumentsComponent,
+    LogsComponent
   ],
   imports: [
     PrimengModule,

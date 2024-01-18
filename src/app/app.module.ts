@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 
 import { CoreModule } from './core/core.module';
 import { AdminModule } from './module/admin/admin.module';
-import { PrimengModule } from './primeng/primeng.module';
 
 
 
@@ -21,7 +20,6 @@ import { PrimengModule } from './primeng/primeng.module';
     AppRoutingModule,
     AdminModule,
     CoreModule,
-    PrimengModule,
   ],
 
   providers: [],
