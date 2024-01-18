@@ -7,6 +7,7 @@ import { EventsComponent } from './pages/events/events.component';
 import { PersonnelComponent } from './pages/personnel/personnel.component';
 import { DocumentsComponent } from './pages/documents/documents.component';
 import { LogsComponent } from './pages/logs/logs.component';
+import { AccountComponent } from './pages/account/account.component';
 
 
 const routes: Routes = [
@@ -14,11 +15,11 @@ const routes: Routes = [
     {path:'',component:DashboardComponent},
     {path:'analytics',component:AnalyticsComponent},
     {path:'events',component:EventsComponent},
-    {path:'events',component:EventsComponent},
     {path:'personnel',component:PersonnelComponent},
     {path:'documents',component:DocumentsComponent},
     {path:'logs',component:LogsComponent},
-  ]}
+  ]},
+  {path:'admin/account',component:AccountComponent}
   
 ];
 

@@ -14,6 +14,7 @@ import { PersonnelComponent } from './pages/personnel/personnel.component';
 import { EventsComponent } from './pages/events/events.component';
 import { DocumentsComponent } from './pages/documents/documents.component';
 import { LogsComponent } from './pages/logs/logs.component';
+import { AccountComponent } from './pages/account/account.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LogsComponent } from './pages/logs/logs.component';
     PersonnelComponent,
     EventsComponent,
     DocumentsComponent,
-    LogsComponent
+    LogsComponent,
+    AccountComponent
   ],
   imports: [
     PrimengModule,

@@ -64,7 +64,7 @@
             <div class="grid gap-1 mt-6">
               <div
                 *ngFor="let route of routesArr"
-                [routerLink]="'/admin/' + route.route"
+                [routerLink]="'/' + route.route"
                 (click)="getCurrentRouteURL(route.route)"
                 [ngClass]="
                 currentRoute == route.route
@@ -94,7 +94,7 @@
       <div
         class="w-[calc(100%_-_280px)] flex justify-between items-center p-5 pb-3 bg-green-600"
       >
-        <div class="flex items-center ml-4 text-lg font-semibold">Admin Panel</div>
+        <div class="flex items-center ml-4 text-lg font-semibold">Personnel Panel</div>
   
         <div class="flex items-center">
           <div

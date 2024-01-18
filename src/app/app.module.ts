@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 
 import { CoreModule } from './core/core.module';
 import { AdminModule } from './module/admin/admin.module';
+import { PersonnelModule } from './module/personnel/personnel.module';
 
 
 
@@ -19,6 +20,7 @@ import { AdminModule } from './module/admin/admin.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     AdminModule,
+    PersonnelModule,
     CoreModule,
   ],
 
