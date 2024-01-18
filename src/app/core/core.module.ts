@@ -8,7 +8,7 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BackBtnComponent } from './components/back-btn/back-btn.component';
-import { PageNotFoundComponent } from './page/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { LayoutComponent } from './components/layout/layout.component';
 
 
