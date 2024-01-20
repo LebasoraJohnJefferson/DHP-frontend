@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AdminService } from '../../shared/services/admin.service';
+import { AuthService } from '../../../../core/shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -49,7 +51,9 @@ export class HeaderComponent implements OnInit {
   ];
 
   constructor(
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
+    private _adminService:AdminService,
+    private _authService:AuthService
   ) {}
 
   ngOnInit(): void {
@@ -69,7 +73,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     let confirm = window.confirm("Are you sure you want to logout?")
-    // if(confirm) this.authService.logout('admin');
+    if(confirm) this._authService.logout('admin');
   }
 
   openCloseNavOverlay() {
@@ -86,10 +90,10 @@ export class HeaderComponent implements OnInit {
   };
 
   getAdmin() {
-    // this._adminService.getAdmin().subscribe({
-    //   next: (res) => {
-    //     this.user = res.user;
-    //   },
-    // });
+    this._adminService.getAdmin().subscribe({
+      next: (res:any) => {
+        this.user = res.data[0];
+      },
+    });
   }
 }

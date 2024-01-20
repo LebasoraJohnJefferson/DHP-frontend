@@ -13,6 +13,8 @@ import { DocumentsComponent } from './pages/documents/documents.component';
 import { LogsComponent } from './pages/logs/logs.component';
 import { AccountComponent } from './pages/account/account.component';
 
+
+
 @NgModule({
   declarations: [
     DashboardComponent,

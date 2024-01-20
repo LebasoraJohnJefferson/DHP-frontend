@@ -8,6 +8,7 @@ import { PersonnelComponent } from './pages/personnel/personnel.component';
 import { DocumentsComponent } from './pages/documents/documents.component';
 import { LogsComponent } from './pages/logs/logs.component';
 import { AccountComponent } from './pages/account/account.component';
+import { AdminGuard } from '../../core/shared/guards/admin.guard';
 
 
 const routes: Routes = [
@@ -18,7 +19,7 @@ const routes: Routes = [
     {path:'personnel',component:PersonnelComponent},
     {path:'documents',component:DocumentsComponent},
     {path:'logs',component:LogsComponent},
-  ]},
+  ],canActivate:[AdminGuard]},
   {path:'admin/account',component:AccountComponent}
   
 ];

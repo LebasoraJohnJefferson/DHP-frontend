@@ -26,6 +26,6 @@ import { LayoutComponent } from './components/layout/layout.component';
     CoreRoutingModule,
     FormsModule,
     ReactiveFormsModule
-  ]
+  ],
 })
 export class CoreModule { }

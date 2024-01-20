@@ -6,6 +6,7 @@ import { EventsComponent } from './pages/events/events.component';
 import { DocumentsComponent } from './pages/documents/documents.component';
 import { LogsComponent } from './pages/logs/logs.component';
 import { AccountComponent } from './pages/account/account.component';
+import { PersonnelGuard } from '../../core/shared/guards/personnel.guard';
 
 const routes: Routes = [
   {path:'',component:LayoutComponent,children:[
@@ -13,7 +14,7 @@ const routes: Routes = [
     {path:'events',component:EventsComponent},
     {path:'documents',component:DocumentsComponent},
     {path:'logs',component:LogsComponent},
-  ]},
+  ],canActivate:[PersonnelGuard]},
   {path:'admin/account',component:AccountComponent}
 ];
 

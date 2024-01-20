@@ -7,16 +7,16 @@
                 <h2 class="text-red-700 font-bold lg:text-lg text-[12px]  text-center">DEMOGRAPHIC AND HEALTH PROFILE SYSTEM </h2>
             </div>
         </div>
-        <form action="" class="w-full gap-3 h-full flex items-center lg:justify-center flex-col">
+        <form [formGroup]="loginForm" action="" class="w-full gap-3 h-full flex items-center lg:justify-center flex-col">
             <h3 class="font-bold  text-lg">Welcome back!</h3>
             <h4 class="text-sm">Please, Enter your credentials below to login.</h4>
             <div class="w-[90%] flex items-center flex-col">
                 <label class="block text-[13px] lg:w-[70%] w-full font-medium text-gray-700">Email</label>
-                <input placeholder="Enter Email" class="text-[14px] border drop-shadow lg:w-[70%] w-full px-1 py-2 rounded outline-0 bg-slate-50" type="text" name="" id="">
+                <input formControlName="email" placeholder="Enter Email" class="text-[14px] border drop-shadow lg:w-[70%] w-full px-1 py-2 rounded outline-0 bg-slate-50" type="text" name="" id="">
             </div>
             <div class="w-[90%] flex items-center flex-col">
                 <label class="block text-[13px] lg:w-[70%] w-full  font-medium text-gray-700">Password</label>
-                <input placeholder="Enter Password" class="text-[14px] bg-slate-50 border drop-shadow lg:w-[70%] w-full px-1 py-2 rounded outline-0 " type="password" name="" id="">
+                <input formControlName="password" placeholder="Enter Password" class="text-[14px] bg-slate-50 border drop-shadow lg:w-[70%] w-full px-1 py-2 rounded outline-0 " type="password" name="" id="">
             </div>
             <div class="w-[90%] flex items-center flex-col">
             <button

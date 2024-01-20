@@ -41,7 +41,7 @@
       </div>
   
       <div
-        class="md:hidden transition-all"
+        class="lg:hidden transition-all"
         [ngClass]="isNavOpen ? 'block' : 'hidden'"
       >
         <div
@@ -103,7 +103,7 @@
           >
           
             <h1 *ngIf="user.length != 0" class="font-semibold mr-2 capitalize">
-              Hi, {{ user.name.split(" ")[0] }}
+              Hi, {{ user.first_name.split(" ")[0] }}
             </h1>
             <div class="w-fit h-fit rounded-full bg-green-200">
               <img

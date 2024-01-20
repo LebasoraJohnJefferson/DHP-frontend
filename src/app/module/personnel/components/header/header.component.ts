@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { PersonnelService } from '../../shared/services/personnel.service';
+import { AuthService } from '../../../../core/shared/services/auth.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -39,12 +42,16 @@ export class HeaderComponent implements OnInit {
   ];
 
   constructor(
-    private route: ActivatedRoute,
+    private _authService:AuthService,
+    public route: ActivatedRoute,
+    private _personnelService:PersonnelService
   ) {}
 
   ngOnInit(): void {
     window.addEventListener('scroll', this.listenScrollEvent);
-    this.getAdmin();
+    this.getUser();
+
+    console.log('hello')
 
     const route = this.route.snapshot.children[0].routeConfig?.path;
     route == '' ? (this.currentRoute = '/admin/') : (this.currentRoute = route);
@@ -59,7 +66,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     let confirm = window.confirm("Are you sure you want to logout?")
-    // if(confirm) this.authService.logout('admin');
+    if(confirm) this._authService.logout('personnel');
   }
 
   openCloseNavOverlay() {
@@ -75,11 +82,11 @@ export class HeaderComponent implements OnInit {
     window.scrollY > 15 ? (this.onScroll = true) : (this.onScroll = false);
   };
 
-  getAdmin() {
-    // this._adminService.getAdmin().subscribe({
-    //   next: (res) => {
-    //     this.user = res.user;
-    //   },
-    // });
+  getUser() {
+    this._personnelService.getProfile().subscribe({
+      next: (res:any) => {
+        this.user = res.data[0];
+      },
+    });
   }
 }
