@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './personnel.component.scss'
 })
 export class PersonnelComponent {
-
+  customers:any=[]
+  selecetedCustomer:any;
+  cols: any[] = [];
 }

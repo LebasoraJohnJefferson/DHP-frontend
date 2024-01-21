@@ -12,8 +12,8 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { AdminModule } from './module/admin/admin.module';
 import { PersonnelModule } from './module/personnel/personnel.module';
-import { HotToastModule } from '@ngneat/hot-toast';
 
+import { HotToastModule } from '@ngneat/hot-toast';
 
 @NgModule({
   declarations: [
