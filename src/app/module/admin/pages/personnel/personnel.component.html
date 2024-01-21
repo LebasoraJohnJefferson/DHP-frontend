@@ -8,7 +8,7 @@
         <table class="w-full">
           <tr class="grid grid-cols-2 p-2 lg:w-full w-[90vw] bg-green-800 text-white ">
             <th class="flex w-full items-center">
-              <div class="bg-green-300 text-green-900 p-2 hover:bg-green-300/80 cursor-pointer text-[12px] rounded-full">Create <i class="fal fa-plus font-semibold"></i></div>
+              <div (click)="openPersonnelForm('create')" class="bg-green-300 text-green-900 p-2 hover:bg-green-300/80 cursor-pointer text-[12px] rounded-full">Create <i class="fal fa-plus font-semibold"></i></div>
             </th>
             <th class="flex justify-end w-full  px-4 py-2">
               <input class="px-2 border-0 outline-0 py-1 rounded text-black" placeholder="Search..."/>
@@ -16,18 +16,20 @@
           </tr>
           <div class="lg:w-full w-[90vw] overflow-x-auto">
             <div class="md:w-full w-[800px]">
-              <tr class="grid grid-cols-6 bg-green-800 text-white text-[14px]">
+              <tr class="grid grid-cols-7 bg-green-800 text-white text-[14px]">
                 <th class="border border-gray-300 px-4 py-2">First Name</th>
                 <th class="border border-gray-300 px-4 py-2">Middle Name</th>
                 <th class="border border-gray-300 px-4 py-2">Last Name</th>
+                <th class="border border-gray-300 px-4 py-2">Gender</th>
                 <th class="border border-gray-300 px-4 py-2">Email</th>
                 <th class="border border-gray-300 px-4 py-2">Status</th>
                 <th class="border border-gray-300 px-4 py-2">Action</th>
               </tr>
-              <tr *ngFor="let details of data" class="grid grid-cols-6 even:bg-green-200  text-[14px]">
+              <tr *ngFor="let details of data" class="grid grid-cols-7 even:bg-green-200  text-[14px]">
                 <th class="border border-gray-300 px-4 py-2 break-all">{{details.first_name}}</th>
                 <th class="border border-gray-300 px-4 py-2 break-all">{{details.middle_name}}</th>
                 <th class="border border-gray-300 px-4 py-2 break-all">{{details.last_name}}</th>
+                <th class="border border-gray-300 px-4 py-2 break-all">{{details.gender}}</th>
                 <th class="border border-gray-300 px-4 py-2 break-all">{{details.email}}</th>
                 <th class="border border-gray-300 px-4 py-2 text-[12px] flex items-center justify-center">
                   <p [class]=" details.status ? 'rounded-lg bg-blue-300 text-blue-800 w-fit p-2' : 'rounded-lg bg-red-300 text-red-800 w-fit p-2'">{{ details.status ? 'Active' : 'Inactive'}}</p>
@@ -51,3 +53,169 @@
         
     </div>
 </div>
+
+  <div
+      *ngIf="createAccountModal"
+      id="modal"
+      class="w-screen h-screen fixed z-50 left-0 top-0 bg-slate-500/[.54] flex justify-center items-center"
+    >
+      
+      <div class="mt-3">
+        <div class="max-w-[450px] rounded w-[450px] p-4 opacity-100 bg-white" >
+          <div class="flex items-center justify-between">
+            <div class="text-slate-700  my-3 font-semibold">
+              Create Personnel
+            </div>
+            <div>
+              <i (click)="createAccountModal=false" class="cursor-pointer hover:bg-red-500/80 pi pi-times text-red-500 hover:text-white p-1 rounded-full"></i>
+            </div>
+          </div>
+          <form
+          (ngSubmit)="onSubmit()"
+          [formGroup]="createForm"
+          class="w-full grid gap-2"
+        >
+
+        <div class="grid grid-cols-3 gap-2">
+
+          <div class="w-full">
+            <label class="block text-[12px] font-medium text-gray-700"
+              >First name</label
+            >
+            <div class="mt-1 relative rounded-md w-full">
+              <input
+                type="text"
+                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
+                placeholder="Enter name"
+                formControlName="first_name"
+              />
+            </div>
+          </div>
+
+          <div class="w-full">
+            <label class="block text-[12px] font-medium text-gray-700"
+              >Middle name</label
+            >
+            <div class="mt-1 relative rounded-md w-full">
+              <input
+                type="text"
+                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
+                placeholder="Enter name"
+                formControlName="middle_name"
+              />
+            </div>
+          </div>
+
+          <div class="w-full">
+            <label class="block text-[12px] font-medium text-gray-700"
+              >Last name</label
+            >
+            <div class="mt-1 relative rounded-md w-full">
+              <input
+                type="text"
+                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
+                placeholder="Enter name"
+                formControlName="last_name"
+              />
+            </div>
+          </div>
+        </div>
+        
+
+          <div class="w-full">
+            <label class="block text-[12px] font-medium text-gray-700"
+              >Email</label
+            >
+            <div class="mt-1 relative rounded-md w-full">
+              <input
+                type="text"
+                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
+                placeholder="Enter name"
+                formControlName="email"
+              />
+            </div>
+          </div>
+
+
+
+          <div>
+            <label class="block text-[12px] font-medium text-gray-700"
+              >Gender</label
+            >
+            <div class="mt-1 relative rounded-md">
+              <select
+                formControlName="gender"
+                required
+                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50 cursor-pointer"
+              >
+                <option value="" selected disabled hidden class="">
+                  Select Gender
+                </option>
+                <option class="text-black" *ngFor="let identify of gender" [value]="identify.id">
+                  {{ identify.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          
+
+          <div class="w-full">
+            <label class="block text-[12px] font-medium text-gray-700"s
+              >Password</label
+            >
+            <div class="mt-1 relative rounded-md shadow-sm w-full">
+              <input
+                type="text"
+                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
+                placeholder="Enter password"
+                formControlName="password"
+              />
+            </div>
+          </div>
+          <div class="flex items-center justify-start gap-2 mt-2">
+            <input type="checkbox" class="outline-0 p-2"> 
+            <label class="block text-[13px] font-medium text-gray-700"s
+              >Active</label
+            >
+          </div>
+
+          <button
+            [disabled]="isSubmitLoading"
+            type="submit"
+            class="grid place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-3 hover:bg-slate-900/80 transition-all w-full mt-2"
+          >
+            <div class="flex items-center w-fit mx-auto" *ngIf="isSubmitLoading">
+              <svg
+                class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+
+              <span>Processing</span>
+            </div>
+
+            <span *ngIf="true">Create</span>
+          </button>
+        </form>
+        </div>
+        
+      </div>
+    </div>
+
+    
