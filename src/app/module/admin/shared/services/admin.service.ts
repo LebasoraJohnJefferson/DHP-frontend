@@ -15,7 +15,7 @@ export class AdminService {
   constructor(private http: HttpClient, private router: Router) {}
 
   getAdmin(): Observable<any> {
-    return this.http.get(`${BASEURL}/admin`);
+    return this.http.get(`${BASEURL}/admin/profile`);
   }
 
   

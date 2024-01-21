@@ -14,9 +14,14 @@ export class DashboardComponent implements OnInit{
   name: string = 'Admin';
   overview:any;
 
+
+
+
   ngOnInit(): void {
     this.timeOfTheDayIndex = this.checkTime()
   }
+
+  
 
   checkTime():number{
     console.log(this.date.getHours())
