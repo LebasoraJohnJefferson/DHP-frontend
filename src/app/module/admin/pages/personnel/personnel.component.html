@@ -1,9 +1,53 @@
-<div class="relative z-40 mt-10 pb-20">
+<div class="relative z-40 mt-10 pb-20 w-full">
     <div class="">
       <h1 class="font-bold text-xl md:text-3xl text-white">Personnel</h1>
       <p class="text-slate-100 text-[12px]">Information about the system</p>
     </div>
-    <div class="mt-10 pb-10">
+    <div class="mt-5 w-full">
+      <div class="grid rounded w-full lg:place-items-center">
+        <table class="w-full">
+          <tr class="grid grid-cols-2 p-2 lg:w-full w-[90vw] bg-green-800 text-white ">
+            <th class="flex w-full items-center">
+              <div class="bg-green-300 text-green-900 p-2 hover:bg-green-300/80 cursor-pointer text-[12px] rounded-full">Create <i class="fal fa-plus font-semibold"></i></div>
+            </th>
+            <th class="flex justify-end w-full  px-4 py-2">
+              <input class="px-2 border-0 outline-0 py-1 rounded text-black" placeholder="Search..."/>
+            </th>
+          </tr>
+          <div class="lg:w-full w-[90vw] overflow-x-auto">
+            <div class="md:w-full w-[800px]">
+              <tr class="grid grid-cols-6 bg-green-800 text-white text-[14px]">
+                <th class="border border-gray-300 px-4 py-2">First Name</th>
+                <th class="border border-gray-300 px-4 py-2">Middle Name</th>
+                <th class="border border-gray-300 px-4 py-2">Last Name</th>
+                <th class="border border-gray-300 px-4 py-2">Email</th>
+                <th class="border border-gray-300 px-4 py-2">Status</th>
+                <th class="border border-gray-300 px-4 py-2">Action</th>
+              </tr>
+              <tr *ngFor="let details of data" class="grid grid-cols-6 even:bg-green-200  text-[14px]">
+                <th class="border border-gray-300 px-4 py-2 break-all">{{details.first_name}}</th>
+                <th class="border border-gray-300 px-4 py-2 break-all">{{details.middle_name}}</th>
+                <th class="border border-gray-300 px-4 py-2 break-all">{{details.last_name}}</th>
+                <th class="border border-gray-300 px-4 py-2 break-all">{{details.email}}</th>
+                <th class="border border-gray-300 px-4 py-2 text-[12px] flex items-center justify-center">
+                  <p [class]=" details.status ? 'rounded-lg bg-blue-300 text-blue-800 w-fit p-2' : 'rounded-lg bg-red-300 text-red-800 w-fit p-2'">{{ details.status ? 'Active' : 'Inactive'}}</p>
+                </th>
+                <th class="border border-gray-300 px-4 py-2 flex items-center justify-center md:gap-6 gap-2">
+                  <i class="fal fa-trash text-red-500 hover:text-red-500/80 font-semibold cursor-pointer text-[18px]"></i>
+                  <i class="fal fa-pen text-slate-800 hover:text-slate-800/80 font-semibold cursor-pointer text-[18px]"></i>
+                </th>
+              </tr>
+            </div>
+          </div>
+          <tr class="bg-slate-100 drop-shadow border">
+            <th class="w-full flex items-center justify-start py-2">
+              <select class="rounded outline-0 ml-3 bg-slate-300 text-[12px] p-1 px-3">
+                <option value="1" *ngFor="let page of pages">page {{page}}</option>
+              </select>
+            </th>
+          </tr>
+        </table>
+      </div>
         
     </div>
 </div>
