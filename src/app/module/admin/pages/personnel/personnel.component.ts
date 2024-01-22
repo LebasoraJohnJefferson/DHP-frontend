@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup,Validators} from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { PersonnelService } from '../../shared/services/personnel.service';
 import * as FileSaver from 'file-saver';
+import { read, utils, writeFile } from 'xlsx';
 import  jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
@@ -16,35 +17,8 @@ export class PersonnelComponent {
   selectPersonnel:any;
   createAccountModal:boolean = false
   isSubmitLoading:boolean = false
-  formMethod:string = 'post'
-  data:any = [
-    {
-      id:1,
-      first_name:"hello wolrd",
-      last_name:"hell world",
-      middle_name:"hell world",
-      email:"hell_world@gmail.com",
-      gender:'male',
-      is_active:false
-    },
-    {
-      id:2,
-      first_name:"hello wolrd",
-      last_name:"hell world",
-      middle_name:"hell world",
-      email:"hell_world@gmail.com",
-      gender:'male',
-      is_active:true
-    },{
-      id:3,
-      first_name:"hello wolrd",
-      last_name:"hell world",
-      middle_name:"hell world",
-      email:"hell_world@gmail.com",
-      gender:'male',
-      is_active:false
-    }
-  ]
+  importedPersonnel: any[] = [];
+  data:any = []
 
 
   createForm:FormGroup = this._fb.group({
@@ -52,23 +26,13 @@ export class PersonnelComponent {
     last_name:['',[Validators.required]],
     middle_name:['',[Validators.required]],
     email:['',[Validators.required,Validators.email]],
-    gender:['',[Validators.required]],
     is_active:[false,[Validators.required]],
     password:['',[Validators.required]],
     password_confirmation:['']
   })
 
 
-  gender:any=[
-    {
-      id:1,
-      name:"male"
-    },
-    {
-      id:2,
-      name:"female"
-    }
-  ];
+  
   pages:number[] = [1,3,4,5,6,7]
 
   cols: any[] = [];
@@ -78,7 +42,17 @@ export class PersonnelComponent {
     public toast:HotToastService,
     private _personnelService:PersonnelService
   ){
+    this.getAllPersonnel()
+  }
 
+  getAllPersonnel(){
+    this._personnelService.getAllPersonnel().subscribe({
+      next:(res)=>{
+        this.data = res.data
+      },error:(err)=>{
+
+      }
+    })
   }
 
 
@@ -106,6 +80,7 @@ export class PersonnelComponent {
         this.toast.success("Personnel successfully Added!")
         this.isSubmitLoading=false
         this.createAccountModal = false
+        this.getAllPersonnel()
         this.createForm.reset()
       },error:(err)=>{
         this.toast.warning(err.error.message || "An Error Occurred")
@@ -116,25 +91,38 @@ export class PersonnelComponent {
   }
 
   handleImport($event: any) {
-    // const files = $event.target.files;
+    const files = $event.target.files;
 
-    // if (files.length) {
-    //   const file = files[0];
-    //   const reader = new FileReader();
+    if (files.length) {
+      const file = files[0];
+      const reader = new FileReader();
 
-    //   reader.onload = (event: any) => {
-    //     const wb = read(event.target.result);
-    //     const sheets = wb.SheetNames;
+      reader.onload = (event: any) => {
+        const wb = read(event.target.result);
+        const sheets = wb.SheetNames;
 
-    //     if (sheets.length) {
-    //       const rows = utils.sheet_to_json(wb.Sheets[sheets[0]]);
-    //       this.importedAlumni = rows;
+        if (sheets.length) {
+          const rows = utils.sheet_to_json(wb.Sheets[sheets[0]]);
+          this.importedPersonnel = rows;
 
-    //       this.importStudents();
-    //     }
-    //   };
-    //   reader.readAsArrayBuffer(file);
-    // }
+          this.importStudents();
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    }
+  }
+
+  importStudents() {
+    this._personnelService.importPersonnel({ alumni: this.importedPersonnel }).subscribe({
+      next:(res:any)=>{
+        setTimeout(() => {
+          this.toast.success(res.message);
+          this.getAllPersonnel();
+        }, 5000);
+      },error:(err:any)=>{
+        this.toast.error(err.error.message || 'Error occurred');
+      }
+    })
   }
 
 
@@ -143,28 +131,61 @@ export class PersonnelComponent {
   }
 
   exportExcel(){
+    import('xlsx').then((xlsx) => {
+      let filteredAlumni  = this.data.map((personnel:any)=>{
+        const { first_name, middle_name, last_name, email,is_active, ...rest } = personnel;
+        return {
+          "First Name":first_name,
+          "Middle Name":middle_name,
+          "Last Name":last_name,
+          "email":email,
+          "is_active":is_active ? 'Active' : 'Inactive',
+          ...rest
+        };
+      })
+      const worksheet = xlsx.utils.json_to_sheet(filteredAlumni );
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      this.saveAsExcelFile(excelBuffer, 'rhu_personnel_data');
+    });
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string){
+    let EXCEL_TYPE =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE,
+    });
+    FileSaver.saveAs(
+      data,
+      fileName +
+        '_export_' +
+        new Date().getTime() +
+        EXCEL_EXTENSION
+    );
 
   }
 
 
   exportPdf() {
     const doc = new jsPDF('p', 'pt');
-
-    let data: any = [];
-
+    let data:any = []
     let columns = [
-      { title: 'Student ID', dataKey: 'studentId' },
-      { title: 'Name', dataKey: 'name' },
+      { title: 'First Name', dataKey: 'first_name' },
+      { title: 'Middle name', dataKey: 'middle_name' },
+      { title: 'Last Name', dataKey: 'last_name' },
       { title: 'Email', dataKey: 'email' },
-
-      {title: 'Gender',dataKey:'gender'},
-      {title: 'Address',dataKey:'address'},
-      {title: 'Organization',dataKey:'organization'},
-      {title: 'Position',dataKey:'position'},
-
-      { title: 'Course', dataKey: 'course' },
-      { title: 'Year', dataKey: 'year' },
+      {title:'Status',dataKey:'is_active'}
     ];
+
+    this.data.map((info:any)=>{
+      let active = info.is_active ? 'active' : 'Inactive'
+      data.push({...info,is_active:active})
+    })
 
     autoTable(doc, {
       columns: columns,
@@ -176,11 +197,6 @@ export class PersonnelComponent {
     doc.save('IntelAlley_Alumni.pdf');
   }
 
-
-  openPersonnelForm(method:string){
-    this.formMethod = method
-    this.createAccountModal = true
-  }
 
   
 

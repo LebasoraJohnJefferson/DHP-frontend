@@ -20,4 +20,12 @@ export class PersonnelService {
     return this.http.post(`${BASEURL}/admin/personnel`,data);
   }
 
+  getAllPersonnel():Observable<any>{
+    return this.http.get(`${BASEURL}/admin/personnel`);
+  }
+
+  importPersonnel(data:any):Observable<any>{
+    return this.http.post(`${BASEURL}/admin/personnel/importExcel`,data);
+  }
+
 }

@@ -1,6 +1,6 @@
 <div class="relative z-40 mt-10 pb-20">
   <div class="">
-    <h1 class="font-bold text-xl md:text-3xl text-white">Alumni</h1>
+    <h1 class="font-bold text-xl md:text-3xl text-white">Personnel</h1>
     <p class="text-slate-100 text-[12px]">Information about the system</p>
   </div>
 
@@ -128,7 +128,6 @@
               <th field="AlumniCredentialschoolId.Course.acronym">Middle name</th>
               <th field="AlumniCredentialschoolId.gradClass">Last name</th>
               <th field="email">Email</th>
-              <th field="status">Gender</th>
               <th field="status">Status</th>
               <th>Action</th>
             </tr>
@@ -139,7 +138,6 @@
               <td>{{ personnel.middle_name }}</td>
               <td>{{ personnel.last_name }}</td>
               <td>{{ personnel.email}}</td>
-              <td>{{ personnel.gender }}</td>
               <td>
                 <div
                   class="py-1 px-3 w-fit rounded-lg text-[12px] font-semibold capitalize"
@@ -183,7 +181,6 @@
         [formGroup]="createForm"
         class="w-full grid gap-2"
       >
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
           <div class="w-full">
             <label class="block text-[12px] font-medium text-gray-700"
               >First Name</label
@@ -227,7 +224,6 @@
           </div>
 
 
-        </div>
 
         <div class="w-full">
           <label class="block text-[12px] font-medium text-gray-700"
@@ -243,27 +239,6 @@
           </div>
         </div>
 
-        
-
-        <div>
-          <label class="block text-[12px] font-medium text-gray-700"
-            >Gender</label
-          >
-          <div class="mt-1 relative rounded-md">
-            <select
-              formControlName="gender"
-              required
-              class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50 cursor-pointer"
-            >
-              <option value="" selected disabled hidden class="">
-                Select Gender
-              </option>
-              <option *ngFor="let indentify of gender" [value]="indentify.id">
-                {{ indentify.name }}
-              </option>
-            </select>
-          </div>
-        </div>
 
         <div class="w-full">
           <label class="block text-[12px] font-medium text-gray-700"s
