@@ -78,12 +78,21 @@ export class PersonnelComponent {
 
   onSubmit(){
     this.isSubmitLoading = true
+
+
+    if(this.createForm.controls['email'].invalid){
+      this.toast.warning("Invalid Email")
+      this.isSubmitLoading = false
+      return
+    }
+
+
     if(this.createForm.invalid){
       this.toast.warning("Please, fill-up all inputs")
       this.isSubmitLoading = false
       return
     }
-    this.createForm.controls['password_confirmation'].value(
+    this.createForm.controls['password_confirmation'].setValue(
       this.createForm.controls['password'].value
     )
     this._personnelService.createPersonnel(this.createForm.value).subscribe({
