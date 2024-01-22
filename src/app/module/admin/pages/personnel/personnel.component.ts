@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup,Validators} from '@angular/forms';
+import { HotToastService } from '@ngneat/hot-toast';
+import { PersonnelService } from '../../shared/services/personnel.service';
+
 
 @Component({
   selector: 'app-personnel',
@@ -11,6 +14,7 @@ export class PersonnelComponent {
 
   createAccountModal:boolean = false
   isSubmitLoading:boolean = false
+  formMethod:string = 'post'
   data:any = [
     {
       first_name:"hello wolrd",
@@ -44,9 +48,9 @@ export class PersonnelComponent {
     middle_name:['',[Validators.required]],
     email:['',[Validators.required,Validators.email]],
     gender:['',[Validators.required]],
-    is_active:['',[Validators.required]],
+    is_active:[false,[Validators.required]],
     password:['',[Validators.required]],
-    confirm_passowrd:[]
+    password_confirmation:['']
   })
 
 
@@ -64,18 +68,39 @@ export class PersonnelComponent {
 
 
   constructor(
-    private _fb:FormBuilder
+    private _fb:FormBuilder,
+    public toast:HotToastService,
+    private _personnelService:PersonnelService
   ){
 
   }
 
 
   onSubmit(){
+    this.isSubmitLoading = true
+    if(this.createForm.invalid){
+      this.toast.warning("Please, fill-up all inputs")
+      this.isSubmitLoading = false
+      return
+    }
+    this.createForm.controls['password_confirmation'].value(
+      this.createForm.controls['password'].value
+    )
+    this._personnelService.createPersonnel(this.createForm.value).subscribe({
+      next:(res)=>{
+        this.toast.success("Personnel successfully Added!")
+        this.isSubmitLoading=false
+      },error:(err)=>{
+        this.toast.warning(err.error.message || "An Error Occurred")
+        this.isSubmitLoading = false
+      }
+    })
 
   }
 
 
   openPersonnelForm(method:string){
+    this.formMethod = method
     this.createAccountModal = true
   }
 
