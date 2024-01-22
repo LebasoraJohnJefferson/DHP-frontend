@@ -113,10 +113,11 @@ export class PersonnelComponent {
   }
 
   importStudents() {
-    this._personnelService.importPersonnel({ alumni: this.importedPersonnel }).subscribe({
+    this._personnelService.importPersonnel({ personnel: this.importedPersonnel }).subscribe({
       next:(res:any)=>{
         setTimeout(() => {
-          this.toast.success(res.message);
+          console.log(res)
+          this.toast.success("Successfully Imported!");
           this.getAllPersonnel();
         }, 5000);
       },error:(err:any)=>{
@@ -135,11 +136,11 @@ export class PersonnelComponent {
       let filteredAlumni  = this.data.map((personnel:any)=>{
         const { first_name, middle_name, last_name, email,is_active, ...rest } = personnel;
         return {
-          "First Name":first_name,
-          "Middle Name":middle_name,
-          "Last Name":last_name,
+          "first_name":first_name,
+          "middle_name":middle_name,
+          "last_name":last_name,
           "email":email,
-          "is_active":is_active ? 'Active' : 'Inactive',
+          "is_active":is_active,
           ...rest
         };
       })
