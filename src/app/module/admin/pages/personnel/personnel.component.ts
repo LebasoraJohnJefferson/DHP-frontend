@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup,Validators} from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { PersonnelService } from '../../shared/services/personnel.service';
 import * as FileSaver from 'file-saver';
@@ -16,20 +15,11 @@ export class PersonnelComponent {
 
   selectPersonnel:any;
   createAccountModal:boolean = false
-  isSubmitLoading:boolean = false
   importedPersonnel: any[] = [];
   data:any = []
 
 
-  createForm:FormGroup = this._fb.group({
-    first_name:['',[Validators.required]],
-    last_name:['',[Validators.required]],
-    middle_name:['',[Validators.required]],
-    email:['',[Validators.required,Validators.email]],
-    is_active:[false],
-    password:['',[Validators.required]],
-    password_confirmation:['']
-  })
+  
 
 
   
@@ -38,7 +28,6 @@ export class PersonnelComponent {
   cols: any[] = [];
 
   constructor(
-    private _fb:FormBuilder,
     public toast:HotToastService,
     private _personnelService:PersonnelService
   ){
@@ -55,41 +44,10 @@ export class PersonnelComponent {
     })
   }
 
-
-  onSubmit(){
-    this.isSubmitLoading = true
+  
 
 
-    if(this.createForm.controls['email'].invalid){
-      this.toast.warning("Invalid Email")
-      this.isSubmitLoading = false
-      return
-    }
-
-
-    if(this.createForm.invalid){
-      this.toast.warning("Please, fill-up all inputs")
-      this.isSubmitLoading = false
-      return
-    }
-    this.createForm.controls['password_confirmation'].setValue(
-      this.createForm.controls['password'].value
-    )
-    this._personnelService.createPersonnel(this.createForm.value).subscribe({
-      next:(res)=>{
-        this.toast.success("Personnel successfully Added!")
-        this.isSubmitLoading=false
-        this.createAccountModal = false
-        this.getAllPersonnel()
-        this.createForm.reset()
-      },error:(err)=>{
-        this.toast.warning(err.error.message || "An Error Occurred")
-        this.isSubmitLoading = false
-      }
-    })
-
-  }
-
+ 
   handleImport($event: any) {
     const files = $event.target.files;
 

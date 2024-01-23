@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
-import { ToastrService } from 'ngx-toastr';
-
+import { HotToastService } from '@ngneat/hot-toast';
 
 
 @Injectable({
@@ -13,7 +12,7 @@ export class AuthGuardService{
   constructor(
     public auth:AuthService, 
     public router:Router,
-    public toastr:ToastrService) { }
+    public toastr:HotToastService) { }
 
   canActivate():boolean{
     if(!this.auth.isAuthenticated()){

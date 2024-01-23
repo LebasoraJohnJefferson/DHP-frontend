@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AdminService } from '../../shared/services/admin.service';
 import { AuthService } from '../../../../core/shared/services/auth.service';
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -53,7 +54,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     public route: ActivatedRoute,
     private _adminService:AdminService,
-    private _authService:AuthService
+    private _authService:AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -93,7 +94,10 @@ export class HeaderComponent implements OnInit {
     this._adminService.getAdmin().subscribe({
       next: (res:any) => {
         this.user = res.data[0];
-      },
+      },error:(err:any)=>{
+        localStorage.removeItem('token')
+        this._authService.logout('admin')
+      }
     });
   }
 }

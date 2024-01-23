@@ -41,7 +41,6 @@ export class PersonnelGuard {
           },
         });
       });
-
       // Check if the user data is valid (e.g., logged in)
       if (admin) {
         return true; // Allow navigation
