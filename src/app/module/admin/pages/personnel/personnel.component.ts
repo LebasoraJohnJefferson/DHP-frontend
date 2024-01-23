@@ -17,8 +17,11 @@ export class PersonnelComponent {
   createAccountModal:boolean = false
   importedPersonnel: any[] = [];
   data:any = []
-
-
+  isShowDeletedPersonnel:boolean = false
+  deletePersonnel:any = []
+  isRecovering:boolean = false
+  isDeletingPermanent:boolean = false
+  defualtImg = '../../../../../assets/images/nurse.png'
   
 
 
@@ -38,12 +41,41 @@ export class PersonnelComponent {
     this._personnelService.getAllPersonnel().subscribe({
       next:(res)=>{
         this.data = res.data
-      },error:(err)=>{
-
       }
     })
   }
 
+  recover(personnelId:number){
+    this.isRecovering = true
+    this._personnelService.recoverPersonnel(personnelId).subscribe({
+      next:(res)=>{
+        this.toast.success('Successfully recover')
+        this.isRecovering = false
+        this.retrieve()
+        this.getAllPersonnel()
+      },
+      error:(err)=>{
+        this.isRecovering = false
+        this.toast.error(err?.error?.message || "An error occurred")
+      } 
+    })
+  }
+
+  deletePermanently(personnelId:number){
+    this.isDeletingPermanent = true
+    this._personnelService.commitDeletePersonnel(personnelId).subscribe({
+      next:(res)=>{
+        this.toast.success('Successfully deleted!')
+        this.isDeletingPermanent = false
+        this.retrieve()
+        this.getAllPersonnel()
+      },
+      error:(err)=>{
+        this.isDeletingPermanent = false
+        this.toast.error(err?.error?.message || "An error occurred")
+      } 
+    })
+  }
   
 
 
@@ -86,7 +118,12 @@ export class PersonnelComponent {
 
 
   retrieve(){
-
+    this.isShowDeletedPersonnel = true
+    this._personnelService.getAllDeletedPersonnel().subscribe({
+      next:(res)=>{
+        this.deletePersonnel = res.data
+      }
+    })
   }
 
   exportExcel(){

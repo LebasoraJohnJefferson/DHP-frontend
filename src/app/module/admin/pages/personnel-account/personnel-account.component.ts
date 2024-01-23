@@ -17,6 +17,7 @@ export class PersonnelAccountComponent implements OnInit {
 
   constructor(
     private _route: ActivatedRoute,
+    public router:Router,
     private _personnelService:PersonnelService,
     public location:Location,
     public toast:HotToastService
@@ -38,6 +39,22 @@ export class PersonnelAccountComponent implements OnInit {
         this.basicInfo = res.data
         this.checked = res?.data?.is_active ? true : false
         this.updateAccountModal = false
+      },error:(err)=>{
+        this.router.navigate(['/admin/personnel'])
+        this.toast.error(err?.error?.message || 'An error occurred!')
+      }
+    })
+  }
+
+  deleteAccount(){
+    const confirmation = confirm(`Are you sure you want to delete ${this.basicInfo?.first_name}`)
+    if(!confirmation) return
+    this._personnelService.deletePersonnel(this.personnelId).subscribe({
+      next:()=>{
+        this.toast.success("Successfully deleted");
+        this.router.navigate(['/admin/personnel'])
+      },error:(err)=>{
+        this.toast.warning(err?.error?.message || 'An error occurred!')
       }
     })
   }

@@ -10,9 +10,29 @@
                     <div (click)="goBack()" class="cursor-pointer rounded-full lg:hidden px-2 py-1 bg-slate-500 hover:bg-slate-500/80 text-white">
                         <i class="fal fa-arrow-right"></i>
                     </div>
-                    <div (click)="updateAccountModal=true" class="cursor-pointer rounded-full px-2 py-1 bg-slate-500 hover:bg-slate-500/80 text-white">
+                    <div (click)="opAction.toggle($event)"  class="cursor-pointer rounded-full px-2 py-1 bg-slate-500 hover:bg-slate-500/80 text-white">
                         <i class="fal fa-cog"></i>
                     </div>
+                    <p-overlayPanel #opAction>
+                        <ng-template pTemplate>
+                          <div class="md:max-w-[400px]">
+                            <div class="grid gap-1">
+                              <div
+                                (click)="deleteAccount(); opAction.toggle($event)"
+                                class="text-[12px] px-2 py-2 hover:bg-slate-100 cursor-pointer transition-all"
+                              >
+                                <i class="fal fa-trash mr-1"></i>Delete account
+                              </div>
+                              <div
+                              (click)="updateAccountModal=true"
+                                class="text-[12px] px-2 py-2 hover:bg-slate-100 cursor-pointer transition-all"
+                              >
+                                <i class="fal fa-pencil mr-1"></i>Update account
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </p-overlayPanel>
                 </div>
             </div>
         </div>

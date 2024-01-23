@@ -40,4 +40,20 @@ export class PersonnelService {
     return this.http.put(`${BASEURL}/admin/personnel/${personnelId}`,data)
   }
 
+  deletePersonnel(personnelId:number):Observable<any>{
+    return this.http.delete(`${BASEURL}/admin/personnel/${personnelId}`)
+  }
+
+  getAllDeletedPersonnel():Observable<any>{
+    return this.http.get(`${BASEURL}/admin/recover_personnel`);
+  }
+
+  recoverPersonnel(personnelId:number):Observable<any>{
+    return this.http.patch(`${BASEURL}/admin/recover_personnel/${personnelId}`,'');
+  }
+
+  commitDeletePersonnel(personnelId:number):Observable<any>{
+    return this.http.delete(`${BASEURL}/admin/recover_personnel/${personnelId}`)
+  }
+
 }
