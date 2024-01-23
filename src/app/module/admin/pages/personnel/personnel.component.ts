@@ -26,7 +26,7 @@ export class PersonnelComponent {
     last_name:['',[Validators.required]],
     middle_name:['',[Validators.required]],
     email:['',[Validators.required,Validators.email]],
-    is_active:[false,[Validators.required]],
+    is_active:[false],
     password:['',[Validators.required]],
     password_confirmation:['']
   })

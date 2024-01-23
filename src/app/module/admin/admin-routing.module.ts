@@ -9,7 +9,7 @@ import { DocumentsComponent } from './pages/documents/documents.component';
 import { LogsComponent } from './pages/logs/logs.component';
 import { AccountComponent } from './pages/account/account.component';
 import { AdminGuard } from '../../core/shared/guards/admin.guard';
-
+import { PersonnelAccountComponent } from './pages/personnel-account/personnel-account.component';
 
 const routes: Routes = [
   {path:'admin',component:LayoutComponent,children:[
@@ -19,7 +19,8 @@ const routes: Routes = [
     {path:'personnel',component:PersonnelComponent},
     {path:'documents',component:DocumentsComponent},
     {path:'logs',component:LogsComponent},
-  ],canActivate:[AdminGuard]},
+  ]},
+  {path:'admin/personnel/account',component:PersonnelAccountComponent,canActivate:[AdminGuard]},
   {path:'admin/account',component:AccountComponent}
   
 ];

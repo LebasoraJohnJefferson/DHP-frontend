@@ -1,0 +1,64 @@
+<div  class="grid w-full  px-5 py-2 gap-2 grid-cols-1 lg:grid-cols-[300px_1fr]">
+    <section class="w-full  h-fit mb-3" >
+        <div class="flex relative justify-center bg-green-200 py-2">
+            <img
+                src="../../../../../assets/images/nurse.png"
+                class="w-[10rem] h-[10rem] rounded "
+            />
+            <div class="absolute top-0 left-0 p-3 flex items-center w-full justify-end">
+                <div class="flex flex-col gap-2">
+                    <div (click)="goBack()" class="cursor-pointer rounded-full lg:hidden px-2 py-1 bg-slate-500 hover:bg-slate-500/80 text-white">
+                        <i class="fal fa-arrow-right"></i>
+                    </div>
+                    <div class="cursor-pointer rounded-full px-2 py-1 bg-slate-500 hover:bg-slate-500/80 text-white">
+                        <i class="fal fa-cog"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-red px-2 mt-5 flex items-center justify-between">
+            <h3 class="font-extrabold text-xl">Basic Info</h3>
+            <p-inputSwitch [(ngModel)]="checked" [style]="{'width':'50px', 'height':'26px'}"></p-inputSwitch>
+        </div>
+        <div class="w-full px-4 mt-3 text-slate-700">
+            <ol class="grid grid-cols-1 w-full gap-2">
+                <li class="grid grid-cols-[auto_1fr_auto] gap-2 text-[14px]">
+                    <div class="font-bold bg-green-100 rounded-lg px-2 py-1">First Name:</div>
+                    <hr class="flex m-auto border-slate-500 w-full border-dotted border-2">
+                    <div class="flex ml-auto my-auto">{{backInfo?.first_name}}</div>
+                </li>
+                <li class="grid grid-cols-[auto_1fr_auto] gap-2 text-[14px]">
+                    <div class="font-bold bg-green-100 rounded-lg px-2 py-1">Middle Name:</div>
+                    <hr class="flex m-auto border-slate-500 w-full border-dotted border-2">
+                    <div class="flex ml-auto my-auto">{{backInfo?.middle_name}}</div>
+                </li>
+                <li class="grid grid-cols-[auto_1fr_auto] gap-2 text-[14px]">
+                    <div class="font-bold bg-green-100 rounded-lg px-2 py-1">Last Name:</div>
+                    <hr class="flex m-auto border-slate-500 w-full border-dotted border-2">
+                    <div class="flex ml-auto my-auto">{{backInfo?.last_name}}</div>
+                </li>
+                <li class="grid grid-cols-[auto_1fr_auto] gap-2 text-[14px]">
+                    <div class="font-bold bg-green-100 rounded-lg px-2 py-1">Email:</div>
+                    <hr class="flex m-auto border-slate-500 w-full border-dotted border-2">
+                    <div class="flex ml-auto my-auto">{{backInfo?.email}}</div>
+                </li>
+                <li class="grid grid-cols-[auto_1fr_auto] gap-2 text-[14px]">
+                    <div class="font-bold bg-green-100 rounded-lg px-2 py-1">Joined:</div>
+                    <hr class="flex m-auto border-slate-500 w-full border-dotted border-2">
+                    <div class="flex ml-auto my-auto">{{backInfo?.created_at | date}}</div>
+                </li>
+            </ol>
+            <div class="mt-10 lg:block hidden ">
+                <button (click)="goBack()" class="flex rounded-lg text-[14px] w-full mx-auto px-3 py-1 bg-green-600 text-white">
+                    <p class="flex m-auto">
+                        Go Back
+                    </p>
+                </button>
+            </div>
+        </div>
+    </section>
+    <div class="w-full h-full flex items-center justify-center flex-col">
+        <img src="../../../../../assets/images/no-file.jpg" class="w-[20rem] h-[20rem]" alt="">
+        <p class="font-extrabold">More Information about the personnel not found!</p>
+    </div>
+</div>

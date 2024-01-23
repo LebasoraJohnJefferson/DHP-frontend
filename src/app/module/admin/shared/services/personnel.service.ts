@@ -28,4 +28,8 @@ export class PersonnelService {
     return this.http.post(`${BASEURL}/admin/personnel/importExcel`,data);
   }
 
+  getSpecificPersonnel(personnelId:number):Observable<any>{
+    return this.http.get(`${BASEURL}/admin/personnel/${personnelId}`)
+  }
+
 }
