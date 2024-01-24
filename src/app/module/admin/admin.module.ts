@@ -17,6 +17,7 @@ import { LogsComponent } from './pages/logs/logs.component';
 import { AccountComponent } from './pages/account/account.component';
 import { PersonnelAccountComponent } from './pages/personnel-account/personnel-account.component';
 import { PersonnelFormComponent } from './components/personnel-form/personnel-form.component';
+import { EventComponent } from './pages/event/event.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PersonnelFormComponent } from './components/personnel-form/personnel-fo
     LogsComponent,
     AccountComponent,
     PersonnelAccountComponent,
-    PersonnelFormComponent
+    PersonnelFormComponent,
+    EventComponent
   ],
   imports: [
     PrimengModule,
