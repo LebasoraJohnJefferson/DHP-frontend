@@ -1,10 +1,225 @@
 <div class="relative z-40 mt-10 pb-20">
-    <div class="">
-      <h1 class="font-bold text-xl md:text-3xl text-white">Events</h1>
-      <p class="text-slate-100 text-[12px]">Information about the system</p>
-    </div>
-    <div class="mt-5 ">
+  <div class="">
+    <h1 class="font-bold text-xl md:text-3xl text-white">Events</h1>
+    <p class="text-slate-100 text-[12px]">Information about the system</p>
+  </div>
 
-        <p>Events works!</p>
+  <div class="mt-10 pb-10">
+    <div class="text-sm w-full relative mt-10 grid gap-20 z-40">
+      <div class="">
+        <div class="relative w-full">
+          <p-table
+            [value]="events"
+            #dt2
+            dataKey="id"
+            responsiveLayout="scroll"
+            [autoLayout]="true"
+            [paginator]="true"
+            [rows]="10"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [rowsPerPageOptions]="[10, 25, 50]"
+            styleClass="p-datatable-gridlines"
+          >
+            <ng-template pTemplate="caption">
+              <div class="gap-2 w-full flex justify-between">
+                <div class="flex items-center py-1 rounded bg-white px-2">
+                  <i class="pi pi-search"></i>
+                  <input
+                    type="text"
+                    class="outline-0 ml-2 border-0"
+                    #textInput
+                    (input)="dt2.filterGlobal(textInput.value, 'contains')"
+                    placeholder="Search keyword"
+                  />
+                </div>
+
+                <div class="flex">
+                  <button
+                    (click)="createEventModal = true"
+                    class="bg-green-800 text-white text-[12px] md:text-sm font-semibold py-3 px-5 rounded-3xl hover:bg-green-900/80 cursor-pointer transition-all"
+                  >
+                    <i class="fal fa-file-plus mr-1"></i>
+                    Create
+                  </button>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr class="text-sm">
+                <th field="title">Event Name</th>
+                <th field="venue">Venue</th>
+                <th field="date">Date</th>
+                <th>Action</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-event>
+              <tr class="text-sm" [pSelectableRow]="event">
+                <td>{{ event.title }}</td>
+                <td>{{ event.venue }}</td>
+                <td>{{ dateFormat(event.date) }}</td>
+                <td>
+                  <div
+                    class="cursor-pointer"
+                    [routerLink]="['/admin/event']"
+                    [queryParams]="{ id: event.id }"
+                  >
+                    <i class="fad fa-eye"></i> View
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
     </div>
+
+    <p-dialog
+      header="Create Event"
+      [(visible)]="createEventModal"
+      [modal]="true"
+      appendTo="body"
+      [style]="{ maxWidth: '400px', width: '400px' }"
+    >
+      <div class="mt-1">
+        <form
+          (ngSubmit)="approval()"
+          [formGroup]="createForm"
+          class="w-full grid gap-2 relative"
+        >
+          <input
+            #imageInput
+            type="file"
+            accept="image/x-png,image/gif,image/jpeg"
+            [(ngModel)]="previewImg"
+            [ngModelOptions]="{ standalone: true }"
+            class="hidden"
+            (change)="loadInputImgToSrc($event)"
+          />
+          <div class="w-full">
+            <div class="w-full">
+              <label class="block text-[12px] font-medium text-gray-700"
+                >Event name</label
+              >
+              <div class="mt-1 relative rounded-md w-full">
+                <input
+                  type="text"
+                  class="py-2 outline-none w-full block px-3 text-[12px] border border-gray-200 rounded-md bg-slate-50"
+                  placeholder="Enter event name"
+                  formControlName="title"
+                />
+              </div>
+            </div>
+            <div class="w-full">
+              <label class="block text-[12px] font-medium text-gray-700"
+                >Description</label
+              >
+              <div class="mt-1 relative rounded-md w-full">
+                <textarea
+                  type="text"
+                  class="py-2 outline-none w-full block px-3 text-[12px] border border-gray-200 rounded-md bg-slate-50 max-h-[200px] min-h-[100px]"
+                  placeholder="Enter event description"
+                  formControlName="description"
+                  rows="5"
+                ></textarea>
+              </div>
+            </div>
+            <div class="w-full">
+              <label class="block text-[12px] font-medium text-gray-700"
+                >Date</label
+              >
+              <div class="mt-1 relative rounded-md w-full">
+                <input
+                  type="date"
+                  class="py-2 outline-none w-full block px-3 text-[12px] border border-gray-200 rounded-md bg-slate-50"
+                  placeholder="Enter event name"
+                  formControlName="date"
+                />
+              </div>
+            </div>
+            <div class="w-full">
+              <label class="block text-[12px] font-medium text-gray-700"
+                >Venue</label
+              >
+              <div class="mt-1 relative rounded-md w-full">
+                <input
+                  type="text"
+                  class="py-2 outline-none w-full block px-3 text-[12px] border border-gray-200 rounded-md bg-slate-50"
+                  placeholder="Enter name of the vanue"
+                  formControlName="venue"
+                />
+              </div>
+            </div>
+            <div class="">
+              <div class="flex items-center">
+                <i
+                  (click)="imageInput.click()"
+                  class="pi pi-camera text-lg px-1 my-1 rounded text-green-300 cursor border-2 border-green-300"
+                ></i>
+                <p
+                  class="py-2 font-bold outline-none w-full block px-1 text-[12px] rounded-md text-slate-400"
+                >
+                  Upload Image
+                </p>
+              </div>
+              <div class="w-full flex items-center justify-center">
+                <img
+                  *ngIf="previewImg"
+                  [src]="previewImg"
+                  class="h-40 w-full rounded object-cover border-2 border-slate-200"
+                />
+              </div>
+            </div>
+          </div>
+          <div *ngIf="isShowConfirmation" class="absolute flex-col flex justify-center items-center  w-full h-full bg-gray-800 bg-opacity-50 rounded ">
+            <div class="bg-slate-200 py-3 px-2 rounded shadow">
+              <div class="h-fit w-fit py-2">
+                <p>Are you sure you want to post this event?</p>
+              </div>
+              <div class="w-full flex justify-around">
+                <button [disabled]="isCommitting" (click)="onSubmit()" class="text-white bg-green-600 hover:bg-green-400 px-3 py-1 rounded cursor-pointer">
+                <p *ngIf="!isCommitting">YES</p>
+                <p *ngIf="isCommitting"><i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i></p>
+              </button>
+                <button  (click)="cancelApproval()" class="text-white bg-red-600 hover:bg-red-400 px-3 py-1 rounded cursor-pointer">NO</button>
+              </div>
+            </div>
+          </div>
+
+          <button
+            [disabled]="submitLoading"
+            type="submit"
+            class="grid place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-3 hover:bg-slate-900/80 transition-all w-full mt-2"
+          >
+            <div class="flex items-center w-fit mx-auto" *ngIf="submitLoading">
+              <svg
+                class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+
+              <span>Processing</span>
+            </div>
+
+            <span *ngIf="!submitLoading">Create</span>
+          </button>
+        </form>
+      </div>
+    </p-dialog>
+  </div>
 </div>
