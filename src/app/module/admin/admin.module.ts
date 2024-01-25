@@ -18,6 +18,9 @@ import { AccountComponent } from './pages/account/account.component';
 import { PersonnelAccountComponent } from './pages/personnel-account/personnel-account.component';
 import { PersonnelFormComponent } from './components/personnel-form/personnel-form.component';
 import { EventComponent } from './pages/event/event.component';
+import {TabViewModule} from 'primeng/tabview';
+import { CommentsComponent } from './components/comments/comments.component';
+import { InvitationComponent } from './components/invitation/invitation.component';
 
 @NgModule({
   declarations: [
@@ -34,14 +37,17 @@ import { EventComponent } from './pages/event/event.component';
     AccountComponent,
     PersonnelAccountComponent,
     PersonnelFormComponent,
-    EventComponent
+    EventComponent,
+    CommentsComponent,
+    InvitationComponent
   ],
   imports: [
     PrimengModule,
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    TabViewModule
   ],
 })
 export class AdminModule { }
