@@ -12,7 +12,10 @@ import { EventsComponent } from './pages/events/events.component';
 import { DocumentsComponent } from './pages/documents/documents.component';
 import { LogsComponent } from './pages/logs/logs.component';
 import { AccountComponent } from './pages/account/account.component';
-
+import { CityComponent } from './pages/city/city.component';
+import { LocationComponent } from './components/location/location.component';
+import { ProvinceComponent } from './pages/province/province.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -24,9 +27,13 @@ import { AccountComponent } from './pages/account/account.component';
     EventsComponent,
     DocumentsComponent,
     LogsComponent,
-    AccountComponent
+    AccountComponent,
+    CityComponent,
+    LocationComponent,
+    ProvinceComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     PrimengModule,
     CommonModule,
     PersonnelRoutingModule
