@@ -7,6 +7,9 @@ import { DocumentsComponent } from './pages/documents/documents.component';
 import { LogsComponent } from './pages/logs/logs.component';
 import { AccountComponent } from './pages/account/account.component';
 import { PersonnelGuard } from '../../core/shared/guards/personnel.guard';
+import { LocationComponent } from './components/location/location.component';
+import { CityComponent } from './pages/city/city.component';
+import { ProvinceComponent } from './pages/province/province.component';
 
 const routes: Routes = [
   {path:'',component:LayoutComponent,children:[
@@ -14,6 +17,10 @@ const routes: Routes = [
     {path:'events',component:EventsComponent},
     {path:'documents',component:DocumentsComponent},
     {path:'logs',component:LogsComponent},
+    {path:'form',component:LocationComponent,children:[
+      {path:'province',component:ProvinceComponent},
+      {path:'province/:provinceId',component:CityComponent}
+    ]}
   ],canActivate:[PersonnelGuard]},
   {path:'admin/account',component:AccountComponent}
 ];

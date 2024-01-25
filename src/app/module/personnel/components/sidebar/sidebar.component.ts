@@ -8,7 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
   currentRoute: any;
-
+  isFormOpen:boolean = true
   routesArr: any = [
     {
       title: 'Dashboard',
@@ -30,6 +30,39 @@ export class SidebarComponent implements OnInit {
       route: 'logs',
       icon: 'fal fa-pallet',
     }
+  ];
+
+  formsArr: any = [
+    {
+      title: 'Location',
+      route: '/form/province',
+      icon: 'fal fa-file-invoice',
+    },
+    {
+      title: 'Family Profile',
+      route: '/',
+      icon: 'fal fa-file-invoice',
+    },
+    {
+      title: 'Monthly records',
+      route: '/',
+      icon: 'fal fa-file-invoice',
+    },
+    {
+      title: 'Preschool population',
+      route: '/',
+      icon: 'fal fa-file-invoice',
+    },
+    {
+      title: 'Weight and height',
+      route: '/',
+      icon: 'fal fa-file-invoice',
+    },
+    {
+      title: 'Affected/at-risk',
+      route: '/',
+      icon: 'fal fa-file-invoice',
+    },
   ];
 
   constructor(private route: ActivatedRoute, private router: Router) {}
