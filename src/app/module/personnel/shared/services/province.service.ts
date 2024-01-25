@@ -19,6 +19,10 @@ export class ProvinceService {
     return this.http.post(`${BASEURL}/personnel/province`,data)
   }
 
+  getProvince(provinceId:number):Observable<any>{
+    return this.http.get(`${BASEURL}/personnel/province/${provinceId}`)
+  }
+
   getAllProvince():Observable<any>{
     return this.http.get(`${BASEURL}/personnel/province`)
   }

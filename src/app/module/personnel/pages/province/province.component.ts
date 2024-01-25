@@ -30,11 +30,15 @@ export class ProvinceComponent {
     this._provinceService.getAllProvince().subscribe({
       next:(res)=>{
         this.provinces = res.data
+        console.log(this.provinces)
       }
     })
   }
 
+
   deleteProvince(provinceId:number){
+    const confirmation = confirm("Are you sure, you want to delete this province?")
+    if(!confirmation) return
     this._provinceService.deleteProvince(provinceId).subscribe({
       next:(res)=>{
         this.getAllProvince()

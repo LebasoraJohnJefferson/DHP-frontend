@@ -1,9 +1,16 @@
-<div class="text-sm w-full relative mt-10 grid gap-20 z-40">
+<div class="text-sm w-full relative mt-5 grid gap-20 z-40">
     <div class="" >
       <div class="relative  lg:w-full">
+        <ol class="flex items-center py-2 gap-2">
+            <li class="flex cursor-normal gap-1 items-center">
+                <i class="pi pi-folder-open"></i>
+                <span>Province</span>
+            </li>
+        </ol>
         <p-table
           [value]="provinces"
           #dt2
+          class="mt-5"
           dataKey="id"
           responsiveLayout="scroll"
           [autoLayout]="true"
@@ -54,20 +61,20 @@
               <th field="email">Action</th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-personnel>
-            <tr class="text-sm" [pSelectableRow]="personnel">
-              <td>{{ personnel.attributes.province }}</td>
-              <td>{{ personnel.personnel_details.last_name + ' ,' +  personnel.personnel_details.first_name + ' ' + personnel.personnel_details.middle_name[0] + '.' | titlecase}}</td>
-              <td>{{ personnel.personnel_details.email}}</td>
+          <ng-template pTemplate="body" let-province>
+            <tr class="text-sm" [pSelectableRow]="province">
+              <td>{{ province.attributes.province }}</td>
+              <td>{{ province.personnel_details.last_name + ' ,' +  province.personnel_details.first_name + ' ' + province.personnel_details.middle_name[0] + '.' | titlecase}}</td>
+              <td>{{ province.personnel_details.email}}</td>
               
               <td class="grid gap-2">
                 <div
                   class="cursor-pointer"
-                  [routerLink]="'/form/province/'+personnel.id"
+                  [routerLink]="'/form/province/'+province.id"
                 >
-                  <i class="fad fa-eye"></i> View
+                  <i class="fad fa-eye"></i> View 
                 </div>
-                <div (click)="deleteProvince(personnel.id)">
+                <div (click)="deleteProvince(province.id)">
                     <i class="fad fa-trash"></i> Delete
                 </div>
               </td>
