@@ -37,10 +37,16 @@ export class FamilyProfileFormComponent implements OnInit {
       placeholder:'No of household number.'
     },
     {
+      title:'Contact number',
+      formName:'contact_number',
+      type:'string',
+      placeholder:'contact number e.g 09********.'
+    },
+    {
       title:'Name of Household head/Spouse',
       formName:'housthould_head',
       type:'text',
-      placeholder:'housthould_head.'
+      placeholder:'housthould head.'
     },
     {
       title:'Occupation',
@@ -62,11 +68,13 @@ export class FamilyProfileFormComponent implements OnInit {
   typeOfWater:string[]=['P','W','S']
   foodProdActs:string[]=['VG','P/L','FP']
 
-  formData:any={
+  
+
+  familyProfileForm:FormGroup = this._fb.group({
     province_id:[''],
     city_id:[''],
     brgy_id:['',Validators.required],
-
+    contact_number: ['', [Validators.required, Validators.pattern(/^(09|\+639)\d{9}$/)]],
     household_no:['',Validators.required],
     no_household_member:['',Validators.required],
     housthould_head:['',Validators.required],
@@ -81,9 +89,7 @@ export class FamilyProfileFormComponent implements OnInit {
     using_IFR:[false,Validators.required],
     familty_planning:[false,Validators.required],
     mother_pregnant:[false,Validators.required],
-  }
-
-  familyProfileForm:FormGroup = this._fb.group(this.formData);
+  });
 
   checkLists:any=[
     {
@@ -115,13 +121,14 @@ export class FamilyProfileFormComponent implements OnInit {
     private _FPService:FamilyProfileService
   ){}
 
-  onSubmit(){
-    this.isSubmitLoading=true
+  onSubmit():any{
+    if(this.familyProfileForm.controls['contact_number'].invalid) return this.toast.warning("Invalid contact number")
     if(this.familyProfileForm.valid){
+      this.isSubmitLoading=true
       this._FPService.createProfileFamilty(this.familyProfileForm.value).subscribe({
         next:(res:any)=>{
           this.isSubmitLoading=false
-          this.familyProfileForm.patchValue(this.formData)
+          this.familyProfileForm.reset()
           this.triggerSubmmit.emit()
           this.toast.success(res?.message || 'Successfully added')
         },
@@ -131,6 +138,7 @@ export class FamilyProfileFormComponent implements OnInit {
         }
       })
     }else{
+      console.log(this.familyProfileForm)
       this.isSubmitLoading=false
       this.toast.warning("Please, fill-up all inputs")
     }

@@ -21,11 +21,15 @@
         [rowsPerPageOptions]="[10, 25, 50]"
         styleClass="p-datatable-gridlines"
         [globalFilterFields]="[
-          'attributes.city',
-          'personnel_details.last_name',
-          'personnel_details.first_name',
-          'personnel_details.middle_name',
-          'personnel_details.email'
+          'attributes.household_no',
+            'attributes.no_household_member',
+            'attributes.contact_number',
+            'attributes.housthould_head',
+            'attributes.occupation',
+            'attributes.educ_attain',
+           'attributes.toilet_type',
+            'attributes.water_source',
+            'attributes.food_prod_act'
         ]"
       >
         <ng-template pTemplate="caption">
@@ -54,6 +58,7 @@
           <tr class="text-sm">
             <th field="AlumniCredentialschoolId.Course.acronym">Household no.</th>
             <th field="AlumniCredentialschoolId.gradClass">No of household member</th>
+            <th field="AlumniCredentialschoolId.gradClass">Contact number</th>
             <th field="AlumniCredentialschoolId.gradClass">Name of house held/spouse</th>
             <th field="AlumniCredentialschoolId.gradClass">Occupation</th>
             <th field="AlumniCredentialschoolId.gradClass">Educational attainment</th>
@@ -67,6 +72,7 @@
           <tr class="text-sm" [pSelectableRow]="pf">
             <td>{{ pf.attributes.household_no }}</td>
             <td>{{ pf.attributes.no_household_member }}</td>
+            <td>{{ pf.attributes.contact_number }}</td>
             <td>{{ pf.attributes.housthould_head }}</td>
             <td>{{ pf.attributes.occupation }}</td>
             <td>{{ pf.attributes.educ_attain }}</td>
@@ -76,12 +82,12 @@
             
             <td class="grid gap-2">
               <div
-                class="cursor-pointer"
+                class="cursor-pointer text-center"
                 [routerLink]="'/'"
               >
                 <i class="fad fa-eye"></i> View
               </div>
-              <div (click)="deleteData(pf.id)">
+              <div (click)="deleteData(pf.id)" class="text-center">
                   <i class="fad fa-trash"></i> Delete
               </div>
             </td>
