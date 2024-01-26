@@ -11,6 +11,7 @@ import { LocationComponent } from './components/location/location.component';
 import { CityComponent } from './pages/city/city.component';
 import { ProvinceComponent } from './pages/province/province.component';
 import { BaranggayComponent } from './pages/baranggay/baranggay.component';
+import { FamilyProfileComponent } from './pages/family-profile/family-profile.component';
 
 const routes: Routes = [
   {path:'',component:LayoutComponent,children:[
@@ -21,8 +22,9 @@ const routes: Routes = [
     {path:'form',component:LocationComponent,children:[
       {path:'province',component:ProvinceComponent},
       {path:'province/:provinceId',component:CityComponent},
-      {path:'province/:provinceId/:cityId',component:BaranggayComponent}
-    ]}
+      {path:'province/:provinceId/:cityId',component:BaranggayComponent},
+    ]},
+    {path:'form/familty-profile',component:FamilyProfileComponent}
   ],canActivate:[PersonnelGuard]},
   {path:'admin/account',component:AccountComponent}
 ];

@@ -17,6 +17,9 @@ import { LocationComponent } from './components/location/location.component';
 import { ProvinceComponent } from './pages/province/province.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BaranggayComponent } from './pages/baranggay/baranggay.component';
+import { FamilyProfileComponent } from './pages/family-profile/family-profile.component';
+import { FamilyProfileFormComponent } from './components/family-profile-form/family-profile-form.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -33,11 +36,14 @@ import { BaranggayComponent } from './pages/baranggay/baranggay.component';
     LocationComponent,
     ProvinceComponent,
     BaranggayComponent,
+    FamilyProfileComponent,
+    FamilyProfileFormComponent,
   ],
   imports: [
     ReactiveFormsModule,
     PrimengModule,
     CommonModule,
+    FormsModule,
     PersonnelRoutingModule
   ]
 })

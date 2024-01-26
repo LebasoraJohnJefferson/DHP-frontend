@@ -40,29 +40,9 @@ export class SidebarComponent implements OnInit {
     },
     {
       title: 'Family Profile',
-      route: '/',
+      route: '/form/familty-profile',
       icon: 'fal fa-file-invoice',
-    },
-    {
-      title: 'Monthly records',
-      route: '/',
-      icon: 'fal fa-file-invoice',
-    },
-    {
-      title: 'Preschool population',
-      route: '/',
-      icon: 'fal fa-file-invoice',
-    },
-    {
-      title: 'Weight and height',
-      route: '/',
-      icon: 'fal fa-file-invoice',
-    },
-    {
-      title: 'Affected/at-risk',
-      route: '/',
-      icon: 'fal fa-file-invoice',
-    },
+    }
   ];
 
   constructor(private route: ActivatedRoute, private router: Router) {}

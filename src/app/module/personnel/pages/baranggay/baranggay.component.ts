@@ -40,7 +40,6 @@ export class BaranggayComponent implements OnInit {
   ngOnInit(): void {
     this._route.paramMap.subscribe(params => {
       this.cityId = params.get('cityId');
-      this.brgyForm.controls['city_id'].setValue(this.cityId)
     });
     this.getBrgyDetails()
   }
@@ -71,6 +70,7 @@ export class BaranggayComponent implements OnInit {
   onSubmit(){
     this.isSubmitLoading = true
     if(this.brgyForm.valid){
+      this.brgyForm.controls['city_id'].setValue(this.cityId)
       this._bgyService.createBrgy(this.brgyForm.value).subscribe({
         next:(res)=>{
           this.toast.success(res?.message || 'Successfully added')

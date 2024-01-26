@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
 
   notifications: any = [];
 
+  isFormOpen:boolean = true
   routesArr: any = [
     {
       title: 'Dashboard',
@@ -41,10 +42,26 @@ export class HeaderComponent implements OnInit {
     }
   ];
 
+
+
+  formsArr: any = [
+    {
+      title: 'Location',
+      route: '/form/province',
+      icon: 'fal fa-file-invoice',
+    },
+    {
+      title: 'Family Profile',
+      route: '/form/familty-profile',
+      icon: 'fal fa-file-invoice',
+    }
+  ];
+
   constructor(
     private _authService:AuthService,
     public route: ActivatedRoute,
-    private _personnelService:PersonnelService
+    private _personnelService:PersonnelService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +72,15 @@ export class HeaderComponent implements OnInit {
     const route = this.route.snapshot.children[0].routeConfig?.path;
     route == '' ? (this.currentRoute = '/admin/') : (this.currentRoute = route);
   }
+
+  goUser(data: any) {
+    this.router.navigate(
+      [`/${data.route}`],
+      { queryParams: { type: data.params } }
+    );
+  }
+
+  
 
   getCurrentRouteURL(route: any) {
     route == '' ? (this.currentRoute = '/admin/') : (this.currentRoute = route);

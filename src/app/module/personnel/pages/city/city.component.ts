@@ -57,7 +57,6 @@ export class CityComponent implements OnInit{
     this._provinceService.getProvince(this.provinceId).subscribe({
       next:(res)=>{
         this.provinceName = res?.data?.attributes?.province
-        console.log(res)
       }
     })
   }
