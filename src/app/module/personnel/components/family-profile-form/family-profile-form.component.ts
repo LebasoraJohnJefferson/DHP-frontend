@@ -68,7 +68,6 @@ export class FamilyProfileFormComponent implements OnInit {
   typeOfWater:string[]=['P','W','S']
   foodProdActs:string[]=['VG','P/L','FP']
 
-  
 
   familyProfileForm:FormGroup = this._fb.group({
     province_id:[''],
@@ -128,8 +127,14 @@ export class FamilyProfileFormComponent implements OnInit {
       this._FPService.createProfileFamilty(this.familyProfileForm.value).subscribe({
         next:(res:any)=>{
           this.isSubmitLoading=false
-          this.familyProfileForm.reset()
           this.triggerSubmmit.emit()
+          this.familyProfileForm.reset()
+          this.familyProfileForm.patchValue({
+            using_iodized_salt:false,
+            using_IFR:false,
+            familty_planning:false,
+            mother_pregnant:false,
+          })
           this.toast.success(res?.message || 'Successfully added')
         },
         error:(err:any)=>{
