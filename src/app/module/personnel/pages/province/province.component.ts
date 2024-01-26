@@ -30,7 +30,6 @@ export class ProvinceComponent {
     this._provinceService.getAllProvince().subscribe({
       next:(res)=>{
         this.provinces = res.data
-        console.log(this.provinces)
       }
     })
   }

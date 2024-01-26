@@ -16,6 +16,7 @@ import { CityComponent } from './pages/city/city.component';
 import { LocationComponent } from './components/location/location.component';
 import { ProvinceComponent } from './pages/province/province.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BaranggayComponent } from './pages/baranggay/baranggay.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CityComponent,
     LocationComponent,
     ProvinceComponent,
+    BaranggayComponent,
   ],
   imports: [
     ReactiveFormsModule,

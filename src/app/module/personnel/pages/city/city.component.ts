@@ -44,7 +44,7 @@ export class CityComponent implements OnInit{
 
 
   getAllCity(){
-    this._cityService.getAllCity().subscribe({
+    this._cityService.getAllCity(this.provinceId).subscribe({
       next:(res)=>{
         this.cities = res.data
         console.log(this.cities)

@@ -10,6 +10,7 @@ import { PersonnelGuard } from '../../core/shared/guards/personnel.guard';
 import { LocationComponent } from './components/location/location.component';
 import { CityComponent } from './pages/city/city.component';
 import { ProvinceComponent } from './pages/province/province.component';
+import { BaranggayComponent } from './pages/baranggay/baranggay.component';
 
 const routes: Routes = [
   {path:'',component:LayoutComponent,children:[
@@ -19,7 +20,8 @@ const routes: Routes = [
     {path:'logs',component:LogsComponent},
     {path:'form',component:LocationComponent,children:[
       {path:'province',component:ProvinceComponent},
-      {path:'province/:provinceId',component:CityComponent}
+      {path:'province/:provinceId',component:CityComponent},
+      {path:'province/:provinceId/:cityId',component:BaranggayComponent}
     ]}
   ],canActivate:[PersonnelGuard]},
   {path:'admin/account',component:AccountComponent}

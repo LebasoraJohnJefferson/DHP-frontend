@@ -51,7 +51,6 @@ export class HeaderComponent implements OnInit {
     window.addEventListener('scroll', this.listenScrollEvent);
     this.getUser();
 
-    console.log('hello')
 
     const route = this.route.snapshot.children[0].routeConfig?.path;
     route == '' ? (this.currentRoute = '/admin/') : (this.currentRoute = route);
