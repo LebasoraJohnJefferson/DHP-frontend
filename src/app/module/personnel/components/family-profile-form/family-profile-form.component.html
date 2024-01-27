@@ -17,7 +17,7 @@
               </select>
             </div>
           </div>
-          <div class="w-full" (change)="cityChange()" *ngIf="this.familyProfileForm.controls['province_id']?.value != ''">
+          <div class="w-full" (change)="cityChange()">
             <label class="block text-[12px] font-medium text-gray-700"
               >City</label
             >
@@ -30,7 +30,7 @@
               </select>
             </div>
           </div>
-          <div class="w-full" *ngIf="this.familyProfileForm.controls['city_id']?.value != ''">
+          <div class="w-full">
             <label class="block text-[12px] font-medium text-gray-700"
               >Baranggay</label
             >
@@ -47,8 +47,7 @@
 
 
           
-          <!-- if address set -->
-          <div *ngIf="this.familyProfileForm.controls['brgy_id']?.value != ''">
+          <div >
               <div class="w-full" *ngFor="let field of otherFileds">
                   <label class="block text-[12px] font-medium text-gray-700"
                     >{{field.title}}</label

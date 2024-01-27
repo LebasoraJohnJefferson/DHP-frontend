@@ -13,11 +13,14 @@ import { PersonnelAccountComponent } from './pages/personnel-account/personnel-a
 import { EventComponent } from './pages/event/event.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { InvitationComponent } from './components/invitation/invitation.component';
+import { FamilyProfileAnalyticsComponent } from './pages/family-profile-analytics/family-profile-analytics.component';
 
 const routes: Routes = [
   {path:'admin',component:LayoutComponent,children:[
     {path:'',component:DashboardComponent},
-    {path:'analytics',component:AnalyticsComponent},
+    {path:'analytics',component:AnalyticsComponent,children:[
+      {path:'',component:FamilyProfileAnalyticsComponent}
+    ]},
     {path:'events',component:EventsComponent},
     {path:'personnel',component:PersonnelComponent},
     {path:'documents',component:DocumentsComponent},

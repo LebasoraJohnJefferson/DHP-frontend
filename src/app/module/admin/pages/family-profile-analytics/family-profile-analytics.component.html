@@ -1,0 +1,28 @@
+<div>
+    <div class="grid grid-cols-1 lg:grid-cols-[600px_1fr]">
+        <div class="w-full flex mx-auto flex-col my-4">
+            <h3 class="text-center my-2 font-semibold">Total Population for each province</h3>
+            <app-line-chart [label]="data?.provinces" [data]="data?.population"></app-line-chart>
+        </div>
+        <ol class="flex flex-col gap-3 px-0 lg:px-3 items-center justify-center">
+            <li class="flex items-center w-full justify-center">
+                <div class="border border-2 bg-green-500 grid grid-cols-[1fr_1fr] items-center  border-slate-200 h-[fit] p-2 w-full rounded shadow-md">
+                    <div class="flex flex-col items-center justify-center">
+                        <img class="w-[50px] h-[50px]" src="../../../../../assets/images/pregnant-woman.png" alt="">
+                        <p class="font-bold text-white">Mother Pregnant</p>
+                    </div>
+                    <p class="text-center text-white font-extrabold text-xl md:text-3xl">{{data?.count_pregnant}}</p>
+                </div>
+            </li>
+            <li class="flex items-center w-full justify-center">
+                <div class="border border-2 bg-green-500  grid grid-cols-[1fr_1fr] items-center  border-slate-200 h-[fit] p-2 w-full rounded shadow-md">
+                    <div class="flex flex-col items-center justify-center">
+                        <img class="w-[50px] h-[50px]" src="../../../../../assets/images/family.png" alt="">
+                        <p class="font-bold text-white text-green-800 text-[14px] text-center">Couple pactice family planning</p>
+                    </div>
+                    <p class="text-center font-extrabold text-white text-xl md:text-3xl">{{data?.count_prac_fam_plan}}</p>
+                </div>
+            </li>
+        </ol>
+    </div>
+</div>

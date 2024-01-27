@@ -21,6 +21,8 @@ import { EventComponent } from './pages/event/event.component';
 import {TabViewModule} from 'primeng/tabview';
 import { CommentsComponent } from './components/comments/comments.component';
 import { InvitationComponent } from './components/invitation/invitation.component';
+import { LineChartComponent } from './components/line-chart/line-chart.component';
+import { FamilyProfileAnalyticsComponent } from './pages/family-profile-analytics/family-profile-analytics.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { InvitationComponent } from './components/invitation/invitation.componen
     PersonnelFormComponent,
     EventComponent,
     CommentsComponent,
-    InvitationComponent
+    InvitationComponent,
+    LineChartComponent,
+    FamilyProfileAnalyticsComponent
   ],
   imports: [
     PrimengModule,
