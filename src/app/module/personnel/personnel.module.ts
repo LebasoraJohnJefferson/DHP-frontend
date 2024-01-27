@@ -20,7 +20,7 @@ import { BaranggayComponent } from './pages/baranggay/baranggay.component';
 import { FamilyProfileComponent } from './pages/family-profile/family-profile.component';
 import { FamilyProfileFormComponent } from './components/family-profile-form/family-profile-form.component';
 import { FormsModule } from '@angular/forms';
-
+import { ProfileFamilyDetailsComponent } from './pages/profile-family-details/profile-family-details.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +38,7 @@ import { FormsModule } from '@angular/forms';
     BaranggayComponent,
     FamilyProfileComponent,
     FamilyProfileFormComponent,
+    ProfileFamilyDetailsComponent,
   ],
   imports: [
     ReactiveFormsModule,

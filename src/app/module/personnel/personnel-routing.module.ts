@@ -12,6 +12,7 @@ import { CityComponent } from './pages/city/city.component';
 import { ProvinceComponent } from './pages/province/province.component';
 import { BaranggayComponent } from './pages/baranggay/baranggay.component';
 import { FamilyProfileComponent } from './pages/family-profile/family-profile.component';
+import { ProfileFamilyDetailsComponent } from './pages/profile-family-details/profile-family-details.component';
 
 const routes: Routes = [
   {path:'',component:LayoutComponent,children:[
@@ -24,7 +25,8 @@ const routes: Routes = [
       {path:'province/:provinceId',component:CityComponent},
       {path:'province/:provinceId/:cityId',component:BaranggayComponent},
     ]},
-    {path:'form/familty-profile',component:FamilyProfileComponent}
+    {path:'form/familty-profile',component:FamilyProfileComponent},
+    {path:'form/familty-profile/details',component:ProfileFamilyDetailsComponent}
   ],canActivate:[PersonnelGuard]},
   {path:'admin/account',component:AccountComponent}
 ];

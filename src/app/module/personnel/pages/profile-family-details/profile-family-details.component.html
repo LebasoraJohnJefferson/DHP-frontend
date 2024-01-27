@@ -1,0 +1,221 @@
+<div class="relative z-40 mt-10 pb-20">
+    <div class="">
+      <h1 class="font-bold text-xl md:text-3xl text-white">Family Profile Details</h1>
+      <p class="text-slate-100 text-[12px]">Information about the system</p>
+    </div>
+    <div class="mt-5">
+        <div routerLink="/form/familty-profile" class="px-2 py-1 flex items-center gap-2 text-white text-[12px] cursor-pointer rounded-full bg-slate-500 hover:bg-slate-500/80 w-fit">
+            <i class="pi pi-arrow-left"></i>
+            Go back
+        </div>
+    </div>
+    <div class="mt-5 grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-2">
+
+       
+
+
+        <div class="grid">
+            <p-table
+            [value]="data"
+            #dt2
+            dataKey="id"
+            responsiveLayout="scroll"
+            [autoLayout]="true"
+            [paginator]="true"
+            [rows]="10"
+            [columns]="cols"
+            selectionMode="multiple"
+            [(selection)]="selectdata"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [rowsPerPageOptions]="[10, 25, 50]"
+            styleClass="p-datatable-gridlines"
+            [globalFilterFields]="[
+              'name',
+                'birthDay',
+                'nursing_type',
+            ]"
+          >
+            <ng-template pTemplate="caption">
+              <div class="grid gap-2 md:flex md:justify-between">
+                <div class="flex items-center py-1 rounded bg-white px-2">
+                  <i class="pi pi-search"></i>
+                  <input
+                    type="text"
+                    class="outline-0 ml-2 border-0"
+                    #textInput
+                    (input)="dt2.filterGlobal(textInput.value, 'contains')"
+                    placeholder="Search keyword"
+                  />
+                </div>
+                <button
+                    (click)="createModal = true"
+                    class="bg-green-800 text-white text-[12px] md:text-sm font-semibold py-3 px-5 rounded-3xl hover:bg-green-900/80 cursor-pointer transition-all"
+                  >
+                    <i class="fal fa-file-plus mr-1"></i>
+                    Create
+                  </button>
+                
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr class="text-sm">
+                
+                <th field="name">Name</th>
+                <th field="birthDay">Birth Day</th>
+                <th field="birthDay">Age</th>
+                <th field="nursing_type">Nursing</th>
+                <th >Action</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-pfc>
+              <tr class="text-sm" [pSelectableRow]="pfc">
+                <td>{{ pfc.name }}</td>
+                <td>{{ pfc.birthDay | date}}</td>
+                <td>{{ calculateAge(pfc.birthDay)!=0 ? calculateAge(pfc.birthDay)+' year(s) old' : '1 yr>mos.Child' }}</td>
+                <td>{{ pfc.nursing_type ? pfc.nursing_type : 'N/A' }}</td>
+                
+                <td class="grid gap-2">
+                  <div (click)="deleteData(pfc.id)" class="text-center">
+                      <i class="fad fa-trash"></i> Delete
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+        
+
+         
+        <table class="flex h-fit flex mx-auto  p-2 rounded text-[12px]">
+            <tr class="grid">
+                <th class="show border p-1 px-2">Household number</th>
+                <th class="show border p-1 px-2">No of household member</th>
+                <th  class="show border p-1 px-2">Address</th>
+                <th class="show border p-1 px-2">Contact number</th>
+                <th class="show border p-1 px-2">Household head/Spouse</th>
+                <th class="show border p-1 px-2">Occupation</th>
+                <th class="show border p-1 px-2">Educational attainment</th>
+                <th class="show border p-1 px-2">Food Production Activity</th>
+                <th class="show border p-1 px-2">Toilet type</th>
+                <th class="show border p-1 px-2">Water source</th>
+                <th class="show border p-1 px-2">Using iodized salt</th>
+                <th class="show border p-1 px-2">Using IFR</th>
+                <th class="show border p-1 px-2">Family planning</th>
+                <th class="show border p-1 px-2">Mother pregnant</th>
+            </tr>
+            <tr class="grid ">
+                <td class="show border p-1 px-2">{{FamDetails?.profile_familty?.household_no}}</td>
+                <td class="show border p-1 px-2">{{FamDetails?.profile_familty?.no_household_member}}</td>
+                <td  class="show border p-1 px-2">{{FamDetails?.address}}</td>
+                <td class="show border p-1 px-2">{{FamDetails?.profile_familty?.contact_number}}</td>
+                <td class="show border p-1 px-2">{{FamDetails?.profile_familty?.housthould_head}}</td>
+                <td class="show border p-1 px-2">{{FamDetails?.profile_familty?.occupation}}</td>
+                <td class="show border p-1 px-2">{{FamDetails?.profile_familty?.educ_attain}}</td>
+                <td class="show border p-1 px-2">{{FamDetails?.profile_familty?.food_prod_act}}</td>
+                <td class="show border p-1 px-2">{{FamDetails?.profile_familty?.toilet_type}}</td>
+                <td class="show border p-1 px-2">{{FamDetails?.profile_familty?.water_source}}</td>
+                <td class="show border p-1 px-2">{{FamDetails?.profile_familty?.using_iodized_salt ? 'true' : 
+                    'false'}}</td>
+                <td class="show border p-1 px-2">{{FamDetails?.profile_familty?.using_IFR ? 'true' : 'false'}}</td>
+                <td class="show border p-1 px-2">{{FamDetails?.profile_familty?.familty_planning ? 'true' : 'false'}}</td>
+                <td class="show border p-1 px-2">{{FamDetails?.profile_familty?.mother_pregnant ? 'true' : 'false'}}</td>
+            </tr>
+        </table>
+        
+        
+    </div>
+</div>
+
+
+
+<p-dialog
+      header="Add Child"
+      [(visible)]="createModal"
+      [modal]="true"
+      appendTo="body"
+      [style]="{ maxWidth: '400px', width: '400px' }"
+    >
+    <div class="mt-3">
+    <form
+        (ngSubmit)="onSubmit()"
+        [formGroup]="childrenForm"
+        class="w-full grid gap-2"
+      >
+          <div class="w-full">
+            <label class="block text-[12px] font-medium text-gray-700"
+              >Name</label
+            >
+            <div class="mt-1 relative rounded-md w-full">
+              <input
+                type="text"
+                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
+                placeholder="Enter child name"
+                formControlName="name"
+              />
+            </div>
+          </div>
+          <div class="w-full">
+            <label class="block text-[12px] font-medium text-gray-700"
+              >Birth Day</label
+            >
+            <div class="mt-1 relative rounded-md w-full">
+              <input
+                type="date"
+                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
+                formControlName="birthDay"
+              />
+            </div>
+          </div>
+          
+          <div  class="w-full my-2 flex items-center items-center justify-between">
+            <label  class="block text-[12px] font-medium text-gray-700"
+              >Nursing</label
+            >
+            <p-inputSwitch formControlName="is_nursing"></p-inputSwitch>
+          </div>
+          <select formControlName="nursing_type" *ngIf="childrenForm.controls['is_nursing'].value != false" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
+            <option selected disabled>Select feeding Type</option>
+            <option  [value]="type" *ngFor="let type of nursingTypes">
+                {{type}}
+            </option>
+          </select>
+
+          
+
+        <button
+          [disabled]="isSubmitLoading"
+          type="submit"
+          class="grid place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-3 hover:bg-slate-900/80 transition-all w-full mt-2"
+        >
+          <div class="flex items-center w-fit mx-auto" *ngIf="isSubmitLoading">
+            <svg
+              class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+
+            <span>Processing</span>
+          </div>
+
+          <span *ngIf="!isSubmitLoading">Create</span>
+        </button>
+      </form>
+    </div>
+  </p-dialog>
+ 

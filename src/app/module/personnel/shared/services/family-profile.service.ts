@@ -24,6 +24,10 @@ export class FamilyProfileService {
     return this.http.post(`${BASEURL}/personnel/famityProfile`,data);
   }
 
+  specificProfileFamilty(PFid:any):any{
+    return this.http.get(`${BASEURL}/personnel/famityProfile/${PFid}`);
+  }
+
   deletePF(PFId:any){
     return this.http.delete(`${BASEURL}/personnel/famityProfile/${PFId}`);
   }
