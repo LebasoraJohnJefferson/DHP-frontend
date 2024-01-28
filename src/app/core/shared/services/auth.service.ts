@@ -15,22 +15,24 @@ const HELPER = new JwtHelperService();
 })
 export class AuthService {
   constructor(
-    public toast:HotToastService,
-    private http: HttpClient, 
-    private router: Router) {}
+    public toast: HotToastService,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
- 
   login(data: any): any {
     return this.http.post(`${BASEURL}/login`, data);
   }
 
   forgotpassword(data: string): any {
-    return this.http.post(`${BASEURL}/auth/forgotpassword`, data);
+    return this.http.post(`${BASEURL}/forgotpassword`, data, {
+      responseType: 'text',
+    });
   }
 
   resetPassword(data: any, token: any): Observable<any> {
     localStorage.setItem('token', token);
-    return this.http.post(`${BASEURL}/auth/resetpassword`, data);
+    return this.http.post(`${BASEURL}/resetpassword`, data);
   }
 
   isLoggedIn(type: string): boolean {
@@ -54,7 +56,7 @@ export class AuthService {
   }
 
   logout(type: string) {
-    this.toast.success("Successfully logout!")
+    this.toast.success('Successfully logout!');
     localStorage.removeItem(`token`);
     this.router.navigate([`/login`], {
       queryParams: { type: type },
