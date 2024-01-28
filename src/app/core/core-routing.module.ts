@@ -7,17 +7,21 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { LayoutComponent } from './components/layout/layout.component';
 
 const routes: Routes = [
-  {path:'',component:LayoutComponent,children:[
-    {path:'login',component:LoginComponent},
-    {path:'forgot-password',component:ForgetPasswordComponent},
-    {path:'reset-password/:token',component:ResetPasswordComponent},
-    {path:'page-not-found',component:PageNotFoundComponent},
-    {path:'**',redirectTo:"page-not-found"}
-  ]}
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'forgotpassword', component: ForgetPasswordComponent },
+      { path: 'resetpassword', component: ResetPasswordComponent },
+      { path: 'page-not-found', component: PageNotFoundComponent },
+      { path: '**', redirectTo: 'page-not-found' },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CoreRoutingModule { }
+export class CoreRoutingModule {}

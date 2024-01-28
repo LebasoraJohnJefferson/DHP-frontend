@@ -30,8 +30,8 @@ export class AuthService {
     });
   }
 
-  resetPassword(data: any, token: any): Observable<any> {
-    localStorage.setItem('token', token);
+  resetPassword(data: any): Observable<any> {
+    localStorage.setItem('token', data.token);
     return this.http.post(`${BASEURL}/resetpassword`, data);
   }
 

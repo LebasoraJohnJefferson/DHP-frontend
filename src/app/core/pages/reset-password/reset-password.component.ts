@@ -1,62 +1,64 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { HotToastService } from '@ngneat/hot-toast';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrl: './reset-password.component.scss'
+  styleUrls: ['./reset-password.component.scss'],
 })
-export class ResetPasswordComponent {
-  submitLoading: boolean = false;
-  token: any;
+export class ResetPasswordComponent implements OnInit {
+  token: any = null;
+  userId: any = null;
+  password: any = null;
+  password_confirmation: any = null;
 
-  passwordForm: FormGroup = this._fb.group({
-    password: ['', Validators.required],
-    confirmPassword: ['', Validators.required],
-  });
+  submitLoading: boolean = false;
 
   constructor(
-    private _fb: FormBuilder,
-    private _route: ActivatedRoute,
-    public router: Router
-  ) {
-    this._route.queryParams.subscribe((value) => {
-      this.token = this._route.snapshot.paramMap.get('token');
-    });
-  }
+    private toast: HotToastService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
-  goBack() {
-    this.router.navigate(['/login']);
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((value) => {
+      (this.token = value['token']), (this.userId = value.id);
+    });
+
+    if (this.token == null && this.userId == null) {
+      this.router.navigate(['/']);
+    }
   }
 
   onSubmit() {
-    if (this.passwordForm.invalid) {
-      // this.toast.warning('Empty Input(s)');
-      this.submitLoading = false;
-    } else if (
-      this.passwordForm.controls['password'].value !=
-      this.passwordForm.controls['confirmPassword'].value
-    ) {
-      // this.toast.error("Password didn't matched.");
-      this.submitLoading = false;
-    } else {
-      // this._authService
-      //   .resetPassword(this.passwordForm.value, this.token)
-      //   .subscribe({
-      //     complete: () => {
-      //       this.submitLoading = false;
-      //       this.passwordForm.reset();
-      //     },
-      //     error: (err) => {
-      //       this.toast.warning(err.error);
-      //       this.submitLoading = false;
-      //     },
-      //     next: (res) => {
-      //       this.toast.success(res.message);
-      //       this.router.navigate(['/login?type=alumni']);
-      //     },
-      //   });
-    }
+    if (this.password != this.password_confirmation)
+      return this.toast.error("Password didn't matched.");
+
+    this.submitLoading = true;
+
+    const data = {
+      token: this.token,
+      password: this.password,
+      userId: this.userId,
+    };
+
+    this.authService.resetPassword(data).subscribe(
+      (response: any) => {
+        this.submitLoading = false;
+        this.toast.success(response.message);
+
+        this.router.navigate([`/login`], {
+          queryParams: { type: 'student' },
+        });
+      },
+      (err: any) => {
+        this.submitLoading = false;
+        this.toast.error(err.error.message);
+      }
+    );
   }
 }
