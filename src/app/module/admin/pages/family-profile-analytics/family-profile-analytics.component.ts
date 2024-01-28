@@ -10,6 +10,12 @@ export class FamilyProfileAnalyticsComponent {
 
   data:any;
 
+  toiletTypes:string[] = ['WS','OP','O','N']
+  typeOfWater:string[]=['P','W','S']
+  foodProdActs:string[]=['VG','P/L','FP']
+
+
+
   constructor(
     private _analytic:AnalyticsService
   ){
@@ -21,7 +27,6 @@ export class FamilyProfileAnalyticsComponent {
     this._analytic.getFPAnalytics().subscribe({
       next:(res)=>{
         this.data = res?.data
-        console.log(this.data)
       }
     })
   }
