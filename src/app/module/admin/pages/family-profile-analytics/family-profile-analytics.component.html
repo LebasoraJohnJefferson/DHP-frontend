@@ -43,12 +43,15 @@
     
     <ol class="gap-2 grid mt-4 lg:grid-cols-3  grid-cols-1">
         <li class="border-2 border border-green-500/50 flex flex-col items-center justify-center py-2 rounded shadow ">
+            <h3 class="text-center text-green-700 font-bold">Toilet Types</h3>
             <app-pie-chart [data]="data?.toilet_type" [label]="toiletTypes"></app-pie-chart>
         </li>
         <li class="border-2 border border-green-500/50 flex flex-col items-center justify-center py-2 rounded shadow ">
+            <h3 class="text-center text-green-700 font-bold">Water Soure</h3>
             <app-pie-chart [data]="data?.water_soruce" [label]="typeOfWater"></app-pie-chart>
         </li>
         <li class="border-2 border border-green-500/50 flex flex-col items-center justify-center py-2 rounded shadow ">
+            <h3 class="text-center text-green-700 font-bold">Food Producation Activity</h3>
             <app-pie-chart [data]="data?.food_prod_act" [label]="foodProdActs"></app-pie-chart>
         </li>
     </ol>

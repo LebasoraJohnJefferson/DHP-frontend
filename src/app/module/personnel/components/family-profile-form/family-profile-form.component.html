@@ -63,6 +63,28 @@
                 </div>
                 <div class="w-full" >
                     <label class="block text-[12px] font-medium text-gray-700"
+                      >Educational Attainment</label
+                    >
+                    <div class="mt-1 relative rounded-md w-full">
+                      <select formControlName="educ_attain" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
+                        <option selected disabled>Select Educatioal Attained</option>
+                        <option [value]="type" *ngFor="let type of educAttans">{{type}}</option>
+                      </select>
+                    </div>
+                  </div>
+                <div class="w-full" >
+                    <label class="block text-[12px] font-medium text-gray-700"
+                      >Occupation</label
+                    >
+                    <div class="mt-1 relative rounded-md w-full">
+                      <select formControlName="occupation" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
+                        <option selected disabled>Select occupation</option>
+                        <option [value]="type" *ngFor="let type of occupations">{{type}}</option>
+                      </select>
+                    </div>
+                  </div>
+                <div class="w-full" >
+                    <label class="block text-[12px] font-medium text-gray-700"
                       >Toilet type</label
                     >
                     <div class="mt-1 relative rounded-md w-full">

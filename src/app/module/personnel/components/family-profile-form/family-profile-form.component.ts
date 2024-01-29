@@ -48,20 +48,26 @@ export class FamilyProfileFormComponent implements OnInit {
       type:'text',
       placeholder:'housthould head.'
     },
-    {
-      title:'Occupation',
-      formName:'occupation',
-      type:'text',
-      placeholder:'occupation.'
-    },
-    {
-      title:'Educational attainment',
-      formName:'educ_attain',
-      type:'text',
-      placeholder:'educational attainment.'
-    }
   ]
 
+  occupations = ['employed','unemployed','self-employed']
+  educAttans = ['Advance Learning System',
+                'College',
+                'College Student',
+                'College undergrad',
+                'Elem Student',
+                'Elem Undegrad',
+                'Elem Education',
+                'High Scool Education',
+                'HS Student',
+                'HS undegrad',
+                'No Formal Education',
+                'Not Applicable',
+                'Postgraduate Program',
+                'Pre-School',
+                'Senior HS',
+                'Vacational',
+              ]
  
 
   toiletTypes:string[] = ['WS','OP','O','N']
