@@ -1,0 +1,24 @@
+::ng-deep p-timeline {
+    .p-timeline-vertical {
+      .p-timeline-event-opposite {
+        display: none;
+      }
+    }
+  
+    .p-timeline-event-marker {
+      background-color: rgb(153, 27, 151) !important;
+    }
+  }
+  
+  ::ng-deep .p-tabmenu {
+    
+    .p-highlight .p-menuitem-link {
+      color: rgb(173, 129, 231) !important;
+      border-color: rgb(99, 25, 134) !important;
+      border-bottom-width: 3px !important;
+    }
+    
+    .p-menuitem-link:not(.p-disabled):focus {
+      box-shadow: none !important;
+    }
+  }

@@ -10,7 +10,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { PrimengModule } from '../../primeng/primeng.module';
 import { EventsComponent } from './pages/events/events.component';
 import { DocumentsComponent } from './pages/documents/documents.component';
-import { LogsComponent } from './pages/logs/logs.component';
 import { AccountComponent } from './pages/account/account.component';
 import { CityComponent } from './pages/city/city.component';
 import { LocationComponent } from './components/location/location.component';
@@ -30,7 +29,6 @@ import { ProfileFamilyDetailsComponent } from './pages/profile-family-details/pr
     SidebarComponent,
     EventsComponent,
     DocumentsComponent,
-    LogsComponent,
     AccountComponent,
     CityComponent,
     LocationComponent,

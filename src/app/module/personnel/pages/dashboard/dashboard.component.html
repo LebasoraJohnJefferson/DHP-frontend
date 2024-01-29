@@ -6,6 +6,62 @@
     </h1>
   
     <div class="mt-20 pb-10">
-        Dashboard work
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+        <a 
+      routerLink="/events"
+      class="bg-white shadow-lg border-4 border-gray-200 p-5 px-8 h-fit rounded-2xl grid grid-cols-2 gap-1 items-center cursor-pointer hover:bg-slate-50 transition-all"
+    >
+      <div class="h-[100px]">
+        <img
+          src="../../../../../assets/images/calendar.png"
+          alt=""
+          class="w-[100px]"
+        />
+      </div>
+
+      <div class="">
+        <h1 class="text-xl lg:text-3xl font-black text-slate-800 text-end">
+          Events
+        </h1>
+        <div class="flex gap-2 justify-end">
+          <p class = 'text-end text-sm text-green-500 font-semibold mt-1'>
+             Posted
+          </p>              
+          <p class="text-end text-sm  text-slate-600 font-semibold mt-1">
+            {{data?.event_count}}
+          </p>
+        </div>
+      </div>
+      
+    </a>
+
+      <a 
+        routerLink="/documents"
+        class="bg-white shadow-lg border-4 border-gray-200 p-5 px-8 h-fit rounded-2xl grid grid-cols-2 gap-1 items-center cursor-pointer hover:bg-slate-50 transition-all"
+      >
+        <div class="h-[100px]">
+          <img
+            src="../../../../../assets/images/folders.png"
+            alt=""
+            class="w-[100px]"
+          />
+        </div>
+
+        <div class="">
+          <h1 class="text-xl lg:text-3xl font-black text-slate-800 text-end">
+            Documents
+          </h1>
+          <div class="flex gap-2 justify-end">
+            <p class = 'text-end text-sm text-green-500 font-semibold mt-1'>
+               Files
+            </p>              
+            <p class="text-end text-sm  text-slate-600 font-semibold mt-1">
+              0
+            </p>
+          </div>
+        </div>
+        
+      </a>
+      </div>
     </div>
 </div>

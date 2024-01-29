@@ -4,7 +4,6 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EventsComponent } from './pages/events/events.component';
 import { DocumentsComponent } from './pages/documents/documents.component';
-import { LogsComponent } from './pages/logs/logs.component';
 import { AccountComponent } from './pages/account/account.component';
 import { PersonnelGuard } from '../../core/shared/guards/personnel.guard';
 import { LocationComponent } from './components/location/location.component';
@@ -19,7 +18,6 @@ const routes: Routes = [
     {path:'',component:DashboardComponent},
     {path:'events',component:EventsComponent},
     {path:'documents',component:DocumentsComponent},
-    {path:'logs',component:LogsComponent},
     {path:'form',component:LocationComponent,children:[
       {path:'province',component:ProvinceComponent},
       {path:'province/:provinceId',component:CityComponent},

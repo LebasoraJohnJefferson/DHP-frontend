@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from '../../shared/services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit{
   profile: any = [];
-
+  data:any;
   date: Date = new Date();
   timeOfTheDay:string[] = ['Morning','Afternoon','Evening','Night']
   timeOfTheDayIndex:number = 0
@@ -16,7 +17,23 @@ export class DashboardComponent implements OnInit{
 
   ngOnInit(): void {
     this.timeOfTheDayIndex = this.checkTime()
+    this.getDashBoardData()
   }
+  
+  constructor(
+    private _dashboardService:DashboardService
+  ){
+
+  }
+
+  getDashBoardData(){
+    this._dashboardService.getDashboardData().subscribe({
+      next:(res)=>{
+        this.data = res?.data
+      } 
+    })
+  }
+
 
   checkTime():number{
     console.log(this.date.getHours())
