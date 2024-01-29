@@ -22,9 +22,31 @@ export class EventService {
     return this.http.post(`${BASEURL}/admin/event/comment/${eventId}`, data);
   }
 
+  getAllProvincesNotYetInvited(eventId:any):Observable<any> {
+    return this.http.get(`${BASEURL}/admin/event_invitation/${eventId}`);
+  }
+
+  
+  inviteProvince(data:any):Observable<any> {
+    return this.http.post(`${BASEURL}/admin/event_invitation`,data);
+  }
+
+
+  deleteInvitation(inviteId:any):Observable<any> {
+    return this.http.delete(`${BASEURL}/admin/event_invitation/${inviteId}`);
+  }
+
+
   getEvents(): any {
     return this.http.get(`${BASEURL}/admin/event`);
   }
+
+
+  getAllInvitedProvince(eventId:any):Observable<any> {
+    return this.http.get(`${BASEURL}/admin/get_all_invited_province/${eventId}`);
+  }
+    
+
 
   getEvent(eventId: any): Observable<any> {
     return this.http.get(`${BASEURL}/admin/event/${eventId}`);

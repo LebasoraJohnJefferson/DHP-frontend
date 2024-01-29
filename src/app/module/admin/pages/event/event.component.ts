@@ -15,7 +15,10 @@ export class EventComponent {
   defaultImage:string ='../../../../../assets/images/error-404.png'
   eventId:any;
   isDeleting:boolean = false
+  provinces:any;
   event:any;
+  createEventModal:any;
+  provinceNotYetInvited:any=[]
   constructor(
     public route: ActivatedRoute,
     private _eventService:EventService,
@@ -26,20 +29,69 @@ export class EventComponent {
       this.eventId = value['id'];
     });
     this.getEvent()
+    this.getAllProvinceNotInvited()
+    this.getAllInvitedProvince()
   }
 
   ngOnInit(): void {
+  }
+
+
+  getAllInvitedProvince(){
+    this._eventService.getAllInvitedProvince(this.eventId).subscribe({
+      next:(res:any)=>{
+        this.provinces = res?.data?.provinces
+        console.log(res)
+      }
+    })
+  }
+
+  deleteInvitation(eventId:any){
+    const confirmation = confirm("Are you sure, you want to delete this invited provice?")
+    if(!confirmation) return 
+    this._eventService.deleteInvitation(eventId).subscribe({
+      next:(res:any)=>{
+        this.getAllInvitedProvince()
+        this.getAllProvinceNotInvited()
+        this.toast.success( res?.message || "Successfully deleted")
+      },error:(err)=>{
+        this.toast.warning(err?.error?.message || 'An error occurred!')
+      }
+    })
+  }
+
+
+  sendInvitation(provinceId:any){
+    const confirmation = confirm("Are you sure, you want to invite this province?")
+    if(!confirmation) return 
+    this._eventService.inviteProvince({
+      province_id:provinceId,
+      event_id:this.eventId
+    }).subscribe({
+      next:(res:any)=>{
+        this.getAllInvitedProvince()
+        this.getAllProvinceNotInvited()
+        this.toast.success(res?.message || 'Successfully Invited')
+      },error:(err:any)=>{
+        this.toast.error(err?.error?.message || "An error occurred")
+      }
+    })
   }
 
   changeRoute(route:string){
     this.seletedRoute = route
   }
 
+  getAllProvinceNotInvited(){
+    this._eventService.getAllProvincesNotYetInvited(this.eventId).subscribe((res)=>{
+      this.provinceNotYetInvited = res.data
+    })
+  }
+
   getEvent(){
     this._eventService.getEvent(this.eventId).subscribe({
       next:(res)=>{
         this.event = res.data
-        console.log(this.event)
       },error:(err)=>{
         this.toast.warning(err?.error?.message || 'An error occurred!')
         this.redirectToEvent()
