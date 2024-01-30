@@ -31,11 +31,43 @@ export class DocumentsComponent {
     private _fileService:FileService
   ){
     this.getFiles()
+    this.archiveFiles()
+  }
+
+  archiveFiles(){
+    this._fileService.getArchiveFiles().subscribe({
+      next:(res)=>{
+        this.recoverFiles  = res?.data
+      }
+    })
   }
 
 
   recoverFile(fileId:any){
+    const confirmation = confirm('Are you sure, you want to recover this file?')
+    if(!confirmation) return
+    this._fileService.recoverFile(fileId).subscribe({
+      next:(res)=>{
+        this.getFiles()
+        this.archiveFiles()
+        this.toast.success(res?.message || 'Successfully deleted!')
+      },error:(err)=>{
+        this.toast.warning(err?.error?.message || 'An error occurred')
+      }
+    })
+  }
 
+  commitDelete(fileId:any){
+    const confirmation = confirm('Are you sure, you want to delete this file permanently?')
+    if(!confirmation) return
+    this._fileService.commitDelete(fileId).subscribe({
+      next:(res)=>{
+        this.archiveFiles()
+        this.toast.success(res?.message || 'Successfully deleted!')
+      },error:(err)=>{
+        this.toast.warning(err?.error?.message || 'An error occurred')
+      }
+    })
   }
 
 
@@ -43,7 +75,6 @@ export class DocumentsComponent {
     this._fileService.getFiles().subscribe({
       next:(res:any)=>{
         this.documents = res.data
-        console.log(this.documents)
       } 
     })
   }
@@ -54,6 +85,7 @@ export class DocumentsComponent {
     this._fileService.deleteFile(fileId).subscribe({
       next:(res:any)=>{
         this.getFiles()
+        this.archiveFiles()
         this.toast.success(res?.message || 'Successfully Deleted')
       },error:(err:any)=>{
         this.toast.warning(err?.error?.message || 'An error occurred!')

@@ -1,0 +1,11 @@
+<ol class="flex flex-wrap gap-3">
+    <li [routerLink]="'/admin/documents/'+owner?.id" class="w-[100px] cursor-pointer hover:text-slate-700 flex flex-col" *ngFor="let owner of filesOwner">
+        <div class="flex items-center justify-center relative">
+            <i class="fal fa-folder  text-6xl mx-auto"></i>
+            <span class="absolute top-6 text-[11px]">{{owner?.created_at | date :'shortDate'}}</span>
+        </div>
+        <span class="truncate text-center text-[12px]">
+            {{owner?.last_name+', '+owner?.first_name +' '+owner?.middle_name[0]+'.' | titlecase}}
+        </span>
+    </li>
+</ol>

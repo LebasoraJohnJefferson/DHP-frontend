@@ -14,6 +14,8 @@ import { EventComponent } from './pages/event/event.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { InvitationComponent } from './components/invitation/invitation.component';
 import { FamilyProfileAnalyticsComponent } from './pages/family-profile-analytics/family-profile-analytics.component';
+import { OwnerDocumentComponent } from './components/owner-document/owner-document.component';
+import { AllDocumentsComponent } from './components/all-documents/all-documents.component';
 
 const routes: Routes = [
   {path:'admin',component:LayoutComponent,children:[
@@ -23,7 +25,10 @@ const routes: Routes = [
     ]},
     {path:'events',component:EventsComponent},
     {path:'personnel',component:PersonnelComponent},
-    {path:'documents',component:DocumentsComponent},
+    {path:'documents',component:DocumentsComponent,children:[
+      {path:'',component:OwnerDocumentComponent},
+      {path:':ownerId',component:AllDocumentsComponent},
+    ]},
     {path:'logs',component:LogsComponent},
   ]},
   {path:'admin/personnel/account',component:PersonnelAccountComponent,canActivate:[AdminGuard]},

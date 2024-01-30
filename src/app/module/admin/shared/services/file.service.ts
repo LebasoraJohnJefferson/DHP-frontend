@@ -15,17 +15,14 @@ const HELPER = new JwtHelperService();
 export class FileService {
   
     constructor(private http: HttpClient, private router: Router) {}
-  
-    uploadFile(data:any): any {
-      return this.http.post(`${BASEURL}/personnel/file`,data);
-    }
+ 
 
-    getFiles(): any {
-      return this.http.get(`${BASEURL}/personnel/file`);
+    getFiles(userId:any): any {
+      return this.http.get(`${BASEURL}/admin/file/${userId}`);
     }
 
     deleteFile(id:any):Observable<any>{
-      return this.http.delete(`${BASEURL}/personnel/file/${id}`);
+      return this.http.delete(`${BASEURL}/admin/file/${id}`);
     }
 
 
@@ -33,8 +30,8 @@ export class FileService {
       return this.http.put(`${BASEURL}/recover_files/${id}`,'');
     }
 
-    getArchiveFiles():Observable<any>{
-      return this.http.get(`${BASEURL}/recover_files`);
+    getArchiveFiles(ownerId:any):Observable<any>{
+      return this.http.get(`${BASEURL}/recover_files/${ownerId}`);
     }
 
     commitDelete(id:any):Observable<any>{

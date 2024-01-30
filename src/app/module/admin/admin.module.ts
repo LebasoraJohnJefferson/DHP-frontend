@@ -26,6 +26,8 @@ import { FamilyProfileAnalyticsComponent } from './pages/family-profile-analytic
 import { DougnutChartComponent } from './components/dougnut-chart/dougnut-chart.component';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+import { OwnerDocumentComponent } from './components/owner-document/owner-document.component';
+import { AllDocumentsComponent } from './components/all-documents/all-documents.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { PieChartComponent } from './components/pie-chart/pie-chart.component';
     DougnutChartComponent,
     BarChartComponent,
     PieChartComponent,
+    OwnerDocumentComponent,
+    AllDocumentsComponent,
   ],
   imports: [
     PrimengModule,

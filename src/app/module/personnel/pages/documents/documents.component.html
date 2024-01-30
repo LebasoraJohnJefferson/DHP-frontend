@@ -117,9 +117,12 @@
   >
   <div class="mt-3">
     <ol class="grid gap-2">
-      <li class="grid grid-cols-[1fr_auto]" *ngFor="let file of recoverFiles">
+      <li class="grid grid-cols-[1fr_auto] border p-2 shadow rounded" *ngFor="let file of recoverFiles">
         <p>{{file?.name}}</p>
-        <i (click)="recoverFile(file.id)" class="pi pi-undo text-white bg-green-500 hover:bg-green-500/80 rounded cursor-pointer  px-2 py-1"></i>
+        <div class="gap-2 flex">
+          <i (click)="recoverFile(file.id)" class="pi pi-undo text-white bg-green-500 hover:bg-green-500/80 rounded cursor-pointer  px-2 py-1"></i>
+          <i (click)="commitDelete(file.id)" class="pi pi-trash text-white bg-red-500 hover:bg-red-500/80 rounded cursor-pointer  px-2 py-1"></i>
+        </div>
       </li>
       <li class="text-center text-xl font-bold" *ngIf="recoverFiles?.length == 0">No Files </li>
     </ol>
