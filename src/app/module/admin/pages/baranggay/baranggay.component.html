@@ -2,11 +2,11 @@
     <div class="" >
       <div class="relative  lg:w-full">
         <ol class="flex items-center py-2 gap-2">
-            <li routerLink="/form/province" class="flex cursor-pointer cursor-normal gap-1 items-center">
+            <li routerLink="/admin/form/province" class="flex cursor-pointer cursor-normal gap-1 items-center">
                 <i class="pi pi-folder"></i>
                 <span>Province <i>[{{province?.province}}]</i> ></span>
             </li>
-            <li [routerLink]="'/form/province/'+province?.id" class="flex cursor-pointer cursor-normal gap-1 items-center">
+            <li [routerLink]="'/admin/form/province/'+province?.id" class="flex cursor-pointer cursor-normal gap-1 items-center">
                 <i class="pi pi-folder"></i>
                 <span>City <i>[{{city?.city}}]</i> ></span>
             </li>
@@ -35,9 +35,7 @@
       styleClass="p-datatable-gridlines"
       [globalFilterFields]="[
         'attributes.city',
-        'personnel_details.last_name',
-        'personnel_details.first_name',
-        'personnel_details.middle_name',
+        'attributes.created_at',
         'personnel_details.email'
       ]"
     >
@@ -67,8 +65,7 @@
         <tr class="text-sm">
           <th field="name">Baranggay</th>
           <th field="name">Purok</th>
-          <th field="AlumniCredentialschoolId.Course.acronym">Personnel</th>
-          <th field="AlumniCredentialschoolId.gradClass">Email</th>
+          <th field="AlumniCredentialschoolId.Course.acronym">Created</th>
           <th field="email">Action</th>
         </tr>
       </ng-template>
@@ -76,10 +73,7 @@
         <tr class="text-sm" [pSelectableRow]="brgy">
           <td>{{ brgy?.baranggay }}</td>
           <td>{{ brgy?.purok }}</td>
-          <td>
-            {{ brgy?.user?.last_name + ' ,' +  brgy?.user?.first_name + ' ' + brgy?.user?.middle_name[0] + '.' | titlecase}}
-          </td>
-          <td>{{ brgy.user.email}}</td>
+          <td>{{ brgy?.created_at | date }}</td>
           
           <td class="grid gap-2">
                 <div (click)="deleteBaranggay(brgy.id)">

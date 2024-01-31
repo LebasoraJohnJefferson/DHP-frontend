@@ -25,9 +25,7 @@
           styleClass="p-datatable-gridlines"
           [globalFilterFields]="[
             'attributes.province',
-            'personnel_details.last_name',
-            'personnel_details.first_name',
-            'personnel_details.middle_name',
+            'attributes.created_at',
             'personnel_details.email'
           ]"
         >
@@ -56,21 +54,19 @@
           <ng-template pTemplate="header">
             <tr class="text-sm">
               <th field="name">Province</th>
-              <th field="AlumniCredentialschoolId.Course.acronym">Personnel</th>
-              <th field="AlumniCredentialschoolId.gradClass">Email</th>
+              <th field="name">Created</th>
               <th field="email">Action</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-province>
             <tr class="text-sm" [pSelectableRow]="province">
               <td>{{ province.attributes.province }}</td>
-              <td>{{ province.personnel_details.last_name + ' ,' +  province.personnel_details.first_name + ' ' + province.personnel_details.middle_name[0] + '.' | titlecase}}</td>
-              <td>{{ province.personnel_details.email}}</td>
+              <td>{{ province.attributes.created_at | date}}</td>
               
               <td class="grid gap-2">
                 <div
                   class="cursor-pointer"
-                  [routerLink]="'/form/province/'+province.id"
+                  [routerLink]="['/admin/form/province', province?.id]"
                 >
                   <i class="fad fa-eye"></i> View 
                 </div>

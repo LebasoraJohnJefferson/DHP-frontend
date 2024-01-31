@@ -40,11 +40,7 @@ export class HeaderComponent implements OnInit {
 
 
   formsArr: any = [
-    {
-      title: 'Location',
-      route: '/form/province',
-      icon: 'fal fa-file-invoice',
-    },
+    
     {
       title: 'Family Profile',
       route: '/form/familty-profile',

@@ -17,12 +17,20 @@ import { FamilyProfileAnalyticsComponent } from './pages/family-profile-analytic
 import { OwnerDocumentComponent } from './components/owner-document/owner-document.component';
 import { AllDocumentsComponent } from './components/all-documents/all-documents.component';
 
+
+import { LocationComponent } from './components/location/location.component';
+import { CityComponent } from './pages/city/city.component';
+import { ProvinceComponent } from './pages/province/province.component';
+import { BaranggayComponent } from './pages/baranggay/baranggay.component';
+
+
 const routes: Routes = [
   {path:'admin',component:LayoutComponent,children:[
     {path:'',component:DashboardComponent},
     {path:'analytics',component:AnalyticsComponent,children:[
       {path:'',component:FamilyProfileAnalyticsComponent}
     ]},
+    
     {path:'events',component:EventsComponent},
     {path:'personnel',component:PersonnelComponent},
     {path:'documents',component:DocumentsComponent,children:[
@@ -30,6 +38,15 @@ const routes: Routes = [
       {path:':ownerId',component:AllDocumentsComponent},
     ]},
     {path:'logs',component:LogsComponent},
+    {
+      path: 'form',
+      component: LocationComponent,
+      children: [
+        { path: 'province', component: ProvinceComponent },
+        { path: 'province/:provinceId', component: CityComponent },
+        { path: 'province/:provinceId/:cityId', component: BaranggayComponent },
+      ],
+    },
   ]},
   {path:'admin/personnel/account',component:PersonnelAccountComponent,canActivate:[AdminGuard]},
   {path:'admin/events/info',component:EventComponent,children:[

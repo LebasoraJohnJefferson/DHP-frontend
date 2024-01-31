@@ -2,7 +2,7 @@
   <div class="" >
     <div class="relative  lg:w-full">
       <ol class="flex items-center py-2 gap-2">
-          <li routerLink="/form/province" class="flex cursor-pointer cursor-normal gap-1 items-center">
+          <li routerLink="/admin/form/province" class="flex cursor-pointer cursor-normal gap-1 items-center">
               <i class="pi pi-folder"></i>
               <span>Province <i>[{{provinceName}}]</i> ></span>
           </li>
@@ -29,9 +29,7 @@
         styleClass="p-datatable-gridlines"
         [globalFilterFields]="[
           'attributes.city',
-          'personnel_details.last_name',
-          'personnel_details.first_name',
-          'personnel_details.middle_name',
+          'attributes.created_at',
           'personnel_details.email'
         ]"
       >
@@ -60,21 +58,19 @@
         <ng-template pTemplate="header">
           <tr class="text-sm">
             <th field="name">City</th>
-            <th field="AlumniCredentialschoolId.Course.acronym">Personnel</th>
-            <th field="AlumniCredentialschoolId.gradClass">Email</th>
+            <th field="created_at">Created</th>
             <th field="email">Action</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-city>
           <tr class="text-sm" [pSelectableRow]="city">
             <td>{{ city.attributes.city }}</td>
-            <td>{{ city.personnel_details.last_name + ' ,' +  city.personnel_details.first_name + ' ' + city.personnel_details.middle_name[0] + '.' | titlecase}}</td>
-            <td>{{ city.personnel_details.email}}</td>
+            <td>{{ city.attributes.created_at | date}}</td>
             
             <td class="grid gap-2">
               <div
                 class="cursor-pointer"
-                [routerLink]="'/form/province/'+provinceId+'/'+city.id"
+                [routerLink]="'/admin/form/province/'+provinceId+'/'+city.id"
               >
                 <i class="fad fa-eye"></i> View
               </div>
