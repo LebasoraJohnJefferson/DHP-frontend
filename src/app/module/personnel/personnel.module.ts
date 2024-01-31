@@ -17,7 +17,7 @@ import { ProvinceComponent } from '../admin/pages/province/province.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BaranggayComponent } from '../admin/pages/baranggay/baranggay.component';
 import { FamilyProfileComponent } from './pages/family-profile/family-profile.component';
-import { FamilyProfileFormComponent } from '../admin/components/family-profile-form/family-profile-form.component';
+import { FamilyProfileFormComponent } from './components/family-profile-form/family-profile-form.component';
 import { FormsModule } from '@angular/forms';
 import { ProfileFamilyDetailsComponent } from './pages/profile-family-details/profile-family-details.component';
 

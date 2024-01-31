@@ -4,7 +4,7 @@ import { ProvinceService } from '../../shared/services/province.service';
 import { CityService } from '../../shared/services/city.service';
 import { BaranggayService } from '../../shared/services/baranggay.service';
 import { HotToastService } from '@ngneat/hot-toast';
-import { FamilyProfileService } from '../../../personnel/shared/services/family-profile.service';
+import { FamilyProfileService } from '../../shared/services/family-profile.service';
 
 
 @Component({
