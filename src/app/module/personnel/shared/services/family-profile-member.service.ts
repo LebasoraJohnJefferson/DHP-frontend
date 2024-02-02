@@ -11,19 +11,19 @@ const HELPER = new JwtHelperService();
 @Injectable({
   providedIn: 'root'
 })
-export class FamilyProfileChildService {
+export class FamilyProfileMemberService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
   createPFC(data:any): any {
-    return this.http.post(`${BASEURL}/personnel/famityProfileChild`,data);
+    return this.http.post(`${BASEURL}/personnel/famityProfileMembers`,data);
   }
 
   getAllPFC(FC_id:any):any{
-    return this.http.get(`${BASEURL}/personnel/famityProfileChild/${FC_id}`);
+    return this.http.get(`${BASEURL}/personnel/famityProfileMembers/${FC_id}`);
   }
 
   deletePFC(FC_id:any):any{
-    return this.http.delete(`${BASEURL}/personnel/famityProfileChild/${FC_id}`);
+    return this.http.delete(`${BASEURL}/personnel/famityProfileMembers/${FC_id}`);
   }
 }

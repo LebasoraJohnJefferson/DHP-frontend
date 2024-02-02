@@ -15,8 +15,8 @@ export class BaranggayService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getProvinceAndCity(cityId:number):Observable<any>{
-    return this.http.get(`${BASEURL}/personnel/baranggay/${cityId}`)
+  getAllBrg():Observable<any>{
+    return this.http.get(`${BASEURL}/personnel/baranggay`)
   }
 
   createBrgy(data:any):Observable<any>{

@@ -45,9 +45,9 @@ export class HeaderComponent implements OnInit {
       icon: 'fal fa-folder-tree',
     },
     {
-      title: 'Location',
+      title: 'baranggay',
       route: 'form/province',
-      icon: 'fal fa-file',
+      icon: 'pi pi-map',
     },
     {
       title: 'Logs',

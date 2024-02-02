@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FamilyProfileService } from '../../shared/services/family-profile.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FamilyProfileChildService } from '../../shared/services/family-profile-child.service';
+import { FamilyProfileMemberService } from '../../shared/services/family-profile-member.service';
 import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
@@ -20,11 +20,21 @@ export class ProfileFamilyDetailsComponent implements OnInit{
   FamDetails:any
   today = new Date();
   nursingTypes:string[]=['EBF','Mixed feeding','Bottle-fed','Others']
+  genders:string[]=['male','female']
+  relationships:string[] = [
+    'Father','Mother','Grandmother','Grandfather',
+    'Brother','Sister','Son','Daughter','Aunt','Uncle',
+    'Father-in-law','Mother-in-law','Brother-in-law',
+    'Sister-in-law','Son-in-law','Daugter-in-law',
+    'Nephew','Niece','Great-Grandfather','Great-Grandmother',
+    'Great-Grandson','Great-Granddaughter','Friend'
+  ]
+  occupations:string[]=['employed','unemployed','self-employed']
   constructor(
     private _FP:FamilyProfileService,
     private _route: ActivatedRoute,
     private _fb:FormBuilder,
-    private _FPCService:FamilyProfileChildService,
+    private _FPCService:FamilyProfileMemberService,
     public toast:HotToastService
   ){
   }
@@ -34,6 +44,9 @@ export class ProfileFamilyDetailsComponent implements OnInit{
       FP_id:[''],
       name:['',Validators.required],
       birthDay:['',Validators.required],
+      gender:['',Validators.required],
+      occupation:['',Validators.required],
+      relationship:['',Validators.required],
       is_nursing:[''],
       nursing_type:['']
     },
@@ -64,7 +77,8 @@ export class ProfileFamilyDetailsComponent implements OnInit{
   getFP(){
     this._FP.specificProfileFamilty(this.FPid).subscribe({
       next:(res:any)=>{
-        this.FamDetails = res.data
+        this.FamDetails = res?.data
+        console.log(res);
       }
     })
   }
@@ -72,11 +86,13 @@ export class ProfileFamilyDetailsComponent implements OnInit{
   getAllFPC(){
     this._FPCService.getAllPFC(this.FPid).subscribe((res:any)=>{
       console.log(res)
-      this.data = res.data
+      this.data = res?.data
     })
   }
 
   deleteData(childId:any){
+    const confirmation = confirm('Are you sure, you want to deleted this member?')
+    if(!confirmation) return
     this._FPCService.deletePFC(childId).subscribe({
       next:(res:any)=>{
         this.getAllFPC()

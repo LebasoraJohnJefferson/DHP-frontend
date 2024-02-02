@@ -28,6 +28,7 @@ import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { OwnerDocumentComponent } from './components/owner-document/owner-document.component';
 import { AllDocumentsComponent } from './components/all-documents/all-documents.component';
+import { BaranggayComponent } from './pages/baranggay/baranggay.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { AllDocumentsComponent } from './components/all-documents/all-documents.
     PieChartComponent,
     OwnerDocumentComponent,
     AllDocumentsComponent,
+    BaranggayComponent
   ],
   imports: [
     PrimengModule,

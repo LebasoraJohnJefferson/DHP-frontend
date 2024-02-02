@@ -14,8 +14,7 @@ import { FamilyProfileService } from '../../shared/services/family-profile.servi
 })
 export class FamilyProfileFormComponent implements OnInit {
   isSubmitLoading:boolean =false
-  provinces:any=[]
-  cities:any=[]
+  
   baranggay:any=[]
 
   usingIodizedSalt:boolean = false
@@ -31,23 +30,24 @@ export class FamilyProfileFormComponent implements OnInit {
       placeholder:'household number.'
     },
     {
-      title:'No of household member',
-      formName:'no_household_member',
-      type:'number',
-      placeholder:'No of household number.'
-    },
-    {
       title:'Contact number',
       formName:'contact_number',
       type:'string',
       placeholder:'contact number e.g 09********.'
     },
     {
-      title:'Name of Household head/Spouse',
-      formName:'housthould_head',
+      title:'Father name',
+      formName:'father',
       type:'text',
-      placeholder:'housthould head.'
+      placeholder:'Enter Father`s name.'
     },
+    {
+      title:'Mother name',
+      formName:'mother',
+      type:'text',
+      placeholder:'Enter mother`s name.'
+    },
+    
   ]
 
   occupations = ['employed','unemployed','self-employed']
@@ -76,13 +76,11 @@ export class FamilyProfileFormComponent implements OnInit {
 
 
   familyProfileForm:FormGroup = this._fb.group({
-    province_id:[''],
-    city_id:[''],
     brgy_id:['',Validators.required],
+    mother:['',Validators.required],
+    father:['',Validators.required],
     contact_number: ['', [Validators.required, Validators.pattern(/^(09|\+639)\d{9}$/)]],
     household_no:['',Validators.required],
-    no_household_member:['',Validators.required],
-    housthould_head:['',Validators.required],
     occupation:['',Validators.required],
     educ_attain:['',Validators.required],
     //drop down
@@ -119,8 +117,6 @@ export class FamilyProfileFormComponent implements OnInit {
 
   constructor(
     private _fb:FormBuilder,
-    private _provinceService:ProvinceService,
-    private _cityService:CityService,
     private _brgy:BaranggayService,
     public toast:HotToastService,
     private _FPService:FamilyProfileService
@@ -156,35 +152,16 @@ export class FamilyProfileFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllProvince()
+    this.getAllBrgy()
   }
 
-  getAllProvince(){
-    this._provinceService.getAllProvince().subscribe({
-      next:(res)=>{
-        this.provinces = res?.data
-      }
-    }
-    )
-  }
-
-  provinceChange(){
-    this.familyProfileForm.controls['city_id'].setValue('')
-    this.familyProfileForm.controls['brgy_id'].setValue('')
-    this._cityService.getAllCity(this.familyProfileForm.controls['province_id'].value).subscribe({
-      next:(res)=>{
-        this.cities=res?.data
-      }
-    })
-  }
-
-  cityChange(){
-    this.familyProfileForm.controls['brgy_id'].setValue('')
-    this._brgy.getProvinceAndCity(this.familyProfileForm.controls['city_id'].value).subscribe({
+  getAllBrgy(){
+    this._brgy.getAllBrg().subscribe({
       next:(res)=>{
         this.baranggay = res?.data?.baranggay
       }
     })
   }
 
+ 
 }

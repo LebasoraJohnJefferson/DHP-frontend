@@ -11,11 +11,7 @@ import { PrimengModule } from '../../primeng/primeng.module';
 import { EventsComponent } from './pages/events/events.component';
 import { DocumentsComponent } from './pages/documents/documents.component';
 import { AccountComponent } from './pages/account/account.component';
-import { CityComponent } from '../admin/pages/city/city.component';
-import { LocationComponent } from '../admin/components/location/location.component';
-import { ProvinceComponent } from '../admin/pages/province/province.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BaranggayComponent } from '../admin/pages/baranggay/baranggay.component';
 import { FamilyProfileComponent } from './pages/family-profile/family-profile.component';
 import { FamilyProfileFormComponent } from './components/family-profile-form/family-profile-form.component';
 import { FormsModule } from '@angular/forms';
@@ -30,10 +26,6 @@ import { ProfileFamilyDetailsComponent } from './pages/profile-family-details/pr
     EventsComponent,
     DocumentsComponent,
     AccountComponent,
-    CityComponent,
-    LocationComponent,
-    ProvinceComponent,
-    BaranggayComponent,
     FamilyProfileComponent,
     FamilyProfileFormComponent,
     ProfileFamilyDetailsComponent,

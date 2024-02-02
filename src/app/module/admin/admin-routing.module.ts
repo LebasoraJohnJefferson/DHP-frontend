@@ -16,11 +16,6 @@ import { InvitationComponent } from './components/invitation/invitation.componen
 import { FamilyProfileAnalyticsComponent } from './pages/family-profile-analytics/family-profile-analytics.component';
 import { OwnerDocumentComponent } from './components/owner-document/owner-document.component';
 import { AllDocumentsComponent } from './components/all-documents/all-documents.component';
-
-
-import { LocationComponent } from './components/location/location.component';
-import { CityComponent } from './pages/city/city.component';
-import { ProvinceComponent } from './pages/province/province.component';
 import { BaranggayComponent } from './pages/baranggay/baranggay.component';
 
 
@@ -38,15 +33,7 @@ const routes: Routes = [
       {path:':ownerId',component:AllDocumentsComponent},
     ]},
     {path:'logs',component:LogsComponent},
-    {
-      path: 'form',
-      component: LocationComponent,
-      children: [
-        { path: 'province', component: ProvinceComponent },
-        { path: 'province/:provinceId', component: CityComponent },
-        { path: 'province/:provinceId/:cityId', component: BaranggayComponent },
-      ],
-    },
+    {path: 'baranggay',component: BaranggayComponent},
   ]},
   {path:'admin/personnel/account',component:PersonnelAccountComponent,canActivate:[AdminGuard]},
   {path:'admin/events/info',component:EventComponent,children:[
