@@ -45,6 +45,10 @@ export class HeaderComponent implements OnInit {
       title: 'Family Profile',
       route: '/form/familty-profile',
       icon: 'fal fa-file-invoice',
+    },{
+      title: 'Infant Records',
+      route: '/form/infant-records',
+      icon: 'fal fa-file-invoice',
     }
   ];
 

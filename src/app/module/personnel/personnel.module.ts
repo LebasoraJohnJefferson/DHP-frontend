@@ -16,6 +16,8 @@ import { FamilyProfileComponent } from './pages/family-profile/family-profile.co
 import { FamilyProfileFormComponent } from './components/family-profile-form/family-profile-form.component';
 import { FormsModule } from '@angular/forms';
 import { ProfileFamilyDetailsComponent } from './pages/profile-family-details/profile-family-details.component';
+import { InfantRecordsComponent } from './pages/infant-records/infant-records.component';
+import { InfantRecordsFormComponent } from './components/infant-records-form/infant-records-form.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { ProfileFamilyDetailsComponent } from './pages/profile-family-details/pr
     FamilyProfileComponent,
     FamilyProfileFormComponent,
     ProfileFamilyDetailsComponent,
+    InfantRecordsComponent,
+    InfantRecordsFormComponent,
   ],
   imports: [
     ReactiveFormsModule,
