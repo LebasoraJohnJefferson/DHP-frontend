@@ -12,6 +12,7 @@ import { AuthService } from '../../shared/services/auth.service';
 export class ResetPasswordComponent implements OnInit {
   token: any = null;
   userId: any = null;
+  email: any = null;
   password: any = null;
   password_confirmation: any = null;
 
@@ -26,34 +27,39 @@ export class ResetPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((value) => {
-      (this.token = value['token']), (this.userId = value.id);
+      this.token = value['token'];
     });
 
-    if (this.token == null && this.userId == null) {
+    if (this.token == null) {
       this.router.navigate(['/']);
     }
   }
 
   onSubmit() {
+    if (this.email == '') return this.toast.error('Email is required');
+
     if (this.password != this.password_confirmation)
       return this.toast.error("Password didn't matched.");
 
     this.submitLoading = true;
 
     const data = {
+      email: this.email,
       token: this.token,
       password: this.password,
-      userId: this.userId,
+      password_confirmation: this.password_confirmation,
     };
+
+    console.log(data);
 
     this.authService.resetPassword(data).subscribe(
       (response: any) => {
         this.submitLoading = false;
-        this.toast.success(response.message);
 
-        this.router.navigate([`/login`], {
-          queryParams: { type: 'student' },
-        });
+        if (response == 'passwords.reset') {
+          this.toast.success('Password reset successfully');
+          this.router.navigate([`/login`]);
+        }
       },
       (err: any) => {
         this.submitLoading = false;
