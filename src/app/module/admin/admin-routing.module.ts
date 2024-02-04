@@ -18,34 +18,51 @@ import { OwnerDocumentComponent } from './components/owner-document/owner-docume
 import { AllDocumentsComponent } from './components/all-documents/all-documents.component';
 import { BaranggayComponent } from './pages/baranggay/baranggay.component';
 
-
 const routes: Routes = [
-  {path:'admin',component:LayoutComponent,children:[
-    {path:'',component:DashboardComponent},
-    {path:'analytics',component:AnalyticsComponent,children:[
-      {path:'',component:FamilyProfileAnalyticsComponent}
-    ]},
-    
-    {path:'events',component:EventsComponent},
-    {path:'personnel',component:PersonnelComponent},
-    {path:'documents',component:DocumentsComponent,children:[
-      {path:'',component:OwnerDocumentComponent},
-      {path:':ownerId',component:AllDocumentsComponent},
-    ]},
-    {path:'logs',component:LogsComponent},
-    {path: 'baranggay',component: BaranggayComponent},
-  ]},
-  {path:'admin/personnel/account',component:PersonnelAccountComponent,canActivate:[AdminGuard]},
-  {path:'admin/events/info',component:EventComponent,children:[
-    {path:'',component:CommentsComponent},
-    {path:'invitation',component:InvitationComponent}
-  ],canActivate:[AdminGuard]},
-  {path:'admin/account',component:AccountComponent}
-  
+  {
+    path: 'admin',
+    component: LayoutComponent,
+    children: [
+      { path: '', component: DashboardComponent },
+      {
+        path: 'analytics',
+        component: AnalyticsComponent,
+        children: [{ path: '', component: FamilyProfileAnalyticsComponent }],
+      },
+
+      { path: 'events', component: EventsComponent },
+      { path: 'personnel', component: PersonnelComponent },
+      {
+        path: 'documents',
+        component: DocumentsComponent,
+        children: [
+          { path: '', component: OwnerDocumentComponent },
+          { path: ':ownerId', component: AllDocumentsComponent },
+        ],
+      },
+      { path: 'logs', component: LogsComponent },
+      { path: 'baranggay', component: BaranggayComponent },
+    ],
+  },
+  {
+    path: 'admin/personnel/account',
+    component: PersonnelAccountComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/events/info',
+    component: EventComponent,
+    children: [
+      { path: '', component: CommentsComponent },
+      { path: 'invitation', component: InvitationComponent },
+    ],
+    canActivate: [AdminGuard],
+  },
+  { path: 'admin/account', component: AccountComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}
