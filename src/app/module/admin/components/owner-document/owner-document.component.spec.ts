@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CityComponent } from './city.component';
+import { OwnerDocumentComponent } from './owner-document.component';
 
-describe('CityComponent', () => {
-  let component: CityComponent;
-  let fixture: ComponentFixture<CityComponent>;
+describe('OwnerDocumentComponent', () => {
+  let component: OwnerDocumentComponent;
+  let fixture: ComponentFixture<OwnerDocumentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CityComponent]
+      declarations: [OwnerDocumentComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(CityComponent);
+    fixture = TestBed.createComponent(OwnerDocumentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

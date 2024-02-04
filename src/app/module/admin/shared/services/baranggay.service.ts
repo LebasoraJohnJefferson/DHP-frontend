@@ -15,17 +15,17 @@ export class BaranggayService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getAllBrg():Observable<any>{
-    return this.http.get(`${BASEURL}/personnel/baranggay`)
+  getProvinceAndCity():Observable<any>{
+    return this.http.get(`${BASEURL}/admin/baranggay`)
   }
 
   createBrgy(data:any):Observable<any>{
-    return this.http.post(`${BASEURL}/personnel/baranggay`,data)
+    return this.http.post(`${BASEURL}/admin/baranggay`,data)
   }
 
 
   deleteBrgy(brgyId:any):Observable<any>{
-    return this.http.delete(`${BASEURL}/personnel/baranggay/${brgyId}`)
+    return this.http.delete(`${BASEURL}/admin/baranggay/${brgyId}`)
   }
 
 }

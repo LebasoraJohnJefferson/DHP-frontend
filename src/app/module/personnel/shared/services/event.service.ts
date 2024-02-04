@@ -9,21 +9,14 @@ const BASEURL = environment.baseURL;
 const HELPER = new JwtHelperService();
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class FamilyProfileChildService {
-
+export class EventService {
   constructor(private http: HttpClient, private router: Router) {}
 
-  createPFC(data:any): any {
-    return this.http.post(`${BASEURL}/personnel/famityProfileChild`,data);
+  getEvents():Observable<any> {
+    return this.http.get(`${BASEURL}/personnel/event`);
   }
 
-  getAllPFC(FC_id:any):any{
-    return this.http.get(`${BASEURL}/personnel/famityProfileChild/${FC_id}`);
-  }
 
-  deletePFC(FC_id:any):any{
-    return this.http.delete(`${BASEURL}/personnel/famityProfileChild/${FC_id}`);
-  }
 }

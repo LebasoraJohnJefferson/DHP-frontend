@@ -38,14 +38,11 @@ export class BaranggayComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._route.paramMap.subscribe(params => {
-      this.cityId = params.get('cityId');
-    });
     this.getBrgyDetails()
   }
 
   getBrgyDetails(){
-    this._bgyService.getProvinceAndCity(this.cityId).subscribe({
+    this._bgyService.getProvinceAndCity().subscribe({
       next:(res)=>{
         this.city = res?.data?.city
         this.province = res?.data?.province

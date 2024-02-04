@@ -1,10 +1,10 @@
 <div class="relative z-40 mt-10 pb-20">
     <div class="">
-      <h1 class="font-bold text-xl md:text-3xl text-white">Family Profile</h1>
+      <h1 class="font-bold text-xl md:text-3xl text-white">Infant Records</h1>
       <p class="text-slate-100 text-[12px]">Information about the system</p>
     </div>
-    <div class="mt-5 ">
-      <p-table
+    <div class="mt-5">
+        <p-table
         [value]="data"
         #dt2
         class="mt-5"
@@ -57,16 +57,10 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr class="text-sm">
-            <th field="AlumniCredentialschoolId.Course.acronym">Household no.</th>
-            <th field="AlumniCredentialschoolId.gradClass">No of household member</th>
-            <th field="AlumniCredentialschoolId.gradClass">Contact number</th>
-            <th field="AlumniCredentialschoolId.gradClass">Name of Mother</th>
-            <th field="AlumniCredentialschoolId.gradClass">Name of Father</th>
-            <th field="AlumniCredentialschoolId.gradClass">Occupation</th>
-            <th field="AlumniCredentialschoolId.gradClass">Educational attainment</th>
-            <th field="AlumniCredentialschoolId.gradClass">Toilet Type</th>
-            <th field="AlumniCredentialschoolId.gradClass">Water Source</th>
-            <th field="AlumniCredentialschoolId.gradClass">Food production activity</th>
+            <th field="AlumniCredentialschoolId.Course.acronym">Name of child</th>
+            <th field="AlumniCredentialschoolId.gradClass">Age in month</th>
+            <th field="AlumniCredentialschoolId.gradClass">Weight</th>
+            <th field="AlumniCredentialschoolId.gradClass">Weight Status</th>
             <th field="email">Action</th>
           </tr>
         </ng-template>
@@ -76,12 +70,6 @@
             <td>{{ pf.attributes.no_household_member }}</td>
             <td>{{ pf.attributes.contact_number }}</td>
             <td>{{ pf.attributes.father }}</td>
-            <td>{{ pf.attributes.mother }}</td>
-            <td>{{ pf.attributes.occupation }}</td>
-            <td>{{ pf.attributes.educ_attain }}</td>
-            <td>{{ pf.attributes.toilet_type }}</td>
-            <td>{{ pf.attributes.water_source }}</td>
-            <td>{{ pf.attributes.food_prod_act }}</td>
             
             <td class="grid gap-2">
               <div
@@ -101,12 +89,13 @@
     </div>
 </div>
 
+
 <p-dialog
-    header="Create Family Profile"
+    header="Create Infant Record"
     [(visible)]="createModal"
     [modal]="true"
     appendTo="body"
     [style]="{ maxWidth: '400px', width: '400px' }"
   >
-  <app-family-profile-form (triggerSubmmit)="registerFamiltyProfileCommit()"></app-family-profile-form>
+    <app-infant-records-form (triggerSubmmit)="createInfantRecordCommit()"></app-infant-records-form>
 </p-dialog>

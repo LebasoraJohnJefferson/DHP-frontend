@@ -1,0 +1,50 @@
+
+<div class="mt-5">
+    <div class="flex gap-2">
+    <div class="flex gap-2">
+        <div routerLink="/admin/documents" class="px-3 gap-2 flex items-center py-2 rounded-lg bg-green-600 hover:bg-green-600/80 font-bold text-[12px] w-fit text-white cursor-pointer"><i class="pi pi-arrow-left"></i>Recover Files </div>
+        <div (click)="fileModel=true" class="px-3 gap-2 flex items-center py-2 rounded-lg bg-green-600 hover:bg-green-600/80 font-bold text-[12px] w-fit text-white cursor-pointer">Recover Files <i class="pi pi-undo"></i></div>
+    </div>
+    </div>
+    <div class="mt-10 flex flex-wrap gap-3" >
+        <div *ngFor="let document of documents" class="w-[100px] flex items-center flex-col">
+            <span class="flex relative items-center justify-center flex-col">
+                <i (click)="deleteFile(document?.id)" class="fal fa-times bg-red-500 hover:bg-red-600 cursor-pointer text-white px-2 py-1 rounded-full absolute top-0 right-0"></i>
+                <i class="fal fa-file text-7xl"></i>
+                <p class="absolute text-[10px]">{{document?.created_at | date: 'shortDate'}}</p>
+            </span>
+            <p class="truncate hover:text-clip w-[90px] text-[12px] text-center">{{document?.name}} </p>
+            <a [href]="baseUrl+'/file/download/'+document?.file_name" class="gap-2 text-[10px] px-2 py-1 text-center text-white rounded font-bold bg-purple-700 cursor-pointer" download>Download <i class="pi pi-download text-[10px]"></i></a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<p-dialog
+    header="Recover Files"
+    [(visible)]="fileModel"
+    [modal]="true"
+    appendTo="body"
+    [style]="{ maxWidth: '400px', width: '400px' }"
+  >
+  <div class="mt-3">
+    <ol class="grid gap-2">
+      <li class="grid grid-cols-[1fr_auto] border p-2 shadow rounded" *ngFor="let file of recoverFiles">
+        <p>{{file?.name}}</p>
+        <div class="gap-2 flex">
+          <i (click)="recoverFile(file.id)" class="pi pi-undo text-white bg-green-500 hover:bg-green-500/80 rounded cursor-pointer  px-2 py-1"></i>
+          <i (click)="commitDelete(file.id)" class="pi pi-trash text-white bg-red-500 hover:bg-red-500/80 rounded cursor-pointer  px-2 py-1"></i>
+
+        </div>
+      </li>
+      <li class="text-center text-xl font-bold" *ngIf="recoverFiles?.length == 0">No Files </li>
+    </ol>
+  </div>
+</p-dialog>

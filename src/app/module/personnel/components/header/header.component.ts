@@ -34,25 +34,20 @@ export class HeaderComponent implements OnInit {
       title: 'Documents',
       route: 'documents',
       icon: 'fal fa-folder-tree',
-    },
-    {
-      title: 'Logs',
-      route: 'logs',
-      icon: 'fal fa-pallet',
     }
   ];
 
 
 
   formsArr: any = [
-    {
-      title: 'Location',
-      route: '/form/province',
-      icon: 'fal fa-file-invoice',
-    },
+    
     {
       title: 'Family Profile',
       route: '/form/familty-profile',
+      icon: 'fal fa-file-invoice',
+    },{
+      title: 'Infant Records',
+      route: '/form/infant-records',
       icon: 'fal fa-file-invoice',
     }
   ];

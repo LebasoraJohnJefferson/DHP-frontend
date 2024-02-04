@@ -1,1 +1,131 @@
-<p>documents works!</p>
+<div class="relative z-40 mt-10 pb-20">
+    <div class="">
+      <h1 class="font-bold text-xl md:text-3xl text-white">Documents</h1>
+      <p class="text-slate-100 text-[12px]">Information about the system</p>
+    </div>
+    <div class="mt-5">
+      <div class="flex gap-2">
+        <div>
+            <div (click)="createModal=true" class="px-3 gap-2 flex items-center py-2 rounded-lg bg-green-600 hover:bg-green-600/80 font-bold text-[12px] w-fit text-white cursor-pointer">Upload File <i class="pi pi-inbox"></i></div>
+        </div>
+        <div>
+          <div (click)="fileModel=true" class="px-3 gap-2 flex items-center py-2 rounded-lg bg-green-600 hover:bg-green-600/80 font-bold text-[12px] w-fit text-white cursor-pointer">Recover Files <i class="pi pi-undo"></i></div>
+      </div>
+      </div>
+        <div class="mt-10 flex flex-wrap gap-3" >
+            <div *ngFor="let document of documents" class="w-[100px] flex items-center flex-col">
+                <span class="flex relative items-center justify-center flex-col">
+                    <i (click)="deleteFile(document?.id)" class="fal fa-times bg-red-500 hover:bg-red-600 cursor-pointer text-white px-2 py-1 rounded-full absolute top-0 right-0"></i>
+                    <i class="fal fa-file text-7xl"></i>
+                    <p class="absolute text-[10px]">{{document?.created_at | date: 'shortDate'}}</p>
+                </span>
+                <p class="truncate hover:text-clip w-[90px] text-[12px] text-center">{{document?.name}} </p>
+                <a [href]="baseUrl+'/file/download/'+document?.file_name" class="gap-2 text-[10px] px-2 py-1 text-center text-white rounded font-bold bg-purple-700 cursor-pointer" download>Download <i class="pi pi-download text-[10px]"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog
+    header="Create Baranggay"
+    [(visible)]="createModal"
+    [modal]="true"
+    appendTo="body"
+    [style]="{ maxWidth: '400px', width: '400px' }"
+  >
+  <div class="mt-3">
+  <form
+      (ngSubmit)="onSubmit()"
+      [formGroup]="uploadFileForm"
+      class="w-full grid gap-2"
+    >
+        <div class="w-full">
+          <label class="block text-[12px] font-medium text-gray-700"
+            >File Name</label
+          >
+          <div class="mt-1 relative rounded-md w-full">
+            <input
+              type="text"
+              class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
+              placeholder="Enter file name"
+              formControlName="name"
+            />
+          </div>
+        </div>
+        <div class="w-full">
+            <label class="block text-[12px] font-medium text-gray-700"
+              >Upload File</label
+            >
+            <input formControlName="uploader" class="py-2 border-none border-0 outline-0 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50" (change)="uploadFile($event)" type="file"/>
+            <div class="mt-1 relative rounded-md w-full">
+              <input
+                type="text"
+                
+                class="py-2 hidden border-none border-0 outline-0 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
+                formControlName="file_name"
+              />
+            </div>
+        </div>
+
+        
+
+      <button
+        [disabled]="isSubmitLoading"
+        type="submit"
+        class="grid place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-3 hover:bg-slate-900/80 transition-all w-full mt-2"
+      >
+        <div class="flex items-center w-fit mx-auto" *ngIf="isSubmitLoading">
+          <svg
+            class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+
+          <span>Processing</span>
+        </div>
+
+        <span *ngIf="!isSubmitLoading">Create</span>
+      </button>
+    </form>
+  </div>
+</p-dialog>
+
+
+<!-- view all file deleleted -->
+
+<p-dialog
+    header="Recover Files"
+    [(visible)]="fileModel"
+    [modal]="true"
+    appendTo="body"
+    [style]="{ maxWidth: '400px', width: '400px' }"
+  >
+  <div class="mt-3">
+    <ol class="grid gap-2">
+      <li class="grid grid-cols-[1fr_auto] border p-2 shadow rounded" *ngFor="let file of recoverFiles">
+        <p>{{file?.name}}</p>
+        <div class="gap-2 flex">
+          <i (click)="recoverFile(file.id)" class="pi pi-undo text-white bg-green-500 hover:bg-green-500/80 rounded cursor-pointer  px-2 py-1"></i>
+          <i (click)="commitDelete(file.id)" class="pi pi-trash text-white bg-red-500 hover:bg-red-500/80 rounded cursor-pointer  px-2 py-1"></i>
+        </div>
+      </li>
+      <li class="text-center text-xl font-bold" *ngIf="recoverFiles?.length == 0">No Files </li>
+    </ol>
+  </div>
+</p-dialog>
+

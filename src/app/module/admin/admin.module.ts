@@ -23,6 +23,12 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { InvitationComponent } from './components/invitation/invitation.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
 import { FamilyProfileAnalyticsComponent } from './pages/family-profile-analytics/family-profile-analytics.component';
+import { DougnutChartComponent } from './components/dougnut-chart/dougnut-chart.component';
+import { BarChartComponent } from './components/bar-chart/bar-chart.component';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+import { OwnerDocumentComponent } from './components/owner-document/owner-document.component';
+import { AllDocumentsComponent } from './components/all-documents/all-documents.component';
+import { BaranggayComponent } from './pages/baranggay/baranggay.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +49,13 @@ import { FamilyProfileAnalyticsComponent } from './pages/family-profile-analytic
     CommentsComponent,
     InvitationComponent,
     LineChartComponent,
-    FamilyProfileAnalyticsComponent
+    FamilyProfileAnalyticsComponent,
+    DougnutChartComponent,
+    BarChartComponent,
+    PieChartComponent,
+    OwnerDocumentComponent,
+    AllDocumentsComponent,
+    BaranggayComponent
   ],
   imports: [
     PrimengModule,

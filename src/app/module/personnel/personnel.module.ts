@@ -10,17 +10,14 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { PrimengModule } from '../../primeng/primeng.module';
 import { EventsComponent } from './pages/events/events.component';
 import { DocumentsComponent } from './pages/documents/documents.component';
-import { LogsComponent } from './pages/logs/logs.component';
 import { AccountComponent } from './pages/account/account.component';
-import { CityComponent } from './pages/city/city.component';
-import { LocationComponent } from './components/location/location.component';
-import { ProvinceComponent } from './pages/province/province.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BaranggayComponent } from './pages/baranggay/baranggay.component';
 import { FamilyProfileComponent } from './pages/family-profile/family-profile.component';
 import { FamilyProfileFormComponent } from './components/family-profile-form/family-profile-form.component';
 import { FormsModule } from '@angular/forms';
 import { ProfileFamilyDetailsComponent } from './pages/profile-family-details/profile-family-details.component';
+import { InfantRecordsComponent } from './pages/infant-records/infant-records.component';
+import { InfantRecordsFormComponent } from './components/infant-records-form/infant-records-form.component';
 
 @NgModule({
   declarations: [
@@ -30,15 +27,12 @@ import { ProfileFamilyDetailsComponent } from './pages/profile-family-details/pr
     SidebarComponent,
     EventsComponent,
     DocumentsComponent,
-    LogsComponent,
     AccountComponent,
-    CityComponent,
-    LocationComponent,
-    ProvinceComponent,
-    BaranggayComponent,
     FamilyProfileComponent,
     FamilyProfileFormComponent,
     ProfileFamilyDetailsComponent,
+    InfantRecordsComponent,
+    InfantRecordsFormComponent,
   ],
   imports: [
     ReactiveFormsModule,

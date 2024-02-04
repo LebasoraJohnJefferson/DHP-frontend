@@ -36,6 +36,11 @@ export class SidebarComponent implements OnInit {
       icon: 'fal fa-folder-tree',
     },
     {
+      title: 'Baranggay',
+      route: 'baranggay',
+      icon: 'pi pi-map',
+    },
+    {
       title: 'Logs',
       route: 'logs',
       icon: 'fal fa-pallet',

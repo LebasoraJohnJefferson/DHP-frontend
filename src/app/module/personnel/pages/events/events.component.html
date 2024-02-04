@@ -1,1 +1,33 @@
-<p>events works!</p>
+<div class="relative z-40 mt-10 pb-20">
+    <div class="">
+      <h1 class="font-bold text-xl md:text-3xl text-white">Events</h1>
+      <p class="text-slate-100 text-[12px]">Information about the system</p>
+    </div>
+      
+    <div class="mt-20 pb-10">
+        <div class="h-full w-full flex items-center flex-col gap-5">
+            <article *ngFor="let event of events" class="border grid grid-cols-1 border-2 lg:w-[90%] w-full p-5 rounded-lg gap-3 drop-shadow border-green-500/50">
+                <div *ngIf="event.image" class="bg-green-100 py-2">
+                    <img class="h-[10rem] mx-auto" [src]=" event.image ? event.image :  '../../../../../assets/images/error-404.png'"/>
+                </div>
+                <div class="gap-2 grid grid-cols-1">
+                    <div class="text-center font-bold text-xl">{{event.title | titlecase}}</div>
+                    <div class="flex items-center gap-2">
+                        <h3 class="font-bold text-[10px] px-2 rounded-lg bg-green-200 w-fit py-1">Venue</h3>
+                        <div class="">{{event.venue}}</div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <h3 class="font-bold text-[10px] px-2 rounded-lg bg-green-200 w-fit py-1">When</h3>
+                        <div class="">
+                            {{event.date | date}}
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <h3 class="font-bold text-[10px] px-2 rounded-lg bg-green-200 w-fit py-1">Description</h3>
+                        <div class="">{{event.description}}</div>
+                    </div>
+                    
+                </div>
+            </article>
+        </div>
+</div>
