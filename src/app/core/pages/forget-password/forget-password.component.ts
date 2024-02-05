@@ -35,16 +35,15 @@ export class ForgetPasswordComponent {
       return this.toast.info('Please enter a valid email address');
 
     this.submitLoading = true;
-
     this.authService.forgotpassword(this.form.value).subscribe(
       (response: any) => {
-        this.isEmailSent = true;
         this.submitLoading = false;
-        console.log(response);
+        if(response !== 'passwords.sent') return this.toast.warning(response)
+        this.isEmailSent = true;
       },
       (err: any) => {
         this.submitLoading = false;
-        // this.toast.error(err);
+        this.toast.error(err?.message || 'Invalid Credentials');
         console.log(err);
       }
     );
