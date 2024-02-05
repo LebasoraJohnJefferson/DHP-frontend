@@ -4,7 +4,7 @@
       <p class="text-slate-100 text-[12px]">Information about the system</p>
     </div>
     <div class="mt-5">
-        <div routerLink="/form/familty-profile" class="px-2 py-1 flex items-center gap-2 text-white text-[12px] cursor-pointer rounded-full bg-slate-500 hover:bg-slate-500/80 w-fit">
+        <div (click)="goBack()" class="px-2 py-1 flex items-center gap-2 text-white text-[12px] cursor-pointer rounded-full bg-slate-500 hover:bg-slate-500/80 w-fit">
             <i class="pi pi-arrow-left"></i>
             Go back
         </div>
@@ -109,7 +109,7 @@
             <ng-template pTemplate="body" let-pfc>
               <tr class="text-sm" [pSelectableRow]="pfc">
                 <td>{{ pfc.name }}</td>
-                <td>{{ pfc.birthDay | date :'date'}}</td>
+                <td>{{ pfc.birthDay | date :'mediumDate'}}</td>
                 <td>{{ calculateAge(pfc.birthDay)!=0 ? calculateAge(pfc.birthDay)+' year(s) old' : '1 yr>mos.Child' }}</td>
                 <td>{{ pfc.occupation }}</td>
                 <td>{{ pfc.relationship }}</td>

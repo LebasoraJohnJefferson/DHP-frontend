@@ -10,10 +10,10 @@
             >Name of child</label
             >
             <div class="mt-1 relative rounded-md w-full">
-            <select formControlName="brgy_id" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
+            <select formControlName="member_id" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
                 <option selected disabled>Select child</option>
                 <option [value]="child?.id" *ngFor="let child of children">
-                    {{child?.name}}
+                   {{child?.name}} | {{child?.birthDay | date : 'mediumDate'}}
                 </option>
             </select>
             </div>

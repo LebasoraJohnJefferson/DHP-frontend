@@ -21,16 +21,10 @@
         [rowsPerPageOptions]="[10, 25, 50]"
         styleClass="p-datatable-gridlines"
         [globalFilterFields]="[
-          'attributes.household_no',
-            'attributes.no_household_member',
-            'attributes.contact_number',
-            'attributes.mother',
-            'attributes.father',
-            'attributes.occupation',
-            'attributes.educ_attain',
-           'attributes.toilet_type',
-            'attributes.water_source',
-            'attributes.food_prod_act'
+          'info?.f_p_m?.name' ,
+          'ageInMoth',
+            'info?.weight', 
+            'status'
         ]"
       >
         <ng-template pTemplate="caption">
@@ -64,22 +58,24 @@
             <th field="email">Action</th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-pf>
-          <tr class="text-sm" [pSelectableRow]="pf">
-            <td>{{ pf.attributes.household_no }}</td>
-            <td>{{ pf.attributes.no_household_member }}</td>
-            <td>{{ pf.attributes.contact_number }}</td>
-            <td>{{ pf.attributes.father }}</td>
+        <ng-template pTemplate="body" let-child>
+          <tr class="text-sm" [pSelectableRow]="child">
+            <td><a class="text-blue-500 font-bold hover:text-blue-500/80" 
+              routerLink="/form/familty-profile/details"
+              [queryParams]="{id:child?.info?.f_p_m?.FP_id}">{{ child?.info?.f_p_m?.name }}</a></td>
+            <td>{{child?.ageInMoth}}</td>
+            <td>{{ child?.info?.weight }}</td>
+            <td>{{ child?.status }}</td>
             
             <td class="grid gap-2">
-              <div
+              <!-- <div
                 class="cursor-pointer text-center"
                 [routerLink]="'/form/familty-profile/details'"
-                [queryParams]="{id:pf.id}"
+                [queryParams]="{id:child?.info?.id}"
               >
                 <i class="fad fa-eye"></i> View
-              </div>
-              <div (click)="deleteData(pf.id)" class="text-center">
+              </div> -->
+              <div (click)="deleteData(child?.info?.id)" class="text-center">
                   <i class="fad fa-trash"></i> Delete
               </div>
             </td>

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FamilyProfileMemberService } from '../../shared/services/family-profile-member.service';
 import { HotToastService } from '@ngneat/hot-toast';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-profile-family-details',
@@ -35,7 +36,8 @@ export class ProfileFamilyDetailsComponent implements OnInit{
     private _route: ActivatedRoute,
     private _fb:FormBuilder,
     private _FPCService:FamilyProfileMemberService,
-    public toast:HotToastService
+    public toast:HotToastService,
+    public location:Location
   ){
   }
 
@@ -124,6 +126,9 @@ export class ProfileFamilyDetailsComponent implements OnInit{
       this.toast.warning("Please, fill-up all inputs")
     }
   }
-    
+  
+  goBack(){
+    this.location.back()
+  }
 
 }
