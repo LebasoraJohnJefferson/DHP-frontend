@@ -17,6 +17,7 @@ import { FamilyProfileAnalyticsComponent } from './pages/family-profile-analytic
 import { OwnerDocumentComponent } from './components/owner-document/owner-document.component';
 import { AllDocumentsComponent } from './components/all-documents/all-documents.component';
 import { BaranggayComponent } from './pages/baranggay/baranggay.component';
+import { InfantAnalyticsComponent } from './pages/infant-analytics/infant-analytics.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,10 @@ const routes: Routes = [
       {
         path: 'analytics',
         component: AnalyticsComponent,
-        children: [{ path: '', component: FamilyProfileAnalyticsComponent }],
+        children: [
+            { path: '', component: FamilyProfileAnalyticsComponent },
+            { path: 'infant-analytics', component: InfantAnalyticsComponent }
+          ],
       },
 
       { path: 'events', component: EventsComponent },

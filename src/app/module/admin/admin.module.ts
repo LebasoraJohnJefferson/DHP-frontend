@@ -29,6 +29,8 @@ import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { OwnerDocumentComponent } from './components/owner-document/owner-document.component';
 import { AllDocumentsComponent } from './components/all-documents/all-documents.component';
 import { BaranggayComponent } from './pages/baranggay/baranggay.component';
+import { InfantAnalyticsComponent } from './pages/infant-analytics/infant-analytics.component';
+import { MultiLineChartComponent } from './components/multi-line-chart/multi-line-chart.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { BaranggayComponent } from './pages/baranggay/baranggay.component';
     PieChartComponent,
     OwnerDocumentComponent,
     AllDocumentsComponent,
-    BaranggayComponent
+    BaranggayComponent,
+    InfantAnalyticsComponent,
+    MultiLineChartComponent
   ],
   imports: [
     PrimengModule,

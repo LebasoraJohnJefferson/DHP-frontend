@@ -1,10 +1,16 @@
 <div class="relative z-40 mt-10 pb-20">
     <div class="">
       <h1 class="font-bold text-xl md:text-3xl text-white">Analytics</h1>
-      <p class="text-slate-100 text-[12px]">Information about the system</p>
+      <div class="flex gap-3">
+        <p class="text-slate-100 text-[12px]">Information about the system</p>
+      </div>
     </div>
     <div class="mt-5 ">
-
-        <router-outlet></router-outlet>
+      <div class="flex gap-2 -translate-y-1 rounded flex items-center">
+        <select (change)="navigateTo($event)" class="text-[12px] py-1 bg-green-800 text-white border-0 outline-0  h-fit items-center rounded">
+          <option *ngFor="let analytic of anaylitcs" [value]="analytic?.link">{{analytic.label}}</option>
+        </select>
+      </div>
+      <router-outlet></router-outlet>
     </div>
 </div>

@@ -18,4 +18,11 @@ export class AnalyticsService {
   getFPAnalytics():Observable<any> {
     return this.http.get(`${BASEURL}/admin/profileFamiltyAnalytics`);
   }
+
+  
+  getInfantAnatics():Observable<any> {
+    return this.http.get(`${BASEURL}/admin/profileInfantAnlytics`);
+  }
+
+
 }
