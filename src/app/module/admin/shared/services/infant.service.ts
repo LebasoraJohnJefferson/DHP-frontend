@@ -9,28 +9,26 @@ const BASEURL = environment.baseURL;
 const HELPER = new JwtHelperService();
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class BaranggayService {
-
+export class InfantService {
   constructor(private http: HttpClient, private router: Router) {}
 
-  getProvinceAndCity():Observable<any>{
-    return this.http.get(`${BASEURL}/admin/baranggay`)
+  getInfants():Observable<any> {
+    return this.http.get(`${BASEURL}/infant`);
   }
 
-  createBrgy(data:any):Observable<any>{
-    return this.http.post(`${BASEURL}/admin/baranggay`,data)
+  addInfantWeight(data:any):Observable<any>{
+    return this.http.post(`${BASEURL}/infant`,data);
   }
 
-
-  deleteBrgy(brgyId:any):Observable<any>{
-    return this.http.delete(`${BASEURL}/admin/baranggay/${brgyId}`)
+  getAllInfantRecords(){
+    return this.http.get(`${BASEURL}/infant/anyThingWorksHere`);
   }
 
-
-  getAllBrg():Observable<any>{
-    return this.http.get(`${BASEURL}/admin/baranggay`)
+  deleteInfantRecord(recordId:any){
+    return this.http.delete(`${BASEURL}/infant/${recordId}`);
   }
+
 
 }

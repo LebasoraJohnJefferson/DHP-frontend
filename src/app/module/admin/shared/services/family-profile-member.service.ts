@@ -11,26 +11,19 @@ const HELPER = new JwtHelperService();
 @Injectable({
   providedIn: 'root'
 })
-export class BaranggayService {
+export class FamilyProfileMemberService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getProvinceAndCity():Observable<any>{
-    return this.http.get(`${BASEURL}/admin/baranggay`)
+  createPFC(data:any): any {
+    return this.http.post(`${BASEURL}/admin/famityProfileMembers`,data);
   }
 
-  createBrgy(data:any):Observable<any>{
-    return this.http.post(`${BASEURL}/admin/baranggay`,data)
+  getAllPFC(FC_id:any):any{
+    return this.http.get(`${BASEURL}/admin/famityProfileMembers/${FC_id}`);
   }
 
-
-  deleteBrgy(brgyId:any):Observable<any>{
-    return this.http.delete(`${BASEURL}/admin/baranggay/${brgyId}`)
+  deletePFC(FC_id:any):any{
+    return this.http.delete(`${BASEURL}/admin/famityProfileMembers/${FC_id}`);
   }
-
-
-  getAllBrg():Observable<any>{
-    return this.http.get(`${BASEURL}/admin/baranggay`)
-  }
-
 }

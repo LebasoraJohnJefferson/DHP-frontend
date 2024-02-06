@@ -31,6 +31,12 @@ import { AllDocumentsComponent } from './components/all-documents/all-documents.
 import { BaranggayComponent } from './pages/baranggay/baranggay.component';
 import { InfantAnalyticsComponent } from './pages/infant-analytics/infant-analytics.component';
 import { MultiLineChartComponent } from './components/multi-line-chart/multi-line-chart.component';
+import { FormsComponent } from './pages/forms/forms.component';
+import { InfantComponent } from './components/infant/infant.component';
+import { FamilyProfileComponent } from './components/family-profile/family-profile.component';
+import { InfantRecordsFormComponent } from './components/infant-records-form/infant-records-form.component';
+import { FamilyProfileFormComponent } from './components/family-profile-form/family-profile-form.component';
+import { FamilyProfileDetailsComponent } from './pages/family-profile-details/family-profile-details.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +65,13 @@ import { MultiLineChartComponent } from './components/multi-line-chart/multi-lin
     AllDocumentsComponent,
     BaranggayComponent,
     InfantAnalyticsComponent,
-    MultiLineChartComponent
+    MultiLineChartComponent,
+    FormsComponent,
+    InfantComponent,
+    FamilyProfileComponent,
+    InfantRecordsFormComponent,
+    FamilyProfileFormComponent,
+    FamilyProfileDetailsComponent,
   ],
   imports: [
     PrimengModule,

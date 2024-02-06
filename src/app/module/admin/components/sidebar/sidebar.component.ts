@@ -41,6 +41,11 @@ export class SidebarComponent implements OnInit {
       icon: 'pi pi-map',
     },
     {
+      title: 'Forms',
+      route: 'forms',
+      icon: 'pi pi-file',
+    },
+    {
       title: 'Logs',
       route: 'logs',
       icon: 'fal fa-pallet',

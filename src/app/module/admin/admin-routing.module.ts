@@ -18,6 +18,10 @@ import { OwnerDocumentComponent } from './components/owner-document/owner-docume
 import { AllDocumentsComponent } from './components/all-documents/all-documents.component';
 import { BaranggayComponent } from './pages/baranggay/baranggay.component';
 import { InfantAnalyticsComponent } from './pages/infant-analytics/infant-analytics.component';
+import { FormsComponent } from './pages/forms/forms.component';
+import { InfantComponent } from './components/infant/infant.component';
+import { FamilyProfileComponent } from './components/family-profile/family-profile.component';
+import { FamilyProfileDetailsComponent } from './pages/family-profile-details/family-profile-details.component';
 
 const routes: Routes = [
   {
@@ -25,6 +29,12 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', component: DashboardComponent },
+      { path: 'forms', component: FormsComponent,children:[
+        {path:'',component:FamilyProfileComponent},
+        {path:'infant',component:InfantComponent},
+        
+      ]},
+      {path:'forms/familty-profile/details',component:FamilyProfileDetailsComponent},
       {
         path: 'analytics',
         component: AnalyticsComponent,
