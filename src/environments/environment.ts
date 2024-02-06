@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    baseURL: 'rhu.topfavlists.com/api',
+    baseURL: 'https://rhu.topfavlists.com/api',
   };
