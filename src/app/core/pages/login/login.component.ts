@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit{
         this.toast.success("Successfully login")
       },error:(err:any)=>{
         this.submitLoading=false
-        this.toast.warning(err.error.message ?? 'error')
+        this.toast.warning(err?.error?.message ?? err)
       }
     })
   }
