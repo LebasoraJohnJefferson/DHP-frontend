@@ -16,12 +16,12 @@ export class AnalyticsService {
   constructor(private http: HttpClient) {}
 
   getFPAnalytics():Observable<any> {
-    return this.http.get(`${BASEURL}/admin/profileFamiltyAnalytics`);
+    return this.http.get(`${BASEURL}/admin/profileFamiltyAnalytics/`);
   }
 
   
   getInfantAnatics():Observable<any> {
-    return this.http.get(`${BASEURL}/admin/profileInfantAnlytics`);
+    return this.http.get(`${BASEURL}/admin/profileInfantAnlytics/`);
   }
 
 
