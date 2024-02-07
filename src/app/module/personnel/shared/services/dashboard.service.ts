@@ -17,6 +17,6 @@ export class DashboardService {
   constructor(private http: HttpClient) {}
 
   getDashboardData():Observable<any> {
-    return this.http.get(`${BASEURL}/personnel/dashboard`);
+    return this.http.get(`${BASEURL}/dashboard`);
   }
 }

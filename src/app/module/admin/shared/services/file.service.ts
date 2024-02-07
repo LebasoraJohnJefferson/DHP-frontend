@@ -18,11 +18,11 @@ export class FileService {
  
 
     getFiles(userId:any): any {
-      return this.http.get(`${BASEURL}/admin/file/${userId}`);
+      return this.http.get(`${BASEURL}/file/${userId}`);
     }
 
     deleteFile(id:any):Observable<any>{
-      return this.http.delete(`${BASEURL}/admin/file/${id}`);
+      return this.http.delete(`${BASEURL}/file/${id}`);
     }
 
 

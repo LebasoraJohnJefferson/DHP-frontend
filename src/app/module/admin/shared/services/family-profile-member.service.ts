@@ -16,14 +16,14 @@ export class FamilyProfileMemberService {
   constructor(private http: HttpClient, private router: Router) {}
 
   createPFC(data:any): any {
-    return this.http.post(`${BASEURL}/admin/famityProfileMembers`,data);
+    return this.http.post(`${BASEURL}/famityProfileMembers`,data);
   }
 
   getAllPFC(FC_id:any):any{
-    return this.http.get(`${BASEURL}/admin/famityProfileMembers/${FC_id}`);
+    return this.http.get(`${BASEURL}/famityProfileMembers/${FC_id}`);
   }
 
   deletePFC(FC_id:any):any{
-    return this.http.delete(`${BASEURL}/admin/famityProfileMembers/${FC_id}`);
+    return this.http.delete(`${BASEURL}/famityProfileMembers/${FC_id}`);
   }
 }

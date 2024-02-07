@@ -16,19 +16,19 @@ export class FamilyProfileService {
   constructor(private http: HttpClient, private router: Router) {}
 
   getAllPF(): any {
-    return this.http.get(`${BASEURL}/admin/famityProfile`);
+    return this.http.get(`${BASEURL}/famityProfile`);
   }
 
 
   createProfileFamilty(data:any): any {
-    return this.http.post(`${BASEURL}/admin/famityProfile`,data);
+    return this.http.post(`${BASEURL}/famityProfile`,data);
   }
 
   specificProfileFamilty(PFid:any):any{
-    return this.http.get(`${BASEURL}/admin/famityProfile/${PFid}`);
+    return this.http.get(`${BASEURL}/famityProfile/${PFid}`);
   }
 
   deletePF(PFId:any){
-    return this.http.delete(`${BASEURL}/admin/famityProfile/${PFId}`);
+    return this.http.delete(`${BASEURL}/famityProfile/${PFId}`);
   }
 }

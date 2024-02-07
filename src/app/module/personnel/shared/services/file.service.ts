@@ -17,15 +17,15 @@ export class FileService {
     constructor(private http: HttpClient, private router: Router) {}
   
     uploadFile(data:any): any {
-      return this.http.post(`${BASEURL}/personnel/file`,data);
+      return this.http.post(`${BASEURL}/file`,data);
     }
 
     getFiles(): any {
-      return this.http.get(`${BASEURL}/personnel/file`);
+      return this.http.get(`${BASEURL}/file`);
     }
 
     deleteFile(id:any):Observable<any>{
-      return this.http.delete(`${BASEURL}/personnel/file/${id}`);
+      return this.http.delete(`${BASEURL}/file/${id}`);
     }
 
 
