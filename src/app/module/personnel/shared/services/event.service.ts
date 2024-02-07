@@ -15,7 +15,7 @@ export class EventService {
   constructor(private http: HttpClient, private router: Router) {}
 
   getEvents():Observable<any> {
-    return this.http.get(`${BASEURL}/personnel/event`);
+    return this.http.get(`${BASEURL}/personnel/personnelEvent`);
   }
 
 
