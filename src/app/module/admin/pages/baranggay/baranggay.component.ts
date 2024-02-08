@@ -12,7 +12,6 @@ import { HotToastService } from '@ngneat/hot-toast';
 
 
 export class BaranggayComponent implements OnInit {
-  cityId:any
   province:any;
   city:any;
   selectBrgy:any;
@@ -22,10 +21,39 @@ export class BaranggayComponent implements OnInit {
   baranggay:any=[]
 
   brgyForm:FormGroup = this._fb.group({
-    city_id:[Validators.required],
+    city:['',[Validators.required]],
+    province:['',[Validators.required]],
     purok:['',[Validators.required]],
     baranggay:['',[Validators.required]]
   })
+
+  formElems:any = [
+   
+    {
+      title:'City',
+      formName:'city',
+      placeholder:'Enter name of city',
+      type:'text'
+    },
+    {
+      title:'Province',
+      formName:'province',
+      placeholder:'Enter name of province',
+      type:'text'
+    },
+    {
+      title:'Baranggay',
+      formName:'baranggay',
+      placeholder:'Enter name of baranggay',
+      type:'text'
+    },
+    {
+      title:'Purok',
+      formName:'purok',
+      placeholder:'Enter name of purok',
+      type:'text'
+    },
+  ]
 
 
   constructor(
@@ -67,7 +95,6 @@ export class BaranggayComponent implements OnInit {
   onSubmit(){
     this.isSubmitLoading = true
     if(this.brgyForm.valid){
-      this.brgyForm.controls['city_id'].setValue(this.cityId)
       this._bgyService.createBrgy(this.brgyForm.value).subscribe({
         next:(res)=>{
           this.toast.success(res?.message || 'Successfully added')

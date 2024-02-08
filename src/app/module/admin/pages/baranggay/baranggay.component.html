@@ -27,6 +27,9 @@
     styleClass="p-datatable-gridlines"
     [globalFilterFields]="[
       'attributes.city',
+      'attributes.purok',
+      'attributes.baranggay',
+      'attributes.province',
       'attributes.created_at',
       'personnel_details.email'
     ]"
@@ -55,6 +58,8 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr class="text-sm">
+        <th field="name">Province</th>
+        <th field="name">City</th>
         <th field="name">Baranggay</th>
         <th field="name">Purok</th>
         <th field="AlumniCredentialschoolId.Course.acronym">Created</th>
@@ -63,6 +68,8 @@
     </ng-template>
     <ng-template pTemplate="body" let-brgy>
       <tr class="text-sm" [pSelectableRow]="brgy">
+        <td>{{ brgy?.province }}</td>
+        <td>{{ brgy?.city }}</td>
         <td>{{ brgy?.baranggay }}</td>
         <td>{{ brgy?.purok }}</td>
         <td>{{ brgy?.created_at | date }}</td>
@@ -97,32 +104,19 @@
       [formGroup]="brgyForm"
       class="w-full grid gap-2"
     >
-        <div class="w-full">
+        <div class="w-full" *ngFor="let elem of formElems">
           <label class="block text-[12px] font-medium text-gray-700"
-            >Baranggay</label
+            >{{elem?.title}}</label
           >
           <div class="mt-1 relative rounded-md w-full">
             <input
-              type="text"
+              [type]="elem.type"
               class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
-              placeholder="Enter baranggay"
-              formControlName="baranggay"
+              [placeholder]="elem?.placeholder"
+              [formControlName]="elem?.formName"
             />
           </div>
         </div>
-        <div class="w-full">
-            <label class="block text-[12px] font-medium text-gray-700"
-              >Purok</label
-            >
-            <div class="mt-1 relative rounded-md w-full">
-              <input
-                type="text"
-                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
-                placeholder="Enter purok"
-                formControlName="purok"
-              />
-            </div>
-          </div>
 
         
 
