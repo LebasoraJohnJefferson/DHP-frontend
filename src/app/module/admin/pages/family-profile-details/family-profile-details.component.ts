@@ -13,13 +13,14 @@ import { Location } from '@angular/common';
 })
 export class FamilyProfileDetailsComponent implements OnInit{
   createModal:boolean = false
-  FPid:any;
+  detailModal:boolean = false
+  isSubmitLoading:boolean = false
+  today = new Date();
   selectdata:any;
+  FamDetails:any
+  FPid:any;
   data:any;
   cols:any;
-  isSubmitLoading:boolean = false
-  FamDetails:any
-  today = new Date();
   nursingTypes:string[]=['EBF','Mixed feeding','Bottle-fed','Others']
   genders:string[]=['male','female']
   relationships:string[] = [
