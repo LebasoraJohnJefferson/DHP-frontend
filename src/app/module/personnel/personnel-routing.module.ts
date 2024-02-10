@@ -9,6 +9,7 @@ import { PersonnelGuard } from '../../core/shared/guards/personnel.guard';
 import { FamilyProfileComponent } from './pages/family-profile/family-profile.component';
 import { ProfileFamilyDetailsComponent } from './pages/profile-family-details/profile-family-details.component';
 import { InfantRecordsComponent } from './pages/infant-records/infant-records.component';
+import { PreschoolComponent } from './pages/preschool/preschool.component';
 
 const routes: Routes = [
   {path:'',component:LayoutComponent,children:[
@@ -17,7 +18,8 @@ const routes: Routes = [
     {path:'documents',component:DocumentsComponent},
     {path:'form/familty-profile',component:FamilyProfileComponent},
     {path:'form/familty-profile/details',component:ProfileFamilyDetailsComponent},
-    {path:'form/infant-records',component:InfantRecordsComponent}
+    {path:'form/infant-records',component:InfantRecordsComponent},
+    {path:'form/preschool-records',component:PreschoolComponent}
   ],canActivate:[PersonnelGuard]},
   {path:'admin/account',component:AccountComponent}
 ];

@@ -18,6 +18,8 @@ import { FormsModule } from '@angular/forms';
 import { ProfileFamilyDetailsComponent } from './pages/profile-family-details/profile-family-details.component';
 import { InfantRecordsComponent } from './pages/infant-records/infant-records.component';
 import { InfantRecordsFormComponent } from './components/infant-records-form/infant-records-form.component';
+import { PreschoolComponent } from './pages/preschool/preschool.component';
+import { PreschoolRecordsFormComponent } from './components/preschool-records-form/preschool-records-form.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { InfantRecordsFormComponent } from './components/infant-records-form/inf
     ProfileFamilyDetailsComponent,
     InfantRecordsComponent,
     InfantRecordsFormComponent,
+    PreschoolComponent,
+    PreschoolRecordsFormComponent,
   ],
   imports: [
     ReactiveFormsModule,

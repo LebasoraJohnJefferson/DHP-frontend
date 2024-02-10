@@ -3,50 +3,19 @@
       <h1 class="font-bold text-xl md:text-3xl text-white">Family Profile Details</h1>
       <p class="text-slate-100 text-[12px]">Information about the system</p>
     </div>
-    <div class="mt-5">
+    <div class="mt-5 flex gap-2">
         <div (click)="goBack()" class="px-2 py-1 flex items-center gap-2 text-white text-[12px] cursor-pointer rounded-full bg-slate-500 hover:bg-slate-500/80 w-fit">
             <i class="pi pi-arrow-left"></i>
             Go back
         </div>
+        <div (click)="detailsModal = true" class="px-2 py-1 flex items-center gap-2 text-white text-[12px] cursor-pointer rounded-full bg-slate-500 hover:bg-slate-500/80 w-fit">
+            <i class="pi pi-info-circle"></i>
+            More Details
+        </div>
     </div>
-    <div class="mt-5 grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-2">
+    <div class="grid grid-cols-1 w-full mt-3">
 
-           
-      <table class="flex h-fit flex mx-auto  p-2 rounded text-[12px]">
-        <tr class="grid">
-            <th class="show border p-1 px-2">Household number</th>
-            <th  class="show border p-1 px-2">Address</th>
-            <th class="show border p-1 px-2">Contact number</th>
-            <th class="show border p-1 px-2">Mother</th>
-            <th class="show border p-1 px-2">Father</th>
-            <th class="show border p-1 px-2">Occupation</th>
-            <th class="show border p-1 px-2">Educational attainment</th>
-            <th class="show border p-1 px-2">Food Production Activity</th>
-            <th class="show border p-1 px-2">Toilet type</th>
-            <th class="show border p-1 px-2">Water source</th>
-            <th class="show border p-1 px-2">Using iodized salt</th>
-            <th class="show border p-1 px-2">Using IFR</th>
-            <th class="show border p-1 px-2">Family planning</th>
-            <th class="show border p-1 px-2">Mother pregnant</th>
-        </tr>
-        <tr class="grid ">
-            <td class="show border p-1 px-2">{{FamDetails?.attributes?.household_no}}</td>
-            <td  class="show border p-1 px-2">{{FamDetails?.attributes.baranggay}}</td>
-            <td class="show border p-1 px-2">{{FamDetails?.attributes?.contact_number}}</td>
-            <td class="show border p-1 px-2">{{FamDetails?.attributes?.father}}</td>
-            <td class="show border p-1 px-2">{{FamDetails?.attributes?.mother}}</td>
-            <td class="show border p-1 px-2">{{FamDetails?.attributes?.occupation}}</td>
-            <td class="show border p-1 px-2">{{FamDetails?.attributes?.educ_attain}}</td>
-            <td class="show border p-1 px-2">{{FamDetails?.attributes?.food_prod_act}}</td>
-            <td class="show border p-1 px-2">{{FamDetails?.attributes?.toilet_type}}</td>
-            <td class="show border p-1 px-2">{{FamDetails?.attributes?.water_source}}</td>
-            <td class="show border p-1 px-2">{{FamDetails?.attributes?.using_iodized_salt ? 'true' : 
-                'false'}}</td>
-            <td class="show border p-1 px-2">{{FamDetails?.attributes?.using_IFR ? 'true' : 'false'}}</td>
-            <td class="show border p-1 px-2">{{FamDetails?.attributes?.familty_planning ? 'true' : 'false'}}</td>
-            <td class="show border p-1 px-2">{{FamDetails?.attributes?.mother_pregnant ? 'true' : 'false'}}</td>
-        </tr>
-    </table>
+       <div class="px-2 rounded-lg text-white bg-purple-800 rounded w-fit py-1 text-[12px] my-2">Household Member</div>
 
 
         <div class="grid">
@@ -125,13 +94,58 @@
             </ng-template>
           </p-table>
         </div>
-        
 
-      
-        
-        
     </div>
 </div>
+
+
+
+<p-dialog
+      header="More Details"
+      [(visible)]="detailsModal"
+      [modal]="true"
+      appendTo="body"
+      [style]="{ maxWidth: '400px', width: '400px' }"
+    >
+        
+    <table class="grid grid-cols-2 w-full mx-auto  p-2 rounded text-[12px]">
+      <tr class="grid">
+          <th class="show border p-1 px-2">Household number</th>
+          <th  class="show border p-1 px-2">Address</th>
+          <th class="show border p-1 px-2">Contact number</th>
+          <th class="show border p-1 px-2">Mother</th>
+          <th class="show border p-1 px-2">Father</th>
+          <th class="show border p-1 px-2">Occupation</th>
+          <th class="show border p-1 px-2">Educational attainment</th>
+          <th class="show border p-1 px-2">Food Production Activity</th>
+          <th class="show border p-1 px-2">Toilet type</th>
+          <th class="show border p-1 px-2">Water source</th>
+          <th class="show border p-1 px-2">Using iodized salt</th>
+          <th class="show border p-1 px-2">Using IFR</th>
+          <th class="show border p-1 px-2">Family planning</th>
+          <th class="show border p-1 px-2">Mother pregnant</th>
+      </tr>
+      <tr class="grid ">
+          <td class="show border p-1 px-2">{{FamDetails?.attributes?.household_no}}</td>
+          <td  class="show border p-1 px-2">{{FamDetails?.attributes.baranggay}}</td>
+          <td class="show border p-1 px-2">{{FamDetails?.attributes?.contact_number}}</td>
+          <td class="show border p-1 px-2">{{FamDetails?.attributes?.father}}</td>
+          <td class="show border p-1 px-2">{{FamDetails?.attributes?.mother}}</td>
+          <td class="show border p-1 px-2">{{FamDetails?.attributes?.occupation}}</td>
+          <td class="show border p-1 px-2">{{FamDetails?.attributes?.educ_attain}}</td>
+          <td class="show border p-1 px-2">{{FamDetails?.attributes?.food_prod_act}}</td>
+          <td class="show border p-1 px-2">{{FamDetails?.attributes?.toilet_type}}</td>
+          <td class="show border p-1 px-2">{{FamDetails?.attributes?.water_source}}</td>
+          <td class="show border p-1 px-2">{{FamDetails?.attributes?.using_iodized_salt ? 'true' : 
+              'false'}}</td>
+          <td class="show border p-1 px-2">{{FamDetails?.attributes?.using_IFR ? 'true' : 'false'}}</td>
+          <td class="show border p-1 px-2">{{FamDetails?.attributes?.familty_planning ? 'true' : 'false'}}</td>
+          <td class="show border p-1 px-2">{{FamDetails?.attributes?.mother_pregnant ? 'true' : 'false'}}</td>
+      </tr>
+  </table>
+
+</p-dialog>
+
 
 
 
@@ -211,7 +225,7 @@
             >
             <p-inputSwitch formControlName="is_nursing"></p-inputSwitch>
           </div>
-          <select formControlName="nursing_type" *ngIf="childrenForm.controls['is_nursing'].value != false" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
+          <select formControlName="nursing_type" *ngIf="childrenForm.controls['is_nursing'].value" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
             <option selected disabled>Select feeding Type</option>
             <option  [value]="type" *ngFor="let type of nursingTypes">
                 {{type}}

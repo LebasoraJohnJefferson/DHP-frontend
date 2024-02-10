@@ -13,6 +13,7 @@ import { Location } from '@angular/common';
 })
 export class ProfileFamilyDetailsComponent implements OnInit{
   createModal:boolean = false
+  detailsModal:boolean = false
   FPid:any;
   selectdata:any;
   data:any;
@@ -109,6 +110,8 @@ export class ProfileFamilyDetailsComponent implements OnInit{
     if(this.childrenForm.valid){
       this.isSubmitLoading =true
       this.childrenForm.controls['FP_id'].setValue(this.FPid)
+      this.childrenForm.controls['is_nursing'].setValue(
+        this.childrenForm.controls['is_nursing'].value == '' ? false : this.childrenForm.controls['is_nursing'].value)
       this._FPCService.createPFC(this.childrenForm.value).subscribe({
         next:(res:any)=>{
           this.isSubmitLoading =false
