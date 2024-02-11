@@ -3,12 +3,11 @@ import { PreschoolService } from '../../shared/services/preschool.service';
 import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
-  selector: 'app-preschool',
-  templateUrl: './preschool.component.html',
-  styleUrl: './preschool.component.scss'
+  selector: 'app-baranggay-preschooler',
+  templateUrl: './baranggay-preschooler.component.html',
+  styleUrl: './baranggay-preschooler.component.scss'
 })
-export class PreschoolComponent {
-
+export class BaranggayPreschoolerComponent {
   createModal:boolean = false
   data:any;
   cols:any;
@@ -43,11 +42,11 @@ export class PreschoolComponent {
     })
   }
 
-
   triggerSubmit(){
-    this.getAllPreschool()
     this.createModal = false
+    this.getAllPreschool()
   }
 
 
 }
+

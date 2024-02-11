@@ -22,6 +22,7 @@ import { FormsComponent } from './pages/forms/forms.component';
 import { InfantComponent } from './components/infant/infant.component';
 import { FamilyProfileComponent } from './components/family-profile/family-profile.component';
 import { FamilyProfileDetailsComponent } from './pages/family-profile-details/family-profile-details.component';
+import { BaranggayPreschoolerComponent } from './components/baranggay-preschooler/baranggay-preschooler.component';
 
 const routes: Routes = [
   {
@@ -32,9 +33,10 @@ const routes: Routes = [
       { path: 'forms', component: FormsComponent,children:[
         {path:'',component:FamilyProfileComponent},
         {path:'infant',component:InfantComponent},
+        {path:'baranggay-preschooler',component:BaranggayPreschoolerComponent},
         
       ]},
-      {path:'forms/familty-profile/details',component:FamilyProfileDetailsComponent},
+      {path:'forms/family-profile/details',component:FamilyProfileDetailsComponent},
       {
         path: 'analytics',
         component: AnalyticsComponent,

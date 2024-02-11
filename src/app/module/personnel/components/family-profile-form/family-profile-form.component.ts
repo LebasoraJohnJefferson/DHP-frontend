@@ -23,12 +23,7 @@ export class FamilyProfileFormComponent implements OnInit {
   motherPregnant:boolean = false
   @Output() triggerSubmmit:EventEmitter<any> = new EventEmitter()
   otherFileds:any=[
-    {
-      title:'Household number',
-      formName:'household_no',
-      type:'string',
-      placeholder:'household number.'
-    },
+    
     {
       title:'Contact number',
       formName:'contact_number',
@@ -80,7 +75,6 @@ export class FamilyProfileFormComponent implements OnInit {
     mother:['',Validators.required],
     father:['',Validators.required],
     contact_number: ['', [Validators.required, Validators.pattern(/^(09|\+639)\d{9}$/)]],
-    household_no:['',Validators.required],
     occupation:['',Validators.required],
     educ_attain:['',Validators.required],
     //drop down

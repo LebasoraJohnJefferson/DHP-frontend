@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 export class FormsComponent {
   forms = [
     {link:'/admin/forms',label:'Family profile'},
-    {link:'/admin/forms/infant',label:'Infant'}
+    {link:'/admin/forms/infant',label:'Infant'},
+    {link:'/admin/forms/baranggay-preschooler',label:'baranggay preschooler'}
   ]
 
 

@@ -37,6 +37,8 @@ import { FamilyProfileComponent } from './components/family-profile/family-profi
 import { InfantRecordsFormComponent } from './components/infant-records-form/infant-records-form.component';
 import { FamilyProfileFormComponent } from './components/family-profile-form/family-profile-form.component';
 import { FamilyProfileDetailsComponent } from './pages/family-profile-details/family-profile-details.component';
+import { BaranggayPreschoolerComponent } from './components/baranggay-preschooler/baranggay-preschooler.component';
+import { PreschoolRecordsFormComponent } from './components/preschool-records-form/preschool-records-form.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import { FamilyProfileDetailsComponent } from './pages/family-profile-details/fa
     InfantRecordsFormComponent,
     FamilyProfileFormComponent,
     FamilyProfileDetailsComponent,
+    BaranggayPreschoolerComponent,
+    PreschoolRecordsFormComponent,
   ],
   imports: [
     PrimengModule,
