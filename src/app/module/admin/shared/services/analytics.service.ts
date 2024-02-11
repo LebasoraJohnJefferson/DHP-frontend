@@ -25,4 +25,9 @@ export class AnalyticsService {
   }
 
 
+  getBrgyPreschoolerAnalytic(year:number){
+    return this.http.get(`${BASEURL}/admin/BrgyPreschoolerAnalytic/${year}`);
+  }
+
+
 }

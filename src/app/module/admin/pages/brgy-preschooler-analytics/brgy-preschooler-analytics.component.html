@@ -1,0 +1,9 @@
+<div class="card w-full">
+    <div class="flex my-2 gap-2 text-[12px]  items-center">
+        <select (change)="changeYear($event)" class="border-0 outline-0 px-2 bg-green-200 rounded py-1">
+            <option disabled selected >Select Year</option>
+            <option *ngFor="let yr of years" [value]="yr">{{yr}}</option>
+        </select>
+    </div>
+    <p-chart type="line" [data]="lineStylesData" width="700" [options]="basicOptions"></p-chart>
+</div>

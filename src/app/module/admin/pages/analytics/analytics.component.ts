@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 export class AnalyticsComponent {
   anaylitcs = [
     {link:'/admin/analytics',label:'Family profile'},
-    {link:'/admin/analytics/infant-analytics',label:'Infant'}
+    {link:'/admin/analytics/infant-analytics',label:'Infant'},
+    {link:'/admin/analytics/brgy-preschooler-analytics',label:'baranggay preschooler'}
   ]
 
   constructor(

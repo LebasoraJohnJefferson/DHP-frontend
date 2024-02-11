@@ -23,6 +23,7 @@ import { InfantComponent } from './components/infant/infant.component';
 import { FamilyProfileComponent } from './components/family-profile/family-profile.component';
 import { FamilyProfileDetailsComponent } from './pages/family-profile-details/family-profile-details.component';
 import { BaranggayPreschoolerComponent } from './components/baranggay-preschooler/baranggay-preschooler.component';
+import { BrgyPreschoolerAnalyticsComponent } from './pages/brgy-preschooler-analytics/brgy-preschooler-analytics.component';
 
 const routes: Routes = [
   {
@@ -42,7 +43,8 @@ const routes: Routes = [
         component: AnalyticsComponent,
         children: [
             { path: '', component: FamilyProfileAnalyticsComponent },
-            { path: 'infant-analytics', component: InfantAnalyticsComponent }
+            { path: 'infant-analytics', component: InfantAnalyticsComponent },
+            { path: 'brgy-preschooler-analytics', component: BrgyPreschoolerAnalyticsComponent }
           ],
       },
 
