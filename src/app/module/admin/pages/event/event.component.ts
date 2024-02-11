@@ -15,7 +15,7 @@ export class EventComponent {
   defaultImage:string ='../../../../../assets/images/error-404.png'
   eventId:any;
   isDeleting:boolean = false
-  provinces:any;
+  locations:any;
   event:any;
   createEventModal:any;
   provinceNotYetInvited:any=[]
@@ -40,8 +40,7 @@ export class EventComponent {
   getAllInvitedProvince(){
     this._eventService.getAllInvitedProvince(this.eventId).subscribe({
       next:(res:any)=>{
-        this.provinces = res?.data?.provinces
-        console.log(res)
+        this.locations = res?.data
       }
     })
   }
@@ -61,11 +60,11 @@ export class EventComponent {
   }
 
 
-  sendInvitation(provinceId:any){
+  sendInvitation(brgy_id:any){
     const confirmation = confirm("Are you sure, you want to invite this province?")
     if(!confirmation) return 
     this._eventService.inviteProvince({
-      province_id:provinceId,
+      brgy_id:brgy_id,
       event_id:this.eventId
     }).subscribe({
       next:(res:any)=>{
@@ -84,7 +83,7 @@ export class EventComponent {
 
   getAllProvinceNotInvited(){
     this._eventService.getAllProvincesNotYetInvited(this.eventId).subscribe((res)=>{
-      this.provinceNotYetInvited = res.data
+      this.provinceNotYetInvited = res?.data
     })
   }
 

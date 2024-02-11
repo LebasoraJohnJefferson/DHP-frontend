@@ -63,7 +63,7 @@
     </article>
     <div class="px-3 py-2 mt-2">
       <p-table
-      [value]="provinces"
+      [value]="locations"
       #dt2
       dataKey="id"
       responsiveLayout="scroll"
@@ -106,19 +106,19 @@
           <th>Action</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-province>
-        <tr class="text-sm" [pSelectableRow]="province">
-          <td>{{ province?.province?.province }}</td>
-          <td>{{ province.create_at | date}}</td>
+      <ng-template pTemplate="body" let-location>
+        <tr class="text-sm" [pSelectableRow]="location">
+          <td>{{location?.brgy?.province +', '+ location?.brgy?.city+', '+ location?.brgy?.baranggay+', '+ location?.brgy?.purok}}</td>
+          <td>{{ location.created_at | date}}</td>
           <td class="gap-2 grid">
             <div
-              (click)="sendInvitation(province?.province?.id)"
+              (click)="sendInvitation(location?.brgy?.id)"
               class="cursor-pointer flex items-center justify-center gap-2"
             >
               <i class="pi pi-send"></i> Resend
             </div>
             <div
-              (click)="deleteInvitation(province.id)"
+              (click)="deleteInvitation(location.id)"
               class="cursor-pointer flex items-center justify-center gap-2"
             >
               <i class="pi pi-trash"></i> Delete
@@ -132,7 +132,7 @@
 
 
 <p-dialog
-      header="Invite By Province"
+      header="Invite By Baranggay"
       [(visible)]="createEventModal"
       [modal]="true"
       appendTo="body"
@@ -141,7 +141,7 @@
       <div class="mt-1 grid grid-cols-1 gap-2">
         <div *ngFor="let province of provinceNotYetInvited?.provinces" class="flex justify-between text-white  rounded-lg  bg-green-500 px-2 items-center border py-2">
           <div class="truncate">
-            {{province?.province}}
+            {{province?.province +', '+ province?.city+', '+ province?.baranggay+', '+ province?.purok}}
           </div>
           <i (click)="sendInvitation(province?.id)" class="pi pi-send p-2  cursor-pointer hover:text-white/80 text-xl "></i>
         </div>

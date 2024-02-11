@@ -187,10 +187,10 @@ export class PersonnelComponent {
       columns: columns,
       body: data,
       didDrawPage: (dataArg:any) => {
-        doc.text('\nIntel Alley: Alumni', dataArg.settings.margin.top, 10);
+        doc.text('\BRU: Personnel', dataArg.settings.margin.top, 10);
       },
     });
-    doc.save('IntelAlley_Alumni.pdf');
+    doc.save('rhu.pdf');
   }
 
 
