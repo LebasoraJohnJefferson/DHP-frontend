@@ -20,8 +20,8 @@ export class AnalyticsService {
   }
 
   
-  getInfantAnatics():Observable<any> {
-    return this.http.get(`${BASEURL}/admin/profileInfantAnlytics`);
+  getInfantAnatics(year:number):Observable<any> {
+    return this.http.get(`${BASEURL}/admin/profileInfantAnlytics/${year}`);
   }
 
 
