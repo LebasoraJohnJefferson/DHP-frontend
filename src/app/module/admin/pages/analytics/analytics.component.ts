@@ -10,7 +10,8 @@ export class AnalyticsComponent {
   anaylitcs = [
     {link:'/admin/analytics',label:'Family profile'},
     {link:'/admin/analytics/infant-analytics',label:'Infant'},
-    {link:'/admin/analytics/brgy-preschooler-analytics',label:'baranggay preschooler'}
+    {link:'/admin/analytics/brgy-preschooler-analytics',label:'baranggay preschooler'},
+    {link:'/admin/analytics/nutritional-status-analytics',label:'preschooler with nutritional status'},
   ]
 
   constructor(

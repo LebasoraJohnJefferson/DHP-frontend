@@ -30,4 +30,9 @@ export class AnalyticsService {
   }
 
 
+  PreschoolWithNutritionalStatusAnalytics(year:number){
+    return this.http.get(`${BASEURL}/admin/PreschoolWithNutritionalStatusAnlytics/${year}`);
+  }
+
+
 }

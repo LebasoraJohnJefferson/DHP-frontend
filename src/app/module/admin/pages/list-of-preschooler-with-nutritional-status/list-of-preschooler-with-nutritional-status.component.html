@@ -1,8 +1,4 @@
-<div class="relative z-40 mt-10 pb-20">
-    <div class="">
-      <h1 class="font-bold text-xl md:text-3xl text-white">List Of Preschooler</h1>
-      <p class="text-slate-100 text-[12px]">Information about the system (Identified nutritional status)</p>
-    </div>
+<div class="relative z-40 mt-5 pb-20">
     <div class="mt-5">
         <p-table
         [value]="data"
@@ -66,7 +62,7 @@
         <ng-template pTemplate="body" let-child>
           <tr class="text-sm" [pSelectableRow]="child">
             <td><a class="text-blue-500 font-bold hover:text-blue-500/80" 
-              routerLink="/form/family-profile/details"
+              routerLink="/admin/forms/family-profile/details"
               [queryParams]="{id:child?.FP_id}">{{ child?.name }}</a></td>
             <td>{{child?.age}}</td>
             <td>{{ child?.preDetails?.date_opt | date : 'mediumDate' }}</td>

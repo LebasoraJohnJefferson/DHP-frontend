@@ -40,6 +40,9 @@ import { FamilyProfileDetailsComponent } from './pages/family-profile-details/fa
 import { BaranggayPreschoolerComponent } from './components/baranggay-preschooler/baranggay-preschooler.component';
 import { PreschoolRecordsFormComponent } from './components/preschool-records-form/preschool-records-form.component';
 import { BrgyPreschoolerAnalyticsComponent } from './pages/brgy-preschooler-analytics/brgy-preschooler-analytics.component';
+import { PreschoolWithNutritionalStatusFormComponent } from './components/preschool-with-nutritional-status-form/preschool-with-nutritional-status-form.component';
+import { ListOfPreschoolerWithNutritionalStatusComponent } from './pages/list-of-preschooler-with-nutritional-status/list-of-preschooler-with-nutritional-status.component';
+import { NutritionalStatusAnalyticsComponent } from './pages/nutritional-status-analytics/nutritional-status-analytics.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +81,9 @@ import { BrgyPreschoolerAnalyticsComponent } from './pages/brgy-preschooler-anal
     BaranggayPreschoolerComponent,
     PreschoolRecordsFormComponent,
     BrgyPreschoolerAnalyticsComponent,
+    PreschoolWithNutritionalStatusFormComponent,
+    ListOfPreschoolerWithNutritionalStatusComponent,
+    NutritionalStatusAnalyticsComponent,
   ],
   imports: [
     PrimengModule,
