@@ -31,7 +31,7 @@ export class SidebarComponent implements OnInit {
     
     {
       title: 'Family Profile',
-      route: '/form/familty-profile',
+      route: '/form/family-profile',
       icon: 'fal fa-file-invoice',
     },{
       title: 'Infant Records',
@@ -40,6 +40,10 @@ export class SidebarComponent implements OnInit {
     },{
       title: 'Baranggay Preschoolers Record',
       route: '/form/preschool-records',
+      icon: 'fal fa-file-invoice',
+    },{
+      title: 'List Of Preschooler (Identified nutritional status)',
+      route: '/form/list-of-preschooler-with-nutritional-status',
       icon: 'fal fa-file-invoice',
     }
   ];

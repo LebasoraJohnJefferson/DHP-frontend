@@ -1,7 +1,7 @@
 <div class="relative z-40 mt-10 pb-20">
     <div class="">
-      <h1 class="font-bold text-xl md:text-3xl text-white">Infant Records</h1>
-      <p class="text-slate-100 text-[12px]">Information about the system</p>
+      <h1 class="font-bold text-xl md:text-3xl text-white">List Of Preschooler</h1>
+      <p class="text-slate-100 text-[12px]">Information about the system (Identified nutritional status)</p>
     </div>
     <div class="mt-5">
         <p-table
@@ -51,20 +51,30 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr class="text-sm">
-            <th field="AlumniCredentialschoolId.Course.acronym">Name of child</th>
-            <th field="AlumniCredentialschoolId.gradClass">Age in month</th>
-            <th field="AlumniCredentialschoolId.gradClass">Weight</th>
-            <th field="AlumniCredentialschoolId.gradClass">Weight Status</th>
-            <th field="email">Action</th>
+            <th field="name">Name of child</th>
+            <th field="age">age</th>
+            <th field="opt_plus">Date of opt plus</th>
+            <th field="created_at">Actual date of weight</th>
+            <th field="weight">Weight (kg)</th>
+            <th field="height">height (cm)</th>
+            <th field="BMI">BMI (Body max Index)</th>
+            <th field="percentile_for_BMI">Percentile for BMI</th>
+            <th field="status">Nutritional Status</th>
+            <th >Action</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-child>
           <tr class="text-sm" [pSelectableRow]="child">
             <td><a class="text-blue-500 font-bold hover:text-blue-500/80" 
-              routerLink="/form/family-profile/details"
-              [queryParams]="{id:child?.info?.f_p_m?.FP_id}">{{ child?.info?.f_p_m?.name }}</a></td>
-            <td>{{child?.ageInMoth}}</td>
-            <td>{{ child?.info?.weight }}</td>
+              routerLink="/form/familty-profile/details"
+              [queryParams]="{id:child?.info?.f_p_m?.FP_id}">{{ child?.name }}</a></td>
+            <td>{{child?.age}}</td>
+            <td>{{ child?.preDetails?.date_opt | date : 'mediumDate' }}</td>
+            <td>{{ child?.created_at | date : 'mediumDate' }}</td>
+            <td>{{ child?.preDetails?.weight }}</td>
+            <td>{{ child?.preDetails?.height }}</td>
+            <td>{{ child?.BMI }}</td>
+            <td>{{ child?.percentile }}</td>
             <td>{{ child?.status }}</td>
             
             <td class="grid gap-2">
@@ -75,8 +85,8 @@
               >
                 <i class="fad fa-eye"></i> View
               </div> -->
-              <div (click)="deleteData(child?.info?.id)" class="text-center">
-                  <i class="fad fa-trash"></i> Delete
+              <div (click)="deleteData(child?.preDetails?.id)" class="text-center">
+                  <i class="fad fa-trash"></i> Delete 
               </div>
             </td>
           </tr>
@@ -87,11 +97,11 @@
 
 
 <p-dialog
-    header="Create Infant Record"
+    header="Create Record"
     [(visible)]="createModal"
     [modal]="true"
     appendTo="body"
     [style]="{ maxWidth: '400px', width: '400px' }"
   >
-    <app-infant-records-form (triggerSubmmit)="createInfantRecordCommit()"></app-infant-records-form>
+    <app-preschool-with-nutritional-status-form (triggerSubmmit)="createInfantRecordCommit()"></app-preschool-with-nutritional-status-form>
 </p-dialog>

@@ -10,16 +10,18 @@ import { FamilyProfileComponent } from './pages/family-profile/family-profile.co
 import { ProfileFamilyDetailsComponent } from './pages/profile-family-details/profile-family-details.component';
 import { InfantRecordsComponent } from './pages/infant-records/infant-records.component';
 import { PreschoolComponent } from './pages/preschool/preschool.component';
+import { ListOfPreschoolerWithNutritionalStatusComponent } from './pages/list-of-preschooler-with-nutritional-status/list-of-preschooler-with-nutritional-status.component';
 
 const routes: Routes = [
   {path:'',component:LayoutComponent,children:[
     {path:'',component:DashboardComponent},
     {path:'events',component:EventsComponent},
     {path:'documents',component:DocumentsComponent},
-    {path:'form/familty-profile',component:FamilyProfileComponent},
-    {path:'form/familty-profile/details',component:ProfileFamilyDetailsComponent},
+    {path:'form/family-profile',component:FamilyProfileComponent},
+    {path:'form/family-profile/details',component:ProfileFamilyDetailsComponent},
     {path:'form/infant-records',component:InfantRecordsComponent},
-    {path:'form/preschool-records',component:PreschoolComponent}
+    {path:'form/preschool-records',component:PreschoolComponent},
+    {path:'form/list-of-preschooler-with-nutritional-status',component:ListOfPreschoolerWithNutritionalStatusComponent}
   ],canActivate:[PersonnelGuard]},
   {path:'admin/account',component:AccountComponent}
 ];
