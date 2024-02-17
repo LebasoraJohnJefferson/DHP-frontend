@@ -12,7 +12,7 @@ export class InfantComponent {
   cols:any;
   selectdata:any;
   createModal:boolean = false
-  
+
   constructor(
     private _infantService:InfantService,
     public toast:HotToastService
@@ -24,7 +24,7 @@ export class InfantComponent {
 
   deleteData(infantId:any){
     const confirmation = confirm('Are you sure, you want to delete this record?')
-    if(!confirmation) return 
+    if(!confirmation) return
     this._infantService.deleteInfantRecord(infantId).subscribe({
       next:(res:any)=>{
         this.getAllInfantRecord()

@@ -26,6 +26,9 @@ import { BaranggayPreschoolerComponent } from './components/baranggay-preschoole
 import { BrgyPreschoolerAnalyticsComponent } from './pages/brgy-preschooler-analytics/brgy-preschooler-analytics.component';
 import { ListOfPreschoolerWithNutritionalStatusComponent } from './pages/list-of-preschooler-with-nutritional-status/list-of-preschooler-with-nutritional-status.component';
 import { NutritionalStatusAnalyticsComponent } from './pages/nutritional-status-analytics/nutritional-status-analytics.component';
+import { AtRiskPreschoolComponent } from './pages/at-risk-preschool/at-risk-preschool.component';
+import { AtRiskPreschoolAnalyticsComponent } from './pages/at-risk-preschool-analytics/at-risk-preschool-analytics.component';
+import { PopulationAgeBracketComponent } from './pages/population-age-bracket/population-age-bracket.component';
 
 const routes: Routes = [
   {
@@ -38,7 +41,8 @@ const routes: Routes = [
         {path:'infant',component:InfantComponent},
         {path:'baranggay-preschooler',component:BaranggayPreschoolerComponent},
         {path:'list-of-preschooler-with-nutritional-status',component:ListOfPreschoolerWithNutritionalStatusComponent},
-        
+        {path:'at-risk-preschool',component:AtRiskPreschoolComponent},
+
       ]},
       {path:'forms/family-profile/details',component:FamilyProfileDetailsComponent},
       {
@@ -49,9 +53,10 @@ const routes: Routes = [
             { path: 'infant-analytics', component: InfantAnalyticsComponent },
             { path: 'brgy-preschooler-analytics', component: BrgyPreschoolerAnalyticsComponent },
             { path: 'nutritional-status-analytics', component: NutritionalStatusAnalyticsComponent },
+            { path: 'at-risk-preschool-analytics', component: AtRiskPreschoolAnalyticsComponent },
           ],
       },
-
+      {path:'population-age-bracket',component:PopulationAgeBracketComponent},
       { path: 'events', component: EventsComponent },
       { path: 'personnel', component: PersonnelComponent },
       {

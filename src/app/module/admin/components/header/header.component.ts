@@ -53,6 +53,10 @@ export class HeaderComponent implements OnInit {
       title: 'Forms',
       route: 'forms',
       icon: 'pi pi-file',
+    },{
+      title: 'Population bracket',
+      route: 'population-age-bracket',
+      icon: 'pi pi-users',
     },
     {
       title: 'Logs',

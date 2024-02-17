@@ -19,7 +19,7 @@ export class AnalyticsService {
     return this.http.get(`${BASEURL}/admin/profileFamiltyAnalytics`);
   }
 
-  
+
   getInfantAnatics(year:number):Observable<any> {
     return this.http.get(`${BASEURL}/admin/profileInfantAnlytics/${year}`);
   }
@@ -32,6 +32,11 @@ export class AnalyticsService {
 
   PreschoolWithNutritionalStatusAnalytics(year:number){
     return this.http.get(`${BASEURL}/admin/PreschoolWithNutritionalStatusAnlytics/${year}`);
+  }
+
+
+  AtRiskAnalytics(year:number){
+    return this.http.get(`${BASEURL}/admin/AtRiskAnalytics/${year}`);
   }
 
 

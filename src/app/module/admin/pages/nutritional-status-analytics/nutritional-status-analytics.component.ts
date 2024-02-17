@@ -32,7 +32,7 @@ export class NutritionalStatusAnalyticsComponent {
       for(let i= new Date().getFullYear() ;i>= 2020; i-- ){
         this.years.push(i);
       }
-      
+
 
   }
 
@@ -56,6 +56,7 @@ export class NutritionalStatusAnalyticsComponent {
             label: 'Male',
             borderColor: '#42A5F5',
             borderWidth: 2,
+            tension: .4,
             fill: false,
             data: this.info[0]
         }, {
@@ -63,6 +64,7 @@ export class NutritionalStatusAnalyticsComponent {
             label: 'Female',
             borderColor: '#F317E6',
             borderWidth: 2,
+            tension: .4,
             fill: false,
             data: this.info[1]
         }, {
@@ -119,8 +121,8 @@ export class NutritionalStatusAnalyticsComponent {
     };
   }
 
- 
 
 
-  
+
+
 }
