@@ -11,6 +11,7 @@ import { ProfileFamilyDetailsComponent } from './pages/profile-family-details/pr
 import { InfantRecordsComponent } from './pages/infant-records/infant-records.component';
 import { PreschoolComponent } from './pages/preschool/preschool.component';
 import { ListOfPreschoolerWithNutritionalStatusComponent } from './pages/list-of-preschooler-with-nutritional-status/list-of-preschooler-with-nutritional-status.component';
+import { AtRiskPreschoolComponent } from './pages/at-risk-preschool/at-risk-preschool.component';
 
 const routes: Routes = [
   {path:'',component:LayoutComponent,children:[
@@ -21,7 +22,8 @@ const routes: Routes = [
     {path:'form/family-profile/details',component:ProfileFamilyDetailsComponent},
     {path:'form/infant-records',component:InfantRecordsComponent},
     {path:'form/preschool-records',component:PreschoolComponent},
-    {path:'form/list-of-preschooler-with-nutritional-status',component:ListOfPreschoolerWithNutritionalStatusComponent}
+    {path:'form/list-of-preschooler-with-nutritional-status',component:ListOfPreschoolerWithNutritionalStatusComponent},
+    {path:'form/preschool-at-risk',component:AtRiskPreschoolComponent}
   ],canActivate:[PersonnelGuard]},
   {path:'admin/account',component:AccountComponent}
 ];

@@ -49,13 +49,13 @@
                      <i class="fal fa-file-plus mr-1"></i>
                      Create
                    </button>
-                 
+
                </div>
              </ng-template>
              <ng-template pTemplate="header">
-              
+
                <tr class="text-sm">
-                 <th field="name">Name</th>
+                 <th field="name">Name of child</th>
                  <th field="birthDay">Indigenous preschool child</th>
                  <th field="birthDay">address</th>
                  <th field="birthDay">Age</th>
@@ -67,7 +67,7 @@
              </ng-template>
              <ng-template pTemplate="body" let-pfc>
                <tr class="text-sm" [pSelectableRow]="pfc">
-                <td><a class="text-blue-500 font-bold hover:text-blue-500/80" 
+                <td><a class="text-blue-500 font-bold hover:text-blue-500/80"
                   routerLink="/form/family-profile/details"
                   [queryParams]="{id:pfc?.FP_id}">{{ pfc?.name }}</a></td>
                  <td>{{ pfc?.preDetails?.indigenous_preschool_child==true ? 'Yes' : 'No'}}</td>
@@ -76,7 +76,7 @@
                  <td>{{ pfc?.preDetails?.created_at | date :'mediumDate'}}</td>
                  <td>{{ pfc?.preDetails?.weight }}</td>
                  <td>{{ pfc?.preDetails?.height }}</td>
-                 
+
                  <td class="grid gap-2">
                    <div (click)="deleteData(pfc?.preDetails?.id)" class="text-center">
                        <i class="fad fa-trash"></i> Delete
@@ -86,7 +86,7 @@
              </ng-template>
            </p-table>
          </div>
- 
+
      </div>
 </div>
 

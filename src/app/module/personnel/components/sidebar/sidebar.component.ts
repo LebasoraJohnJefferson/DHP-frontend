@@ -28,7 +28,7 @@ export class SidebarComponent implements OnInit {
   ];
 
   formsArr: any = [
-    
+
     {
       title: 'Family Profile',
       route: '/form/family-profile',
@@ -44,6 +44,10 @@ export class SidebarComponent implements OnInit {
     },{
       title: 'List Of Preschooler (Identified nutritional status)',
       route: '/form/list-of-preschooler-with-nutritional-status',
+      icon: 'fal fa-file-invoice',
+    },{
+      title: 'Affected/At Risk Preschool',
+      route: '/form/preschool-at-risk',
       icon: 'fal fa-file-invoice',
     }
   ];

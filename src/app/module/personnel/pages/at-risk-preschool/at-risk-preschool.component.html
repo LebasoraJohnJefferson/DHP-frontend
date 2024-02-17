@@ -1,10 +1,10 @@
 <div class="relative z-40 mt-10 pb-20">
-    <div class="">
-      <h1 class="font-bold text-xl md:text-3xl text-white">Infant Records</h1>
-      <p class="text-slate-100 text-[12px]">Information about the system (0-23 months old)</p>
-    </div>
-    <div class="mt-5">
-        <p-table
+  <div class="">
+    <h1 class="font-bold text-xl md:text-3xl text-white">Affected/At Risk</h1>
+    <p class="text-slate-100 text-[12px]">Information about the system (0-59 months old)</p>
+  </div>
+  <div class="mt-5 ">
+    <p-table
         [value]="data"
         #dt2
         class="mt-5"
@@ -21,10 +21,11 @@
         [rowsPerPageOptions]="[10, 25, 50]"
         styleClass="p-datatable-gridlines"
         [globalFilterFields]="[
-          'info?.f_p_m?.name' ,
-          'ageInMoth',
-            'info?.weight',
-            'status'
+        'created_at',
+        'name',
+        'weight',
+        'height',
+        'period_of_measurement',
         ]"
       >
         <ng-template pTemplate="caption">
@@ -51,47 +52,41 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr class="text-sm">
-            <th field="AlumniCredentialschoolId.Course.acronym">Name of child</th>
-            <th field="AlumniCredentialschoolId.gradClass">Age in month</th>
-            <th field="AlumniCredentialschoolId.gradClass">Weight</th>
-            <th field="AlumniCredentialschoolId.gradClass">Weight Status</th>
+            <th field="AlumniCredentialschoolId.gradClass">Name of child</th>
+            <th field="AlumniCredentialschoolId.gradClass">Year/Period of measurement</th>
+            <th field="AlumniCredentialschoolId.gradClass">Actual date of weighting</th>
+            <th field="AlumniCredentialschoolId.gradClass">Weight (Kg)</th>
+            <th field="AlumniCredentialschoolId.gradClass">Height (cm)</th>
             <th field="email">Action</th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-child>
-          <tr class="text-sm" [pSelectableRow]="child">
+        <ng-template pTemplate="body" let-pf>
+          <tr class="text-sm" [pSelectableRow]="pf">
             <td><a class="text-blue-500 font-bold hover:text-blue-500/80"
               routerLink="/form/family-profile/details"
-              [queryParams]="{id:child?.info?.f_p_m?.FP_id}">{{ child?.info?.f_p_m?.name }}</a></td>
-            <td>{{child?.ageInMoth}}</td>
-            <td>{{ child?.info?.weight }}</td>
-            <td>{{ child?.status }}</td>
+              [queryParams]="{id:pf?.FP_id}">{{ pf?.name }}</a></td>
+            <td>{{ pf?.period_of_measurement }} {{ pf?.period_of_measurement > 1 ? 'months old' : 'month old'}}</td>
+            <td>{{ pf?.created_at | date : 'mediumDate' }}</td>
+            <td>{{ pf?.weight }}</td>
+            <td>{{ pf?.height }}</td>
 
             <td class="grid gap-2">
-              <!-- <div
-                class="cursor-pointer text-center"
-                [routerLink]="'/form/familty-profile/details'"
-                [queryParams]="{id:child?.info?.id}"
-              >
-                <i class="fad fa-eye"></i> View
-              </div> -->
-              <div (click)="deleteData(child?.info?.id)" class="text-center">
+              <div (click)="deleteData(pf.id)" class="text-center">
                   <i class="fad fa-trash"></i> Delete
               </div>
             </td>
           </tr>
         </ng-template>
       </p-table>
-    </div>
+  </div>
 </div>
 
-
 <p-dialog
-    header="Create Infant Record"
+    header="Add Records"
     [(visible)]="createModal"
     [modal]="true"
     appendTo="body"
     [style]="{ maxWidth: '400px', width: '400px' }"
   >
-    <app-infant-records-form (triggerSubmmit)="createInfantRecordCommit()"></app-infant-records-form>
+  <app-at-risk-preschool-form (triggerSubmmit)="registerFamiltyProfileCommit()"></app-at-risk-preschool-form>
 </p-dialog>
