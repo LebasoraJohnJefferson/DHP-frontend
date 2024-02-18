@@ -3,23 +3,43 @@
     <h1 class="font-bold text-xl md:text-3xl text-white">Population Bracket</h1>
     <p class="text-slate-100 text-[12px]">Information about the system</p>
   </div>
-  <div class="mt-5 grid overflow-x-scroll py-2">
-    <table class="text-[10px]">
-      <tr>
-        <th rowspan="2" class="border min-w-[100px]">Province, City, Manicipality, and Baranggay</th>
-        <th class="min-w-[100px] border" *ngFor="let month of months">{{month.label}}</th>
-      </tr>
-      <tr >
-        <th class="min-w-[100px] border" *ngFor="let month of months">
-          <div class="grid grid-cols-3 gap-1">
-            <div>Male</div>
-            <div>Female</div>
-            <div>Total</div>
-          </div>
-        </th>
-      </tr>
-      <tr>
-      </tr>
-    </table>
+  <div class="mt-5 grid">
+    <div class=" grid overflow-x-scroll py-2">
+      <div class="gap-1 text-[10px] my-2 flex items-center w-fit px-2 rounded-lg bg-purple-700 hover:bg-purple-700/80 text-white py-1 cursor-pointer">
+        <span>download</span>
+        <i class="pi pi-print"></i>
+      </div>
+      <table class="text-[10px]">
+        <tr>
+          <th rowspan="2" class="border min-w-[100px]">Province, City, Manicipality, and Baranggay</th>
+          <th class="min-w-[100px] border" *ngFor="let month of months">{{month.label}}</th>
+        </tr>
+        <tr >
+          <th class="min-w-[100px] border" *ngFor="let month of months">
+            <div class="grid grid-cols-3 gap-1">
+              <div>Male</div>
+              <div>Female</div>
+              <div>Total</div>
+            </div>
+          </th>
+        </tr>
+
+        <tr *ngFor="let info of data" class="bg-orange-100">
+          <!-- city -->
+          <td class="border border-white text-center">{{info?.city}}</td>
+          <!-- data -->
+          <td *ngFor="let population of info?.genderPopulation">
+            <div class="grid grid-cols-3">
+              <div class="border-white border text-center">{{population.male}}</div>
+              <div class="border-white border text-center">{{population.female}}</div>
+              <div class="border-white border text-center">{{population.male + population.female}}</div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+        </tr>
+      </table>
+    </div>
+
   </div>
 </div>

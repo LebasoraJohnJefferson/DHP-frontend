@@ -22,10 +22,10 @@ export class PersonnelComponent {
   isRecovering:boolean = false
   isDeletingPermanent:boolean = false
   defualtImg = '../../../../../assets/images/nurse.png'
-  
 
 
-  
+
+
   pages:number[] = [1,3,4,5,6,7]
 
   cols: any[] = [];
@@ -57,7 +57,7 @@ export class PersonnelComponent {
       error:(err)=>{
         this.isRecovering = false
         this.toast.error(err?.error?.message || "An error occurred")
-      } 
+      }
     })
   }
 
@@ -73,13 +73,13 @@ export class PersonnelComponent {
       error:(err)=>{
         this.isDeletingPermanent = false
         this.toast.error(err?.error?.message || "An error occurred")
-      } 
+      }
     })
   }
-  
 
 
- 
+
+
   handleImport($event: any) {
     const files = $event.target.files;
 
@@ -194,7 +194,7 @@ export class PersonnelComponent {
   }
 
 
-  
+
 
 
 }
