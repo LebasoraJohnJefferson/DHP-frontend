@@ -5,9 +5,9 @@
   </div>
   <div class="mt-5 grid">
     <div class=" grid overflow-x-scroll py-2">
-      <div class="gap-1 text-[10px] my-2 flex items-center w-fit px-2 rounded-lg bg-purple-700 hover:bg-purple-700/80 text-white py-1 cursor-pointer">
+      <div (click)="exportPdf()" class="gap-2 text-[10px] my-2 flex items-center w-fit px-2 rounded-lg bg-purple-700 hover:bg-purple-700/80 text-white py-1 cursor-pointer">
+        <i class="pi pi-download text-[9px]"></i>
         <span>download</span>
-        <i class="pi pi-print"></i>
       </div>
       <table class="text-[10px]">
         <tr>
@@ -24,15 +24,15 @@
           </th>
         </tr>
 
-        <tr *ngFor="let info of data" class="bg-orange-100">
+        <tr *ngFor="let info of data">
           <!-- city -->
-          <td class="border border-white text-center">{{info?.city}}</td>
+          <td class="border  text-center">{{info?.brgy}}</td>
           <!-- data -->
           <td *ngFor="let population of info?.genderPopulation">
             <div class="grid grid-cols-3">
-              <div class="border-white border text-center">{{population.male}}</div>
-              <div class="border-white border text-center">{{population.female}}</div>
-              <div class="border-white border text-center">{{population.male + population.female}}</div>
+              <div class="border text-center">{{population.male}}</div>
+              <div class="border text-center">{{population.female}}</div>
+              <div class=" border text-center">{{population.male + population.female}}</div>
             </div>
           </td>
         </tr>
