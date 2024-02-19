@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import  jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
+import autoTable, { CellInput } from 'jspdf-autotable';
 import { PopulationBracketService } from '../../shared/services/populationBracket.service';
 
 @Component({
@@ -44,14 +44,13 @@ export class PopulationAgeBracketComponent implements OnInit{
     this._PBService.getData().subscribe({
       next:(res:any)=>{
         this.data  = res?.data
-        console.log(res?.data)
       }
     })
   }
 
   exportPdf() {
     const aspectRatio = 1.2941;  // Aspect ratio of A4 paper
-    const width = 1500;         // Desired width
+    const width = 1400;         // Desired width
 
     // Calculate height based on the aspect ratio
     const height = width / aspectRatio;
@@ -62,27 +61,28 @@ export class PopulationAgeBracketComponent implements OnInit{
       'pt',
       [height, width]
     );
+
     let data:any = []
     let columns = [
       { title: 'Baranggay', dataKey: 'brgy' },
       {title:'Under 1 (0-1 mons)' , dataKey:'under_1_mons'},
       {title:'1 year old (12-23 mons)' , dataKey:'mons_12_23'},
       {title:'(0-6 mons)' , dataKey:'mons_0_6'},
-      { title: '(6-10 mons)', dataKey:''},
-      { title: '(0-12 mons)', dataKey:''},
-      { title: '(13-23 mons)', dataKey:''},
-      { title: '(0-59 mons)', dataKey:''},
-      { title: '(1-4) years', dataKey:''},
-      { title: '(5-9) years', dataKey:''},
-      { title: '(5-11) years', dataKey:''},
-      { title: '(10-14) years', dataKey:''},
-      { title: '(10-19) years', dataKey:''},
-      { title: '(15-19) years', dataKey:''},
-      { title: '(5 years and up)', dataKey:''},
-      { title: '(12-59) years', dataKey:''},
-      { title: '(20-59) years', dataKey:''},
-      { title: '(20 years and UP)', dataKey:''},
-      { title: '(60 years and UP)', dataKey:''},
+      { title: '(6-10 mons)', dataKey:'mons_6_10'},
+      { title: '(0-12 mons)', dataKey:'mons_0_12'},
+      { title: '(13-23 mons)', dataKey:'mons_13_23'},
+      { title: '(0-59 mons)', dataKey:'mons_0_59'},
+      { title: '(1-4) years', dataKey:'year_1_4'},
+      { title: '(5-9) years', dataKey:'year_5_9'},
+      { title: '(5-11) years', dataKey:'year_5_11'},
+      { title: '(10-14) years', dataKey:'year_10_14'},
+      { title: '(10-19) years', dataKey:'year_10_19'},
+      { title: '(15-19) years', dataKey:'year_15_19'},
+      { title: '(5 years and up)', dataKey:'year_5_up'},
+      { title: '(12-59) years', dataKey:'year_12_59'},
+      { title: '(20-59) years', dataKey:'year_20_59'},
+      { title: '(20 years and UP)', dataKey:'year_20_up'},
+      { title: '(60 years and UP)', dataKey:'year_60_up'},
     ];
 
     const expected_age_range = [
@@ -106,20 +106,38 @@ export class PopulationAgeBracketComponent implements OnInit{
       ['above', 720],
     ];
 
-    this.data.map((info:any)=>{
-      data.push({
-        brgy:info.brgy,
-        under_1_mons:` ${info.genderPopulation[0]['male']} | ${info.genderPopulation[0]['female']} | ${info.genderPopulation[0]['female']+info.genderPopulation[0]['male']}`,
-        mons_12_23:` ${info.genderPopulation[1]['male']} | ${info.genderPopulation[1]['female']} | ${info.genderPopulation[1]['female']+info.genderPopulation[1]['male']}`,
-        mons_0_6:` ${info.genderPopulation[2]['male']} | ${info.genderPopulation[2]['female']} | ${info.genderPopulation[2]['female']+info.genderPopulation[1]['male']}`,
-      })
-    })
+    this.data.map((info: any) => {
+      const rowData: any = {};
 
-    const generateSubCol = []
+      columns.forEach((col, index) => {
+        if (col.dataKey === 'brgy') {
+            rowData[col.dataKey] = { content: info.brgy, styles: { halign: 'center' } };
+        } else {
+            const genderPopulation = info.genderPopulation[index-1];
+            if (genderPopulation && genderPopulation.hasOwnProperty('male') && genderPopulation.hasOwnProperty('female')) {
+                rowData[col.dataKey] = {
+                    content: [
+                        genderPopulation['male'],
+                        genderPopulation['female'],
+                        genderPopulation['female'] + genderPopulation['male']
+                    ].join(' | '),
+                    styles: { halign: 'center' }
+                };
+            } else {
+                // Handle the case where genderPopulation[index] is undefined or doesn't have the expected structure
+                rowData[col.dataKey] = { content: 'N/A', styles: { halign: 'center' } };
+            }
+        }
+    });
 
-    for(let i=0; i<expected_age_range.length; i++){
-      generateSubCol.push({content:['M','F','T']})
-    }
+    data.push(rowData);
+  })
+
+    const generateSubCol: (CellInput | string)[] = [];
+
+    expected_age_range.forEach((ageRange, index) => {
+      generateSubCol.push({ content: ['M', 'F', 'T'].join(' | '), styles: { halign: 'center' } });
+    });
 
 
     autoTable(doc, {

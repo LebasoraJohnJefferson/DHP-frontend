@@ -4,11 +4,11 @@
     <p class="text-slate-100 text-[12px]">Information about the system</p>
   </div>
   <div class="mt-5 grid">
+    <div (click)="exportPdf()" class="gap-2 text-[10px] my-2 flex items-center w-fit px-2 rounded-lg bg-purple-700 hover:bg-purple-700/80 text-white py-1 cursor-pointer">
+      <i class="pi pi-download text-[9px]"></i>
+      <span>download</span>
+    </div>
     <div class=" grid overflow-x-scroll py-2">
-      <div (click)="exportPdf()" class="gap-2 text-[10px] my-2 flex items-center w-fit px-2 rounded-lg bg-purple-700 hover:bg-purple-700/80 text-white py-1 cursor-pointer">
-        <i class="pi pi-download text-[9px]"></i>
-        <span>download</span>
-      </div>
       <table class="text-[10px]">
         <tr>
           <th rowspan="2" class="border min-w-[100px]">Province, City, Manicipality, and Baranggay</th>
