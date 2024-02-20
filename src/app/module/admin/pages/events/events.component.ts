@@ -13,7 +13,7 @@ import moment from 'moment';
 export class EventsComponent implements OnInit {
   events: any = [];
   previewImg: any;
-  
+
   isShowConfirmation:boolean = false
   createEventModal: boolean = false;
   submitLoading: boolean = false;
@@ -68,11 +68,11 @@ export class EventsComponent implements OnInit {
     }
 
     this.isCommitting = true
-    
+
     this._eventService.createEvent(this.createForm.value).subscribe(
       (response: any) => {
-        this.toast.success(response?.message);
-        
+        this.toast.success(response?.message || 'Successfully created');
+
         this.isCommitting = false
         this.createEventModal = false;
         this.submitLoading = false;
@@ -83,7 +83,7 @@ export class EventsComponent implements OnInit {
       },
       (error: any) => {
         this.toast.error(error?.error?.message || 'An error occurred');
-        
+
         this.isCommitting = false
         this.submitLoading = false;
       }
@@ -100,7 +100,7 @@ export class EventsComponent implements OnInit {
     this.submitLoading = false;
   }
 
-  
+
 
   dateFormat(date: any) {
     return moment(date).fromNow();

@@ -25,7 +25,7 @@ const routes: Routes = [
     {path:'form/list-of-preschooler-with-nutritional-status',component:ListOfPreschoolerWithNutritionalStatusComponent},
     {path:'form/preschool-at-risk',component:AtRiskPreschoolComponent}
   ],canActivate:[PersonnelGuard]},
-  {path:'admin/account',component:AccountComponent}
+  {path:'account',component:AccountComponent}
 ];
 
 

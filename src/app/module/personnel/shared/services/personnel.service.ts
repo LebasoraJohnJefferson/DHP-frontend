@@ -14,8 +14,14 @@ const HELPER = new JwtHelperService();
 export class PersonnelService {
   constructor(private http: HttpClient, private router: Router) {}
 
-  getProfile(): any {
+  getProfile(): Observable<any> {
     return this.http.get(`${BASEURL}/personnel`);
   }
+
+  updatePersonnelInfo(data:any):Observable<any>{
+    return this.http.put(`${BASEURL}/personnel/basicInfo`,data)
+  }
+
+
 
 }

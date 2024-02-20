@@ -24,6 +24,8 @@ import { ListOfPreschoolerWithNutritionalStatusComponent } from './pages/list-of
 import { PreschoolWithNutritionalStatusFormComponent } from './components/preschool-with-nutritional-status-form/preschool-with-nutritional-status-form.component';
 import { AtRiskPreschoolComponent } from './pages/at-risk-preschool/at-risk-preschool.component';
 import { AtRiskPreschoolFormComponent } from './components/at-risk-preschool-form/at-risk-preschool-form.component';
+import { StepsModule } from 'primeng/steps';
+import { PersonnelFormComponent } from './components/personnel-form/personnel-form.component';
 
 @NgModule({
   declarations: [
@@ -45,13 +47,15 @@ import { AtRiskPreschoolFormComponent } from './components/at-risk-preschool-for
     PreschoolWithNutritionalStatusFormComponent,
     AtRiskPreschoolComponent,
     AtRiskPreschoolFormComponent,
+    PersonnelFormComponent,
   ],
   imports: [
     ReactiveFormsModule,
     PrimengModule,
     CommonModule,
     FormsModule,
-    PersonnelRoutingModule
+    PersonnelRoutingModule,
+    StepsModule
   ]
 })
 export class PersonnelModule { }

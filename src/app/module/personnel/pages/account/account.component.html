@@ -1,1 +1,101 @@
-<p>account works!</p>
+<div class="grid">
+  <div class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-[150px] w-full">
+    <div class="translate-y-[35%] px-10 flex w-full justify-between items-center">
+        <div class="flex items-center gap-3">
+          <img src="../../../../../assets/images/nurse.png" class="h-[10rem] w-[10rem] rounded-full border-white bg-green-200 border border-[5px]" alt="">
+          <div>
+            <p class="text-xl font-bold text-white">John Smith</p>
+          </div>
+        </div>
+        <div>
+          <i (click)="opAction.toggle($event)" class="pi pi-cog cursor-pointer text-slate-500 text-2xl bg-slate-200 rounded-full px-2 py-1"></i>
+          <p-overlayPanel #opAction>
+            <ng-template pTemplate>
+              <div class="md:max-w-[400px]">
+                <div class="grid gap-1">
+
+                  <div
+                    class="text-[12px] px-2 py-2 hover:bg-slate-100 cursor-pointer transition-all"
+                  >
+                    <i class="fal fa-pencil mr-1"></i>Update Information
+                  </div>
+                  <div
+                    (click)="updateAccountModal = true"
+                    class="text-[12px] px-2 py-2 hover:bg-slate-100 cursor-pointer transition-all"
+                  >
+                    <i class="fal fa-pencil mr-1"></i>Update Basic Info
+                  </div>
+                  <div
+                    (click)="goBack()"
+                    class="text-[12px] px-2 py-2 hover:bg-slate-100 cursor-pointer transition-all"
+                  >
+                    <i class="fal fa-arrow-left mr-1"></i>Go back
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </p-overlayPanel>
+        </div>
+    </div>
+
+  </div>
+  <div class="grid grid  md:grid-cols-[40%_1fr] mt-16">
+    <div class="flex flex-col w-full px-10 mb-5  text-[12px]">
+      <h3 class="text-slate-700 my-2 font-bold">Basic Info</h3>
+      <div class="grid grid-cols-2 w-full ">
+        <span class="border  border-slate-300 px-2 py-1">First name </span>
+        <span class="border  border-slate-300 px-2 py-1">{{basicInfo?.first_name}} </span>
+      </div>
+      <div class="grid grid-cols-2 w-full ">
+        <span class="border  border-slate-300 px-2 py-1">Middle name </span>
+        <span class="border  border-slate-300 px-2 py-1">{{basicInfo?.middle_name}} </span>
+      </div>
+      <div class="grid grid-cols-2 w-full ">
+        <span class="border  border-slate-300 px-2 py-1">Last name </span>
+        <span class="border  border-slate-300 px-2 py-1">{{basicInfo?.last_name}} </span>
+      </div>
+      <div class="grid grid-cols-2 w-full ">
+        <span class="border  border-slate-300 px-2 py-1">Email </span>
+        <span class="border  border-slate-300 px-2 py-1">{{basicInfo?.email}}</span>
+      </div>
+      <div class="grid grid-cols-2 w-full ">
+        <span class="border  border-slate-300 px-2 py-1">Joined </span>
+        <span class="border  border-slate-300 px-2 py-1">{{basicInfo?.created_at | date : 'mediumDate'}}</span>
+      </div>
+    </div>
+    <div>
+      <div class="grid w-full px-10 mb-5  text-[12px]">
+        <h3 class="text-slate-700 my-2 font-bold">More Information</h3>
+        <div *ngIf="information?.length">
+          <p-timeline [value]="information" align="left">
+            <ng-template pTemplate="content" let-info>
+              <div class="mb-1">
+                <div class="text-[10px] md:text-[12px]">
+                  {{info.field}}
+                </div>
+                <div class="text-[12px] md:text-sm">{{info.data}}</div>
+              </div>
+            </ng-template>
+          </p-timeline>
+        </div>
+        <div *ngIf="!information?.length" class="flex flex-col w-full items-center justify-center h-[20rem]">
+          <img src="../../../../../assets/images/empty-box.png" class="w-[100px] h-[100px]" alt="">
+          <span class="font-bold mt-2">No Data</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<p-dialog
+      header="Update Basic Info"
+      [(visible)]="updateAccountModal"
+      [modal]="true"
+      appendTo="body"
+      [style]="{ maxWidth: '400px', width: '400px' }"
+    >
+    <div class="mt-3">
+      <app-personnel-form (triggerSubmmit)="getSpecificPersonel()" [data]="basicInfo"></app-personnel-form>
+    </div>
+</p-dialog>
