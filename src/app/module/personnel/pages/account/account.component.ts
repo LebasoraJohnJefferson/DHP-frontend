@@ -8,39 +8,11 @@ import { PersonnelService } from '../../shared/services/personnel.service';
   styleUrl: './account.component.scss'
 })
 export class AccountComponent implements OnInit{
-
+  image:any;
   basicInfo:any;
   updateAccountModal:boolean = false
-  information:any= [
-    // {
-    //   'field':'Address',
-    //   'data':'tacloban city'
-    // },
-    // {
-    //   'field':'BirthDay',
-    //   'data': new Date()
-    // },
-    // {
-    //   'field':'Gender',
-    //   'data':'male'
-    // },
-    // {
-    //   'field':'Contact number',
-    //   'data':'09772671851'
-    // },
-    // {
-    //   'field':'Emergency Contact',
-    //   'data':'09772671851'
-    // },
-    // {
-    //   'field':'Nationality',
-    //   'data':'Filipino'
-    // },
-    // {
-    //   'field':'Motto',
-    //   'data':'lorem lorem'
-    // },
-  ];
+  moreInformationModal:boolean = false
+  information:any= [];
 
   constructor(
     public location:Location,
@@ -56,9 +28,42 @@ export class AccountComponent implements OnInit{
     this._personnelService.getProfile().subscribe({
       next:(res:any)=>{
         this.basicInfo = res?.data[0]
+        this.image = this.basicInfo?.image
         console.log(this.basicInfo)
+        this.information = [
+          {
+            field:'Address',
+            data:this.basicInfo?.more_info?.address
+          },
+          {
+            field:'Birth Day',
+            data:this.basicInfo?.more_info?.birthday
+          },
+          {
+            field:'Contact Number',
+            data:this.basicInfo?.more_info?.contact_number
+          },
+          {
+            field:'Emergency Contact Number',
+            data:this.basicInfo?.more_info?.emergency_contact_number
+          },
+          {
+            field:'Emergency Contact`s Relationship',
+            data:this.basicInfo?.more_info?.emergency_contact_relationship
+          },{
+            field:'Gender',
+            data:this.basicInfo?.more_info?.gender
+
+          }
+        ]
       }
     })
+  }
+
+
+  updateTriggered(){
+    this.getPersonnelDetails()
+    this.moreInformationModal = false
   }
 
   getSpecificPersonel(){

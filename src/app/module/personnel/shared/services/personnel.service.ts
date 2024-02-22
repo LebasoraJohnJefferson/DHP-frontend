@@ -22,6 +22,9 @@ export class PersonnelService {
     return this.http.put(`${BASEURL}/personnel/basicInfo`,data)
   }
 
+  updateMoreInformationOfPersonnel(data:any){
+    return this.http.put(`${BASEURL}/personnel/moreInfo`,data)
+  }
 
 
 }
