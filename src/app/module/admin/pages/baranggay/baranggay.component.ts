@@ -21,14 +21,14 @@ export class BaranggayComponent implements OnInit {
   baranggay:any=[]
 
   brgyForm:FormGroup = this._fb.group({
-    city:['',[Validators.required]],
-    province:['',[Validators.required]],
+    city:['Barugo',[Validators.required]],
+    province:['Leyte',[Validators.required]],
     purok:['',[Validators.required]],
     baranggay:['',[Validators.required]]
   })
 
   formElems:any = [
-   
+
     {
       title:'City',
       formName:'city',
@@ -81,7 +81,7 @@ export class BaranggayComponent implements OnInit {
 
   deleteBaranggay(brgyId:any){
     const confirmation = confirm("Are you sure, you want to delete this baraggay details?")
-    if(!confirmation) return 
+    if(!confirmation) return
     this._bgyService.deleteBrgy(brgyId).subscribe({
       next:()=>{
         this.toast.success("Successfully deleted!")
@@ -113,7 +113,7 @@ export class BaranggayComponent implements OnInit {
     }
   }
 
-  
+
 
 
 }

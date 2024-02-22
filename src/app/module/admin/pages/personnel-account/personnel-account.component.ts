@@ -22,7 +22,7 @@ export class PersonnelAccountComponent implements OnInit {
     public location:Location,
     public toast:HotToastService
   ){
-    
+
   }
 
   ngOnInit(): void {
@@ -33,11 +33,14 @@ export class PersonnelAccountComponent implements OnInit {
   }
 
 
+
+
   getSpecificPersonel(){
     this._personnelService.getSpecificPersonnel(this.personnelId).subscribe({
       next:(res)=>{
         this.basicInfo = res.data
         this.checked = res?.data?.is_active ? true : false
+        console.log(res?.data)
         this.updateAccountModal = false
       },error:(err)=>{
         this.router.navigate(['/admin/personnel'])

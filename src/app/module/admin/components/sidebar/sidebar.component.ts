@@ -8,7 +8,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
   currentRoute: any;
-
+  selectedAttribute:string=''
+  selectedLabel:string=''
   routesArr: any = [
     {
       title: 'Dashboard',
@@ -19,6 +20,14 @@ export class SidebarComponent implements OnInit {
       title: 'Analytics',
       route: 'analytics',
       icon: 'pi pi-chart-bar',
+      name:'analytics',
+      attributes:[
+        {link:'/admin/analytics',label:'Family profile',route:''},
+        {link:'/admin/analytics/infant-analytics',label:'Infant',route:'infant-analytics'},
+        {link:'/admin/analytics/brgy-preschooler-analytics',label:'baranggay preschooler',route:'brgy-preschooler-analytics'},
+        {link:'/admin/analytics/nutritional-status-analytics',label:'preschooler with nutritional status',route:'nutritional-status-analytics'},
+        {link:'/admin/analytics/at-risk-preschool-analytics',label:'Affected/at risk preschool',route:'at-risk-preschool-analytics'},
+      ]
     },
     {
       title: 'Personnel',
@@ -44,6 +53,14 @@ export class SidebarComponent implements OnInit {
       title: 'Forms',
       route: 'forms',
       icon: 'pi pi-file',
+      name:'form',
+      attributes:[
+        {link:'/admin/forms',label:'Family profile'},
+        {link:'/admin/forms/infant',label:'Infant'},
+        {link:'/admin/forms/baranggay-preschooler',label:'Baranggay preschooler'},
+        {link:'/admin/forms/list-of-preschooler-with-nutritional-status',label:'Preschooler with nutritional status'},
+        {link:'/admin/forms/at-risk-preschool',label:'Affected/at risk preschool'}
+      ]
     },{
       title: 'Population bracket',
       route: 'population-age-bracket',
@@ -69,9 +86,18 @@ export class SidebarComponent implements OnInit {
     );
   }
 
+  openAttributes(name:string){
+    this.selectedAttribute = this.selectedAttribute == name ? '' : name
+  }
+
+  assignLabel(labelName:string){
+    this.selectedLabel = labelName
+  }
+
 
   ngDoCheck(): void{
     this.getCurrentRouteURL(this.route.snapshot.children[0].routeConfig?.path);
+    this.selectedLabel = this.router.url;
   }
 
   getCurrentRouteURL(route: any) {

@@ -1,5 +1,5 @@
 <div
-  class="bg-slate-50 min-h-fit h-screen border-r-2 border-gray-200 hidden lg:block fixed w-[280px]"
+  class="bg-slate-50 min-h-fit h-screen border-r-2 border-gray-200 hidden lg:block overflow-y-auto fixed w-[280px]"
 >
 
   <div class="p-6 flex flex-col gap-2 items-center">
@@ -18,16 +18,27 @@
     <h3 class="p-6 pb-4 text-[14px]">Menu</h3>
 
     <div class="grid gap-1">
-      <div
-        *ngFor="let route of routesArr"
-        (click)="goUser(route); getCurrentRouteURL(route.route)"
-        [ngClass]="
-        currentRoute == route.route
-          ? 'border-purple-500 text-green-600 py-1  px-6 transition-all cursor-pointer border-l-4 border-white hover:text-purple-500 font-semibold grid grid-cols-[35px_1fr] items-center'
-          : 'text-slate-800 py-1 px-6 transition-all cursor-pointer border-l-4 border-white hover:text-purple-500 font-semibold grid grid-cols-[35px_1fr] items-center'
-      "
-      >
-        <i [class]="route.icon"></i> {{ route.title }}
+      <div *ngFor="let route of routesArr">
+        <div
+          (click)="goUser(route); getCurrentRouteURL(route.route); openAttributes(route.route)"
+          [ngClass]="
+          currentRoute == route.route
+            ? 'border-purple-500 text-green-600 py-1  px-6 transition-all cursor-pointer border-l-4 border-white hover:text-purple-500 font-semibold grid grid-cols-[35px_1fr] items-center'
+            : 'text-slate-800 py-1 px-6 transition-all cursor-pointer border-l-4 border-white hover:text-purple-500 font-semibold grid grid-cols-[35px_1fr] items-center'
+        "
+        >
+          <i [class]="route.icon"></i> {{ route.title }}
+        </div>
+        <ol class="grid px-9" *ngIf="selectedAttribute == route.route && route?.attributes">
+          <li
+            (click)="assignLabel(attribute?.link)"
+            [routerLink]="attribute?.link"
+            [class]="attribute?.link == selectedLabel ? 'text-purple-500 text-[12px] cursor-pointer py-1 font-semibold pl-2 border-l border-green-500' :
+            'text-[12px] cursor-pointer py-1 font-semibold pl-2 border-l border-green-500'"
+            *ngFor="let attribute of route?.attributes">
+            {{attribute?.label}}
+          </li>
+        </ol>
       </div>
     </div>
 </div>

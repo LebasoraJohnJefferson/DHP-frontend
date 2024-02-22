@@ -2,7 +2,7 @@
     <section class="w-full mb-3" >
         <div class="flex relative justify-center drop-shadow bg-green-200 py-2">
             <img
-                src="../../../../../assets/images/nurse.png"
+                [src]= "basicInfo?.image ? basicInfo?.image : '../../../../../assets/images/nurse.png'"
                 class="w-[10rem] h-[10rem] rounded"
             />
             <div class="absolute top-0 left-0 p-3 flex items-center w-full justify-end">
@@ -80,10 +80,75 @@
             </div>
         </div>
     </section>
-    <div class="w-full h-full flex items-center justify-center flex-col">
+    <div *ngIf="!basicInfo?.more_info" class="w-full h-full flex items-center justify-center flex-col">
         <img src="../../../../../assets/images/no-file.jpg" class="w-[20rem] h-[20rem]" alt="">
         <p class="font-extrabold text-center">More information about the personnel not found!</p>
     </div>
+    <div *ngIf="basicInfo?.more_info" class="flex px-5 w-full py-3 h-full gap-3 text-lg items-center justify-center flex-col">
+        <div class="grid grid-cols-1 bg-slate-50 p-2 gap-1 w-full" >
+          <div class="items-center flex">
+            <span class="flex w-fit bg-green-300 text-xs font-bold text-green-800 rounded px-2 py-1 items-center justify-center gap-2">
+              <i class="pi pi-map"></i>
+              <p class="">Address</p>
+            </span>
+          </div>
+          <span class="py-1 px-3 rounded">{{basicInfo?.more_info?.address}}</span>
+        </div>
+
+        <div class="grid grid-cols-1 bg-slate-50 p-2 gap-1 w-full" >
+          <div class="items-center flex">
+            <span class="flex w-fit bg-green-300 text-xs font-bold text-green-800 rounded px-2 py-1 items-center justify-center gap-2">
+              <i class="pi pi-calendar-plus"></i>
+              <p class="">Birthday</p>
+            </span>
+          </div>
+          <span class="py-1 px-3 rounded">{{basicInfo?.more_info?.birthday | date : 'mediumDate'}}</span>
+        </div>
+
+        <div class="grid grid-cols-1 bg-slate-50 p-2 gap-1 w-full" >
+          <div class="items-center flex">
+            <span class="flex w-fit bg-green-300 text-xs font-bold text-green-800 rounded px-2 py-1 items-center justify-center gap-2">
+              <i class="pi pi-whatsapp"></i>
+              <p class="">Contact number</p>
+            </span>
+          </div>
+          <span class="py-1 px-3 rounded">{{basicInfo?.more_info?.contact_number}}</span>
+        </div>
+
+        <div class="grid grid-cols-1 bg-slate-50 p-2 gap-1 w-full" >
+          <div class="items-center flex">
+            <span class="flex w-fit bg-green-300 text-xs font-bold text-green-800 rounded px-2 py-1 items-center justify-center gap-2">
+              <i class="pi pi-link"></i>
+              <p class="">Emergency contact`s relationship</p>
+            </span>
+          </div>
+          <span class="py-1 px-3 rounded">{{basicInfo?.more_info?.emergency_contact_relationship}}</span>
+        </div>
+
+        <div class="grid grid-cols-1 bg-slate-50 p-2 gap-1 w-full" >
+          <div class="items-center flex">
+            <span class="flex w-fit bg-green-300 text-xs font-bold text-green-800 rounded px-2 py-1 items-center justify-center gap-2">
+              <i class="pi pi-whatsapp"></i>
+              <p class="">Emergency contact number</p>
+            </span>
+          </div>
+          <span class="py-1 px-3 rounded">{{basicInfo?.more_info?.emergency_contact_number}}</span>
+        </div>
+
+        <div class="grid grid-cols-1 bg-slate-50 p-2 gap-1 w-full" >
+          <div class="items-center flex">
+            <span class="flex w-fit bg-green-300 text-xs font-bold text-green-800 rounded px-2 py-1 items-center justify-center gap-2">
+              <i class="fal fa-venus-mars font-bold"></i>
+              <p class="">Gender</p>
+            </span>
+          </div>
+          <span class="py-1 px-3 rounded">{{basicInfo?.more_info?.gender}}</span>
+        </div>
+
+
+
+    </div>
+
 </div>
 
 <p-dialog
