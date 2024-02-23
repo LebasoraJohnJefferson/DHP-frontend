@@ -77,7 +77,7 @@ export class PersonnelFormComponent {
   }
 
   postSubmit(){
-    
+
     this._personnelService.createPersonnel(this.createForm.value).subscribe({
       next:(res)=>{
         this.toast.success("Personnel successfully Added!")

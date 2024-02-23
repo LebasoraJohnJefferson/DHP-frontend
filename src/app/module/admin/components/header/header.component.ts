@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   isNavOpen: boolean = false;
   currentRoute: any;
   onScroll: boolean = false;
+  updateAdminModel:boolean =false
   user: any = [];
   defaultImg: any = '../../../../../assets/images/admin.png';
 
@@ -103,6 +104,12 @@ export class HeaderComponent implements OnInit {
   listenScrollEvent = () => {
     window.scrollY > 15 ? (this.onScroll = true) : (this.onScroll = false);
   };
+
+
+  triggeredUpdateInfo(){
+    this.updateAdminModel = false
+    this.getAdmin()
+  }
 
   getAdmin() {
     this._adminService.getAdmin().subscribe({

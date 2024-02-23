@@ -1,80 +1,66 @@
-<div class="">
-  <div
-    class="h-fit flex justify-between items-center p-4 bg-[#E6EDFB] border-b-[3px] border-slate-300"
-  >
-    <div class="">RETURN</div>
-    <div class=""></div>
-  </div>
+<form
+        (ngSubmit)="updateInfo()"
+        [formGroup]="updateForm"
+        class="w-full grid gap-2"
+      >
 
-  <div class="grid lg:grid-cols-[280px_1fr]">
-    <div class="w-full min:h-fit h-screen bg-[#E6EDFB]">he</div>
-
-    <div class="w-full bg-white p-8">
-      <h2 class="font-bold">Edit Profile</h2>
-
-      <div class="">
-        <div class="mt-5">
-          <h6 class="text-sm">Profile Picture</h6>
-          <div class="grid grid-cols-[150px_150px] gap-4 mt-2">
-            <div class="w-[150px] h-[150px] rounded-xl bg-gray-200 border-2">
-              <img
-                src="https://cdn.dribbble.com/users/4490292/avatars/small/09d97566256838f4a69c747ac638a369.png?1607099967"
-                alt=""
-                class="w-full h-full object-cover rounded-xl"
+          <input
+            #imageInput
+            type="file"
+            accept="image/x-png,image/gif,image/jpeg"
+            class="hidden"
+            (change)="loadInputImgToSrc($event)"
+          />
+          <div class="flex items-center justify-center">
+            <div class="w-fit h-fit relative">
+              <img [src]="previewImg ? previewImg : defaultImg" class="h-[8rem] w-[8rem] bg-slate-100  rounded-full border border-2 border-green-500" alt="">
+              <i (click)="imageInput.click()" class="pi pi-camera cursor-pointer absolute bottom-0 right-0 text-xl px-2 py-1 rounded-full bg-slate-100 text-green-500 border border-2 border-green-500"></i>
+            </div>
+          </div>
+          <div class="w-full" *ngFor="let field of fields">
+            <label class="block text-[12px] font-medium text-gray-700"
+              >{{field?.label}}</label
+            >
+            <div class="mt-1 relative rounded-md w-full">
+              <input
+                [type]="field?.type"
+                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
+                [placeholder]="field?.placeholder"
+                [formControlName]="field?.formControl"
               />
             </div>
-            <div class="">
-              <div
-                class="bg-blue-700 font-semibold text-white border-[3px] border-blue-600 py-3 mt-4 my-2 px-8 w-full text-center h-fit cursor-pointer rounded-lg text-xs outline-none hover:bg-blue-600"
-              >
-                Upload
-              </div>
-              <div
-                class="bg-red-50 border-[3px] border-red-200 font-semibold text-red-400 text-center py-3 px-8 w-full h-fit cursor-pointer rounded-lg text-xs outline-none hover:bg-red-100"
-              >
-                Remove
-              </div>
-            </div>
           </div>
 
-          <div class="mt-10">
-            <div class="grid grid-cols-[400px_400px] gap-6">
-              <div class="w-full">
-                <div class="font-semibold mb-2 text-sm">Name</div>
-                <input
-                  type="text"
-                  placeholder="Your name"
-                  class="bg-white border-2 border-gray-300 w-full outline-none py-3 px-4 text-sm rounded-lg"
-                />
-              </div>
-              <div class="w-full">
-                <div class="font-semibold mb-2 text-sm">Title</div>
-                <input
-                  type="text"
-                  placeholder="Your title"
-                  class="bg-white border-2 border-gray-300 w-full outline-none py-3 px-4 text-sm rounded-lg"
-                />
-              </div>
-              <div class="w-full">
-                <div class="font-semibold mb-2 text-sm">Email</div>
-                <input
-                  type="text"
-                  placeholder="Your email"
-                  class="bg-white border-2 border-gray-300 w-full outline-none py-3 px-4 text-sm rounded-lg"
-                />
-              </div>
-              <div class="w-full">
-                <div class="font-semibold mb-2 text-sm">Phone number</div>
-                <input
-                  type="text"
-                  placeholder="Your phone number"
-                  class="bg-white border-2 border-gray-300 w-full outline-none py-3 px-4 text-sm rounded-lg"
-                />
-              </div>
-            </div>
+        <button
+          [disabled]="isSubmitLoading"
+          type="submit"
+          class="grid place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-3 hover:bg-slate-900/80 transition-all w-full mt-2"
+        >
+          <div class="flex items-center w-fit mx-auto" *ngIf="isSubmitLoading">
+            <svg
+              class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+
+            <span>Processing</span>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+          <span *ngIf="!isSubmitLoading">Submit</span>
+        </button>
+      </form>

@@ -98,7 +98,8 @@ export class BaranggayComponent implements OnInit {
       this._bgyService.createBrgy(this.brgyForm.value).subscribe({
         next:(res)=>{
           this.toast.success(res?.message || 'Successfully added')
-          this.brgyForm.reset()
+          this.brgyForm.controls['purok'].reset()
+          this.brgyForm.controls['baranggay'].reset()
           this.getBrgyDetails()
           this.createBrgyModal = false
           this.isSubmitLoading =false

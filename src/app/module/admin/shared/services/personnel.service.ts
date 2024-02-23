@@ -32,6 +32,11 @@ export class PersonnelService {
     return this.http.get(`${BASEURL}/admin/personnel/${personnelId}`)
   }
 
+
+  updateAdminInfo(data:any){
+    return this.http.patch(`${BASEURL}/admin/updateAdminInfo`,data)
+  }
+
   changePersonnelStatus(personnelId:number):Observable<any>{
     return this.http.patch(`${BASEURL}/admin/personnel/status`,{'id':personnelId})
   }

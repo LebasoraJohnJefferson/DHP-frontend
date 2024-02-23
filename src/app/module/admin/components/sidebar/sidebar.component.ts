@@ -80,6 +80,7 @@ export class SidebarComponent implements OnInit {
   }
 
   goUser(data: any) {
+    if(data.route == 'forms' || data.route == 'analytics') return
     this.router.navigate(
       [`/admin/${data.route}`],
       { queryParams: { type: data.params } }
