@@ -12,7 +12,7 @@ import { FamilyProfileService } from '../../shared/services/family-profile.servi
 })
 export class FamilyProfileFormComponent implements OnInit {
   isSubmitLoading:boolean =false
-  
+
   baranggay:any=[]
 
   usingIodizedSalt:boolean = false
@@ -21,7 +21,6 @@ export class FamilyProfileFormComponent implements OnInit {
   motherPregnant:boolean = false
   @Output() triggerSubmmit:EventEmitter<any> = new EventEmitter()
   otherFileds:any=[
-    
     {
       title:'Contact number',
       formName:'contact_number',
@@ -35,12 +34,22 @@ export class FamilyProfileFormComponent implements OnInit {
       placeholder:'Enter Father`s name.'
     },
     {
+      title:'Father`s birthday',
+      formName:'father_birthday',
+      type:'date',
+    },
+    {
       title:'Mother name',
       formName:'mother',
       type:'text',
       placeholder:'Enter mother`s name.'
     },
-    
+    {
+      title:'mother`s birthday',
+      formName:'mother_birthday',
+      type:'date',
+    },
+
   ]
 
   occupations = ['employed','unemployed','self-employed']
@@ -61,7 +70,7 @@ export class FamilyProfileFormComponent implements OnInit {
                 'Senior HS',
                 'Vacational',
               ]
- 
+
 
   toiletTypes:string[] = ['WS','OP','O','N']
   typeOfWater:string[]=['P','W','S']
@@ -73,8 +82,12 @@ export class FamilyProfileFormComponent implements OnInit {
     mother:['',Validators.required],
     father:['',Validators.required],
     contact_number: ['', [Validators.required, Validators.pattern(/^(09|\+639)\d{9}$/)]],
-    occupation:['',Validators.required],
-    educ_attain:['',Validators.required],
+    mother_occupation:['',Validators.required],
+    father_occupation:['',Validators.required],
+    father_birthday:['',Validators.required],
+    mother_birthday:['',Validators.required],
+    mother_educ_attain:['',Validators.required],
+    father_educ_attain:['',Validators.required],
     //drop down
     food_prod_act:['',Validators.required],
     toilet_type:['',Validators.required],
@@ -104,7 +117,7 @@ export class FamilyProfileFormComponent implements OnInit {
       formName:'using_IFR',
     }
   ]
-  
+
 
 
   constructor(
@@ -155,5 +168,5 @@ export class FamilyProfileFormComponent implements OnInit {
     })
   }
 
- 
+
 }

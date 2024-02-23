@@ -22,8 +22,6 @@
             'attributes.contact_number',
             'attributes.mother',
             'attributes.father',
-            'attributes.occupation',
-            'attributes.educ_attain',
            'attributes.toilet_type',
             'attributes.water_source',
             'attributes.food_prod_act'
@@ -48,7 +46,7 @@
                 <i class="fal fa-file-plus mr-1"></i>
                 Create
               </button>
-            
+
           </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -58,8 +56,6 @@
             <th field="AlumniCredentialschoolId.gradClass">Contact number</th>
             <th field="AlumniCredentialschoolId.gradClass">Name of Mother</th>
             <th field="AlumniCredentialschoolId.gradClass">Name of Father</th>
-            <th field="AlumniCredentialschoolId.gradClass">Occupation</th>
-            <th field="AlumniCredentialschoolId.gradClass">Educational attainment</th>
             <th field="AlumniCredentialschoolId.gradClass">Toilet Type</th>
             <th field="AlumniCredentialschoolId.gradClass">Water Source</th>
             <th field="AlumniCredentialschoolId.gradClass">Food production activity</th>
@@ -73,12 +69,10 @@
             <td>{{ pf.attributes.contact_number }}</td>
             <td>{{ pf.attributes.father }}</td>
             <td>{{ pf.attributes.mother }}</td>
-            <td>{{ pf.attributes.occupation }}</td>
-            <td>{{ pf.attributes.educ_attain }}</td>
             <td>{{ pf.attributes.toilet_type }}</td>
             <td>{{ pf.attributes.water_source }}</td>
             <td>{{ pf.attributes.food_prod_act }}</td>
-            
+
             <td class="grid gap-2">
               <div
                 class="cursor-pointer text-center"

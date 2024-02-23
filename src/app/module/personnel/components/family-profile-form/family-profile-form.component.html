@@ -1,138 +1,160 @@
 <div class="mt-3">
-    <form
-        (ngSubmit)="onSubmit()"
-        [formGroup]="familyProfileForm"
-        class="w-full grid gap-2"
-      >
+  <form
+      (ngSubmit)="onSubmit()"
+      [formGroup]="familyProfileForm"
+      class="w-full grid gap-2"
+    >
 
-          <div class="w-full">
-            <label class="block text-[12px] font-medium text-gray-700"
-              >Baranggay</label
-            >
-            <div class="mt-1 relative rounded-md w-full">
-              <select formControlName="brgy_id" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
-                <option  disabled>Select Province</option>
-                <option [value]="brgy.id" *ngFor="let brgy of baranggay">
-                    {{brgy?.baranggay +' ' + brgy?.purok+ ', ' + brgy?.city + ', ' + brgy?.province}}
-                </option>
-              </select>
-            </div>
+        <div class="w-full">
+          <label class="block text-[12px] font-medium text-gray-700"
+            >Baranggay</label
+          >
+          <div class="mt-1 relative rounded-md w-full">
+            <select formControlName="brgy_id" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
+              <option  disabled>Select Province</option>
+              <option [value]="brgy.id" *ngFor="let brgy of baranggay">
+                {{brgy?.baranggay +' ' + brgy?.purok+ ', ' + brgy?.city + ', ' + brgy?.province}}
+              </option>
+            </select>
           </div>
+        </div>
 
 
 
 
-          <div >
-              <div class="w-full" *ngFor="let field of otherFileds">
+        <div >
+            <div class="w-full" *ngFor="let field of otherFileds">
+                <label class="block text-[12px] font-medium text-gray-700"
+                  >{{field.title}}</label
+                >
+                <div class="mt-1 relative rounded-md w-full">
+                  <input
+                    [type]="field.type"
+                    class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
+                    [placeholder]="'Enter ' + field.placeholder"
+                    [formControlName]="field.formName"
+                  />
+                </div>
+              </div>
+              <div class="w-full" >
                   <label class="block text-[12px] font-medium text-gray-700"
-                    >{{field.title}}</label
+                    >Mother Educational Attainment</label
                   >
                   <div class="mt-1 relative rounded-md w-full">
-                    <input
-                      [type]="field.type"
-                      class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
-                      [placeholder]="'Enter ' + field.placeholder"
-                      [formControlName]="field.formName"
-                    />
+                    <select formControlName="mother_educ_attain" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
+                      <option selected disabled>Select Educatioal Attained</option>
+                      <option [value]="type" *ngFor="let type of educAttans">{{type}}</option>
+                    </select>
                   </div>
                 </div>
                 <div class="w-full" >
-                    <label class="block text-[12px] font-medium text-gray-700"
-                      >Educational Attainment</label
-                    >
-                    <div class="mt-1 relative rounded-md w-full">
-                      <select formControlName="educ_attain" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
-                        <option selected disabled>Select Educatioal Attained</option>
-                        <option [value]="type" *ngFor="let type of educAttans">{{type}}</option>
-                      </select>
-                    </div>
+                  <label class="block text-[12px] font-medium text-gray-700"
+                    >Father Educational Attainment</label
+                  >
+                  <div class="mt-1 relative rounded-md w-full">
+                    <select formControlName="father_educ_attain" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
+                      <option selected disabled>Select Educatioal Attained</option>
+                      <option [value]="type" *ngFor="let type of educAttans">{{type}}</option>
+                    </select>
                   </div>
+                </div>
+              <div class="w-full" >
+                  <label class="block text-[12px] font-medium text-gray-700"
+                    >Mother`s occupation</label
+                  >
+                  <div class="mt-1 relative rounded-md w-full">
+                    <select formControlName="mother_occupation" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
+                      <option selected disabled>Select occupation</option>
+                      <option [value]="type" *ngFor="let type of occupations">{{type}}</option>
+                    </select>
+                  </div>
+                </div>
+              <div class="w-full" >
+                  <label class="block text-[12px] font-medium text-gray-700"
+                    >Father`s occupation</label
+                  >
+                  <div class="mt-1 relative rounded-md w-full">
+                    <select formControlName="father_occupation" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
+                      <option selected disabled>Select occupation</option>
+                      <option [value]="type" *ngFor="let type of occupations">{{type}}</option>
+                    </select>
+                  </div>
+                </div>
+              <div class="w-full" >
+                  <label class="block text-[12px] font-medium text-gray-700"
+                    >Toilet type</label
+                  >
+                  <div class="mt-1 relative rounded-md w-full">
+                    <select formControlName="toilet_type" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
+                      <option selected disabled>Select toilet type</option>
+                      <option [value]="type" *ngFor="let type of toiletTypes">{{type}}</option>
+                    </select>
+                  </div>
+                </div>
                 <div class="w-full" >
-                    <label class="block text-[12px] font-medium text-gray-700"
-                      >Occupation</label
-                    >
-                    <div class="mt-1 relative rounded-md w-full">
-                      <select formControlName="occupation" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
-                        <option selected disabled>Select occupation</option>
-                        <option [value]="type" *ngFor="let type of occupations">{{type}}</option>
-                      </select>
-                    </div>
+                  <label class="block text-[12px] font-medium text-gray-700"
+                    >Water source</label
+                  >
+                  <div class="mt-1 relative rounded-md w-full">
+                    <select formControlName="water_source" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
+                      <option selected disabled>Select water source</option>
+                      <option [value]="type" *ngFor="let type of typeOfWater">{{type}}</option>
+                    </select>
                   </div>
+                </div>
                 <div class="w-full" >
-                    <label class="block text-[12px] font-medium text-gray-700"
-                      >Toilet type</label
-                    >
-                    <div class="mt-1 relative rounded-md w-full">
-                      <select formControlName="toilet_type" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
-                        <option selected disabled>Select toilet type</option>
-                        <option [value]="type" *ngFor="let type of toiletTypes">{{type}}</option>
-                      </select>
-                    </div>
+                  <label class="block text-[12px] font-medium text-gray-700"
+                    >Food prouction activity</label
+                  >
+                  <div class="mt-1 relative rounded-md w-full">
+                    <select formControlName="food_prod_act" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
+                      <option selected disabled>Select Food prouction activity</option>
+                      <option [value]="type" *ngFor="let type of foodProdActs">{{type}}</option>
+                    </select>
                   </div>
-                  <div class="w-full" >
-                    <label class="block text-[12px] font-medium text-gray-700"
-                      >Water source</label
-                    >
-                    <div class="mt-1 relative rounded-md w-full">
-                      <select formControlName="water_source" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
-                        <option selected disabled>Select water source</option>
-                        <option [value]="type" *ngFor="let type of typeOfWater">{{type}}</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="w-full" >
-                    <label class="block text-[12px] font-medium text-gray-700"
-                      >Food prouction activity</label
-                    >
-                    <div class="mt-1 relative rounded-md w-full">
-                      <select formControlName="food_prod_act" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
-                        <option selected disabled>Select Food prouction activity</option>
-                        <option [value]="type" *ngFor="let type of foodProdActs">{{type}}</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div *ngFor="let checklist of checkLists" class="w-full my-2 flex items-center items-center justify-between">
-                    <label class="block text-[12px] font-medium text-gray-700"
-                      >{{checklist.title}}</label
-                    >
-                    <p-inputSwitch [formControlName]="checklist.formName"></p-inputSwitch>
-                  </div>
-          </div>
+                </div>
+                <div *ngFor="let checklist of checkLists" class="w-full my-2 flex items-center items-center justify-between">
+                  <label class="block text-[12px] font-medium text-gray-700"
+                    >{{checklist.title}}</label
+                  >
+                  <p-inputSwitch [formControlName]="checklist.formName"></p-inputSwitch>
+                </div>
+        </div>
 
 
 
 
-        <button
-          [disabled]="isSubmitLoading"
-          type="submit"
-          class="grid place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-3 hover:bg-slate-900/80 transition-all w-full mt-2"
-        >
-          <div class="flex items-center w-fit mx-auto" *ngIf="isSubmitLoading">
-            <svg
-              class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                class="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                stroke-width="4"
-              ></circle>
-              <path
-                class="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-              ></path>
-            </svg>
+      <button
+        [disabled]="isSubmitLoading"
+        type="submit"
+        class="grid place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-3 hover:bg-slate-900/80 transition-all w-full mt-2"
+      >
+        <div class="flex items-center w-fit mx-auto" *ngIf="isSubmitLoading">
+          <svg
+            class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
 
-            <span>Processing</span>
-          </div>
+          <span>Processing</span>
+        </div>
 
-          <span *ngIf="!isSubmitLoading">Create</span>
-        </button>
-      </form>
-    </div>
+        <span *ngIf="!isSubmitLoading">Create</span>
+      </button>
+    </form>
+  </div>

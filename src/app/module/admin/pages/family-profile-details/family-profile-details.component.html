@@ -15,7 +15,7 @@
     </div>
     <div class="mt-5 grid grid-cols-1">
 
-    
+
 
         <div class="my-2 font-bold bg-purple-800 text-[12px] w-fit px-2 py-1 rounded-lg text-white">Household member</div>
         <div class="grid">
@@ -59,12 +59,12 @@
                     <i class="fal fa-file-plus mr-1"></i>
                     Create
                   </button>
-                
+
               </div>
             </ng-template>
             <ng-template pTemplate="header">
               <tr class="text-sm">
-                
+
                 <th field="name">Name</th>
                 <th field="birthDay">Birth Day</th>
                 <th field="birthDay">Age</th>
@@ -84,7 +84,7 @@
                 <td>{{ pfc.relationship }}</td>
                 <td>{{ pfc.gender }}</td>
                 <td>{{ pfc.nursing_type ? pfc.nursing_type : 'N/A' }}</td>
-                
+
                 <td class="grid gap-2">
                   <div (click)="deleteData(pfc.id)" class="text-center">
                       <i class="fad fa-trash"></i> Delete
@@ -94,11 +94,11 @@
             </ng-template>
           </p-table>
         </div>
-        
 
-      
-        
-        
+
+
+
+
     </div>
 </div>
 
@@ -111,16 +111,20 @@
       appendTo="body"
       [style]="{ maxWidth: '400px', width: '400px' }"
     >
-           
+
       <table class="grid grid-cols-2  p-2 rounded text-[12px]">
         <tr class="grid">
             <th class="show border p-1 px-2">Household number</th>
             <th  class="show border p-1 px-2">Address</th>
             <th class="show border p-1 px-2">Contact number</th>
             <th class="show border p-1 px-2">Mother</th>
+            <th class="show border p-1 px-2">Mother`s birthday</th>
+            <th class="show border p-1 px-2">Mother`s occupation</th>
+            <th class="show border p-1 px-2">Mother`s educational attainment</th>
             <th class="show border p-1 px-2">Father</th>
-            <th class="show border p-1 px-2">Occupation</th>
-            <th class="show border p-1 px-2">Educational attainment</th>
+            <th class="show border p-1 px-2">Father`s birthday</th>
+            <th class="show border p-1 px-2">Father`s occupation</th>
+            <th class="show border p-1 px-2">Father`s educational attainment</th>
             <th class="show border p-1 px-2">Food Production Activity</th>
             <th class="show border p-1 px-2">Toilet type</th>
             <th class="show border p-1 px-2">Water source</th>
@@ -133,14 +137,18 @@
             <td class="show border p-1 px-2">{{FamDetails?.attributes?.household_no}}</td>
             <td  class="show border p-1 px-2">{{FamDetails?.attributes.baranggay}}</td>
             <td class="show border p-1 px-2">{{FamDetails?.attributes?.contact_number}}</td>
-            <td class="show border p-1 px-2">{{FamDetails?.attributes?.father}}</td>
             <td class="show border p-1 px-2">{{FamDetails?.attributes?.mother}}</td>
-            <td class="show border p-1 px-2">{{FamDetails?.attributes?.occupation}}</td>
-            <td class="show border p-1 px-2">{{FamDetails?.attributes?.educ_attain}}</td>
+            <td class="show border p-1 px-2">{{FamDetails?.attributes?.mother_birthday | date : 'mediumDate'}}</td>
+            <td class="show border p-1 px-2">{{FamDetails?.attributes?.mother_occupation}}</td>
+            <td class="show border p-1 px-2">{{FamDetails?.attributes?.mother_educ_attain}}</td>
+            <td class="show border p-1 px-2">{{FamDetails?.attributes?.father}}</td>
+            <td class="show border p-1 px-2">{{FamDetails?.attributes?.father_birthday | date : 'mediumDate'}}</td>
+            <td class="show border p-1 px-2">{{FamDetails?.attributes?.father_occupation}}</td>
+            <td class="show border p-1 px-2">{{FamDetails?.attributes?.father_educ_attain}}</td>
             <td class="show border p-1 px-2">{{FamDetails?.attributes?.food_prod_act}}</td>
             <td class="show border p-1 px-2">{{FamDetails?.attributes?.toilet_type}}</td>
             <td class="show border p-1 px-2">{{FamDetails?.attributes?.water_source}}</td>
-            <td class="show border p-1 px-2">{{FamDetails?.attributes?.using_iodized_salt ? 'true' : 
+            <td class="show border p-1 px-2">{{FamDetails?.attributes?.using_iodized_salt ? 'true' :
                 'false'}}</td>
             <td class="show border p-1 px-2">{{FamDetails?.attributes?.using_IFR ? 'true' : 'false'}}</td>
             <td class="show border p-1 px-2">{{FamDetails?.attributes?.familty_planning ? 'true' : 'false'}}</td>
@@ -222,7 +230,7 @@
               </select>
             </div>
           </div>
-          
+
           <div  class="w-full my-2 flex items-center items-center justify-between">
             <label  class="block text-[12px] font-medium text-gray-700"
               >Nursing</label
@@ -236,7 +244,7 @@
             </option>
           </select>
 
-          
+
 
         <button
           [disabled]="isSubmitLoading"
@@ -273,4 +281,3 @@
       </form>
     </div>
   </p-dialog>
- 
