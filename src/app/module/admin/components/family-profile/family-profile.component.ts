@@ -16,6 +16,7 @@ export class FamilyProfileComponent implements OnInit{
   data:any=[];
   cols:any[]=[
   ];
+  FPDetails:any;
   importedFamilyProfile: any[] = [];
   selectdata:any;
   createModal:boolean=false;
@@ -201,6 +202,12 @@ export class FamilyProfileComponent implements OnInit{
         this.toast.error(err.error.message || 'Error occurred');
       }
     })
+  }
+
+
+  familyProfileFormBtn(data:any){
+    this.createModal = true
+    this.FPDetails = data ;
   }
 
 

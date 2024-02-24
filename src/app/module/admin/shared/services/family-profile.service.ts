@@ -24,6 +24,10 @@ export class FamilyProfileService {
     return this.http.post(`${BASEURL}/famityProfile`,data);
   }
 
+  updateProfileFamily(id:number,data:any): any {
+    return this.http.put(`${BASEURL}/famityProfile/${id}`,data);
+  }
+
 
   saveImportedFamilyProfile(data:any): any {
     return this.http.post(`${BASEURL}/admin/saveImportedFamilyProfile`,data);

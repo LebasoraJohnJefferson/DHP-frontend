@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit,Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit,Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaranggayService } from '../../shared/services/baranggay.service';
 import { HotToastService } from '@ngneat/hot-toast';
@@ -12,7 +12,7 @@ import { FamilyProfileService } from '../../shared/services/family-profile.servi
 })
 export class FamilyProfileFormComponent implements OnInit {
   isSubmitLoading:boolean =false
-
+  @Input() FPDetails:any={};
   baranggay:any=[]
 
   usingIodizedSalt:boolean = false
@@ -131,29 +131,22 @@ export class FamilyProfileFormComponent implements OnInit {
     if(this.familyProfileForm.controls['contact_number'].invalid) return this.toast.warning("Invalid contact number")
     if(this.familyProfileForm.valid){
       this.isSubmitLoading=true
-      this._FPService.createProfileFamilty(this.familyProfileForm.value).subscribe({
-        next:(res:any)=>{
-          this.isSubmitLoading=false
-          this.triggerSubmmit.emit()
-          this.familyProfileForm.reset()
-          this.familyProfileForm.patchValue({
-            using_iodized_salt:false,
-            using_IFR:false,
-            familty_planning:false,
-            mother_pregnant:false,
-          })
-          this.toast.success(res?.message || 'Successfully added')
-        },
-        error:(err:any)=>{
-          this.toast.warning(err?.error?.message || 'An error occurred')
-          this.isSubmitLoading=false
-        }
-      })
+      if(this.FPDetails){
+        this.updateProfileFamily()
+      }else{
+        this.createFamilyProfile()
+      }
+
     }else{
       console.log(this.familyProfileForm)
       this.isSubmitLoading=false
       this.toast.warning("Please, fill-up all inputs")
     }
+  }
+
+  ngOnChanges(){
+    if(this.FPDetails) this.familyProfileForm.patchValue(this.FPDetails?.attributes)
+    else this.familyProfileForm.reset()
   }
 
   ngOnInit(): void {
@@ -168,5 +161,47 @@ export class FamilyProfileFormComponent implements OnInit {
     })
   }
 
+  updateProfileFamily(){
+    this._FPService.updateProfileFamily(this.FPDetails?.id,this.familyProfileForm.value).subscribe({
+      next:(res:any)=>{
+        this.isSubmitLoading=false
+        this.triggerSubmmit.emit()
+        this.familyProfileForm.reset()
+        this.familyProfileForm.patchValue({
+          using_iodized_salt:false,
+          using_IFR:false,
+          familty_planning:false,
+          mother_pregnant:false,
+        })
+        this.toast.success(res?.message || 'Successfully updated')
+      },
+      error:(err:any)=>{
+        this.toast.warning(err?.error?.message || 'An error occurred')
+        this.isSubmitLoading=false
+      }
+    })
+  }
+
+
+  createFamilyProfile(){
+    this._FPService.createProfileFamilty(this.familyProfileForm.value).subscribe({
+      next:(res:any)=>{
+        this.isSubmitLoading=false
+        this.triggerSubmmit.emit()
+        this.familyProfileForm.reset()
+        this.familyProfileForm.patchValue({
+          using_iodized_salt:false,
+          using_IFR:false,
+          familty_planning:false,
+          mother_pregnant:false,
+        })
+        this.toast.success(res?.message || 'Successfully added')
+      },
+      error:(err:any)=>{
+        this.toast.warning(err?.error?.message || 'An error occurred')
+        this.isSubmitLoading=false
+      }
+    })
+  }
 
 }
