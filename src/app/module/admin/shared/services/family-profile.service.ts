@@ -12,7 +12,7 @@ const HELPER = new JwtHelperService();
   providedIn: 'root'
 })
 export class FamilyProfileService {
-  
+
   constructor(private http: HttpClient, private router: Router) {}
 
   getAllPF(): any {
@@ -22,6 +22,11 @@ export class FamilyProfileService {
 
   createProfileFamilty(data:any): any {
     return this.http.post(`${BASEURL}/famityProfile`,data);
+  }
+
+
+  saveImportedFamilyProfile(data:any): any {
+    return this.http.post(`${BASEURL}/admin/saveImportedFamilyProfile`,data);
   }
 
   specificProfileFamilty(PFid:any):any{

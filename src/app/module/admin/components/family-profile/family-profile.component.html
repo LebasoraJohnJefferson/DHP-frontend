@@ -18,13 +18,21 @@
         styleClass="p-datatable-gridlines"
         [globalFilterFields]="[
           'attributes.household_no',
-            'attributes.no_household_member',
-            'attributes.contact_number',
-            'attributes.mother',
-            'attributes.father',
-           'attributes.toilet_type',
-            'attributes.water_source',
-            'attributes.food_prod_act'
+          'attributes.no_household_member',
+          'attributes.mother_contact_number',
+          'attributes.father_contact_number',
+          'attributes.mother',
+          'attributes.father',
+          'attributes.toilet_type',
+          'attributes.water_source',
+          'attributes.food_prod_act',
+          'attributes.housthould_head',
+          'attributes.mother_occupation',
+          'attributes.father_occupation' ,
+          'attributes.mother_educ_attain' ,
+          'attributes.father_educ_attain' ,
+          'attributes.mother_birthday' ,
+          'attributes.father_birthday' ,
         ]"
       >
         <ng-template pTemplate="caption">
@@ -39,7 +47,52 @@
                 placeholder="Search keyword"
               />
             </div>
-            <button
+
+
+            <div class="flex">
+              <div class="flex items-center mr-2 gap-1">
+                <input
+                  type="file"
+                  name="file"
+                  #importInput
+                  class="custom-file-input hidden"
+                  id="inputGroupFile"
+                  required
+                  value=""
+                  (change)="handleImport($event)"
+                  (click)="importInput.value = ''"
+                  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                />
+
+                <button
+                  (click)="importInput.click()"
+                  class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+                >
+                  <i class="fad fa-upload mr-1"></i>
+                  Import
+                </button>
+
+                <button
+                  (click)="exportExcel()"
+                  class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+                >
+                  <i class="fad fa-download mr-1"></i>
+                  Excel
+                </button>
+                <div class="relative">
+
+                  <button
+                    (click)="exportPdf()" #ThisElem
+                    class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+                  >
+                    <i class="fad fa-download mr-1"></i>
+                    PDF
+                  </button>
+                </div>
+              </div>
+
+
+              <button
                 (click)="createModal = true"
                 class="bg-green-800 text-white text-[12px] md:text-sm font-semibold py-3 px-5 rounded-3xl hover:bg-green-900/80 cursor-pointer transition-all"
               >
@@ -47,19 +100,25 @@
                 Create
               </button>
 
+            </div>
+
+
+
+
+
           </div>
         </ng-template>
         <ng-template pTemplate="header">
           <tr class="text-sm">
-            <th field="AlumniCredentialschoolId.Course.acronym">Household no.</th>
-            <th field="AlumniCredentialschoolId.gradClass">No of household member</th>
-            <th field="AlumniCredentialschoolId.gradClass">Contact number</th>
-            <th field="AlumniCredentialschoolId.gradClass">Name of Mother</th>
-            <th field="AlumniCredentialschoolId.gradClass">Name of Father</th>
-            <th field="AlumniCredentialschoolId.gradClass">Toilet Type</th>
-            <th field="AlumniCredentialschoolId.gradClass">Water Source</th>
-            <th field="AlumniCredentialschoolId.gradClass">Food production activity</th>
-            <th field="email">Action</th>
+            <th field="">Household no.</th>
+            <th field="attributes.household_no">No of household member</th>
+            <th field="attributes.no_household_member ">Contact number</th>
+            <th field="attributes.father">Name of Mother</th>
+            <th field="attributes.mother">Name of Father</th>
+            <th field="attributes.toilet_type">Toilet Type</th>
+            <th field="attributes.water_source">Water Source</th>
+            <th field="attributes.food_prod_act">Food production activity</th>
+            <th >Action</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-pf>
