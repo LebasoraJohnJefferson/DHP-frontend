@@ -5,6 +5,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FamilyProfileMemberService } from '../../shared/services/family-profile-member.service';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Location } from '@angular/common';
+import * as FileSaver from 'file-saver';
+import { read, utils, writeFile } from 'xlsx';
+import  jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import moment from 'moment';
 
 @Component({
   selector: 'app-family-profile-details',
@@ -16,6 +21,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
   detailModal:boolean = false
   isSubmitLoading:boolean = false
   today = new Date();
+  importedFamilyProfileMember:any=[]
   selectdata:any;
   FamDetails:any
   FPid:any;
@@ -59,7 +65,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
     const birthDate = new Date(birthDay);
     let age = this.today.getFullYear() - birthDate.getFullYear();
     // Adjust age if the birthday hasn't occurred yet this year
-    if (this.today.getMonth() < birthDate.getMonth() || 
+    if (this.today.getMonth() < birthDate.getMonth() ||
         (this.today.getMonth() === birthDate.getMonth() &&
          this.today.getDate() < birthDate.getDate())) {
         age-=1;
@@ -81,7 +87,6 @@ export class FamilyProfileDetailsComponent implements OnInit{
     this._FP.specificProfileFamilty(this.FPid).subscribe({
       next:(res:any)=>{
         this.FamDetails = res?.data
-        console.log(res);
       }
     })
   }
@@ -117,7 +122,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
           this.createModal = false
           this.getAllFPC()
           this.toast.success(res?.message || 'Successfully added')
-        },error:(err:any)=>{  
+        },error:(err:any)=>{
           this.toast.error(err?.error?.message || 'an error occurred')
           this.isSubmitLoading =false
         }
@@ -127,9 +132,126 @@ export class FamilyProfileDetailsComponent implements OnInit{
       this.toast.warning("Please, fill-up all inputs")
     }
   }
-  
+
   goBack(){
     this.location.back()
+  }
+
+
+  exportPdf(){
+    const aspectRatio = 1.2941;
+    const width = 1400;
+    const height = width / aspectRatio;
+    const doc = new jsPDF('p', 'pt');
+    let data:any = []
+    let columns = [
+      {title:'Name',dataKey:'name'},
+      {title:'Birthday',dataKey:'birthDay'},
+      {title:'Gender',dataKey:'gender'},
+      {title:'Nursing type',dataKey:'nursing_type'},
+      {title:'Occupation',dataKey:'occupation'},
+      {title:'Relationship',dataKey:'relationship'},
+    ];
+
+
+    this.data?.map((details:any)=>{
+      const birthday = this.birthDayFormat(details?.birthDay);
+
+      const nursing_type = details?.nursing_type ?? 'N/A';
+
+      const formattedDetails = {
+        ...details,
+        birthDay: birthday,
+        nursing_type: nursing_type,
+      };
+
+      data.push(formattedDetails);
+      })
+
+      autoTable(doc, {
+        columns: columns,
+        body: data,
+        didDrawPage: (dataArg:any) => {
+          doc.text(`\BRU: Family Profile Member of #${this?.FamDetails?.attributes?.household_no}`, dataArg.settings.margin.top, 10);
+        },
+      });
+    doc.save(`rhu_family_profile_member_#${this?.FamDetails?.attributes?.household_no}.pdf`);
+
+  }
+
+  exportExcel(){
+    import('xlsx').then((xlsx) => {
+      let filteredAlumni  = this.data.map((FPC:any)=>{
+        const {nursing_type,birthDay,gender,name,occupation,relationship, ...rest } = FPC
+
+
+        const nursing_type_temp = nursing_type ?? 'N/A';
+        return {
+          gender:gender,
+          birthDay:birthDay,
+          name:name,
+          occupation:occupation,
+          relationship:relationship,
+          nursing_type:nursing_type_temp,
+        };
+      })
+      const worksheet = xlsx.utils.json_to_sheet(filteredAlumni );
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      this.saveAsExcelFile(excelBuffer, `rhu_family_profile_member_#${this?.FamDetails?.attributes?.household_no}`);
+    });
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string){
+    let EXCEL_TYPE =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE,
+    });
+    FileSaver.saveAs(
+      data,
+      fileName +
+        '_export_' +
+        new Date().getTime() +
+        EXCEL_EXTENSION
+    );
+
+  }
+
+
+
+  handleImport($event: any) {
+    const files = $event.target.files;
+
+    if (files.length) {
+      const file = files[0];
+      const reader = new FileReader();
+
+      reader.onload = (event: any) => {
+        const wb = read(event.target.result);
+        const sheets = wb.SheetNames;
+
+        if (sheets.length) {
+          const rows = utils.sheet_to_json(wb.Sheets[sheets[0]]);
+          this.importedFamilyProfileMember = rows;
+
+          this.importFamilyProfileMember();
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    }
+  }
+
+  importFamilyProfileMember() {
+    console.log(this.importedFamilyProfileMember)
+  }
+
+  birthDayFormat(date: any) {
+    return moment(date).format('MMMM DD, YYYY');
   }
 
 }

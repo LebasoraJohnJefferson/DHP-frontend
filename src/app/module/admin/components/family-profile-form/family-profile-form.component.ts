@@ -145,8 +145,15 @@ export class FamilyProfileFormComponent implements OnInit {
   }
 
   ngOnChanges(){
-    if(this.FPDetails) this.familyProfileForm.patchValue(this.FPDetails?.attributes)
-    else this.familyProfileForm.reset()
+    if(this.FPDetails){
+      this.familyProfileForm.patchValue(this.FPDetails?.attributes)
+      this.familyProfileForm.patchValue({
+        using_iodized_salt:this.FPDetails?.attributes?.using_iodized_salt ? true : false,
+        using_IFR:this.FPDetails?.attributes?.using_IFR ? true : false,
+        familty_planning:this.FPDetails?.attributes?.familty_planning ? true : false,
+        mother_pregnant:this.FPDetails?.attributes?.mother_pregnant ? true : false,
+      })
+    }else this.familyProfileForm.reset()
   }
 
   ngOnInit(): void {

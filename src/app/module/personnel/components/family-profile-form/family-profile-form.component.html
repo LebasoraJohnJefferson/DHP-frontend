@@ -154,7 +154,7 @@
           <span>Processing</span>
         </div>
 
-        <span *ngIf="!isSubmitLoading">Create</span>
+        <span *ngIf="!isSubmitLoading">{{FPDetails ? 'Update' : 'Create'}}</span>
       </button>
     </form>
   </div>

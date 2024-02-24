@@ -46,7 +46,7 @@
               />
             </div>
             <button
-                (click)="createModal = true"
+                (click)="familyProfileFormBtn(null)"
                 class="bg-green-800 text-white text-[12px] md:text-sm font-semibold py-3 px-5 rounded-3xl hover:bg-green-900/80 cursor-pointer transition-all"
               >
                 <i class="fal fa-file-plus mr-1"></i>
@@ -79,13 +79,16 @@
             <td>{{ pf.attributes.water_source }}</td>
             <td>{{ pf.attributes.food_prod_act }}</td>
 
-            <td class="grid gap-2">
+            <td class="flex flex-col md:flex-row gap-2">
               <div
                 class="cursor-pointer text-center"
                 [routerLink]="'/form/family-profile/details'"
                 [queryParams]="{id:pf.id}"
               >
                 <i class="fad fa-eye"></i> View
+              </div>
+              <div class="text-center" (click)="familyProfileFormBtn(pf)">
+                  <i class="fad fa-pencil"></i> Update
               </div>
               <div (click)="deleteData(pf.id)" class="text-center">
                   <i class="fad fa-trash"></i> Delete
@@ -104,5 +107,5 @@
     appendTo="body"
     [style]="{ maxWidth: '400px', width: '400px' }"
   >
-  <app-family-profile-form (triggerSubmmit)="registerFamiltyProfileCommit()"></app-family-profile-form>
+  <app-family-profile-form (triggerSubmmit)="registerFamiltyProfileCommit()" [FPDetails]="FPDetails"></app-family-profile-form>
 </p-dialog>

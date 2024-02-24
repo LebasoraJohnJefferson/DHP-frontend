@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit,Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit,Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProvinceService } from '../../shared/services/province.service';
 import { CityService } from '../../shared/services/city.service';
@@ -14,7 +14,7 @@ import { FamilyProfileService } from '../../shared/services/family-profile.servi
 })
 export class FamilyProfileFormComponent implements OnInit {
   isSubmitLoading:boolean =false
-
+  @Input() FPDetails:any
   baranggay:any=[]
 
   usingIodizedSalt:boolean = false
@@ -132,24 +132,12 @@ export class FamilyProfileFormComponent implements OnInit {
     if(this.familyProfileForm.controls['contact_number'].invalid) return this.toast.warning("Invalid contact number")
     if(this.familyProfileForm.valid){
       this.isSubmitLoading=true
-      this._FPService.createProfileFamilty(this.familyProfileForm.value).subscribe({
-        next:(res:any)=>{
-          this.isSubmitLoading=false
-          this.triggerSubmmit.emit()
-          this.familyProfileForm.reset()
-          this.familyProfileForm.patchValue({
-            using_iodized_salt:false,
-            using_IFR:false,
-            familty_planning:false,
-            mother_pregnant:false,
-          })
-          this.toast.success(res?.message || 'Successfully added')
-        },
-        error:(err:any)=>{
-          this.toast.warning(err?.error?.message || 'An error occurred')
-          this.isSubmitLoading=false
-        }
-      })
+      if(this.FPDetails){
+        this.updateProfileFamily()
+      }else{
+        this.createFamilyProfile()
+      }
+
     }else{
       console.log(this.familyProfileForm)
       this.isSubmitLoading=false
@@ -165,6 +153,61 @@ export class FamilyProfileFormComponent implements OnInit {
     this._brgy.getAllBrg().subscribe({
       next:(res)=>{
         this.baranggay = res?.data?.baranggay
+      }
+    })
+  }
+
+  ngOnChanges(){
+    if(this.FPDetails){
+      this.familyProfileForm.patchValue(this.FPDetails?.attributes)
+      this.familyProfileForm.patchValue({
+        using_iodized_salt:this.FPDetails?.attributes?.using_iodized_salt ? true : false,
+        using_IFR:this.FPDetails?.attributes?.using_IFR ? true : false,
+        familty_planning:this.FPDetails?.attributes?.familty_planning ? true : false,
+        mother_pregnant:this.FPDetails?.attributes?.mother_pregnant ? true : false,
+      })
+    }else this.familyProfileForm.reset()
+  }
+
+
+  updateProfileFamily(){
+    this._FPService.updateProfileFamily(this.FPDetails?.id,this.familyProfileForm.value).subscribe({
+      next:(res:any)=>{
+        this.isSubmitLoading=false
+        this.triggerSubmmit.emit()
+        this.familyProfileForm.reset()
+        this.familyProfileForm.patchValue({
+          using_iodized_salt:false,
+          using_IFR:false,
+          familty_planning:false,
+          mother_pregnant:false,
+        })
+        this.toast.success(res?.message || 'Successfully updated')
+      },
+      error:(err:any)=>{
+        this.toast.warning(err?.error?.message || 'An error occurred')
+        this.isSubmitLoading=false
+      }
+    })
+  }
+
+  createFamilyProfile(){
+    this._FPService.createProfileFamilty(this.familyProfileForm.value).subscribe({
+      next:(res:any)=>{
+        this.isSubmitLoading=false
+        this.triggerSubmmit.emit()
+        this.familyProfileForm.reset()
+        this.familyProfileForm.patchValue({
+          using_iodized_salt:false,
+          using_IFR:false,
+          familty_planning:false,
+          mother_pregnant:false,
+        })
+        this.toast.success(res?.message || 'Successfully added')
+      },
+      error:(err:any)=>{
+        this.toast.warning(err?.error?.message || 'An error occurred')
+        this.isSubmitLoading=false
       }
     })
   }

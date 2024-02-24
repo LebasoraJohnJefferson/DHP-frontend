@@ -89,10 +89,6 @@ export class FamilyProfileComponent implements OnInit{
       {title:'Mother pregnant',dataKey:'mother_pregnant'},
     ];
 
-
-
-
-
     this.data?.map((datails:any)=>{
       const info = datails?.attributes;
       const familty_planning = info.familty_planning ? 'Yes' : 'No'
@@ -182,14 +178,14 @@ export class FamilyProfileComponent implements OnInit{
           const rows = utils.sheet_to_json(wb.Sheets[sheets[0]]);
           this.importedFamilyProfile = rows;
 
-          this.importStudents();
+          this.importFamilyProfile();
         }
       };
       reader.readAsArrayBuffer(file);
     }
   }
 
-  importStudents() {
+  importFamilyProfile() {
     console.log(this.importedFamilyProfile)
     this._FPService.saveImportedFamilyProfile({ familiesData: this.importedFamilyProfile }).subscribe({
       next:(res:any)=>{

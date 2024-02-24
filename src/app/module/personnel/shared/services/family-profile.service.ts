@@ -12,11 +12,15 @@ const HELPER = new JwtHelperService();
   providedIn: 'root'
 })
 export class FamilyProfileService {
-  
+
   constructor(private http: HttpClient, private router: Router) {}
 
   getAllPF(): any {
     return this.http.get(`${BASEURL}/famityProfile`);
+  }
+
+  updateProfileFamily(id:number,data:any): any {
+    return this.http.put(`${BASEURL}/famityProfile/${id}`,data);
   }
 
 

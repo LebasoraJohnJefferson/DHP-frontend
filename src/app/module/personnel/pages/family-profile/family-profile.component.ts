@@ -12,6 +12,7 @@ export class FamilyProfileComponent implements OnInit{
   cols:any;
   selectdata:any;
   createModal:boolean=false;
+  FPDetails:any;
 
 
   constructor(
@@ -51,6 +52,12 @@ export class FamilyProfileComponent implements OnInit{
         this.toast.warning(err?.error?.message || 'An error occurred')
       }
     })
+  }
+
+
+  familyProfileFormBtn(data:any){
+    this.createModal = true
+    this.FPDetails = data ;
   }
 
 
