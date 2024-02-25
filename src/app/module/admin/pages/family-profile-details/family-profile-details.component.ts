@@ -93,7 +93,6 @@ export class FamilyProfileDetailsComponent implements OnInit{
 
   getAllFPC(){
     this._FPCService.getAllPFC(this.FPid).subscribe((res:any)=>{
-      console.log(res)
       this.data = res?.data
     })
   }
@@ -247,7 +246,16 @@ export class FamilyProfileDetailsComponent implements OnInit{
   }
 
   importFamilyProfileMember() {
-    console.log(this.importedFamilyProfileMember)
+    this._FPCService.saveImportedFCM(this.FPid,{ familiesMemberData: this.importedFamilyProfileMember }).subscribe({
+      next:(res:any)=>{
+        setTimeout(() => {
+          this.toast.success("Successfully Imported!");
+          this.getAllFPC();
+        }, 5000);
+      },error:(err:any)=>{
+        this.toast.error(err?.error?.message || 'Error occurred');
+      }
+    })
   }
 
   birthDayFormat(date: any) {

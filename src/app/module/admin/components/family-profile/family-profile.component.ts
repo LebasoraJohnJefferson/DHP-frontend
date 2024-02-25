@@ -38,7 +38,6 @@ export class FamilyProfileComponent implements OnInit{
     this._FPService.getAllPF().subscribe({
       next:(res:any)=>{
         this.data = res?.data;
-        console.log(res)
       }
     })
   }
@@ -186,7 +185,6 @@ export class FamilyProfileComponent implements OnInit{
   }
 
   importFamilyProfile() {
-    console.log(this.importedFamilyProfile)
     this._FPService.saveImportedFamilyProfile({ familiesData: this.importedFamilyProfile }).subscribe({
       next:(res:any)=>{
         setTimeout(() => {
