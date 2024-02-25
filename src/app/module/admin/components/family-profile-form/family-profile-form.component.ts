@@ -93,10 +93,10 @@ export class FamilyProfileFormComponent implements OnInit {
     toilet_type:['',Validators.required],
     water_source:['',Validators.required],
     //options
-    using_iodized_salt:[false,Validators.required],
-    using_IFR:[false,Validators.required],
-    familty_planning:[false,Validators.required],
-    mother_pregnant:[false,Validators.required],
+    using_iodized_salt:[false],
+    using_IFR:[false],
+    familty_planning:[false],
+    mother_pregnant:[false],
   });
 
   checkLists:any=[
@@ -131,6 +131,12 @@ export class FamilyProfileFormComponent implements OnInit {
     if(this.familyProfileForm.controls['contact_number'].invalid) return this.toast.warning("Invalid contact number")
     if(this.familyProfileForm.valid){
       this.isSubmitLoading=true
+      this.familyProfileForm.patchValue({
+        using_iodized_salt:this.familyProfileForm.controls['using_iodized_salt'].value ?? false,
+        using_IFR:this.familyProfileForm.controls['using_IFR'].value ?? false,
+        familty_planning:this.familyProfileForm.controls['familty_planning'].value ?? false,
+        mother_pregnant:this.familyProfileForm.controls['mother_pregnant'].value ?? false,
+      })
       if(this.FPDetails){
         this.updateProfileFamily()
       }else{
