@@ -33,13 +33,13 @@ export class AtRiskPreschoolFormComponent {
   ]
 
   preschoolAtRiskForm:FormGroup = this._fb.group({
-    member_id:['',Validators.required],
     weight:['',Validators.required],
     height:['',Validators.required],
+    member_id:['',Validators.required],
     period_of_measurement:['',Validators.required]
   })
 
-  children:any=[{id:1,name:'hello',birthDay:new Date()}]
+  children:any=[]
 
 
 

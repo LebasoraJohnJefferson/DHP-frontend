@@ -43,7 +43,6 @@ export class BaranggayPreschoolerComponent {
     this._preschoolService.getAllRegistedPreschool().subscribe({
       next:(res:any)=>{
         this.data = res?.data
-        console.log(res)
       }
     })
   }
