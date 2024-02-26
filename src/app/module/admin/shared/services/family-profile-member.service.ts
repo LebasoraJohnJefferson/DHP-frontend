@@ -19,6 +19,11 @@ export class FamilyProfileMemberService {
     return this.http.post(`${BASEURL}/famityProfileMembers`,data);
   }
 
+
+  updatePFC(PfcId:number,data:any): any {
+    return this.http.put(`${BASEURL}/famityProfileMembers/${PfcId}`,data);
+  }
+
   saveImportedFCM(FP_id:number,data:any): any {
     return this.http.post(`${BASEURL}/admin/saveImportedFCM/${FP_id}`,data);
   }

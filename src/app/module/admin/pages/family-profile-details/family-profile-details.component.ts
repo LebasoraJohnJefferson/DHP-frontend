@@ -27,6 +27,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
   FPid:any;
   data:any;
   cols:any;
+  pfc:any;
   nursingTypes:string[]=['EBF','Mixed feeding','Bottle-fed','Others']
   genders:string[]=['male','female']
   relationships:string[] = [
@@ -114,22 +115,62 @@ export class FamilyProfileDetailsComponent implements OnInit{
     if(this.childrenForm.valid){
       this.isSubmitLoading =true
       this.childrenForm.controls['FP_id'].setValue(this.FPid)
-      this._FPCService.createPFC(this.childrenForm.value).subscribe({
-        next:(res:any)=>{
-          this.isSubmitLoading =false
-          this.childrenForm.reset()
-          this.createModal = false
-          this.getAllFPC()
-          this.toast.success(res?.message || 'Successfully added')
-        },error:(err:any)=>{
-          this.toast.error(err?.error?.message || 'an error occurred')
-          this.isSubmitLoading =false
-        }
-      })
+      if(this.pfc){
+        this.updatePFC()
+      }else{
+        this.createPFC()
+      }
+      
     }else{
       this.isSubmitLoading = false
       this.toast.warning("Please, fill-up all inputs")
     }
+  }
+
+
+  updatePFC(){
+    this.childrenForm.controls['nursing_type'].setValue(
+      this.childrenForm.controls['is_nursing'].value == true ?
+      this.childrenForm.controls['nursing_type'].value : null
+    )
+    this._FPCService.updatePFC(this.pfc?.id,this.childrenForm.value).subscribe({
+      next:(res:any)=>{
+        this.isSubmitLoading =false
+        this.createModal = false
+        this.getAllFPC()
+        this.toast.success(res?.message || 'Successfully added')
+      },error:(err:any)=>{
+        this.toast.error(err?.error?.message || 'an error occurred')
+        this.isSubmitLoading =false
+      }
+    })
+  }
+
+  createPFC(){
+    this._FPCService.createPFC(this.childrenForm.value).subscribe({
+      next:(res:any)=>{
+        this.isSubmitLoading =false
+        this.createModal = false
+        this.getAllFPC()
+        this.toast.success(res?.message || 'Successfully added')
+      },error:(err:any)=>{
+        this.toast.error(err?.error?.message || 'an error occurred')
+        this.isSubmitLoading =false
+      }
+    })
+  }
+
+
+
+
+  handleSubmit(details:any){
+    this.createModal = true
+    this.pfc = details
+    this.pfc ? this.childrenForm.patchValue({
+      ...this.pfc,
+      is_nursing:details?.nursing_type != 'N/A' && details!=null && details?.nursing_type!=null,
+      nursing_type:details?.nursing_type
+    }) : this.childrenForm.reset()
   }
 
   goBack(){

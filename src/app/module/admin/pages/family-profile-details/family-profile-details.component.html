@@ -97,7 +97,7 @@
 
 
                   <button
-                      (click)="createModal = true"
+                      (click)="handleSubmit(null)"
                       class="bg-green-800 text-white text-[12px] md:text-sm font-semibold py-3 px-5 rounded-3xl hover:bg-green-900/80 cursor-pointer transition-all"
                     >
                       <i class="fal fa-file-plus mr-1"></i>
@@ -132,6 +132,9 @@
                 <td>{{ pfc.nursing_type ? pfc.nursing_type : 'N/A' }}</td>
 
                 <td class="grid gap-2">
+                  <div (click)="handleSubmit(pfc)" class="text-center">
+                    <i class="fad fa-pencil"></i> Update
+                </div>
                   <div (click)="deleteData(pfc.id)" class="text-center">
                       <i class="fad fa-trash"></i> Delete
                   </div>
@@ -208,7 +211,7 @@
 
 
 <p-dialog
-      header="Add Member"
+      [header]="pfc ? 'Update Member' : 'Add Member'"
       [(visible)]="createModal"
       [modal]="true"
       appendTo="body"
@@ -322,7 +325,7 @@
             <span>Processing</span>
           </div>
 
-          <span *ngIf="!isSubmitLoading">Create</span>
+          <span *ngIf="!isSubmitLoading">{{ pfc ? 'Update' : 'Create'}}</span>
         </button>
       </form>
     </div>
