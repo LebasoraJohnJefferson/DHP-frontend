@@ -1,6 +1,11 @@
 import { Component} from '@angular/core';
 import { InfantService } from '../../shared/services/infant.service';
 import { HotToastService } from '@ngneat/hot-toast';
+import * as FileSaver from 'file-saver';
+import { read, utils, writeFile } from 'xlsx';
+import  jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import moment from 'moment';
 
 @Component({
   selector: 'app-infant',
@@ -49,5 +54,83 @@ export class InfantComponent {
     this.getAllInfantRecord()
     this.createModal = false
   }
+
+
+  exportPdf(){
+    const aspectRatio = 1.2941;
+    const width = 1400;
+    const height = width / aspectRatio;
+    const doc = new jsPDF('p', 'pt',[height, width]);
+    let data:any = []
+    let columns = [
+      {title:'Name of child',dataKey:'name'},
+      {title:'Age',dataKey:'ageInMonth'},
+      {title:'Weight',dataKey:'weight'},
+      {title:'Weight Status',dataKey:'status'},
+    ];
+
+    this.data?.map((details:any)=>{
+      
+    
+      data.push({
+        name:details?.info?.f_p_m?.name,
+        ageInMonth:details?.ageInMoth,
+        weight:details?.info?.weight,
+        status:details?.status
+      })
+    })
+
+    autoTable(doc, {
+      columns: columns,
+      body: data,
+      didDrawPage: (dataArg:any) => {
+        doc.text('\BRU: Family Profile`s Infant', dataArg.settings.margin.top, 10);
+      },
+    });
+    doc.save('rhu_infant.pdf');
+  }
+
+  exportExcel(){
+    import('xlsx').then((xlsx) => {
+      let filteredAlumni  = this.data.map((infant:any)=>{
+
+        return {
+          name:infant?.info?.f_p_m?.name,
+          ageInMonth:infant?.ageInMoth,
+          weight:infant?.info?.weight,
+          status:infant?.status
+        };
+      })
+      const worksheet = xlsx.utils.json_to_sheet(filteredAlumni );
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      this.saveAsExcelFile(excelBuffer, 'rhu_infant_data');
+    });
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string){
+    let EXCEL_TYPE =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE,
+    });
+    FileSaver.saveAs(
+      data,
+      fileName +
+        '_export_' +
+        new Date().getTime() +
+        EXCEL_EXTENSION
+    );
+
+  }
+
+  birthDayFormat(date: any) {
+    return moment(date).format('MMMM DD, YYYY');
+  }
+
 
 }

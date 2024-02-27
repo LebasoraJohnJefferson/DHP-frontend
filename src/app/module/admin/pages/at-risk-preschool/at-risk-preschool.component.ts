@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { AtRiskPreschoolService } from '../../shared/services/atRiskPreschool.service';
 import { HotToastService } from '@ngneat/hot-toast';
+import * as FileSaver from 'file-saver';
+import { read, utils, writeFile } from 'xlsx';
+import  jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import moment from 'moment';
 
 @Component({
   selector: 'app-at-risk-preschool',
@@ -25,6 +30,7 @@ export class AtRiskPreschoolComponent {
     this._preschoolAtRiskService.getAllCreatedPreschoolAtRisk().subscribe({
       next:(res:any)=>{
         this.data = res?.data
+        console.log(this.data)
       }
     })
   }
@@ -47,5 +53,78 @@ export class AtRiskPreschoolComponent {
   registerFamiltyProfileCommit(){
     this.getAllPrechoolWithRisk()
     this.createModal = false
+  }
+
+  exportPdf(){
+    const doc = new jsPDF('p', 'pt');
+    let data:any = []
+    let columns = [
+      {title:'Name of child',dataKey:'name'},
+      {title:'Year/Period of measurement',dataKey:'period_of_measurement'},
+      {title:'Actual date of weighting',dataKey:'created_at'},
+      {title:'Weight (Kg)',dataKey:'weight'},
+      {title:'Height (cm)',dataKey:'height'},
+    ];
+
+    this.data?.map((details:any)=>{
+      
+    
+      data.push({
+        ...details,
+        created_at:this.birthDayFormat(details.created_at)
+      })
+    })
+
+    autoTable(doc, {
+      columns: columns,
+      body: data,
+      didDrawPage: (dataArg:any) => {
+        doc.text('\BRU: Family Profile`s at risk preschool', dataArg.settings.margin.top, 10);
+      },
+    });
+    doc.save('rhu_at_risk_preschool.pdf');
+  }
+
+  exportExcel(){
+    import('xlsx').then((xlsx) => {
+      let filteredAlumni  = this.data.map((atRisk:any)=>{
+
+        return {
+          name:atRisk?.name,
+          period_of_measurement:atRisk?.period_of_measurement,
+          actual_date_of_weighting:this.birthDayFormat(atRisk.created_at),
+          weight:atRisk?.weight,
+          height:atRisk.height
+        };
+      })
+      const worksheet = xlsx.utils.json_to_sheet(filteredAlumni );
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      this.saveAsExcelFile(excelBuffer, 'rhu_at_risk_data');
+    });
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string){
+    let EXCEL_TYPE =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE,
+    });
+    FileSaver.saveAs(
+      data,
+      fileName +
+        '_export_' +
+        new Date().getTime() +
+        EXCEL_EXTENSION
+    );
+
+  }
+
+  birthDayFormat(date: any) {
+    return moment(date).format('MMMM DD, YYYY');
   }
 }

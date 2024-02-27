@@ -20,8 +20,8 @@
         [globalFilterFields]="[
           'info?.f_p_m?.name' ,
           'ageInMoth',
-            'info?.weight',
-            'status'
+          'info?.weight',
+          'status'
         ]"
       >
         <ng-template pTemplate="caption">
@@ -35,14 +35,34 @@
                 (input)="dt2.filterGlobal(textInput.value, 'contains')"
                 placeholder="Search keyword"
               />
+              
             </div>
-            <button
-                (click)="createModal = true"
-                class="bg-green-800 text-white text-[12px] md:text-sm font-semibold py-3 px-5 rounded-3xl hover:bg-green-900/80 cursor-pointer transition-all"
-              >
-                <i class="fal fa-file-plus mr-1"></i>
-                Create
-              </button>
+            <div class="flex gap-1 items-center">
+              <button
+                  (click)="exportExcel()"
+                  class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+                >
+                  <i class="fad fa-download mr-1"></i>
+                  Excel
+                </button>
+                <div class="relative">
+
+                  <button
+                    (click)="exportPdf()" #ThisElem
+                    class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+                  >
+                    <i class="fad fa-download mr-1"></i>
+                    PDF
+                  </button>
+                </div>
+              <button
+                  (click)="createModal = true"
+                  class="bg-green-800 text-white text-[12px] md:text-sm font-semibold py-3 px-5 rounded-3xl hover:bg-green-900/80 cursor-pointer transition-all"
+                >
+                  <i class="fal fa-file-plus mr-1"></i>
+                  Create
+                </button>
+            </div>
 
           </div>
         </ng-template>

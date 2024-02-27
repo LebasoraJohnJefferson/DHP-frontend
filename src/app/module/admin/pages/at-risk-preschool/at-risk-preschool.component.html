@@ -36,13 +36,33 @@
                 placeholder="Search keyword"
               />
             </div>
-            <button
-                (click)="createModal = true"
-                class="bg-green-800 text-white text-[12px] md:text-sm font-semibold py-3 px-5 rounded-3xl hover:bg-green-900/80 cursor-pointer transition-all"
-              >
-                <i class="fal fa-file-plus mr-1"></i>
-                Create
-              </button>
+              <div class="flex items-center gap-1">
+
+                <button
+                  (click)="exportExcel()"
+                  class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+                >
+                  <i class="fad fa-download mr-1"></i>
+                  Excel
+                </button>
+                <div class="relative">
+
+                  <button
+                    (click)="exportPdf()" #ThisElem
+                    class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+                  >
+                    <i class="fad fa-download mr-1"></i>
+                    PDF
+                  </button>
+                </div>
+                <button
+                    (click)="createModal = true"
+                    class="bg-green-800 text-white text-[12px] md:text-sm font-semibold py-3 px-5 rounded-3xl hover:bg-green-900/80 cursor-pointer transition-all"
+                  >
+                    <i class="fal fa-file-plus mr-1"></i>
+                    Create
+                  </button>
+                </div>
 
           </div>
         </ng-template>
@@ -61,7 +81,7 @@
             <td><a class="text-blue-500 font-bold hover:text-blue-500/80"
               routerLink="/admin/forms/family-profile/details"
               [queryParams]="{id:pf?.FP_id}">{{ pf?.name }}</a></td>
-            <td>{{ pf?.period_of_measurement }} {{ pf?.period_of_measurement > 1 ? 'months old' : 'month old'}}</td>
+            <td>{{ pf?.period_of_measurement }}</td>
             <td>{{ pf?.created_at | date : 'mediumDate' }}</td>
             <td>{{ pf?.weight }}</td>
             <td>{{ pf?.height }}</td>
