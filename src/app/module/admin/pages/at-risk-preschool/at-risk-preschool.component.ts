@@ -59,7 +59,10 @@ export class AtRiskPreschoolComponent {
     const doc = new jsPDF('p', 'pt');
     let data:any = []
     let columns = [
-      {title:'Name of child',dataKey:'name'},
+      {title:'First name',dataKey:'first_name'},
+      {title:'Middle name',dataKey:'middle_name'},
+      {title:'Last name',dataKey:'last_name'},
+      {title:'Suffix',dataKey:'suffix'},
       {title:'Year/Period of measurement',dataKey:'period_of_measurement'},
       {title:'Actual date of weighting',dataKey:'created_at'},
       {title:'Weight (Kg)',dataKey:'weight'},
@@ -90,7 +93,10 @@ export class AtRiskPreschoolComponent {
       let filteredAlumni  = this.data.map((atRisk:any)=>{
 
         return {
-          name:atRisk?.name,
+          first_name:atRisk?.first_name,
+          middle_name:atRisk?.middle_name,
+          last_name:atRisk?.last_name,
+          suffix:atRisk?.suffix,
           period_of_measurement:atRisk?.period_of_measurement,
           actual_date_of_weighting:this.birthDayFormat(atRisk.created_at),
           weight:atRisk?.weight,

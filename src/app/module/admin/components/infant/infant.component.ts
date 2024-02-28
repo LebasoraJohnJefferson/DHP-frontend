@@ -63,7 +63,10 @@ export class InfantComponent {
     const doc = new jsPDF('p', 'pt',[height, width]);
     let data:any = []
     let columns = [
-      {title:'Name of child',dataKey:'name'},
+      {title:'First name',dataKey:'first_name'},
+      {title:'Middle name ',dataKey:'middle_name'},
+      {title:'Last name',dataKey:'last_name'},
+      {title:'Suffix',dataKey:'suffix'},
       {title:'Age',dataKey:'ageInMonth'},
       {title:'Weight',dataKey:'weight'},
       {title:'Weight Status',dataKey:'status'},
@@ -73,7 +76,10 @@ export class InfantComponent {
       
     
       data.push({
-        name:details?.info?.f_p_m?.name,
+        first_name:details?.info?.f_p_m?.first_name,
+        middle_name:details?.info?.f_p_m?.middle_name,
+        last_name:details?.info?.f_p_m?.last_name,
+        suffix:details?.info?.f_p_m?.suffix,
         ageInMonth:details?.ageInMoth,
         weight:details?.info?.weight,
         status:details?.status
@@ -95,7 +101,10 @@ export class InfantComponent {
       let filteredAlumni  = this.data.map((infant:any)=>{
 
         return {
-          name:infant?.info?.f_p_m?.name,
+          first_name:infant?.info?.f_p_m?.first_name,
+          middle_name:infant?.info?.f_p_m?.middle_name,
+          last_name:infant?.info?.f_p_m?.last_name,
+          suffix:infant?.info?.f_p_m?.suffix,
           ageInMonth:infant?.ageInMoth,
           weight:infant?.info?.weight,
           status:infant?.status

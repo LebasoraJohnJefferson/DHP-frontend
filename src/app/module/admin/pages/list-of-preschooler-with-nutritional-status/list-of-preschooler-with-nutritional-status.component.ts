@@ -62,7 +62,10 @@ export class ListOfPreschoolerWithNutritionalStatusComponent {
     const doc = new jsPDF('p', 'pt',[height, width]);
     let data:any = []
     let columns = [
-      {title:'Name of child',dataKey:'name'},
+      {title:'First name',dataKey:'first_name'},
+      {title:'Middle name',dataKey:'middle_name'},
+      {title:'Last name',dataKey:'last_name'},
+      {title:'Suffix',dataKey:'suffix'},
       {title:'Age', dataKey:'age'},
       {title:'Date of opt plus',dataKey:'optPlus'},
       {title:'Actual date of weight',dataKey:'actDateWeight'},
@@ -100,11 +103,15 @@ export class ListOfPreschoolerWithNutritionalStatusComponent {
       let filteredAlumni  = this.data.map((details:any)=>{
 
         return {
+          first_name:details?.first_name,
+          middle_name:details?.middle_name,
+          last_name:details?.last_name,
+          suffix:details?.suffix,
           actDateWeight:this.birthDayFormat(details.created_at),
           height:details?.preDetails?.height,
           weight:details?.preDetails?.weight,
           optPlus:this.birthDayFormat(details?.preDetails?.date_opt),
-          name:details?.name,
+          
           age:details?.age,
           BMI:details?.BMI,
           percentile:details?.percentile,

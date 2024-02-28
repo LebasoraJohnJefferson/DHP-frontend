@@ -43,6 +43,7 @@ export class BaranggayPreschoolerComponent {
     this._preschoolService.getAllRegistedPreschool().subscribe({
       next:(res:any)=>{
         this.data = res?.data
+        console.log(this.data)
       }
     })
   }
@@ -60,7 +61,10 @@ export class BaranggayPreschoolerComponent {
     const doc = new jsPDF('p', 'pt',[height, width]);
     let data:any = []
     let columns = [
-      {title:'Name',dataKey:'name'},
+      {title:'First name',dataKey:'first_name'},
+      {title:'Middle name',dataKey:'last_name'},
+      {title:'Last name',dataKey:'middle_name'},
+      {title:'Suffix',dataKey:'suffix'},
       {title:'Indigenous preschool child', dataKey:'ingigenous'},
       {title:'Address',dataKey:'address'},
       {title:'Actual date of weighing',dataKey:'actDateWeight'},
@@ -70,7 +74,11 @@ export class BaranggayPreschoolerComponent {
 
     this.data?.map((details:any)=>{
       
-      data.push({...details,
+      data.push({
+          first_name:details?.preDetails?.fam_profile_member?.first_name,
+          middle_name:details?.preDetails?.fam_profile_member?.middle_name,
+          last_name:details?.preDetails?.fam_profile_member?.last_name,
+          suffix:details?.preDetails?.fam_profile_member?.suffix,
           ingigenous:details?.preDetails?.indigenous_preschool_child ? 'Yes' : 'No',
           address:details?.preDetails?.address,
           actDateWeight:this.birthDayFormat(details?.preDetails?.created_at),
@@ -94,6 +102,10 @@ export class BaranggayPreschoolerComponent {
       let filteredAlumni  = this.data.map((details:any)=>{
 
         return {
+          first_name:details?.preDetails?.fam_profile_member?.first_name,
+          middle_name:details?.preDetails?.fam_profile_member?.middle_name,
+          last_name:details?.preDetails?.fam_profile_member?.last_name,
+          suffix:details?.preDetails?.fam_profile_member?.suffix,
           ingigenous:details?.preDetails?.indigenous_preschool_child ? 'Yes' : 'No',
           address:details?.preDetails?.address,
           actDateWeight:this.birthDayFormat(details?.preDetails?.created_at),

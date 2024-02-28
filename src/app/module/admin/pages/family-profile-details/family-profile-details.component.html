@@ -123,7 +123,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-pfc>
               <tr class="text-sm" [pSelectableRow]="pfc">
-                <td>{{ pfc.name }}</td>
+                <td>{{ pfc.first_name + ' ' + pfc?.middle_name[0] +'. ' + pfc?.last_name + ' ' }} {{pfc.suffix ? pfc.suffix : ''}}</td>
                 <td>{{ pfc.birthDay | date :'mediumDate'}}</td>
                 <td>{{ calculateAge(pfc.birthDay)!=0 ? calculateAge(pfc.birthDay)+' year(s) old' : '1 yr>mos.Child' }}</td>
                 <td>{{ pfc.occupation }}</td>
@@ -233,31 +233,28 @@
         [formGroup]="childrenForm"
         class="w-full grid gap-2"
       >
-          <div class="w-full">
+          <div *ngFor="let field of fields" class="w-full">
             <label class="block text-[12px] font-medium text-gray-700"
-              >Name</label
+              >{{field.label}}</label
             >
-            <div class="mt-1 relative rounded-md w-full">
+            <div *ngIf="field.type != 'dropdown'" class="mt-1 relative rounded-md w-full">
               <input
-                type="text"
+                [type]="field.type"
                 class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
-                placeholder="Enter child name"
-                formControlName="name"
+                [placeholder]="field.placeholder"
+                [formControlName]="field.formName"
               />
             </div>
-          </div>
-          <div class="w-full">
-            <label class="block text-[12px] font-medium text-gray-700"
-              >Birth Day</label
-            >
-            <div class="mt-1 relative rounded-md w-full">
-              <input
-                type="date"
-                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
-                formControlName="birthDay"
-              />
+            <div *ngIf="field.type == 'dropdown'" class="mt-1 relative rounded-md w-full">
+              <select [formControlName]="field.formName" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
+                <option selected disabled>Select suffix</option>
+                <option [value]="suffix?.acro" *ngFor="let suffix of field?.data">
+                    {{suffix?.acro}} ({{suffix?.meaning}})
+                </option>
+              </select>
             </div>
           </div>
+          
           <div class="w-full">
             <label class="block text-[12px] font-medium text-gray-700"
               >Gender</label
