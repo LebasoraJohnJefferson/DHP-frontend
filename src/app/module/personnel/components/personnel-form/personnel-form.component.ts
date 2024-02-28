@@ -12,13 +12,30 @@ export class PersonnelFormComponent implements OnInit{
   @Input() data:any;
   @Output() triggerSubmmit:EventEmitter<any> = new EventEmitter()
   isSubmitLoading:boolean=false
+
+  extension:any=[
+    {acro:'',meaning:'Not Applicable'},
+    {acro:'Jr',meaning:'Junior'},
+    {acro:'Sr',meaning:'Senior'},
+    {acro:'II',meaning:'The second'},
+    {acro:'III',meaning:'The third'},
+    {acro:'IV',meaning:'The fourth'},
+    {acro:'V',meaning:'The fifth'},
+    {acro:'VI',meaning:'The sixth'},
+    {acro:'VII',meaning:'The seventh'},
+    {acro:'VIII',meaning:'The eighth'},
+    {acro:'IX',meaning:'The ninth'},
+    {acro:'X',meaning:'The tenth'},
+  ];
+
   updateForm:FormGroup = this._fb.group({
     first_name:['',[Validators.required]],
     last_name:['',[Validators.required]],
     middle_name:['',[Validators.required]],
     email:['',[Validators.required,Validators.email]],
     password:['',[Validators.required]],
-    password_confirmation:['']
+    password_confirmation:[''],
+    suffix:['']
   })
 
   constructor(

@@ -11,6 +11,9 @@ import { HotToastService } from '@ngneat/hot-toast';
 })
 export class PersonnelFormComponent {
   isSubmitLoading:boolean = false
+  @Input() methodSet:string = 'post'
+  @Input() data:any;
+  @Output() triggerSubmmit:EventEmitter<any> = new EventEmitter()
   createForm:FormGroup = this._fb.group({
     first_name:['',[Validators.required]],
     last_name:['',[Validators.required]],
@@ -18,11 +21,23 @@ export class PersonnelFormComponent {
     email:['',[Validators.required,Validators.email]],
     is_active:[false],
     password:['',[Validators.required]],
-    password_confirmation:['']
+    password_confirmation:[''],
+    suffix:['']
   })
-  @Input() methodSet:string = 'post'
-  @Input() data:any;
-  @Output() triggerSubmmit:EventEmitter<any> = new EventEmitter()
+  extension:any=[
+    {acro:'',meaning:'Not Applicable'},
+    {acro:'Jr',meaning:'Junior'},
+    {acro:'Sr',meaning:'Senior'},
+    {acro:'II',meaning:'The second'},
+    {acro:'III',meaning:'The third'},
+    {acro:'IV',meaning:'The fourth'},
+    {acro:'V',meaning:'The fifth'},
+    {acro:'VI',meaning:'The sixth'},
+    {acro:'VII',meaning:'The seventh'},
+    {acro:'VIII',meaning:'The eighth'},
+    {acro:'IX',meaning:'The ninth'},
+    {acro:'X',meaning:'The tenth'},
+  ];
   constructor(
     private _fb:FormBuilder,
     private _personnelService:PersonnelService,
@@ -53,6 +68,8 @@ export class PersonnelFormComponent {
     this.createForm.controls['password_confirmation'].setValue(
       this.createForm.controls['password'].value
     )
+    const is_active = this.createForm.controls['is_active'].value
+    if(is_active != false && is_active != true) this.createForm.controls['is_active'].setValue(false)
 
     this.isSubmitLoading = true
     if(this.methodSet === 'post'){

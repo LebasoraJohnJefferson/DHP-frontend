@@ -8,6 +8,7 @@
               {{basicInfo?.first_name | titlecase}}
               {{basicInfo?.middle_name[0] | titlecase}}.
               {{basicInfo?.last_name |titlecase}}
+              {{basicInfo?.suffix | uppercase}}
             </p>
           </div>
         </div>
@@ -58,6 +59,10 @@
       <div class="grid grid-cols-2 w-full ">
         <span class="border  border-slate-300 px-2 py-1">Last name </span>
         <span class="border  border-slate-300 px-2 py-1">{{basicInfo?.last_name}} </span>
+      </div>
+      <div class="grid grid-cols-2 w-full ">
+        <span class="border  border-slate-300 px-2 py-1">Suffix</span>
+        <span class="border  border-slate-300 px-2 py-1">{{basicInfo?.suffix}} </span>
       </div>
       <div class="grid grid-cols-2 w-full ">
         <span class="border  border-slate-300 px-2 py-1">Email </span>

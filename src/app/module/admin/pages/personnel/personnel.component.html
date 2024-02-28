@@ -108,9 +108,10 @@
           </ng-template>
           <ng-template pTemplate="header">
             <tr class="text-sm">
-              <th field="name">First name</th>
-              <th field="AlumniCredentialschoolId.Course.acronym">Middle name</th>
-              <th field="AlumniCredentialschoolId.gradClass">Last name</th>
+              <th field="first_name">First name</th>
+              <th field="middle_name">Middle name</th>
+              <th field="last_name">Last name</th>
+              <th field="suffix">suffix</th>
               <th field="email">Email</th>
               <th field="status">Status</th>
               <th>Action</th>
@@ -121,6 +122,7 @@
               <td>{{ personnel.first_name }}</td>
               <td>{{ personnel.middle_name }}</td>
               <td>{{ personnel.last_name }}</td>
+              <td>{{ personnel.suffix ?? 'N/A' }}</td>
               <td>{{ personnel.email}}</td>
               <td>
                 <div

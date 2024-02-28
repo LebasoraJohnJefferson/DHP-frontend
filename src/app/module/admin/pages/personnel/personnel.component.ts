@@ -41,11 +41,14 @@ export class PersonnelComponent {
     this._personnelService.getAllPersonnel().subscribe({
       next:(res)=>{
         this.data = res.data
+        console.log(res.data,'asdasd')
       }
     })
   }
 
   recover(personnelId:number){
+    const confirmation = confirm("Are you sure, you want to recover this account?")
+    if(!confirmation) return
     this.isRecovering = true
     this._personnelService.recoverPersonnel(personnelId).subscribe({
       next:(res)=>{
@@ -62,6 +65,8 @@ export class PersonnelComponent {
   }
 
   deletePermanently(personnelId:number){
+    const confirmation = confirm("Are you sure, you want to delete this account permanently?")
+    if(!confirmation) return
     this.isDeletingPermanent = true
     this._personnelService.commitDeletePersonnel(personnelId).subscribe({
       next:(res)=>{

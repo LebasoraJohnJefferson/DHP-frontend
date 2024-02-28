@@ -38,6 +38,7 @@ export class FamilyProfileComponent implements OnInit{
     this._FPService.getAllPF().subscribe({
       next:(res:any)=>{
         this.data = res?.data;
+        console.log(this.data)
       }
     })
   }

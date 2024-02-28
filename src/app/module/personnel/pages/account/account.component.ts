@@ -13,6 +13,7 @@ export class AccountComponent implements OnInit{
   updateAccountModal:boolean = false
   moreInformationModal:boolean = false
   information:any= [];
+  
 
   constructor(
     public location:Location,
@@ -53,7 +54,6 @@ export class AccountComponent implements OnInit{
           },{
             field:'Gender',
             data:this.basicInfo?.more_info?.gender
-
           }
         ]
       }
