@@ -134,14 +134,14 @@ export class PersonnelComponent {
   exportExcel(){
     import('xlsx').then((xlsx) => {
       let filteredAlumni  = this.data.map((personnel:any)=>{
-        const { first_name, middle_name, last_name, email,is_active, ...rest } = personnel;
+        const { first_name, suffix, middle_name, last_name, email,is_active } = personnel;
         return {
           "first_name":first_name,
           "middle_name":middle_name,
           "last_name":last_name,
           "email":email,
+          'suffix':suffix,
           "is_active":is_active,
-          ...rest
         };
       })
       const worksheet = xlsx.utils.json_to_sheet(filteredAlumni );
@@ -180,6 +180,7 @@ export class PersonnelComponent {
       { title: 'Middle name', dataKey: 'middle_name' },
       { title: 'Last Name', dataKey: 'last_name' },
       { title: 'Email', dataKey: 'email' },
+      { title: 'Suffix', dataKey: 'suffix' },
       {title:'Status',dataKey:'is_active'}
     ];
 

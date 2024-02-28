@@ -105,7 +105,7 @@
       [(visible)]="detailsModal"
       [modal]="true"
       appendTo="body"
-      [style]="{ maxWidth: '400px', width: '400px' }"
+      [style]="{ maxWidth: '550px', width: '550px' }"
     >
 
     <table class="grid grid-cols-2  p-2 rounded text-[12px]">
@@ -133,11 +133,21 @@
           <td class="show border p-1 px-2">{{FamDetails?.attributes?.household_no}}</td>
           <td  class="show border p-1 px-2">{{FamDetails?.attributes.baranggay}}</td>
           <td class="show border p-1 px-2">{{FamDetails?.attributes?.contact_number}}</td>
-          <td class="show border p-1 px-2">{{FamDetails?.attributes?.mother}}</td>
+          <td class="show border p-1 px-2">
+            {{ FamDetails?.attributes.mother_first_name  | titlecase}}
+            {{ FamDetails?.attributes.mother_middle_name[0]+'.' | titlecase}}
+            {{ FamDetails?.attributes.mother_last_name  | titlecase}}
+            {{ FamDetails?.attributes.mother_suffix  | uppercase}}
+          </td>
           <td class="show border p-1 px-2">{{FamDetails?.attributes?.mother_birthday | date : 'mediumDate'}}</td>
           <td class="show border p-1 px-2">{{FamDetails?.attributes?.mother_occupation}}</td>
           <td class="show border p-1 px-2">{{FamDetails?.attributes?.mother_educ_attain}}</td>
-          <td class="show border p-1 px-2">{{FamDetails?.attributes?.father}}</td>
+          <td class="show border p-1 px-2">
+            {{ FamDetails?.attributes.father_first_name  | titlecase}}
+            {{ FamDetails?.attributes.father_middle_name[0]+'.' | titlecase}}
+            {{ FamDetails?.attributes.father_last_name  | titlecase}}
+            {{ FamDetails?.attributes.father_suffix  | uppercase}}
+          </td>
           <td class="show border p-1 px-2">{{FamDetails?.attributes?.father_birthday | date : 'mediumDate'}}</td>
           <td class="show border p-1 px-2">{{FamDetails?.attributes?.father_occupation}}</td>
           <td class="show border p-1 px-2">{{FamDetails?.attributes?.father_educ_attain}}</td>

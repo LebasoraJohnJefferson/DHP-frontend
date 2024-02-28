@@ -73,8 +73,18 @@
             <td>{{ pf.attributes.household_no }}</td>
             <td>{{ pf.attributes.no_household_member }}</td>
             <td>{{ pf.attributes.contact_number }}</td>
-            <td>{{ pf.attributes.father }}</td>
-            <td>{{ pf.attributes.mother }}</td>
+            <td>
+              {{ pf.attributes.father_first_name  | titlecase}}
+              {{ pf.attributes.father_middle_name[0]+'.' | titlecase}}
+              {{ pf.attributes.father_last_name  | titlecase}}
+              {{ pf.attributes.father_suffix  | uppercase}}
+            </td>
+            <td>
+              {{ pf.attributes.mother_first_name  | titlecase}}
+              {{ pf.attributes.mother_middle_name[0]+'.' | titlecase}}
+              {{ pf.attributes.mother_last_name  | titlecase}}
+              {{ pf.attributes.mother_suffix  | uppercase}}
+            </td>
             <td>{{ pf.attributes.toilet_type }}</td>
             <td>{{ pf.attributes.water_source }}</td>
             <td>{{ pf.attributes.food_prod_act }}</td>

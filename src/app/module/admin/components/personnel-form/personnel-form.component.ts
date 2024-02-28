@@ -70,7 +70,7 @@ export class PersonnelFormComponent {
     )
     const is_active = this.createForm.controls['is_active'].value
     if(is_active != false && is_active != true) this.createForm.controls['is_active'].setValue(false)
-
+      
     this.isSubmitLoading = true
     if(this.methodSet === 'post'){
       this.postSubmit()

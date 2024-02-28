@@ -22,6 +22,20 @@ export class FamilyProfileFormComponent implements OnInit {
   familtyPlanning:boolean = false
   motherPregnant:boolean = false
   @Output() triggerSubmmit:EventEmitter<any> = new EventEmitter()
+  extension:any=[
+    {acro:'',meaning:'Not Applicable'},
+    {acro:'Jr',meaning:'Junior'},
+    {acro:'Sr',meaning:'Senior'},
+    {acro:'II',meaning:'The second'},
+    {acro:'III',meaning:'The third'},
+    {acro:'IV',meaning:'The fourth'},
+    {acro:'V',meaning:'The fifth'},
+    {acro:'VI',meaning:'The sixth'},
+    {acro:'VII',meaning:'The seventh'},
+    {acro:'VIII',meaning:'The eighth'},
+    {acro:'IX',meaning:'The ninth'},
+    {acro:'X',meaning:'The tenth'},
+  ];
   otherFileds:any=[
     {
       title:'Contact number',
@@ -30,10 +44,29 @@ export class FamilyProfileFormComponent implements OnInit {
       placeholder:'contact number e.g 09********.'
     },
     {
-      title:'Father name',
-      formName:'father',
+      title:'Father`s first name',
+      formName:'father_first_name',
       type:'text',
-      placeholder:'Enter Father`s name.'
+      placeholder:'Enter Father`s first name.'
+    },
+    {
+      title:'Father`s middle name',
+      formName:'father_middle_name',
+      type:'text',
+      placeholder:'Enter Father`s middle name.'
+    },
+    {
+      title:'Father`s last name',
+      formName:'father_last_name',
+      type:'text',
+      placeholder:'Enter Father`s last name.'
+    },
+    {
+      title:'Father`s suffix',
+      formName:'father_suffix',
+      type:'dropdown',
+      placeholder:'Enter Father`s last name.',
+      data:this.extension
     },
     {
       title:'Father`s birthday',
@@ -41,16 +74,36 @@ export class FamilyProfileFormComponent implements OnInit {
       type:'date',
     },
     {
-      title:'Mother name',
-      formName:'mother',
+      title:'Mother`s first name',
+      formName:'mother_first_name',
       type:'text',
-      placeholder:'Enter mother`s name.'
+      placeholder:'Enter Father`s first name.'
+    },
+    {
+      title:'Mother`s middle name',
+      formName:'mother_middle_name',
+      type:'text',
+      placeholder:'Enter Mother`s middle name.'
+    },
+    {
+      title:'Mother`s last name',
+      formName:'mother_last_name',
+      type:'text',
+      placeholder:'Enter Father`s last name.'
+    },
+    {
+      title:'Mother`s suffix',
+      formName:'mother_suffix',
+      type:'dropdown',
+      placeholder:'Enter Father`s last name.',
+      data:this.extension
     },
     {
       title:'mother`s birthday',
       formName:'mother_birthday',
       type:'date',
     },
+
   ]
 
   occupations = ['employed','unemployed','self-employed']
@@ -80,8 +133,14 @@ export class FamilyProfileFormComponent implements OnInit {
 
   familyProfileForm:FormGroup = this._fb.group({
     brgy_id:['',Validators.required],
-    mother:['',Validators.required],
-    father:['',Validators.required],
+    mother_first_name:['',Validators.required],
+    mother_middle_name:['',Validators.required],
+    mother_last_name:['',Validators.required],
+    mother_suffix:[''],
+    father_first_name:['',Validators.required],
+    father_middle_name:['',Validators.required],
+    father_last_name:['',Validators.required],
+    father_suffix:[''],
     contact_number: ['', [Validators.required, Validators.pattern(/^(09|\+639)\d{9}$/)]],
     mother_occupation:['',Validators.required],
     father_occupation:['',Validators.required],

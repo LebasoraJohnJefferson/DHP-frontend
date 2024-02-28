@@ -64,7 +64,7 @@ export class FamilyProfileComponent implements OnInit{
 
   exportPdf(){
     const aspectRatio = 1.2941;
-    const width = 1400;
+    const width = 1500;
     const height = width / aspectRatio;
     const doc = new jsPDF('p', 'pt',[height, width]);
     let data:any = []
@@ -97,8 +97,12 @@ export class FamilyProfileComponent implements OnInit{
       const using_IFR = info.using_IFR ? 'Yes' : 'No'
       const father_birthday = this.birthDayFormat(info?.father_birthday);
       const mother_birthday = this.birthDayFormat(info?.mother_birthday);
+      const father =`${info.father_first_name} ${info?.father_middle_name[0]}. ${info.father_last_name} ${info.father_suffix}`
+      const mother =`${info.mother_first_name} ${info?.mother_middle_name[0]}. ${info.mother_last_name} ${info.mother_suffix}`
       data.push({...info,
         familty_planning:familty_planning,
+        father: father,
+        mother:mother,
         mother_pregnant:mother_pregnant,
         using_iodized_salt:using_iodized_salt,
         father_birthday:father_birthday,
