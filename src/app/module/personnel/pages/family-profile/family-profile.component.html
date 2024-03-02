@@ -24,8 +24,14 @@
           'attributes.household_no',
             'attributes.no_household_member',
             'attributes.contact_number',
-            'attributes.mother',
-            'attributes.father',
+            'attributes.mother_first_name',
+            'attributes.mother_last_name',
+            'attributes.mother_middle_name',
+            'attributes.father_suffix',
+            'attributes.father_first_name',
+            'attributes.father_middle_name',
+            'attributes.father_last_name',
+            'attributes.mother_suffix',
             'attributes.occupation',
             'attributes.educ_attain',
            'attributes.toilet_type',
@@ -77,13 +83,13 @@
               {{ pf.attributes.father_first_name  | titlecase}}
               {{ pf.attributes.father_middle_name[0]+'.' | titlecase}}
               {{ pf.attributes.father_last_name  | titlecase}}
-              {{ pf.attributes.father_suffix  | uppercase}}
+              {{ pf.attributes.father_suffix ?? ''  | uppercase}}
             </td>
             <td>
               {{ pf.attributes.mother_first_name  | titlecase}}
               {{ pf.attributes.mother_middle_name[0]+'.' | titlecase}}
               {{ pf.attributes.mother_last_name  | titlecase}}
-              {{ pf.attributes.mother_suffix  | uppercase}}
+              {{ pf.attributes.mother_suffix ?? ''  | uppercase}}
             </td>
             <td>{{ pf.attributes.toilet_type }}</td>
             <td>{{ pf.attributes.water_source }}</td>

@@ -62,6 +62,7 @@ export class PreschoolRecordsFormComponent {
     this._preschoolService.getPreschool().subscribe({
       next:(res:any)=>{
         this.children = res?.data
+        console.log(res.data)
       }
     })
   }

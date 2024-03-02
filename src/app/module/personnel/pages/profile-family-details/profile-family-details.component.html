@@ -35,9 +35,15 @@
             [rowsPerPageOptions]="[10, 25, 50]"
             styleClass="p-datatable-gridlines"
             [globalFilterFields]="[
-              'name',
-                'birthDay',
-                'nursing_type',
+              'first_name',
+              'middle_name',
+              'last_name ',
+              'suffix',
+              'birthDay',
+              'occupation',
+              'relationship',
+              'nursing_type',
+              'gender'
             ]"
           >
             <ng-template pTemplate="caption">
@@ -77,7 +83,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-pfc>
               <tr class="text-sm" [pSelectableRow]="pfc">
-                <td>{{ pfc.name }}</td>
+                <td>{{ pfc.first_name +' ' + pfc.middle_name[0]+ '. ' +' '+ pfc.last_name }} {{pfc?.suffix ?? '' }}</td>
                 <td>{{ pfc.birthDay | date :'mediumDate'}}</td>
                 <td>{{ calculateAge(pfc.birthDay)!=0 ? calculateAge(pfc.birthDay)+' year(s) old' : '1 yr>mos.Child' }}</td>
                 <td>{{ pfc.occupation }}</td>

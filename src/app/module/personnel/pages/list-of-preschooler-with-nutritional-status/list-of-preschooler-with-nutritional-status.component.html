@@ -21,10 +21,16 @@
         [rowsPerPageOptions]="[10, 25, 50]"
         styleClass="p-datatable-gridlines"
         [globalFilterFields]="[
-          'info?.f_p_m?.name' ,
+          'first_name' ,
+          'middle_name' ,
+          'last_name' ,
+          'suffix' ,
           'ageInMoth',
-            'info?.weight', 
-            'status'
+          'preDetails.weight', 
+          'preDetails.height',
+          'BMI',
+          'percentile',
+          'status'
         ]"
       >
         <ng-template pTemplate="caption">
@@ -67,7 +73,10 @@
           <tr class="text-sm" [pSelectableRow]="child">
             <td><a class="text-blue-500 font-bold hover:text-blue-500/80" 
               routerLink="/form/family-profile/details"
-              [queryParams]="{id:child?.FP_id}">{{ child?.name }}</a></td>
+              [queryParams]="{id:child?.FP_id}">
+              {{ child?.first_name+' '+ child?.middle_name[0]+'. '+child?.last_name | titlecase}} 
+              {{child?.suffix ?? '' }}
+            </a></td>
             <td>{{child?.age}}</td>
             <td>{{ child?.preDetails?.date_opt | date : 'mediumDate' }}</td>
             <td>{{ child?.created_at | date : 'mediumDate' }}</td>
