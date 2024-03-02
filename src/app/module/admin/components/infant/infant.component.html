@@ -18,9 +18,12 @@
         [rowsPerPageOptions]="[10, 25, 50]"
         styleClass="p-datatable-gridlines"
         [globalFilterFields]="[
-          'info?.f_p_m?.name' ,
+          'info.f_p_m.first_name' ,
+          'info.f_p_m.last_name' ,
+          'info.f_p_m.middle_name' ,
+          'info.f_p_m.suffix' ,
           'ageInMoth',
-          'info?.weight',
+          'info.weight',
           'status'
         ]"
       >

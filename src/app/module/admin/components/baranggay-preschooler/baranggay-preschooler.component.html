@@ -19,12 +19,13 @@
              [rowsPerPageOptions]="[10, 25, 50]"
              styleClass="p-datatable-gridlines"
              [globalFilterFields]="[
-                'preDetails?.indigenous_preschool_child',
-                'preDetails?.address',
+                'preDetails.indigenous_preschool_child',
+                'name',
+                'preDetails.address',
                 'age',
-                'preDetails?.created_at',
-                  'preDetails?.weight',
-                'preDetails?.height'
+                'preDetails.created_at',
+                'preDetails.weight',
+                'preDetails.height'
              ]"
            >
              <ng-template pTemplate="caption">

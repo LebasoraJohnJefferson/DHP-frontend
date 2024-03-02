@@ -17,10 +17,18 @@
         [rowsPerPageOptions]="[10, 25, 50]"
         styleClass="p-datatable-gridlines"
         [globalFilterFields]="[
-          'info?.f_p_m?.name' ,
-          'ageInMoth',
-            'info?.weight', 
-            'status'
+          'first_name', 
+          'middle_name',
+          'last_name', 
+          'suffix',
+          'age',
+          'preDetails.date_opt', 
+          'created_at', 
+          'preDetails.weight', 
+          'preDetails.height', 
+          'BMI', 
+          'percentile', 
+          'status'
         ]"
       >
         <ng-template pTemplate="caption">
