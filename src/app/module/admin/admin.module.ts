@@ -47,6 +47,7 @@ import { AtRiskPreschoolComponent } from './pages/at-risk-preschool/at-risk-pres
 import { AtRiskPreschoolFormComponent } from './components/at-risk-preschool-form/at-risk-preschool-form.component';
 import { AtRiskPreschoolAnalyticsComponent } from './pages/at-risk-preschool-analytics/at-risk-preschool-analytics.component';
 import { PopulationAgeBracketComponent } from './pages/population-age-bracket/population-age-bracket.component';
+import { ListOfResidentComponent } from './pages/list-of-resident/list-of-resident.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { PopulationAgeBracketComponent } from './pages/population-age-bracket/po
     AtRiskPreschoolFormComponent,
     AtRiskPreschoolAnalyticsComponent,
     PopulationAgeBracketComponent,
+    ListOfResidentComponent,
   ],
   imports: [
     PrimengModule,

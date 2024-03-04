@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="mt-5 ">
-      <div class="flex gap-2 md:hidden -translate-y-1 rounded flex items-center">
+      <div class="flex gap-2 lg:hidden -translate-y-1 rounded flex items-center">
         <select (change)="navigateTo($event)" class="text-[12px] py-1 bg-green-800 text-white border-0 outline-0  h-fit items-center rounded">
           <option *ngFor="let analytic of anaylitcs" [selected]="currentRoute==analytic?.route" [value]="analytic?.link">{{analytic.label}}</option>
         </select>

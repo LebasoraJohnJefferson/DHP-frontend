@@ -15,6 +15,7 @@ export class ProfileFamilyDetailsComponent implements OnInit{
   createModal:boolean = false
   detailsModal:boolean = false
   FPid:any;
+  pfc:any;
   selectdata:any;
   data:any;
   cols:any;
@@ -42,10 +43,63 @@ export class ProfileFamilyDetailsComponent implements OnInit{
   ){
   }
 
+  extension:any=[
+    {acro:'',meaning:'Not Applicable'},
+    {acro:'Jr',meaning:'Junior'},
+    {acro:'Sr',meaning:'Senior'},
+    {acro:'II',meaning:'The second'},
+    {acro:'III',meaning:'The third'},
+    {acro:'IV',meaning:'The fourth'},
+    {acro:'V',meaning:'The fifth'},
+    {acro:'VI',meaning:'The sixth'},
+    {acro:'VII',meaning:'The seventh'},
+    {acro:'VIII',meaning:'The eighth'},
+    {acro:'IX',meaning:'The ninth'},
+    {acro:'X',meaning:'The tenth'},
+  ];
+
+  fields = [
+    {
+      type:'text',
+      placeholder:'Enter first name',
+      formName:'first_name',
+      label:'Member`s first name'
+    },
+    {
+      type:'text',
+      placeholder:'Enter middle name',
+      formName:'middle_name',
+      label:'Member`s middle name'
+    },
+    {
+      type:'text',
+      placeholder:'Enter last name',
+      formName:'last_name',
+      label:'Member`s last name'
+    },
+    {
+      type:'dropdown',
+      placeholder:'Enter suffix',
+      formName:'suffix',
+      label:'Member`s suffix',
+      data:this.extension
+    },
+    {
+      type:'date',
+      placeholder:'Enter Birthday',
+      formName:'birthDay',
+      label:'Member`s birthday',
+    },
+    
+  ]
+
   childrenForm:FormGroup = this._fb.group(
     {
       FP_id:[''],
-      name:['',Validators.required],
+      first_name:['',Validators.required],
+      middle_name:['',Validators.required],
+      last_name:['',Validators.required],
+      suffix:[''],
       birthDay:['',Validators.required],
       gender:['',Validators.required],
       occupation:['',Validators.required],

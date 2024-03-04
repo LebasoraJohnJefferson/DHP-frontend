@@ -29,6 +29,7 @@ import { NutritionalStatusAnalyticsComponent } from './pages/nutritional-status-
 import { AtRiskPreschoolComponent } from './pages/at-risk-preschool/at-risk-preschool.component';
 import { AtRiskPreschoolAnalyticsComponent } from './pages/at-risk-preschool-analytics/at-risk-preschool-analytics.component';
 import { PopulationAgeBracketComponent } from './pages/population-age-bracket/population-age-bracket.component';
+import { ListOfResidentComponent } from './pages/list-of-resident/list-of-resident.component';
 
 const routes: Routes = [
   {
@@ -69,6 +70,7 @@ const routes: Routes = [
       },
       { path: 'logs', component: LogsComponent },
       { path: 'baranggay', component: BaranggayComponent },
+      { path: 'baranggay/list-of-resident', component: ListOfResidentComponent },
     ],
   },
   {

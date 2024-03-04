@@ -19,6 +19,11 @@ export class BaranggayService {
     return this.http.get(`${BASEURL}/baranggay`)
   }
 
+
+  getBaranggayResident(brgyId:number):Observable<any>{
+    return this.http.get(`${BASEURL}/baranggay/${brgyId}`)
+  }
+
   createBrgy(data:any):Observable<any>{
     return this.http.post(`${BASEURL}/baranggay`,data)
   }

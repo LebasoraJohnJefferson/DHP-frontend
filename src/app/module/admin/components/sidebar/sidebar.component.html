@@ -33,8 +33,8 @@
           <li
             (click)="assignLabel(attribute?.link)"
             [routerLink]="attribute?.link"
-            [class]="attribute?.link == selectedLabel ? 'text-purple-500 text-[12px] cursor-pointer py-1 font-semibold pl-2 border-l border-green-500' :
-            'text-[12px] cursor-pointer py-1 font-semibold pl-2 border-l border-green-500'"
+            [class]="attribute?.link == selectedLabel ? 'text-purple-500 hover:text-red-500 text-[12px] cursor-pointer py-1 font-semibold pl-2 border-l border-green-500' :
+            'text-[12px] cursor-pointer py-1 font-semibold pl-2 border-l hover:text-red-500 border-green-500'"
             *ngFor="let attribute of route?.attributes">
             {{attribute?.label}}
           </li>
