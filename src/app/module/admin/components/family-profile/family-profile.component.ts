@@ -115,7 +115,7 @@ export class FamilyProfileComponent implements OnInit{
       columns: columns,
       body: data,
       didDrawPage: (dataArg:any) => {
-        doc.text('\BRU: Family Profile', dataArg.settings.margin.top, 10);
+        doc.text('\RHU: Family Profile', dataArg.settings.margin.top, 10);
       },
     });
     doc.save('rhu_family_profile.pdf');

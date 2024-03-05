@@ -20,6 +20,10 @@
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [rowsPerPageOptions]="[10, 25, 50]"
             styleClass="p-datatable-gridlines"
+            [globalFilterFields]="[
+            'title',
+            'venue',
+            ]"
           >
             <ng-template pTemplate="caption">
               <div class="gap-2 w-full flex justify-between">

@@ -82,7 +82,7 @@ export class AtRiskPreschoolComponent {
       columns: columns,
       body: data,
       didDrawPage: (dataArg:any) => {
-        doc.text('\BRU: Family Profile`s at risk preschool', dataArg.settings.margin.top, 10);
+        doc.text('\RHU: Family Profile`s at risk preschool', dataArg.settings.margin.top, 10);
       },
     });
     doc.save('rhu_at_risk_preschool.pdf');

@@ -13,13 +13,13 @@ export class AtRiskPreschoolFormComponent {
   isSubmitLoading:boolean = false
   otherFileds:any=[
     {
-      title:'Weight',
+      title:'Weight (kg)',
       formName:'weight',
       type:'number',
       placeholder:'weight'
     },
     {
-      title:'Height',
+      title:'Height (cm)',
       formName:'height',
       type:'number',
       placeholder:'height'

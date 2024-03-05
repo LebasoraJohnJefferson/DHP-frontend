@@ -92,7 +92,7 @@ export class ListOfPreschoolerWithNutritionalStatusComponent {
       columns: columns,
       body: data,
       didDrawPage: (dataArg:any) => {
-        doc.text('\BRU: Preschooler with nutritional status', dataArg.settings.margin.top, 10);
+        doc.text('\RHU: Preschooler with nutritional status', dataArg.settings.margin.top, 10);
       },
     });
     doc.save('Preschooler_with_nutritional_status.pdf');

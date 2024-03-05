@@ -268,7 +268,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
         columns: columns,
         body: data,
         didDrawPage: (dataArg:any) => {
-          doc.text(`\BRU: Family Profile Member of #${this?.FamDetails?.attributes?.household_no}`, dataArg.settings.margin.top, 10);
+          doc.text(`\RHU: Family Profile Member of #${this?.FamDetails?.attributes?.household_no}`, dataArg.settings.margin.top, 10);
         },
       });
     doc.save(`rhu_family_profile_member_#${this?.FamDetails?.attributes?.household_no}.pdf`);

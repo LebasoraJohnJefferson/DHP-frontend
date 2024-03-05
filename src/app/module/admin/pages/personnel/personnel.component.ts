@@ -193,10 +193,10 @@ export class PersonnelComponent {
       columns: columns,
       body: data,
       didDrawPage: (dataArg:any) => {
-        doc.text('\BRU: Personnel', dataArg.settings.margin.top, 10);
+        doc.text('\RHU: Personnel', dataArg.settings.margin.top, 10);
       },
     });
-    doc.save('rhu.pdf');
+    doc.save('rhu_personnel.pdf');
   }
 
 

@@ -106,7 +106,7 @@
         >
           <div class="h-[100px]">
             <img
-              src="../../../../../assets/images/population.png"
+              src="../../../../../assets/images/barangay.png"
               alt=""
               class="w-[100px]"
             />
@@ -114,7 +114,7 @@
   
           <a routerLink="/admin/baranggay" class="">
             <h1 class="text-xl lg:text-3xl font-black text-slate-800 text-end">
-              Baranggay
+              Barangay
             </h1>
             <div class="flex gap-2 justify-end">
               <p class = 'text-end text-sm text-green-500 font-semibold mt-1'>
@@ -122,6 +122,62 @@
               </p>              
               <p class="text-end text-sm  text-slate-600 font-semibold mt-1">
                 {{data?.baranggay_count}}
+              </p>
+            </div>
+          </a>
+          
+        </a>
+
+        <a 
+          routerLink="/admin"
+          class="bg-white shadow-lg border-4 border-gray-200 p-5 px-8 h-fit rounded-2xl grid grid-cols-2 gap-1 items-center cursor-pointer hover:bg-slate-50 transition-all"
+        >
+          <div class="h-[100px]">
+            <img
+              src="../../../../../assets/images/population.png"
+              alt=""
+              class="w-[100px]"
+            />
+          </div>
+  
+          <a  class="">
+            <h1 class="text-xl lg:text-3xl font-black text-slate-800 text-end">
+              Population 
+            </h1>
+            <div class="flex gap-2 justify-end">
+              <p class = 'text-end text-sm text-green-500 font-semibold mt-1'>
+                 Total
+              </p>              
+              <p class="text-end text-sm  text-slate-600 font-semibold mt-1">
+                {{data?.population}}
+              </p>
+            </div>
+          </a>
+          
+        </a>
+
+        <a 
+          routerLink="/admin"
+          class="bg-white shadow-lg border-4 border-gray-200 p-5 px-8 h-fit rounded-2xl grid grid-cols-2 gap-1 items-center cursor-pointer hover:bg-slate-50 transition-all"
+        >
+          <div class="h-[100px]">
+            <img
+              src="../../../../../assets/images/families.png"
+              alt=""
+              class="w-[100px]"
+            />
+          </div>
+  
+          <a  class="">
+            <h1 class="text-xl lg:text-3xl font-black text-slate-800 text-end">
+              Families
+            </h1>
+            <div class="flex gap-2 justify-end">
+              <p class = 'text-end text-sm text-green-500 font-semibold mt-1'>
+                 Total
+              </p>              
+              <p class="text-end text-sm  text-slate-600 font-semibold mt-1">
+                {{data?.families}}
               </p>
             </div>
           </a>

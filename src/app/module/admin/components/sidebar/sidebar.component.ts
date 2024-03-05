@@ -24,7 +24,7 @@ export class SidebarComponent implements OnInit {
       attributes:[
         {link:'/admin/analytics',label:'Family profile',route:''},
         {link:'/admin/analytics/infant-analytics',label:'Infant',route:'infant-analytics'},
-        {link:'/admin/analytics/brgy-preschooler-analytics',label:'baranggay preschooler',route:'brgy-preschooler-analytics'},
+        {link:'/admin/analytics/brgy-preschooler-analytics',label:'barangay preschooler',route:'brgy-preschooler-analytics'},
         {link:'/admin/analytics/nutritional-status-analytics',label:'preschooler with nutritional status',route:'nutritional-status-analytics'},
         {link:'/admin/analytics/at-risk-preschool-analytics',label:'Affected/at risk preschool',route:'at-risk-preschool-analytics'},
       ]
@@ -45,7 +45,7 @@ export class SidebarComponent implements OnInit {
       icon: 'fal fa-folder-tree',
     },
     {
-      title: 'Baranggay',
+      title: 'Barangay',
       route: 'baranggay',
       icon: 'pi pi-map',
     },
@@ -57,7 +57,7 @@ export class SidebarComponent implements OnInit {
       attributes:[
         {link:'/admin/forms',label:'Family profile'},
         {link:'/admin/forms/infant',label:'Infant'},
-        {link:'/admin/forms/baranggay-preschooler',label:'Baranggay preschooler'},
+        {link:'/admin/forms/baranggay-preschooler',label:'Barangay preschooler'},
         {link:'/admin/forms/list-of-preschooler-with-nutritional-status',label:'Preschooler with nutritional status'},
         {link:'/admin/forms/at-risk-preschool',label:'Affected/at risk preschool'}
       ]

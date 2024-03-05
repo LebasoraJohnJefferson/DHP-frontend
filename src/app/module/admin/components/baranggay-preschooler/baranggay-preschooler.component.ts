@@ -91,7 +91,7 @@ export class BaranggayPreschoolerComponent {
       columns: columns,
       body: data,
       didDrawPage: (dataArg:any) => {
-        doc.text('\BRU: Baranggay preschooler', dataArg.settings.margin.top, 10);
+        doc.text('\RHU: Baranggay preschooler', dataArg.settings.margin.top, 10);
       },
     });
     doc.save('baranggay_preschooler.pdf');

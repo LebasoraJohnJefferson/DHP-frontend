@@ -42,7 +42,7 @@ export class BaranggayComponent implements OnInit {
       type:'text'
     },
     {
-      title:'Baranggay',
+      title:'Barangay',
       formName:'baranggay',
       placeholder:'Enter name of baranggay',
       type:'text'
