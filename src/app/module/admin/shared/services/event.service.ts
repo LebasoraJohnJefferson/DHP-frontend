@@ -18,6 +18,10 @@ export class EventService {
     return this.http.post(`${BASEURL}/admin/event`, data);
   }
 
+  updateEvent(eventId:number,data:any): Observable<any> {
+    return this.http.put(`${BASEURL}/admin/event/${eventId}`, data);
+  }
+
   postComment(data: any, eventId: number): Observable<any> {
     return this.http.post(`${BASEURL}/admin/event/comment/${eventId}`, data);
   }

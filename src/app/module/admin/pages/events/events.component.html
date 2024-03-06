@@ -40,7 +40,7 @@
 
                 <div class="flex">
                   <button
-                    (click)="createEventModal = true"
+                    (click)="openEvent()"
                     class="bg-green-800 text-white text-[12px] md:text-sm font-semibold py-3 px-5 rounded-3xl hover:bg-green-900/80 cursor-pointer transition-all"
                   >
                     <i class="fal fa-file-plus mr-1"></i>
@@ -62,13 +62,19 @@
                 <td>{{ event.title }}</td>
                 <td>{{ event.venue }}</td>
                 <td>{{ dateFormat(event.date) }}</td>
-                <td>
+                <td class="gap-1">
                   <div
                     class="cursor-pointer"
                     [routerLink]="['/admin/events/info']"
                     [queryParams]="{ id: event.id }"
                   >
                     <i class="fad fa-eye"></i> View
+                  </div>
+                  <div
+                    class="cursor-pointer"
+                    (click)="updateEvent(event)"
+                  >
+                    <i class="fad fa-pencil"></i> Update
                   </div>
                 </td>
               </tr>
@@ -79,7 +85,7 @@
     </div>
 
     <p-dialog
-      header="Create Event"
+      header="{{ eventDetails ? 'Update' : 'Create'}} Event"
       [(visible)]="createEventModal"
       [modal]="true"
       appendTo="body"
@@ -220,7 +226,7 @@
               <span>Processing</span>
             </div>
 
-            <span *ngIf="!submitLoading">Create</span>
+            <span *ngIf="!submitLoading">{{eventDetails ? 'Update' : 'Create'}}</span>
           </button>
         </form>
       </div>

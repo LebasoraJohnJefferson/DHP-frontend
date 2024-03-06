@@ -19,7 +19,7 @@ export class EventsComponent implements OnInit {
   submitLoading: boolean = false;
   isCommitting:boolean = false
   createForm!: FormGroup;
-
+  eventDetails:any;
   constructor(
     private router: Router,
     private toast: HotToastService,
@@ -68,26 +68,69 @@ export class EventsComponent implements OnInit {
     }
 
     this.isCommitting = true
+    if(this.eventDetails){
+      this.updateTriggeredEvent()
+    }else{
+      this.createTriggeredEvent()
+    }
+    
+  }
 
+  successResponse(){
+    this.isCommitting = false
+    this.createEventModal = false;
+    this.submitLoading = false;
+    this.isShowConfirmation = false;
+    this.createForm.reset()
+    this.getEvents();
+    this.previewImg = null;
+  }
+
+  updateTriggeredEvent(){
+    this._eventService.updateEvent(this.eventDetails.id,this.createForm.value).subscribe({
+      next:(response:any)=>{
+        this.toast.success(response?.message || 'Successfully updated');
+        this.successResponse()
+      },
+      error:(error: any) => {
+        this.toast.error(error?.error?.message || 'An error occurred');
+        this.isCommitting = false
+        this.submitLoading = false;
+      }
+    })
+  }
+
+
+  createTriggeredEvent(){
     this._eventService.createEvent(this.createForm.value).subscribe(
       (response: any) => {
         this.toast.success(response?.message || 'Successfully created');
-
-        this.isCommitting = false
-        this.createEventModal = false;
-        this.submitLoading = false;
-        this.isShowConfirmation = false;
-        this.createForm.reset()
-        this.getEvents();
-        this.previewImg = null;
+        this.successResponse()
       },
       (error: any) => {
         this.toast.error(error?.error?.message || 'An error occurred');
-
         this.isCommitting = false
         this.submitLoading = false;
       }
     );
+  }
+
+
+  openEvent(){
+    this.eventDetails = null
+    this.createForm.reset()
+    this.createEventModal = true
+  }
+
+
+  updateEvent(event:any){
+    this.eventDetails = event
+    this.previewImg = event?.image ? event?.image : null;
+    this.createForm.patchValue({
+      ...this.eventDetails,
+      image:null,
+    })
+    this.createEventModal = true
   }
 
   approval(){
@@ -99,7 +142,6 @@ export class EventsComponent implements OnInit {
     this.isShowConfirmation  = false
     this.submitLoading = false;
   }
-
 
 
   dateFormat(date: any) {
