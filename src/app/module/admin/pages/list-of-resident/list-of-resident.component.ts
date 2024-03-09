@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { ResidentService } from '../../shared/services/resident.service';
 import { HotToastService } from '@ngneat/hot-toast';
+import * as FileSaver from 'file-saver';
+import { read, utils, writeFile } from 'xlsx';
+import  jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import moment from 'moment';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-list-of-resident',
@@ -15,12 +21,69 @@ export class ListOfResidentComponent implements OnInit{
   cols:any
   selectResident:any;
   createResidentModal:boolean =false;
+  importResidentModal:boolean =false;
+  isSubmitLoading:boolean =false;
+  importedResident:any;
+  excelExistingField:any;
+
+  otherFileds:any=[
+    {
+      title:'Father`s first name',
+      formName:'father_first_name',
+    },
+    {
+      title:'Father`s middle name',
+      formName:'father_middle_name',
+    },
+    {
+      title:'Father`s last name',
+      formName:'father_last_name',
+    },
+    {
+      title:'Father`s suffix',
+      formName:'father_suffix',
+    },
+    {
+      title:'Father`s birthday',
+      formName:'father_birthday',
+    },
+    {
+      title:'Mother`s first name',
+      formName:'mother_first_name',
+    },
+    {
+      title:'Mother`s middle name',
+      formName:'mother_middle_name',
+    },
+    {
+      title:'Mother`s last name',
+      formName:'mother_last_name',
+    },
+    {
+      title:'mother`s birthday',
+      formName:'mother_birthday',
+    },
+
+  ]
+
+  residentForm:FormGroup = this._fb.group({
+    mother_first_name:['',Validators.required],
+    mother_middle_name:['',Validators.required],
+    mother_last_name:['',Validators.required],
+    father_first_name:['',Validators.required],
+    father_middle_name:['',Validators.required],
+    father_last_name:['',Validators.required],
+    father_suffix:[''],
+    father_birthday:['',Validators.required],
+    mother_birthday:['',Validators.required],
+  });
 
 
   constructor(
     private _residentService:ResidentService,
     public route:ActivatedRoute,
-    public toast:HotToastService
+    public toast:HotToastService,
+    private _fb:FormBuilder
   ){}
 
 
@@ -57,18 +120,176 @@ export class ListOfResidentComponent implements OnInit{
   }
 
 
-  handleImport(event:Event){
+  exportPdf(){
+    const aspectRatio = 1.2941;
+    const width = 1400;
+    const height = width / aspectRatio;
+    const doc = new jsPDF('p', 'pt',[height, width]);
+    let data:any = []
+    let columns = [
+      {title:'Mother first name',dataKey:'mother_first_name'},
+      {title:'Mother middle name',dataKey:'mother_middle_name'},
+      {title:'Mother last name',dataKey:'mother_last_name'},
+      {title:'Mother birth date',dataKey:'mother_birthday'},
+      {title:'Father first name',dataKey:'father_first_name'},
+      {title:'Father middle name',dataKey:'father_middle_name'},
+      {title:'Father Last name',dataKey:'father_last_name'},
+      {title:'Father suffix',dataKey:'father_suffix'},
+      {title:'Father birth date',dataKey:'father_birthday'},
+      
+    ];
 
+    
+
+    this.data?.map((details:any)=>{
+      
+      data.push({...details,
+        mother_birthday:this.birthDayFormat(details.mother_birthday),
+        father_suffix:this.birthDayFormat(details.father_suffix),
+      })
+    })
+
+    autoTable(doc, {
+      columns: columns,
+      body: data,
+      didDrawPage: (dataArg:any) => {
+        doc.text(`\RHU: Resident of ${this.barangay}`, dataArg.settings.margin.top, 10);
+      },
+    });
+    doc.save(`Resident_of_${this.barangay}.pdf`);
   }
 
   exportExcel(){
+    import('xlsx').then((xlsx) => {
+      let filteredAlumni  = this.data.map((details:any)=>{
+
+        return {
+          mother_first_name:details?.mother_first_name,
+          mother_middle_name:details?.mother_middle_name,
+          mother_last_name:details?.mother_last_name,
+          mother_birthday:details?.mother_birthday,
+          father_first_name:details?.father_first_name,
+          father_middle_name:details?.father_middle_name,
+          father_last_name:details?.father_last_name,
+          father_suffix:details?.father_suffix,
+          father_birthday:details?.father_birthday
+        };
+      })
+      const worksheet = xlsx.utils.json_to_sheet(filteredAlumni );
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      this.saveAsExcelFile(excelBuffer, `Resident_of_${this.barangay}`);
+    });
+  }
+  
+  saveAsExcelFile(buffer: any, fileName: string){
+    let EXCEL_TYPE =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE,
+    });
+    FileSaver.saveAs(
+      data,
+      fileName +
+        '_export_' +
+        new Date().getTime() +
+        EXCEL_EXTENSION
+    );
 
   }
 
+  onSubmit(){
+    if(this.residentForm.valid){
+      const data:any = [];
+      this.importedResident.map((resident:any)=>{
+        const {
+          mother_first_name,
+          mother_middle_name,
+          mother_last_name,
+          father_first_name,
+          father_middle_name,
+          father_last_name,
+          father_suffix,
+          father_birthday,
+          mother_birthday
+        } = this.residentForm.value
 
-  exportPdf(){
+        data.push({
+          mother_first_name:resident[mother_first_name],
+          mother_middle_name:resident[mother_middle_name],
+          mother_last_name:resident[mother_last_name],
+          father_first_name:resident[father_first_name],
+          father_middle_name:resident[father_middle_name],
+          father_last_name:resident[father_last_name],
+          father_suffix:resident[father_suffix],
+          father_birthday:resident[father_birthday],
+          mother_birthday:resident[mother_birthday],
+        })
 
+      })
+
+      this.importResident(data)
+    }else{
+      this.toast.warning("Empty field")
+    }
   }
+
+
+
+  
+  handleImport($event: any) {
+    const files = $event.target.files;
+
+    if (files.length) {
+      const file = files[0];
+      const reader = new FileReader();
+
+      reader.onload = (event: any) => {
+        const wb = read(event.target.result);
+        const sheets = wb.SheetNames;
+
+        if (sheets.length) {
+          const rows:any = utils.sheet_to_json(wb.Sheets[sheets[0]]);
+          // with existing data
+          this.importedResident = rows;
+          if(rows.length > 0){
+            // existed column from excel
+            this.excelExistingField = Object.keys(rows[0])
+            this.importResidentModal = true
+          }
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    }
+  }
+
+  importResident(data:any) {
+    this.isSubmitLoading = true
+    console.log(data)
+    this._residentService.importResident({ resident: data },this.brgyId).subscribe({
+      next:(res:any)=>{
+        setTimeout(() => {
+          this.toast.success("Successfully Imported!");
+          this.getAllResident();
+          this.isSubmitLoading = false
+          // this.importResidentModal = false
+          // this.residentForm.reset()
+        }, 5000);
+      },error:(err:any)=>{
+        this.isSubmitLoading = false
+        this.toast.error(err?.error?.message || 'Error occurred');
+      }
+    })
+  }
+
+   birthDayFormat(date: any) {
+    return moment(date).format('MMMM DD, YYYY');
+  }
+
 
 
 

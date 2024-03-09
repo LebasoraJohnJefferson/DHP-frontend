@@ -19,6 +19,10 @@ export class ResidentService {
     return this.http.post(`${BASEURL}/resident`,data)
   }
 
+  importResident(data:any,brgyId:number):Observable<any>{
+    return this.http.post(`${BASEURL}/resident/importResident/${brgyId}`,data)
+  }
+
   getResident(brgy_id:any):Observable<any>{
     return this.http.get(`${BASEURL}/resident/${brgy_id}`)
   }
