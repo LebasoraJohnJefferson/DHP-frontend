@@ -19,6 +19,7 @@ export class ListOfResidentComponent implements OnInit{
   brgyId:number = 0;
   data:any;
   cols:any
+  resident:any;
   selectResident:any;
   createResidentModal:boolean =false;
   importResidentModal:boolean =false;
@@ -44,6 +45,14 @@ export class ListOfResidentComponent implements OnInit{
       formName:'father_suffix',
     },
     {
+      title:'Father`s citizenship',
+      formName:'father_citizenship',
+    },
+    {
+      title:'Father`s place of birth',
+      formName:'father_place_birth',
+    },
+    {
       title:'Father`s birthday',
       formName:'father_birthday',
     },
@@ -60,8 +69,16 @@ export class ListOfResidentComponent implements OnInit{
       formName:'mother_last_name',
     },
     {
-      title:'mother`s birthday',
+      title:'Mother`s birthday',
       formName:'mother_birthday',
+    },
+    {
+      title:'Mother`s citizenship',
+      formName:'mother_citizenship',
+    },
+    {
+      title:'Mother`s place of birth',
+      formName:'mother_place_birth',
     },
 
   ]
@@ -76,6 +93,11 @@ export class ListOfResidentComponent implements OnInit{
     father_suffix:[''],
     father_birthday:['',Validators.required],
     mother_birthday:['',Validators.required],
+
+    mother_citizenship:['',Validators.required],
+    mother_place_birth:['',Validators.required],
+    father_citizenship:['',Validators.required],
+    father_place_birth:['',Validators.required],
   });
 
 
@@ -131,12 +153,16 @@ export class ListOfResidentComponent implements OnInit{
       {title:'Mother middle name',dataKey:'mother_middle_name'},
       {title:'Mother last name',dataKey:'mother_last_name'},
       {title:'Mother birth date',dataKey:'mother_birthday'},
+      {title:'Mother`s citizenship',dataKey:'mother_citizenship'},
+      {title:'Mother`s place of birth',dataKey:'mother_place_birth'},
       {title:'Father first name',dataKey:'father_first_name'},
       {title:'Father middle name',dataKey:'father_middle_name'},
       {title:'Father Last name',dataKey:'father_last_name'},
       {title:'Father suffix',dataKey:'father_suffix'},
       {title:'Father birth date',dataKey:'father_birthday'},
-      
+      {title:'Father place of birth',dataKey:'father_place_birth'},
+      {title:'Father citizenship',dataKey:'father_citizenship'},
+
     ];
 
     
@@ -145,7 +171,7 @@ export class ListOfResidentComponent implements OnInit{
       
       data.push({...details,
         mother_birthday:this.birthDayFormat(details.mother_birthday),
-        father_suffix:this.birthDayFormat(details.father_suffix),
+        father_birthday:this.birthDayFormat(details.father_birthday),
       })
     })
 
@@ -172,7 +198,11 @@ export class ListOfResidentComponent implements OnInit{
           father_middle_name:details?.father_middle_name,
           father_last_name:details?.father_last_name,
           father_suffix:details?.father_suffix,
-          father_birthday:details?.father_birthday
+          father_birthday:details?.father_birthday,
+          mother_citizenship:details?.mother_citizenship,
+          mother_place_birth:details?.mother_place_birth,
+          father_citizenship:details?.father_citizenship,
+          father_place_birth:details?.father_place_birth,
         };
       })
       const worksheet = xlsx.utils.json_to_sheet(filteredAlumni );
@@ -215,7 +245,11 @@ export class ListOfResidentComponent implements OnInit{
           father_last_name,
           father_suffix,
           father_birthday,
-          mother_birthday
+          mother_birthday,
+          mother_citizenship,
+          mother_place_birth,
+          father_citizenship,
+          father_place_birth,
         } = this.residentForm.value
 
         data.push({
@@ -228,6 +262,10 @@ export class ListOfResidentComponent implements OnInit{
           father_suffix:resident[father_suffix],
           father_birthday:resident[father_birthday],
           mother_birthday:resident[mother_birthday],
+          mother_citizenship:resident[mother_citizenship],
+          mother_place_birth:resident[mother_place_birth],
+          father_citizenship:resident[father_citizenship],
+          father_place_birth:resident[father_place_birth],
         })
 
       })
@@ -236,6 +274,11 @@ export class ListOfResidentComponent implements OnInit{
     }else{
       this.toast.warning("Empty field")
     }
+  }
+
+  updateResident(resident:any){
+    this.resident = resident
+    this.createResidentModal = true
   }
 
 
@@ -276,8 +319,8 @@ export class ListOfResidentComponent implements OnInit{
           this.toast.success("Successfully Imported!");
           this.getAllResident();
           this.isSubmitLoading = false
-          // this.importResidentModal = false
-          // this.residentForm.reset()
+          this.importResidentModal = false
+          this.residentForm.reset()
         }, 5000);
       },error:(err:any)=>{
         this.isSubmitLoading = false

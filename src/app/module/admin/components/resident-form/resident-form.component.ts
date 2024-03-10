@@ -54,8 +54,20 @@ export class ResidentFormComponent  {
       title:'Father`s suffix',
       formName:'father_suffix',
       type:'dropdown',
-      placeholder:'Enter Father`s last name.',
+      placeholder:'Enter Father`s suffix.',
       data:this.extension
+    },
+    {
+      title:'Father`s place of birth',
+      formName:'father_place_birth',
+      type:'text',
+      placeholder:'Father`s place of birth.'
+    },
+    {
+      title:'Father`s citizenship',
+      formName:'father_citizenship',
+      type:'text',
+      placeholder:'Father`s citizenship'
     },
     {
       title:'Father`s birthday',
@@ -66,19 +78,31 @@ export class ResidentFormComponent  {
       title:'Mother`s first name',
       formName:'mother_first_name',
       type:'text',
-      placeholder:'Enter Father`s first name.'
+      placeholder:'Mother`s first name.'
     },
     {
       title:'Mother`s middle name',
       formName:'mother_middle_name',
       type:'text',
-      placeholder:'Enter Mother`s middle name.'
+      placeholder:'Mother`s middle name.'
     },
     {
       title:'Mother`s last name',
       formName:'mother_last_name',
       type:'text',
-      placeholder:'Enter Father`s last name.'
+      placeholder:'Mother`s last name.'
+    },
+    {
+      title:'Mother`s place of birth',
+      formName:'mother_place_birth',
+      type:'text',
+      placeholder:'Mother`s place of birth.'
+    },
+    {
+      title:'Mother`s citizenship',
+      formName:'mother_citizenship',
+      type:'text',
+      placeholder:'Mother`s citizenship.'
     },
     {
       title:'mother`s birthday',
@@ -89,10 +113,13 @@ export class ResidentFormComponent  {
   ]
 
 
-
   residentForm:FormGroup = this._fb.group({
     brgy_id:['',Validators.required],
     mother_first_name:['',Validators.required],
+    mother_citizenship:['',Validators.required],
+    mother_place_birth:['',Validators.required],
+    father_citizenship:['',Validators.required],
+    father_place_birth:['',Validators.required],
     mother_middle_name:['',Validators.required],
     mother_last_name:['',Validators.required],
     father_first_name:['',Validators.required],
@@ -133,7 +160,7 @@ export class ResidentFormComponent  {
 
   ngOnChanges(){
     if(this.residentDetails){
-      this.residentForm.patchValue(this.residentDetails?.attributes)
+      this.residentForm.patchValue(this.residentDetails)
     }else this.residentForm.reset()
   }
 
