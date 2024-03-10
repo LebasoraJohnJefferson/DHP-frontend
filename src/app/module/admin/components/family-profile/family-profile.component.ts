@@ -70,13 +70,10 @@ export class FamilyProfileComponent implements OnInit{
     let data:any = []
     let columns = [
       {title:'HH no.',dataKey:'household_no'},
-      { title: 'Baranggay', dataKey: 'baranggay' },
       { title: 'Father', dataKey: 'father' },
-      { title: 'Father`s birthday', dataKey: 'father_birthday' },
       { title: 'Father`s educational attainment', dataKey: 'father_educ_attain' },
       {title:'Father`s occupation',dataKey:'father_occupation'},
       {title:'Mother',dataKey:'mother'},
-      {title:'Mother birthday',dataKey:'mother_birthday'},
       {title:'Mother`s educational attainment',dataKey:'mother_educ_attain'},
       {title:'Mother`s occupation',dataKey:'mother_occupation'},
       {title:'No. of HH members',dataKey:'no_household_member'},
@@ -95,18 +92,10 @@ export class FamilyProfileComponent implements OnInit{
       const mother_pregnant = info.mother_pregnant ? 'Yes' : 'No'
       const using_iodized_salt = info.using_iodized_salt ? 'Yes' : 'No'
       const using_IFR = info.using_IFR ? 'Yes' : 'No'
-      const father_birthday = this.birthDayFormat(info?.father_birthday);
-      const mother_birthday = this.birthDayFormat(info?.mother_birthday);
-      const father =`${info.father_first_name} ${info?.father_middle_name[0]}. ${info.father_last_name} ${info.father_suffix}`
-      const mother =`${info.mother_first_name} ${info?.mother_middle_name[0]}. ${info.mother_last_name} ${info.mother_suffix}`
       data.push({...info,
         familty_planning:familty_planning,
-        father: father,
-        mother:mother,
         mother_pregnant:mother_pregnant,
         using_iodized_salt:using_iodized_salt,
-        father_birthday:father_birthday,
-        mother_birthday:mother_birthday,
         using_IFR:using_IFR
       })
     })
@@ -124,10 +113,9 @@ export class FamilyProfileComponent implements OnInit{
   exportExcel(){
     import('xlsx').then((xlsx) => {
       let filteredAlumni  = this.data.map((FP:any)=>{
-        const {brgy_id,mother_pregnant,familty_planning,using_IFR,using_iodized_salt, ...rest } = FP?.attributes;
+        const {mother_pregnant,familty_planning,using_IFR,using_iodized_salt, ...rest } = FP?.attributes;
 
         return {
-          "brgy_id":brgy_id,
           "mother_pregnant":mother_pregnant ? 'yes' : 'no',
           "familty_planning":familty_planning ? 'yes' : 'no',
           "using_IFR":using_IFR ? 'yes' : 'no',

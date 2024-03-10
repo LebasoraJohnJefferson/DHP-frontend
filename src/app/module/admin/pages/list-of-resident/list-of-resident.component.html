@@ -100,6 +100,7 @@
           </ng-template>
           <ng-template pTemplate="header">
             <tr class="text-sm">
+              <th field="first_name">Household no.</th>
               <th field="first_name">Father's name</th>
               <th field="suffix">Father's Birth date</th>
               <th field="suffix">Father's Place of Birth</th>
@@ -111,6 +112,9 @@
           </ng-template>
           <ng-template pTemplate="body" let-resident>
             <tr class="text-sm" [pSelectableRow]="resident">
+              <td>
+                {{resident.household_no}}
+              </td>
               <td>
                 {{ resident?.father_first_name + " " + resident?.father_middle_name[0] + ' ' + resident?.father_last_name | titlecase}}
                 {{resident?.father_suffix ?? '' }}

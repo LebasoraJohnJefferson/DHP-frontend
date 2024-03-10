@@ -35,4 +35,9 @@ export class ResidentService {
     return this.http.delete(`${BASEURL}/resident/${residentId}`)
   }
 
+  
+  getResidents():Observable<any>{
+    return this.http.get(`${BASEURL}/resident`)
+  }
+
 }

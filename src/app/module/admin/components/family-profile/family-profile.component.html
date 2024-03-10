@@ -64,13 +64,13 @@
                   accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                 />
 
-                <button
+                <!-- <button
                   (click)="importInput.click()"
                   class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
                 >
                   <i class="fad fa-upload mr-1"></i>
                   Import
-                </button>
+                </button> -->
 
                 <button
                   (click)="exportExcel()"
@@ -123,33 +123,31 @@
         </ng-template>
         <ng-template pTemplate="body" let-pf>
           <tr class="text-sm" [pSelectableRow]="pf">
-            <td>{{ pf.attributes.household_no }}</td>
+            <td>
+              
+              <div
+                class="cursor-pointer text-center text-blue-500"
+                [routerLink]="'/admin/baranggay/list-of-resident'"
+                [queryParams]="{brgyId:pf.attributes.brgy_id}"
+              >
+                  {{ pf.attributes.household_no }}
+              </div>
+              
+            </td>
             <td>{{ pf.attributes.no_household_member }}</td>
             <td>{{ pf.attributes.contact_number }}</td>
             <td>
-              {{ pf.attributes.father_first_name  | titlecase}}
-              {{ pf.attributes.father_middle_name[0]+'.' | titlecase}}
-              {{ pf.attributes.father_last_name  | titlecase}}
-              {{ pf.attributes.father_suffix  | uppercase}}
+              {{ pf.attributes.mother  | titlecase}}
             </td>
             <td>
-              {{ pf.attributes.mother_first_name  | titlecase}}
-              {{ pf.attributes.mother_middle_name[0]+'.' | titlecase}}
-              {{ pf.attributes.mother_last_name  | titlecase}}
-              {{ pf.attributes.mother_suffix  | uppercase}}
+              {{ pf.attributes.mother  | titlecase}}
             </td>
             <td>{{ pf.attributes.toilet_type }}</td>
             <td>{{ pf.attributes.water_source }}</td>
             <td>{{ pf.attributes.food_prod_act }}</td>
 
             <td class="flex flex-col md:flex-row gap-2">
-              <div
-                class="cursor-pointer text-center"
-                [routerLink]="'/admin/forms/family-profile/details'"
-                [queryParams]="{id:pf.id}"
-              >
-                <i class="fad fa-eye"></i> View
-              </div>
+              
               <div class="text-center" (click)="familyProfileFormBtn(pf)">
                   <i class="fad fa-pencil"></i> Update
               </div>

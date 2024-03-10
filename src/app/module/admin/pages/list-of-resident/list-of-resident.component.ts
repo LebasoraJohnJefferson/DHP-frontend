@@ -149,6 +149,7 @@ export class ListOfResidentComponent implements OnInit{
     const doc = new jsPDF('p', 'pt',[height, width]);
     let data:any = []
     let columns = [
+      {title:'Household_no',dataKey:'household_no'},
       {title:'Mother first name',dataKey:'mother_first_name'},
       {title:'Mother middle name',dataKey:'mother_middle_name'},
       {title:'Mother last name',dataKey:'mother_last_name'},
@@ -190,6 +191,7 @@ export class ListOfResidentComponent implements OnInit{
       let filteredAlumni  = this.data.map((details:any)=>{
 
         return {
+          household_no:details?.household_no,
           mother_first_name:details?.mother_first_name,
           mother_middle_name:details?.mother_middle_name,
           mother_last_name:details?.mother_last_name,
@@ -303,6 +305,8 @@ export class ListOfResidentComponent implements OnInit{
             // existed column from excel
             this.excelExistingField = Object.keys(rows[0])
             this.importResidentModal = true
+          }else{
+            this.toast.warning("Empty File")
           }
         }
       };

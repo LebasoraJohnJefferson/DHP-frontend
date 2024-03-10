@@ -38,4 +38,5 @@ export class BaranggayService {
     return this.http.get(`${BASEURL}/baranggay`)
   }
 
+
 }
