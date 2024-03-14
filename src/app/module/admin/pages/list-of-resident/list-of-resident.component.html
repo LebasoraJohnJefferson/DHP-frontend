@@ -135,6 +135,10 @@
                 {{resident?.mother_place_birth}}
             </td>
               <td class="text-center gap-y-2" >
+                  <div routerLink="/admin/baranggay/list-of-resident/details"
+                  [queryParams]="{ residentId: resident.id }" routerLinkActive="router-link-active"  class="flex items-center gap-1">
+                    <i class="fad fa-eye"></i> View
+                  </div>
                   <div (click)="deleteResident(resident?.id)" class="flex items-center gap-1">
                     <i class="fad fa-trash"></i> Delete
                   </div>

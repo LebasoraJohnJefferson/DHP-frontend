@@ -45,7 +45,6 @@ const routes: Routes = [
         {path:'at-risk-preschool',component:AtRiskPreschoolComponent},
 
       ]},
-      {path:'forms/family-profile/details',component:FamilyProfileDetailsComponent},
       {
         path: 'analytics',
         component: AnalyticsComponent,
@@ -71,6 +70,7 @@ const routes: Routes = [
       { path: 'logs', component: LogsComponent },
       { path: 'baranggay', component: BaranggayComponent },
       { path: 'baranggay/list-of-resident', component: ListOfResidentComponent },
+      {path:'baranggay/list-of-resident/details',component:FamilyProfileDetailsComponent},
     ],
   },
   {

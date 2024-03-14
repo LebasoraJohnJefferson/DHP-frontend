@@ -24,7 +24,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
   importedFamilyProfileMember:any=[]
   selectdata:any;
   FamDetails:any
-  FPid:any;
+  resident_id:any;
   data:any;
   cols:any;
   pfc:any;
@@ -101,7 +101,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
 
   childrenForm:FormGroup = this._fb.group(
     {
-      FP_id:[''],
+      resident_id:[''],
       first_name:['',Validators.required],
       middle_name:['',Validators.required],
       last_name:['',Validators.required],
@@ -130,7 +130,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
 
   ngOnInit(): void {
     this._route.queryParams.subscribe((value) => {
-      this.FPid = value['id'];
+      this.resident_id = value['residentId'];
       this.getFP()
       this.getAllFPC()
     });
@@ -138,7 +138,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
 
 
   getFP(){
-    this._FP.specificProfileFamilty(this.FPid).subscribe({
+    this._FP.specificProfileFamilty(this.resident_id).subscribe({
       next:(res:any)=>{
         this.FamDetails = res?.data
       }
@@ -146,7 +146,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
   }
 
   getAllFPC(){
-    this._FPCService.getAllPFC(this.FPid).subscribe((res:any)=>{
+    this._FPCService.getAllPFC(this.resident_id).subscribe((res:any)=>{
       this.data = res?.data
     })
   }
@@ -167,7 +167,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
   onSubmit(){
     if(this.childrenForm.valid){
       this.isSubmitLoading =true
-      this.childrenForm.controls['FP_id'].setValue(this.FPid)
+      this.childrenForm.controls['resident_id'].setValue(this.resident_id)
       if(this.pfc){
         this.updatePFC()
       }else{
@@ -346,7 +346,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
   }
 
   importFamilyProfileMember() {
-    this._FPCService.saveImportedFCM(this.FPid,{ familiesMemberData: this.importedFamilyProfileMember }).subscribe({
+    this._FPCService.saveImportedFCM(this.resident_id,{ familiesMemberData: this.importedFamilyProfileMember }).subscribe({
       next:(res:any)=>{
         setTimeout(() => {
           this.toast.success("Successfully Imported!");
