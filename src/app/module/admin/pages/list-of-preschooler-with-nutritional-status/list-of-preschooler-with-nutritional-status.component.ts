@@ -44,7 +44,6 @@ export class ListOfPreschoolerWithNutritionalStatusComponent {
     this._PWNSService.getPreschool().subscribe({
       next:(res:any)=>{
         this.data = res?.data
-        console.log(this.data)
       }
     })
   }

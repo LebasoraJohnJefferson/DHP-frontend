@@ -44,7 +44,6 @@ export class InfantComponent {
     this._infantService.getAllInfantRecords().subscribe({
       next:(res:any)=>{
         this.data = res?.data
-        console.log(this.data)
       }
     })
   }
