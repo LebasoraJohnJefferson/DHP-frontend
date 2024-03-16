@@ -38,7 +38,6 @@ export class FamilyProfileComponent implements OnInit{
     this._FPService.getAllPF().subscribe({
       next:(res:any)=>{
         this.data = res?.data;
-        console.log(this.data)
       }
     })
   }
@@ -68,6 +67,8 @@ export class FamilyProfileComponent implements OnInit{
     const height = width / aspectRatio;
     const doc = new jsPDF('p', 'pt',[height, width]);
     let data:any = []
+    
+    console.log(this.data)
     let columns = [
       {title:'HH no.',dataKey:'household_no'},
       { title: 'Father', dataKey: 'father' },
@@ -76,7 +77,7 @@ export class FamilyProfileComponent implements OnInit{
       {title:'Mother',dataKey:'mother'},
       {title:'Mother`s educational attainment',dataKey:'mother_educ_attain'},
       {title:'Mother`s occupation',dataKey:'mother_occupation'},
-      {title:'No. of HH members',dataKey:'no_household_member'},
+      {title:'No. of HH members',dataKey:'household_member_no'},
       {title:'Food Production Activity',dataKey:'food_prod_act'},
       {title:'Toilet type',dataKey:'toilet_type'},
       {title:'Wather source',dataKey:'water_source'},
@@ -86,8 +87,7 @@ export class FamilyProfileComponent implements OnInit{
       {title:'Mother pregnant',dataKey:'mother_pregnant'},
     ];
 
-    this.data?.map((datails:any)=>{
-      const info = datails?.attributes;
+    this.data?.map((info:any)=>{
       const familty_planning = info.familty_planning ? 'Yes' : 'No'
       const mother_pregnant = info.mother_pregnant ? 'Yes' : 'No'
       const using_iodized_salt = info.using_iodized_salt ? 'Yes' : 'No'
@@ -113,7 +113,7 @@ export class FamilyProfileComponent implements OnInit{
   exportExcel(){
     import('xlsx').then((xlsx) => {
       let filteredAlumni  = this.data.map((FP:any)=>{
-        const {mother_pregnant,familty_planning,using_IFR,using_iodized_salt, ...rest } = FP?.attributes;
+        const {mother_pregnant,familty_planning,using_IFR,using_iodized_salt, ...rest } = FP;
 
         return {
           "mother_pregnant":mother_pregnant ? 'yes' : 'no',
