@@ -5,6 +5,7 @@ import { CityService } from '../../shared/services/city.service';
 import { BaranggayService } from '../../shared/services/baranggay.service';
 import { HotToastService } from '@ngneat/hot-toast';
 import { FamilyProfileService } from '../../shared/services/family-profile.service';
+import { ResidentService } from '../../shared/services/resident.service';
 
 
 @Component({
@@ -14,14 +15,9 @@ import { FamilyProfileService } from '../../shared/services/family-profile.servi
 })
 export class FamilyProfileFormComponent implements OnInit {
   isSubmitLoading:boolean =false
-  @Input() FPDetails:any
-  baranggay:any=[]
+  @Input() FPDetails:any={};
+  residents:any=[]
 
-  usingIodizedSalt:boolean = false
-  usingIFR:boolean = false
-  familtyPlanning:boolean = false
-  motherPregnant:boolean = false
-  @Output() triggerSubmmit:EventEmitter<any> = new EventEmitter()
   extension:any=[
     {acro:'',meaning:'Not Applicable'},
     {acro:'Jr',meaning:'Junior'},
@@ -36,6 +32,12 @@ export class FamilyProfileFormComponent implements OnInit {
     {acro:'IX',meaning:'The ninth'},
     {acro:'X',meaning:'The tenth'},
   ];
+
+  usingIodizedSalt:boolean = false
+  usingIFR:boolean = false
+  familtyPlanning:boolean = false
+  motherPregnant:boolean = false
+  @Output() triggerSubmmit:EventEmitter<any> = new EventEmitter()
   otherFileds:any=[
     {
       title:'Contact number',
@@ -43,67 +45,6 @@ export class FamilyProfileFormComponent implements OnInit {
       type:'string',
       placeholder:'contact number e.g 09********.'
     },
-    {
-      title:'Father`s first name',
-      formName:'father_first_name',
-      type:'text',
-      placeholder:'Enter Father`s first name.'
-    },
-    {
-      title:'Father`s middle name',
-      formName:'father_middle_name',
-      type:'text',
-      placeholder:'Enter Father`s middle name.'
-    },
-    {
-      title:'Father`s last name',
-      formName:'father_last_name',
-      type:'text',
-      placeholder:'Enter Father`s last name.'
-    },
-    {
-      title:'Father`s suffix',
-      formName:'father_suffix',
-      type:'dropdown',
-      placeholder:'Enter Father`s last name.',
-      data:this.extension
-    },
-    {
-      title:'Father`s birthday',
-      formName:'father_birthday',
-      type:'date',
-    },
-    {
-      title:'Mother`s first name',
-      formName:'mother_first_name',
-      type:'text',
-      placeholder:'Enter Father`s first name.'
-    },
-    {
-      title:'Mother`s middle name',
-      formName:'mother_middle_name',
-      type:'text',
-      placeholder:'Enter Mother`s middle name.'
-    },
-    {
-      title:'Mother`s last name',
-      formName:'mother_last_name',
-      type:'text',
-      placeholder:'Enter Father`s last name.'
-    },
-    {
-      title:'Mother`s suffix',
-      formName:'mother_suffix',
-      type:'dropdown',
-      placeholder:'Enter Father`s last name.',
-      data:this.extension
-    },
-    {
-      title:'mother`s birthday',
-      formName:'mother_birthday',
-      type:'date',
-    },
-
   ]
 
   occupations = ['employed','unemployed','self-employed']
@@ -126,26 +67,16 @@ export class FamilyProfileFormComponent implements OnInit {
               ]
 
 
-  toiletTypes:string[] = ['WS','OP','O','N']
-  typeOfWater:string[]=['P','W','S']
-  foodProdActs:string[]=['VG','P/L','FP']
+  toiletTypes:string[] = ['Water sealed','Open pit','Others','None']
+  typeOfWater:string[]=['Pipe','Well','Spring']
+  foodProdActs:string[]=['Vegetable Garden','Poultry/Livestock','Fishpond']
 
 
   familyProfileForm:FormGroup = this._fb.group({
-    brgy_id:['',Validators.required],
-    mother_first_name:['',Validators.required],
-    mother_middle_name:['',Validators.required],
-    mother_last_name:['',Validators.required],
-    mother_suffix:[''],
-    father_first_name:['',Validators.required],
-    father_middle_name:['',Validators.required],
-    father_last_name:['',Validators.required],
-    father_suffix:[''],
+    resident_id:['',Validators.required],
     contact_number: ['', [Validators.required, Validators.pattern(/^(09|\+639)\d{9}$/)]],
     mother_occupation:['',Validators.required],
     father_occupation:['',Validators.required],
-    father_birthday:['',Validators.required],
-    mother_birthday:['',Validators.required],
     mother_educ_attain:['',Validators.required],
     father_educ_attain:['',Validators.required],
     //drop down
@@ -182,13 +113,14 @@ export class FamilyProfileFormComponent implements OnInit {
 
   constructor(
     private _fb:FormBuilder,
-    private _brgy:BaranggayService,
+    private _residentService:ResidentService,
     public toast:HotToastService,
     private _FPService:FamilyProfileService
   ){}
 
   onSubmit():any{
     if(this.familyProfileForm.controls['contact_number'].invalid) return this.toast.warning("Invalid contact number")
+    if(this.FPDetails) this.familyProfileForm.controls['resident_id'].setValue(this.FPDetails.id)
     if(this.familyProfileForm.valid){
       this.isSubmitLoading=true
       this.familyProfileForm.patchValue({
@@ -210,30 +142,29 @@ export class FamilyProfileFormComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    this.getAllBrgy()
-  }
-
-  getAllBrgy(){
-    this._brgy.getAllBrg().subscribe({
-      next:(res)=>{
-        this.baranggay = res?.data?.baranggay
-      }
-    })
-  }
-
   ngOnChanges(){
     if(this.FPDetails){
-      this.familyProfileForm.patchValue(this.FPDetails?.attributes)
+      this.familyProfileForm.patchValue(this.FPDetails)
       this.familyProfileForm.patchValue({
-        using_iodized_salt:this.FPDetails?.attributes?.using_iodized_salt ? true : false,
-        using_IFR:this.FPDetails?.attributes?.using_IFR ? true : false,
-        familty_planning:this.FPDetails?.attributes?.familty_planning ? true : false,
-        mother_pregnant:this.FPDetails?.attributes?.mother_pregnant ? true : false,
+        using_iodized_salt:this.FPDetails?.using_iodized_salt ? true : false,
+        using_IFR:this.FPDetails?.using_IFR ? true : false,
+        familty_planning:this.FPDetails?.familty_planning ? true : false,
+        mother_pregnant:this.FPDetails?.mother_pregnant ? true : false,
       })
     }else this.familyProfileForm.reset()
   }
 
+  ngOnInit(): void {
+    this.getResident()
+  }
+
+  getResident(){
+    this._residentService.getResidents().subscribe({
+      next:(res:any)=>{
+        this.residents = res?.data
+      }
+    })
+  }
 
   updateProfileFamily(){
     this._FPService.updateProfileFamily(this.FPDetails?.id,this.familyProfileForm.value).subscribe({
@@ -256,6 +187,7 @@ export class FamilyProfileFormComponent implements OnInit {
     })
   }
 
+
   createFamilyProfile(){
     this._FPService.createProfileFamilty(this.familyProfileForm.value).subscribe({
       next:(res:any)=>{
@@ -277,5 +209,5 @@ export class FamilyProfileFormComponent implements OnInit {
     })
   }
 
-
 }
+
