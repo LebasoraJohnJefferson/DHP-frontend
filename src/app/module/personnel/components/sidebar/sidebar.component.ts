@@ -4,11 +4,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent implements OnInit {
   currentRoute: any;
-  isFormOpen:boolean = true
+  isFormOpen: boolean = true;
   routesArr: any = [
     {
       title: 'Dashboard',
@@ -24,32 +24,45 @@ export class SidebarComponent implements OnInit {
       title: 'Documents',
       route: 'documents',
       icon: 'fal fa-folder-tree',
-    }
+    },
   ];
 
   formsArr: any = [
-
     {
       title: 'Family Profile',
       route: '/form/family-profile',
       icon: 'fal fa-file-invoice',
-    },{
+    },
+    {
       title: 'Infant Records',
       route: '/form/infant-records',
       icon: 'fal fa-file-invoice',
-    },{
+    },
+    {
       title: 'Barangay Preschoolers Record',
       route: '/form/preschool-records',
       icon: 'fal fa-file-invoice',
-    },{
+    },
+    {
       title: 'List Of Preschooler (Identified nutritional status)',
       route: '/form/list-of-preschooler-with-nutritional-status',
       icon: 'fal fa-file-invoice',
-    },{
+    },
+    {
       title: 'Affected/At Risk Preschool',
       route: '/form/preschool-at-risk',
       icon: 'fal fa-file-invoice',
-    }
+    },
+    {
+      title: 'Prenatal',
+      route: '/form/prenatal',
+      icon: 'fal fa-file-invoice',
+    },
+    {
+      title: 'Immunization',
+      route: '/form/immunization',
+      icon: 'fal fa-file-invoice',
+    },
   ];
 
   constructor(private route: ActivatedRoute, private router: Router) {}
@@ -59,14 +72,12 @@ export class SidebarComponent implements OnInit {
   }
 
   goUser(data: any) {
-    this.router.navigate(
-      [`/${data.route}`],
-      { queryParams: { type: data.params } }
-    );
+    this.router.navigate([`/${data.route}`], {
+      queryParams: { type: data.params },
+    });
   }
 
-
-  ngDoCheck(): void{
+  ngDoCheck(): void {
     this.getCurrentRouteURL(this.route.snapshot.children[0].routeConfig?.path);
   }
 

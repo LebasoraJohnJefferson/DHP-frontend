@@ -1,0 +1,112 @@
+<div class="relative z-40 mt-10 pb-20">
+  <div class="">
+    <h1 class="font-bold text-xl md:text-3xl text-white">Prenatal</h1>
+    <p class="text-slate-100 text-[12px]">
+      Information about the system (0-59 months old)
+    </p>
+  </div>
+  <div class="mt-5">
+    <p-table
+      [value]="data"
+      #dt2
+      class="mt-5"
+      dataKey="id"
+      responsiveLayout="scroll"
+      [autoLayout]="true"
+      [paginator]="true"
+      [rows]="10"
+      [columns]="cols"
+      selectionMode="multiple"
+      [(selection)]="selectdata"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      styleClass="p-datatable-gridlines"
+      [globalFilterFields]="[
+        'created_at',
+        'first_name',
+        'last_name',
+        'middle_name',
+        'suffix',
+        'weight',
+        'height',
+        'period_of_measurement'
+      ]"
+    >
+      <ng-template pTemplate="caption">
+        <div class="grid gap-2 md:flex md:justify-between">
+          <div class="flex items-center py-1 rounded bg-white px-2">
+            <i class="pi pi-search"></i>
+            <input
+              type="text"
+              class="outline-0 ml-2 border-0"
+              #textInput
+              (input)="dt2.filterGlobal(textInput.value, 'contains')"
+              placeholder="Search keyword"
+            />
+          </div>
+          <a
+            routerLink="/form/prenatal/new"
+            class="bg-green-800 text-white text-[12px] md:text-sm font-semibold py-3 px-5 rounded-3xl hover:bg-green-900/80 cursor-pointer transition-all"
+          >
+            <i class="fal fa-file-plus mr-1"></i>
+            Create
+          </a>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr class="text-sm">
+          <th field="AlumniCredentialschoolId.gradClass">Name of child</th>
+          <th field="AlumniCredentialschoolId.gradClass">
+            Year/Period of measurement
+          </th>
+          <th field="AlumniCredentialschoolId.gradClass">
+            Actual date of weighting
+          </th>
+          <th field="AlumniCredentialschoolId.gradClass">Weight (Kg)</th>
+          <th field="AlumniCredentialschoolId.gradClass">Height (cm)</th>
+          <th field="email">Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-pf>
+        <tr class="text-sm" [pSelectableRow]="pf">
+          <td>
+            <a
+              class="text-blue-500 font-bold hover:text-blue-500/80"
+              routerLink="/form/family-profile/details"
+              [queryParams]="{ residentId: pf?.resident_id }"
+            >
+              {{
+                pf?.first_name + " " + pf?.middle_name[0] + ". " + pf?.last_name
+                  | titlecase
+              }}
+              {{ pf?.suffix ?? "" }}
+            </a>
+          </td>
+          <td>{{ pf?.period_of_measurement }}</td>
+          <td>{{ pf?.created_at | date : "mediumDate" }}</td>
+          <td>{{ pf?.weight }}</td>
+          <td>{{ pf?.height }}</td>
+
+          <td class="grid gap-2">
+            <div (click)="deleteData(pf.id)" class="text-center">
+              <i class="fad fa-trash"></i> Delete
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<p-dialog
+  header="Affected/At Risk Form"
+  [(visible)]="createModal"
+  [modal]="true"
+  appendTo="body"
+  [style]="{ maxWidth: '400px', width: '400px' }"
+>
+  <app-at-risk-preschool-form
+    (triggerSubmmit)="registerFamiltyProfileCommit()"
+  ></app-at-risk-preschool-form>
+</p-dialog>

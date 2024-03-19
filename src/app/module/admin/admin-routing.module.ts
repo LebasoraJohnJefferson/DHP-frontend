@@ -30,6 +30,12 @@ import { AtRiskPreschoolComponent } from './pages/at-risk-preschool/at-risk-pres
 import { AtRiskPreschoolAnalyticsComponent } from './pages/at-risk-preschool-analytics/at-risk-preschool-analytics.component';
 import { PopulationAgeBracketComponent } from './pages/population-age-bracket/population-age-bracket.component';
 import { ListOfResidentComponent } from './pages/list-of-resident/list-of-resident.component';
+import { PrenatalComponent } from './pages/prenatal/prenatal.component';
+import { ImmunizationComponent } from './pages/immunization/immunization.component';
+import { NewprenatalComponent } from './pages/newprenatal/newprenatal.component';
+import { EditprenatalComponent } from './pages/editprenatal/editprenatal.component';
+import { NewimmunizationComponent } from './pages/newimmunization/newimmunization.component';
+import { EditimmunizationComponent } from './pages/editimmunization/editimmunization.component';
 
 const routes: Routes = [
   {
@@ -37,26 +43,53 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', component: DashboardComponent },
-      { path: 'forms', component: FormsComponent,children:[
-        {path:'',component:FamilyProfileComponent},
-        {path:'infant',component:InfantComponent},
-        {path:'baranggay-preschooler',component:BaranggayPreschoolerComponent},
-        {path:'list-of-preschooler-with-nutritional-status',component:ListOfPreschoolerWithNutritionalStatusComponent},
-        {path:'at-risk-preschool',component:AtRiskPreschoolComponent},
-
-      ]},
+      {
+        path: 'forms',
+        component: FormsComponent,
+        children: [
+          { path: '', component: FamilyProfileComponent },
+          { path: 'infant', component: InfantComponent },
+          {
+            path: 'baranggay-preschooler',
+            component: BaranggayPreschoolerComponent,
+          },
+          {
+            path: 'list-of-preschooler-with-nutritional-status',
+            component: ListOfPreschoolerWithNutritionalStatusComponent,
+          },
+          { path: 'at-risk-preschool', component: AtRiskPreschoolComponent },
+          { path: 'prenatal', component: PrenatalComponent },
+          { path: 'prenatal/new', component: NewprenatalComponent },
+          { path: 'prenatal/edit', component: EditprenatalComponent },
+          { path: 'immunization', component: ImmunizationComponent },
+          { path: 'immunization/new', component: NewimmunizationComponent },
+          { path: 'immunization/edit', component: EditimmunizationComponent },
+        ],
+      },
       {
         path: 'analytics',
         component: AnalyticsComponent,
         children: [
-            { path: '', component: FamilyProfileAnalyticsComponent },
-            { path: 'infant-analytics', component: InfantAnalyticsComponent },
-            { path: 'brgy-preschooler-analytics', component: BrgyPreschoolerAnalyticsComponent },
-            { path: 'nutritional-status-analytics', component: NutritionalStatusAnalyticsComponent },
-            { path: 'at-risk-preschool-analytics', component: AtRiskPreschoolAnalyticsComponent },
-          ],
+          { path: '', component: FamilyProfileAnalyticsComponent },
+          { path: 'infant-analytics', component: InfantAnalyticsComponent },
+          {
+            path: 'brgy-preschooler-analytics',
+            component: BrgyPreschoolerAnalyticsComponent,
+          },
+          {
+            path: 'nutritional-status-analytics',
+            component: NutritionalStatusAnalyticsComponent,
+          },
+          {
+            path: 'at-risk-preschool-analytics',
+            component: AtRiskPreschoolAnalyticsComponent,
+          },
+        ],
       },
-      {path:'population-age-bracket',component:PopulationAgeBracketComponent},
+      {
+        path: 'population-age-bracket',
+        component: PopulationAgeBracketComponent,
+      },
       { path: 'events', component: EventsComponent },
       { path: 'personnel', component: PersonnelComponent },
       {
@@ -69,8 +102,14 @@ const routes: Routes = [
       },
       { path: 'logs', component: LogsComponent },
       { path: 'baranggay', component: BaranggayComponent },
-      { path: 'baranggay/list-of-resident', component: ListOfResidentComponent },
-      {path:'baranggay/list-of-resident/details',component:FamilyProfileDetailsComponent},
+      {
+        path: 'baranggay/list-of-resident',
+        component: ListOfResidentComponent,
+      },
+      {
+        path: 'baranggay/list-of-resident/details',
+        component: FamilyProfileDetailsComponent,
+      },
     ],
   },
   {

@@ -1,12 +1,10 @@
 <div class="relative z-40 mt-10 pb-20">
-    <div class="">
-      <h1 class="font-bold text-xl md:text-3xl text-white">Family Profile</h1>
-      <p class="text-slate-100 text-[12px]">Information about the system</p>
-    </div>
+  <div class="">
+    <h1 class="font-bold text-xl md:text-3xl text-white">Family Profile</h1>
+    <p class="text-slate-100 text-[12px]">Information about the system</p>
+  </div>
 
-
-
-  <div class="mt-5 ">
+  <div class="mt-5">
     <p-table
       [value]="data"
       #dt2
@@ -35,11 +33,11 @@
         'food_prod_act',
         'housthould_head',
         'mother_occupation',
-        'father_occupation' ,
-        'mother_educ_attain' ,
-        'father_educ_attain' ,
-        'mother_birthday' ,
-        'father_birthday' ,
+        'father_occupation',
+        'mother_educ_attain',
+        'father_educ_attain',
+        'mother_birthday',
+        'father_birthday'
       ]"
     >
       <ng-template pTemplate="caption">
@@ -55,7 +53,6 @@
             />
           </div>
 
-
           <button
             (click)="familyProfileFormBtn(null)"
             class="bg-green-800 text-white text-[12px] md:text-sm font-semibold py-3 px-5 rounded-3xl hover:bg-green-900/80 cursor-pointer transition-all"
@@ -63,11 +60,6 @@
             <i class="fal fa-file-plus mr-1"></i>
             Create
           </button>
-
-
-
-
-
         </div>
       </ng-template>
       <ng-template pTemplate="header">
@@ -80,41 +72,38 @@
           <th field="toilet_type">Toilet Type</th>
           <th field="water_source">Water Source</th>
           <th field="food_prod_act">Food production activity</th>
-          <th >Action</th>
+          <th>Action</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-pf>
         <tr class="text-sm" [pSelectableRow]="pf">
           <td>
-            
             <div
               class="cursor-pointer text-center text-blue-500"
               [routerLink]="'/form/family-profile/details'"
-              [queryParams]="{residentId:pf.resident_id}"
+              [queryParams]="{ residentId: pf.resident_id }"
             >
-                {{ pf.household_no }}
+              {{ pf.household_no }}
             </div>
-            
           </td>
           <td>{{ pf.household_member_no }}</td>
           <td>{{ pf.contact_number }}</td>
           <td>
-            {{ pf.mother  | titlecase}}
+            {{ pf.mother | titlecase }}
           </td>
           <td>
-            {{ pf.mother  | titlecase}}
+            {{ pf.mother | titlecase }}
           </td>
           <td>{{ pf.toilet_type }}</td>
           <td>{{ pf.water_source }}</td>
           <td>{{ pf.food_prod_act }}</td>
 
           <td class="flex flex-col md:flex-row gap-2">
-            
             <div class="text-center" (click)="familyProfileFormBtn(pf)">
-                <i class="fad fa-pencil"></i> Update
+              <i class="fad fa-pencil"></i> Update
             </div>
             <div (click)="deleteData(pf.id)" class="text-center">
-                <i class="fad fa-trash"></i> Delete
+              <i class="fad fa-trash"></i> Delete
             </div>
           </td>
         </tr>
@@ -130,5 +119,8 @@
   appendTo="body"
   [style]="{ maxWidth: '400px', width: '400px' }"
 >
-<app-family-profile-form (triggerSubmmit)="registerFamiltyProfileCommit()" [FPDetails]="FPDetails"></app-family-profile-form>
+  <app-family-profile-form
+    (triggerSubmmit)="registerFamiltyProfileCommit()"
+    [FPDetails]="FPDetails"
+  ></app-family-profile-form>
 </p-dialog>

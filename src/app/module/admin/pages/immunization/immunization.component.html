@@ -1,0 +1,117 @@
+<div class="relative z-40 pb-20">
+  <div class="mt-5">
+    <p-table
+      [value]="data"
+      #dt2
+      class="mt-5"
+      dataKey="id"
+      responsiveLayout="scroll"
+      [autoLayout]="true"
+      [paginator]="true"
+      [rows]="10"
+      [columns]="cols"
+      selectionMode="multiple"
+      [(selection)]="selectdata"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      styleClass="p-datatable-gridlines"
+      [globalFilterFields]="[
+        'info.f_p_m.first_name',
+        'info.f_p_m.last_name',
+        'info.f_p_m.middle_name',
+        'info.f_p_m.suffix',
+        'ageInMoth',
+        'info.weight',
+        'status'
+      ]"
+    >
+      <ng-template pTemplate="caption">
+        <div class="grid gap-2 md:flex md:justify-between">
+          <div class="flex items-center py-1 rounded bg-white px-2">
+            <i class="pi pi-search"></i>
+            <input
+              type="text"
+              class="outline-0 ml-2 border-0"
+              #textInput
+              (input)="dt2.filterGlobal(textInput.value, 'contains')"
+              placeholder="Search keyword"
+            />
+          </div>
+          <div class="flex gap-1 items-center">
+            <button
+              (click)="exportExcel()"
+              class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+            >
+              <i class="fad fa-download mr-1"></i>
+              Excel
+            </button>
+            <div class="relative">
+              <button
+                (click)="exportPdf()"
+                #ThisElem
+                class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+              >
+                <i class="fad fa-download mr-1"></i>
+                PDF
+              </button>
+            </div>
+            <a
+              routerLink="/admin/forms/immunization/new"
+              class="bg-green-800 text-white text-[12px] md:text-sm font-semibold py-3 px-5 rounded-3xl hover:bg-green-900/80 cursor-pointer transition-all"
+            >
+              <i class="fal fa-file-plus mr-1"></i>
+              Create
+            </a>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr class="text-sm">
+          <th field="AlumniCredentialschoolId.Course.acronym">Name of child</th>
+          <th field="AlumniCredentialschoolId.gradClass">Age in month</th>
+          <th field="AlumniCredentialschoolId.gradClass">Weight (kg)</th>
+          <th field="AlumniCredentialschoolId.gradClass">Weight Status</th>
+          <th field="email">Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-child>
+        <tr class="text-sm" [pSelectableRow]="child">
+          <td>
+            <a
+              class="text-blue-500 font-bold hover:text-blue-500/80"
+              routerLink="/admin/baranggay/list-of-resident/details"
+              [queryParams]="{ residentId: child?.info?.f_p_m?.resident_id }"
+            >
+              {{
+                child?.info?.f_p_m?.first_name +
+                  " " +
+                  child?.info?.f_p_m?.middle_name[0] +
+                  ". " +
+                  child?.info?.f_p_m?.last_name +
+                  " " | titlecase
+              }}
+              {{ child?.info?.f_p_m?.suffix ? child?.info?.f_p_m?.suffix : "" }}
+            </a>
+          </td>
+          <td>{{ child?.ageInMoth }}</td>
+          <td>{{ child?.info?.weight }}</td>
+          <td>{{ child?.status }}</td>
+
+          <td class="grid gap-2">
+            <!-- <div
+              class="cursor-pointer text-center"
+              [routerLink]="'/form/familty-profile/details'"
+              [queryParams]="{id:child?.info?.id}"
+            >
+              <i class="fad fa-eye"></i> View
+            </div> -->
+            <div (click)="deleteData(child?.info?.id)" class="text-center">
+              <i class="fad fa-trash"></i> Delete
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

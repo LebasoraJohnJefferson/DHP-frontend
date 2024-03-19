@@ -27,6 +27,12 @@ import { AtRiskPreschoolFormComponent } from './components/at-risk-preschool-for
 import { StepsModule } from 'primeng/steps';
 import { PersonnelFormComponent } from './components/personnel-form/personnel-form.component';
 import { PersonnelMoreInfoFormComponent } from './components/personnel-more-info-form/personnel-more-info-form.component';
+import { PrenatalComponent } from './pages/prenatal/prenatal.component';
+import { ImmunizationComponent } from './pages/immunization/immunization.component';
+import { NewprenatalComponent } from './pages/newprenatal/newprenatal.component';
+import { EditprenatalComponent } from './pages/editprenatal/editprenatal.component';
+import { NewimmunizationComponent } from './pages/newimmunization/newimmunization.component';
+import { EditimmunizationComponent } from './pages/editimmunization/editimmunization.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +56,12 @@ import { PersonnelMoreInfoFormComponent } from './components/personnel-more-info
     AtRiskPreschoolFormComponent,
     PersonnelFormComponent,
     PersonnelMoreInfoFormComponent,
+    PrenatalComponent,
+    ImmunizationComponent,
+    NewprenatalComponent,
+    EditprenatalComponent,
+    NewimmunizationComponent,
+    EditimmunizationComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -57,7 +69,7 @@ import { PersonnelMoreInfoFormComponent } from './components/personnel-more-info
     CommonModule,
     FormsModule,
     PersonnelRoutingModule,
-    StepsModule
-  ]
+    StepsModule,
+  ],
 })
-export class PersonnelModule { }
+export class PersonnelModule {}

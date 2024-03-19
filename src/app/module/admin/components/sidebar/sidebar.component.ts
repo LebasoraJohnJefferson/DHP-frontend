@@ -4,12 +4,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent implements OnInit {
   currentRoute: any;
-  selectedAttribute:string=''
-  selectedLabel:string=''
+  selectedAttribute: string = '';
+  selectedLabel: string = '';
   routesArr: any = [
     {
       title: 'Dashboard',
@@ -20,14 +20,30 @@ export class SidebarComponent implements OnInit {
       title: 'Analytics',
       route: 'analytics',
       icon: 'pi pi-chart-bar',
-      name:'analytics',
-      attributes:[
-        {link:'/admin/analytics',label:'Family profile',route:''},
-        {link:'/admin/analytics/infant-analytics',label:'Infant',route:'infant-analytics'},
-        {link:'/admin/analytics/brgy-preschooler-analytics',label:'barangay preschooler',route:'brgy-preschooler-analytics'},
-        {link:'/admin/analytics/nutritional-status-analytics',label:'preschooler with nutritional status',route:'nutritional-status-analytics'},
-        {link:'/admin/analytics/at-risk-preschool-analytics',label:'Affected/at risk preschool',route:'at-risk-preschool-analytics'},
-      ]
+      name: 'analytics',
+      attributes: [
+        { link: '/admin/analytics', label: 'Family profile', route: '' },
+        {
+          link: '/admin/analytics/infant-analytics',
+          label: 'Infant',
+          route: 'infant-analytics',
+        },
+        {
+          link: '/admin/analytics/brgy-preschooler-analytics',
+          label: 'barangay preschooler',
+          route: 'brgy-preschooler-analytics',
+        },
+        {
+          link: '/admin/analytics/nutritional-status-analytics',
+          label: 'preschooler with nutritional status',
+          route: 'nutritional-status-analytics',
+        },
+        {
+          link: '/admin/analytics/at-risk-preschool-analytics',
+          label: 'Affected/at risk preschool',
+          route: 'at-risk-preschool-analytics',
+        },
+      ],
     },
     {
       title: 'Personnel',
@@ -53,15 +69,27 @@ export class SidebarComponent implements OnInit {
       title: 'Forms',
       route: 'forms',
       icon: 'pi pi-file',
-      name:'form',
-      attributes:[
-        {link:'/admin/forms',label:'Family profile'},
-        {link:'/admin/forms/infant',label:'Infant'},
-        {link:'/admin/forms/baranggay-preschooler',label:'Barangay preschooler'},
-        {link:'/admin/forms/list-of-preschooler-with-nutritional-status',label:'Preschooler with nutritional status'},
-        {link:'/admin/forms/at-risk-preschool',label:'Affected/at risk preschool'}
-      ]
-    },{
+      name: 'form',
+      attributes: [
+        { link: '/admin/forms', label: 'Family profile' },
+        { link: '/admin/forms/infant', label: 'Infant' },
+        {
+          link: '/admin/forms/baranggay-preschooler',
+          label: 'Barangay preschooler',
+        },
+        {
+          link: '/admin/forms/list-of-preschooler-with-nutritional-status',
+          label: 'Preschooler with nutritional status',
+        },
+        {
+          link: '/admin/forms/at-risk-preschool',
+          label: 'Affected/at risk preschool',
+        },
+        { link: '/admin/forms/prenatal', label: 'Prenatal' },
+        { link: '/admin/forms/immunization', label: 'Immunization' },
+      ],
+    },
+    {
       title: 'Population bracket',
       route: 'population-age-bracket',
       icon: 'pi pi-users',
@@ -70,7 +98,7 @@ export class SidebarComponent implements OnInit {
       title: 'Logs',
       route: 'logs',
       icon: 'fal fa-pallet',
-    }
+    },
   ];
 
   constructor(private route: ActivatedRoute, private router: Router) {}
@@ -80,23 +108,21 @@ export class SidebarComponent implements OnInit {
   }
 
   goUser(data: any) {
-    if(data.route == 'forms' || data.route == 'analytics') return
-    this.router.navigate(
-      [`/admin/${data.route}`],
-      { queryParams: { type: data.params } }
-    );
+    if (data.route == 'forms' || data.route == 'analytics') return;
+    this.router.navigate([`/admin/${data.route}`], {
+      queryParams: { type: data.params },
+    });
   }
 
-  openAttributes(name:string){
-    this.selectedAttribute = this.selectedAttribute == name ? '' : name
+  openAttributes(name: string) {
+    this.selectedAttribute = this.selectedAttribute == name ? '' : name;
   }
 
-  assignLabel(labelName:string){
-    this.selectedLabel = labelName
+  assignLabel(labelName: string) {
+    this.selectedLabel = labelName;
   }
 
-
-  ngDoCheck(): void{
+  ngDoCheck(): void {
     this.getCurrentRouteURL(this.route.snapshot.children[0].routeConfig?.path);
     this.selectedLabel = this.router.url;
   }

@@ -49,6 +49,12 @@ import { AtRiskPreschoolAnalyticsComponent } from './pages/at-risk-preschool-ana
 import { PopulationAgeBracketComponent } from './pages/population-age-bracket/population-age-bracket.component';
 import { ListOfResidentComponent } from './pages/list-of-resident/list-of-resident.component';
 import { ResidentFormComponent } from './components/resident-form/resident-form.component';
+import { ImmunizationComponent } from './pages/immunization/immunization.component';
+import { PrenatalComponent } from './pages/prenatal/prenatal.component';
+import { NewprenatalComponent } from './pages/newprenatal/newprenatal.component';
+import { EditprenatalComponent } from './pages/editprenatal/editprenatal.component';
+import { NewimmunizationComponent } from './pages/newimmunization/newimmunization.component';
+import { EditimmunizationComponent } from './pages/editimmunization/editimmunization.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +102,12 @@ import { ResidentFormComponent } from './components/resident-form/resident-form.
     PopulationAgeBracketComponent,
     ListOfResidentComponent,
     ResidentFormComponent,
+    ImmunizationComponent,
+    PrenatalComponent,
+    NewprenatalComponent,
+    EditprenatalComponent,
+    NewimmunizationComponent,
+    EditimmunizationComponent,
   ],
   imports: [
     PrimengModule,
