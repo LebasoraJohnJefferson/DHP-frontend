@@ -14,7 +14,7 @@ import { Location } from '@angular/common';
 export class ProfileFamilyDetailsComponent implements OnInit{
   createModal:boolean = false
   detailsModal:boolean = false
-  FPid:any;
+  residentId:any;
   pfc:any;
   selectdata:any;
   data:any;
@@ -95,7 +95,7 @@ export class ProfileFamilyDetailsComponent implements OnInit{
 
   childrenForm:FormGroup = this._fb.group(
     {
-      FP_id:[''],
+      resident_id:[''],
       first_name:['',Validators.required],
       middle_name:['',Validators.required],
       last_name:['',Validators.required],
@@ -124,7 +124,7 @@ export class ProfileFamilyDetailsComponent implements OnInit{
 
   ngOnInit(): void {
     this._route.queryParams.subscribe((value) => {
-      this.FPid = value['id'];
+      this.residentId = value['residentId'];
       this.getFP()
       this.getAllFPC()
     });
@@ -132,17 +132,15 @@ export class ProfileFamilyDetailsComponent implements OnInit{
 
 
   getFP(){
-    this._FP.specificProfileFamilty(this.FPid).subscribe({
+    this._FP.specificProfileFamilty(this.residentId).subscribe({
       next:(res:any)=>{
         this.FamDetails = res?.data
-        console.log(res);
       }
     })
   }
 
   getAllFPC(){
-    this._FPCService.getAllPFC(this.FPid).subscribe((res:any)=>{
-      console.log(res)
+    this._FPCService.getAllPFC(this.residentId).subscribe((res:any)=>{
       this.data = res?.data
     })
   }
@@ -163,7 +161,7 @@ export class ProfileFamilyDetailsComponent implements OnInit{
   onSubmit(){
     if(this.childrenForm.valid){
       this.isSubmitLoading =true
-      this.childrenForm.controls['FP_id'].setValue(this.FPid)
+      this.childrenForm.controls['resident_id'].setValue(this.residentId)
       this.childrenForm.controls['is_nursing'].setValue(
         this.childrenForm.controls['is_nursing'].value == '' ? false : this.childrenForm.controls['is_nursing'].value)
       this._FPCService.createPFC(this.childrenForm.value).subscribe({

@@ -74,7 +74,7 @@
           <tr class="text-sm" [pSelectableRow]="child">
             <td><a class="text-blue-500 font-bold hover:text-blue-500/80" 
               routerLink="/form/family-profile/details"
-              [queryParams]="{id:child?.FP_id}">
+              [queryParams]="{residentId:child?.resident_id}">
               {{ child?.first_name+' '+ child?.middle_name[0]+'. '+child?.last_name | titlecase}} 
               {{child?.suffix ?? '' }}
             </a></td>

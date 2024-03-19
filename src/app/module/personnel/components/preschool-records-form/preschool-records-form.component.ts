@@ -75,7 +75,8 @@ export class PreschoolRecordsFormComponent {
     if(this.familyProfileForm.valid){
       this.isSubmitLoading = true
       this.familyProfileForm.controls['indigenous_preschool_child'].setValue(
-        this.familyProfileForm.controls['indigenous_preschool_child'].value == '' ? false : this.familyProfileForm.controls['indigenous_preschool_child'].value
+        this.familyProfileForm.controls['indigenous_preschool_child'].value == '' ||
+        this.familyProfileForm.controls['indigenous_preschool_child'].value == null ? false : this.familyProfileForm.controls['indigenous_preschool_child'].value
       )
       this._preschoolService.postPreschool(this.familyProfileForm.value).subscribe({
         next:(res:any)=>{
