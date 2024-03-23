@@ -49,6 +49,9 @@ export class PieChartComponent implements OnInit {
       }
     }
 
+    const total = this.data.reduce((acc: number, val: number) => acc + val, 0);
+    const percentages = this.data.map((value: number) => ((value / total) * 100).toFixed(2) + '%');
+
       this.dataInit = {
           labels: this.label,
           datasets: [
@@ -67,6 +70,18 @@ export class PieChartComponent implements OnInit {
                       usePointStyle: true,
                       color: textColor
                   }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (context: any) {
+                    let label = context.label || '';
+                    if (label) {
+                      label += ': ';
+                    }
+                    label += percentages[context.dataIndex];
+                    return label;
+                  }
+                }
               }
           }
         };

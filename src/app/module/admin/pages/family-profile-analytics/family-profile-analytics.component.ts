@@ -27,6 +27,7 @@ export class FamilyProfileAnalyticsComponent {
     this._analytic.getFPAnalytics().subscribe({
       next:(res)=>{
         this.data = res?.data
+        console.log(res)
       }
     })
   }
