@@ -1,7 +1,8 @@
 <div class="flex my-2 gap-2 text-[12px]  items-center">
     <select (change)="changeBarangay($event)" class="border-0 outline-0 px-2 bg-green-200 rounded py-1">
-        <option disabled selected >Select Year</option>
-        <option *ngFor="let brgy of list_barangays" [value]="brgy.baranggay">{{brgy?.baranggay}}</option>
+        <option disabled selected >Select barangay</option>
+        <option value="null" >All</option>
+        <option *ngFor="let brgy of list_barangays" [value]="brgy">{{brgy}}</option>
     </select>
 </div>
 <div>

@@ -27,7 +27,7 @@ export class FamilyProfileAnalyticsComponent {
     this._analytic.getFPAnalytics(this.selectedBarangay).subscribe({
       next:(res)=>{
         this.data = res?.data
-        this.list_barangays = res?.data?.list_barangays
+        if(this.list_barangays.length != res?.data?.list_barangays.length) this.list_barangays = res?.data?.list_barangays
       }
     })
   }
