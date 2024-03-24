@@ -35,6 +35,10 @@ export class PieChartComponent implements OnInit {
     let backGroundColor:any=[documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500'),documentStyle.getPropertyValue('--orange-500')]
     let hoverColor:any = [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400'),documentStyle.getPropertyValue('--orange-400')]
 
+    if (!this.data || this.data.length === 0) {
+      this.data = [0, 0]; 
+    }
+
     if(this.data){
       for(let i =0 ; i<dataLength; i++){
         if(this.data[i] == 0){

@@ -15,8 +15,8 @@ export class AnalyticsService {
 
   constructor(private http: HttpClient) {}
 
-  getFPAnalytics():Observable<any> {
-    return this.http.get(`${BASEURL}/admin/profileFamiltyAnalytics`);
+  getFPAnalytics(selectedBarangay:any):Observable<any> {
+    return this.http.get(`${BASEURL}/admin/profileFamiltyAnalytics/${selectedBarangay}`);
   }
 
 

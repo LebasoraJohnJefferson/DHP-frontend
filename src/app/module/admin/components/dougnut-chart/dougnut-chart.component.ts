@@ -23,7 +23,9 @@ export class DougnutChartComponent {
     let backGroundColor: any = ['rgb(145, 218, 35)', 'rgb(187, 195, 176 )'];
     let hoverBackGroundColor: any = ['rgba(145, 218, 35,.8)', 'rgba(187, 195, 176,.8 )'];
     let counter = 0;
-
+    if (!this.data || this.data.length === 0) {
+      this.data = [0, 0]; 
+    }
     if (this.data) {
       for (let i = 0; i < this.data?.length; i++) {
         if (this.data[i] == 0) {

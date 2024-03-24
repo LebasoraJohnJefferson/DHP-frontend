@@ -9,11 +9,11 @@ import { AnalyticsService } from '../../shared/services/analytics.service';
 export class FamilyProfileAnalyticsComponent {
 
   data:any;
-
-  toiletTypes:string[] = ['WS','OP','O','N']
-  typeOfWater:string[]=['P','W','S']
-  foodProdActs:string[]=['VG','P/L','FP']
-
+  list_barangays:any=[]
+  toiletTypes:string[] = ['Water sealed','Open pit','Others','None']
+  typeOfWater:string[]=['Pipe','Well','Spring']
+  foodProdActs:string[]=['Vegetable Garden','Poultry/Livestock','Fishpond']
+  selectedBarangay:any = null
 
 
   constructor(
@@ -24,12 +24,17 @@ export class FamilyProfileAnalyticsComponent {
 
 
   getFPAnalytics(){
-    this._analytic.getFPAnalytics().subscribe({
+    this._analytic.getFPAnalytics(this.selectedBarangay).subscribe({
       next:(res)=>{
         this.data = res?.data
-        console.log(res)
+        this.list_barangays = res?.data?.list_barangays
       }
     })
+  }
+
+  changeBarangay(event:any){
+    this.selectedBarangay = event?.target?.value
+    this.getFPAnalytics()
   }
 
 

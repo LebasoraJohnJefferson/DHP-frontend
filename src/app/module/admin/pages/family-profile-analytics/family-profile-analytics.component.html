@@ -1,3 +1,9 @@
+<div class="flex my-2 gap-2 text-[12px]  items-center">
+    <select (change)="changeBarangay($event)" class="border-0 outline-0 px-2 bg-green-200 rounded py-1">
+        <option disabled selected >Select Year</option>
+        <option *ngFor="let brgy of list_barangays" [value]="brgy.baranggay">{{brgy?.baranggay}}</option>
+    </select>
+</div>
 <div>
     <div class="grid grid-cols-1 lg:grid-cols-[600px_1fr]">
         <div class="w-full flex mx-auto flex-col my-4">
