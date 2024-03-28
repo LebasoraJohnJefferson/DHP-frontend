@@ -34,24 +34,21 @@ export class PieChartComponent implements OnInit {
     let counter = 0
     let backGroundColor:any=[documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500'),documentStyle.getPropertyValue('--orange-500')]
     let hoverColor:any = [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400'),documentStyle.getPropertyValue('--orange-400')]
-
+    if (this.data) {
+      if (this.data[0] == 0 && this.data[1]==0) {
+        backGroundColor = ['rgb(187, 195, 176 )'];
+        hoverColor = ['rgba(187, 195, 176,.8 )'];
+        this.data = [1];
+        this.label = ['No Data']
+      }else{
+        this.label = ['Yes', 'No']
+      }
+    }
     if (!this.data || this.data.length === 0) {
       this.data = [0, 0]; 
     }
 
-    if(this.data){
-      for(let i =0 ; i<dataLength; i++){
-        if(this.data[i] == 0){
-          counter +=1
-        }
-      }
-      if(dataLength == counter){
-        this.data = [1]
-        this.label = ["No data"]
-        backGroundColor = ["#CDD3C5"]
-        hoverColor = ["#6F7C5E"]
-      }
-    }
+    
 
     const total = this.data.reduce((acc: number, val: number) => acc + val, 0);
     const percentages = this.data.map((value: number) => ((value / total) * 100).toFixed(2) + '%');

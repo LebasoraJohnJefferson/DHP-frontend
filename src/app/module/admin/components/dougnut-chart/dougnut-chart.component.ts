@@ -7,6 +7,7 @@ import { Component, ChangeDetectorRef, Input } from '@angular/core';
 })
 export class DougnutChartComponent {
   @Input() data: any;
+  label:string[] = ['Yes', 'No']
   options: any;
 
   constructor(
@@ -20,31 +21,29 @@ export class DougnutChartComponent {
   chartView() {
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');
-    let backGroundColor: any = ['rgb(145, 218, 35)', 'rgb(187, 195, 176 )'];
+    let backGroundColor: any = ['rgb(145, 218, 35)', 'rgb(87, 9, 194 )'];
     let hoverBackGroundColor: any = ['rgba(145, 218, 35,.8)', 'rgba(187, 195, 176,.8 )'];
-    let counter = 0;
+    if (this.data) {
+      if (this.data[0] == 0 && this.data[1]==0) {
+        backGroundColor = ['rgb(187, 195, 176 )'];
+        hoverBackGroundColor = ['rgba(187, 195, 176,.8 )'];
+        this.data = [1];
+        this.label = ['No Data']
+      }else{
+        this.label = ['Yes', 'No']
+      }
+    }
     if (!this.data || this.data.length === 0) {
       this.data = [0, 0]; 
     }
-    if (this.data) {
-      for (let i = 0; i < this.data?.length; i++) {
-        if (this.data[i] == 0) {
-          counter += 1;
-        }
-      }
-      if (counter == this.data?.length) {
-        backGroundColor = ["#CDD3C5"];
-        hoverBackGroundColor = ["#6F7C5E"];
-        this.data = [1];
-      }
-    }
+   
 
     // Calculate percentages
     const total = this.data.reduce((acc: number, val: number) => acc + val, 0);
     const percentages = this.data.map((value: number) => ((value / total) * 100).toFixed(2) + '%');
 
     this.data = {
-      labels: ['Yes', 'No'],
+      labels: this.label,
       datasets: [
         {
           data: this.data,
