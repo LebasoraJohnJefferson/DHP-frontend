@@ -30,104 +30,123 @@ export class ResidentFormComponent  {
     {acro:'X',meaning:'The tenth'},
   ];
 
+  sexOptions:any=[
+    {acro:'Male'},
+    {acro:'Female'}
+  ]
+
+  civilStatus:any=[
+    {acro:'Married'},
+    {acro:'Single'},
+    {acro:'Divorced'},
+    {acro:'Separated'},
+    {acro:'Widowed'},
+    {acro:'Annulled'},
+  ]
+
+  citizenshipOptions:any=[
+    {acro:'Chinese'},
+    {acro:'Indian'},
+    {acro:'Japanese'},
+    {acro:'South Korean'},
+    {acro:'Indonesian'},
+    {acro:'Pakistani'},
+    {acro:'Bangladeshi'},
+    {acro:'Filipino'},
+    {acro:'Vietnamese'},
+    {acro:'Iranian'},
+    {acro:'Turkish'},
+    {acro:'Thai'},
+    {acro:'Burmese'},
+    {acro:'Iraqi'},
+    {acro:'Afghan'},
+    {acro:'Saudi'},
+    {acro:'Uzbek'},
+    {acro:'Malaysian'},
+    {acro:'Nepali'},
+    {acro:'Others'},
+  ]
+
+  
+  
+
+
+
+
+
   @Output() triggerSubmmit:EventEmitter<any> = new EventEmitter()
   otherFileds:any=[
     {
-      title:'Father`s first name',
-      formName:'father_first_name',
+      title:'First name',
+      formName:'first_name',
       type:'text',
-      placeholder:'Enter Father`s first name.'
+      placeholder:'first name.'
     },
     {
-      title:'Father`s middle name',
-      formName:'father_middle_name',
+      title:'Middle name',
+      formName:'middle_name',
       type:'text',
-      placeholder:'Enter Father`s middle name.'
+      placeholder:'middle name.'
     },
     {
-      title:'Father`s last name',
-      formName:'father_last_name',
+      title:'Last name',
+      formName:'last_name',
       type:'text',
-      placeholder:'Enter Father`s last name.'
+      placeholder:'last name.'
     },
     {
-      title:'Father`s suffix',
-      formName:'father_suffix',
+      title:'Suffix',
+      formName:'suffix',
       type:'dropdown',
-      placeholder:'Enter Father`s suffix.',
+      placeholder:'suffix.',
       data:this.extension
     },
     {
-      title:'Father`s place of birth',
-      formName:'father_place_birth',
-      type:'text',
-      placeholder:'Father`s place of birth.'
-    },
-    {
-      title:'Father`s citizenship',
-      formName:'father_citizenship',
-      type:'text',
-      placeholder:'Father`s citizenship'
-    },
-    {
-      title:'Father`s birthday',
-      formName:'father_birthday',
+      title:'Birthday',
+      formName:'birthday',
       type:'date',
     },
     {
-      title:'Mother`s first name',
-      formName:'mother_first_name',
-      type:'text',
-      placeholder:'Mother`s first name.'
+      title:'Gender',
+      formName:'sex',
+      type:'dropdown',
+      placeholder:'gender.',
+      data:this.sexOptions
     },
     {
-      title:'Mother`s middle name',
-      formName:'mother_middle_name',
+      title:'Occupation',
+      formName:'occupation',
       type:'text',
-      placeholder:'Mother`s middle name.'
+      placeholder:'occupation.',
     },
     {
-      title:'Mother`s last name',
-      formName:'mother_last_name',
-      type:'text',
-      placeholder:'Mother`s last name.'
+      title:'Civil status',
+      formName:'civil_status',
+      type:'dropdown',
+      placeholder:'civil status.',
+      data:this.civilStatus
     },
     {
-      title:'Mother`s place of birth',
-      formName:'mother_place_birth',
-      type:'text',
-      placeholder:'Mother`s place of birth.'
+      title:'Citizenship',
+      formName:'citizenship',
+      type:'dropdown',
+      placeholder:'citizenship.',
+      data:this.citizenshipOptions
     },
-    {
-      title:'Mother`s citizenship',
-      formName:'mother_citizenship',
-      type:'text',
-      placeholder:'Mother`s citizenship.'
-    },
-    {
-      title:'mother`s birthday',
-      formName:'mother_birthday',
-      type:'date',
-    },
-
   ]
 
 
   residentForm:FormGroup = this._fb.group({
+    citizenship:['',Validators.required],
     brgy_id:['',Validators.required],
-    mother_first_name:['',Validators.required],
-    mother_citizenship:['',Validators.required],
-    mother_place_birth:['',Validators.required],
-    father_citizenship:['',Validators.required],
-    father_place_birth:['',Validators.required],
-    mother_middle_name:['',Validators.required],
-    mother_last_name:['',Validators.required],
-    father_first_name:['',Validators.required],
-    father_middle_name:['',Validators.required],
-    father_last_name:['',Validators.required],
-    father_suffix:[''],
-    father_birthday:['',Validators.required],
-    mother_birthday:['',Validators.required],
+    sex:['',Validators.required],
+    first_name:['',Validators.required],
+    middle_name:[''],
+    last_name:['',Validators.required],
+    civil_status:['',Validators.required],
+    occupation:['',Validators.required],
+    suffix:[''],
+    birthday:['',Validators.required],
   });
 
 

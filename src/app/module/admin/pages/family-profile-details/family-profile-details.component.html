@@ -72,13 +72,13 @@
                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                     />
 
-                    <button
+                    <!-- <button
                       (click)="importInput.click()"
                       class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
                     >
                       <i class="fad fa-upload mr-1"></i>
                       Import
-                    </button>
+                    </button> -->
 
                     <button
                       (click)="exportExcel()"
@@ -234,38 +234,22 @@
         [formGroup]="childrenForm"
         class="w-full grid gap-2"
       >
-          <div *ngFor="let field of fields" class="w-full">
-            <label class="block text-[12px] font-medium text-gray-700"
-              >{{field.label}}</label
-            >
-            <div *ngIf="field.type != 'dropdown'" class="mt-1 relative rounded-md w-full">
-              <input
-                [type]="field.type"
-                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
-                [placeholder]="field.placeholder"
-                [formControlName]="field.formName"
-              />
-            </div>
-            <div *ngIf="field.type == 'dropdown'" class="mt-1 relative rounded-md w-full">
-              <select [formControlName]="field.formName" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
-                <option selected disabled>Select suffix</option>
-                <option [value]="suffix?.acro" *ngFor="let suffix of field?.data">
-                    {{suffix?.acro}} ({{suffix?.meaning}})
-                </option>
-              </select>
-            </div>
-          </div>
-          
+        <div >
           <div class="w-full">
-            <label class="block text-[12px] font-medium text-gray-700"
-              >Gender</label
-            >
-            <div class="mt-1 relative rounded-md w-full">
-              <select class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50" formControlName="gender">
-                <option [value]="gender" *ngFor="let gender of genders">{{gender}}</option>
-              </select>
+              <label class="block text-[12px] font-medium text-gray-700"
+                >Select Family Member</label
+              >
+              <div class="mt-1 relative rounded-md w-full">
+                <select formControlName="resident_id" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
+                  <option selected disabled>-Choose one-</option>
+                  <option [value]="resident.id" *ngFor="let resident of residents">
+                      {{resident.first_name + " " + resident.middle_name[0] + ". "+ resident.last_name}} {{resident.suffix ? resident.suffix : ""}}
+                  </option>
+                </select>
+              </div>
             </div>
-          </div>
+      </div>
+          
 
           <div class="w-full">
             <label class="block text-[12px] font-medium text-gray-700"
@@ -274,16 +258,6 @@
             <div class="mt-1 relative rounded-md w-full">
               <select class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50" formControlName="relationship">
                 <option [value]="relationship" *ngFor="let relationship of  relationships">{{relationship}}</option>
-              </select>
-            </div>
-          </div>
-          <div class="w-full">
-            <label class="block text-[12px] font-medium text-gray-700"
-              >Occupation</label
-            >
-            <div class="mt-1 relative rounded-md w-full">
-              <select class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50" formControlName="occupation">
-                <option [value]="occupation" *ngFor="let occupation of  occupations">{{occupation}}</option>
               </select>
             </div>
           </div>

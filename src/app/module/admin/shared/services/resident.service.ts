@@ -34,6 +34,10 @@ export class ResidentService {
   deleteResident(residentId:number):Observable<any>{
     return this.http.delete(`${BASEURL}/resident/${residentId}`)
   }
+  
+  getAllResidentForFamilyMember(){
+    return this.http.get(`${BASEURL}/famityProfileMembers`)
+  }
 
   
   getResidents():Observable<any>{

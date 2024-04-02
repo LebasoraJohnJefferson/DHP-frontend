@@ -126,9 +126,7 @@
             <td>
               
               <div
-                class="cursor-pointer text-center text-blue-500"
-                [routerLink]="'/admin/baranggay/list-of-resident/details'"
-                [queryParams]="{residentId:pf.resident_id}"
+                class="text-center"
               >
                   {{ pf.household_no }}
               </div>
@@ -146,12 +144,17 @@
             <td>{{ pf.water_source }}</td>
             <td>{{ pf.food_prod_act }}</td>
 
-            <td class="flex flex-col md:flex-row gap-2">
-              
-              <div class="text-center" (click)="familyProfileFormBtn(pf)">
+            <td class="flex flex-col  gap-2">
+              <div class="text-center flex items-center gap-1"
+              [routerLink]="'/admin/baranggay/list-of-resident/details'"
+              [queryParams]="{pfId:pf.id}"
+              >
+                  <i class="fad fa-eye"></i> View
+              </div>
+              <div class="text-center flex items-center gap-1" (click)="familyProfileFormBtn(pf)">
                   <i class="fad fa-pencil"></i> Update
               </div>
-              <div (click)="deleteData(pf.id)" class="text-center">
+              <div (click)="deleteData(pf.id)" class="text-center flex items-center gap-1">
                   <i class="fad fa-trash"></i> Delete
               </div>
             </td>

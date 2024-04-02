@@ -10,6 +10,7 @@ import { read, utils, writeFile } from 'xlsx';
 import  jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import moment from 'moment';
+import { ResidentService } from '../../shared/services/resident.service';
 
 @Component({
   selector: 'app-family-profile-details',
@@ -24,12 +25,12 @@ export class FamilyProfileDetailsComponent implements OnInit{
   importedFamilyProfileMember:any=[]
   selectdata:any;
   FamDetails:any
-  resident_id:any;
+  fp_id:any;
   data:any;
+  residents:any;
   cols:any;
   pfc:any;
   nursingTypes:string[]=['EBF','Mixed feeding','Bottle-fed','Others']
-  genders:string[]=['male','female']
   relationships:string[] = [
     'Father','Mother','Grandmother','Grandfather',
     'Brother','Sister','Son','Daughter','Aunt','Uncle',
@@ -42,6 +43,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
   constructor(
     private _FP:FamilyProfileService,
     private _route: ActivatedRoute,
+    private _residentService:ResidentService,
     private _fb:FormBuilder,
     private _FPCService:FamilyProfileMemberService,
     public toast:HotToastService,
@@ -49,67 +51,12 @@ export class FamilyProfileDetailsComponent implements OnInit{
   ){
   }
 
-  extension:any=[
-    {acro:'',meaning:'Not Applicable'},
-    {acro:'Jr',meaning:'Junior'},
-    {acro:'Sr',meaning:'Senior'},
-    {acro:'II',meaning:'The second'},
-    {acro:'III',meaning:'The third'},
-    {acro:'IV',meaning:'The fourth'},
-    {acro:'V',meaning:'The fifth'},
-    {acro:'VI',meaning:'The sixth'},
-    {acro:'VII',meaning:'The seventh'},
-    {acro:'VIII',meaning:'The eighth'},
-    {acro:'IX',meaning:'The ninth'},
-    {acro:'X',meaning:'The tenth'},
-  ];
-
-  fields = [
-    {
-      type:'text',
-      placeholder:'Enter first name',
-      formName:'first_name',
-      label:'Member`s first name'
-    },
-    {
-      type:'text',
-      placeholder:'Enter middle name',
-      formName:'middle_name',
-      label:'Member`s middle name'
-    },
-    {
-      type:'text',
-      placeholder:'Enter last name',
-      formName:'last_name',
-      label:'Member`s last name'
-    },
-    {
-      type:'dropdown',
-      placeholder:'Enter suffix',
-      formName:'suffix',
-      label:'Member`s suffix',
-      data:this.extension
-    },
-    {
-      type:'date',
-      placeholder:'Enter Birthday',
-      formName:'birthDay',
-      label:'Member`s birthday',
-    },
-    
-  ]
 
   childrenForm:FormGroup = this._fb.group(
     {
-      resident_id:[''],
-      first_name:['',Validators.required],
-      middle_name:['',Validators.required],
-      last_name:['',Validators.required],
-      suffix:[''],
-      birthDay:['',Validators.required],
-      gender:['',Validators.required],
-      occupation:['',Validators.required],
+      fp_id:[''],
       relationship:['',Validators.required],
+      resident_id:['',Validators.required],
       is_nursing:[''],
       nursing_type:['']
     },
@@ -130,7 +77,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
 
   ngOnInit(): void {
     this._route.queryParams.subscribe((value) => {
-      this.resident_id = value['residentId'];
+      this.fp_id = value['pfId'];
       this.getFP()
       this.getAllFPC()
     });
@@ -138,16 +85,27 @@ export class FamilyProfileDetailsComponent implements OnInit{
 
 
   getFP(){
-    this._FP.specificProfileFamilty(this.resident_id).subscribe({
+    this._FP.specificProfileFamilty(this.fp_id).subscribe({
       next:(res:any)=>{
         this.FamDetails = res?.data
       }
     })
   }
 
+  getAllResident(){
+    this._residentService.getAllResidentForFamilyMember().subscribe({
+      next:(res:any)=>{
+        this.residents = res?.data
+      },error:(err)=>{
+        console.log(err)
+      }
+    })
+  }
+
   getAllFPC(){
-    this._FPCService.getAllPFC(this.resident_id).subscribe((res:any)=>{
+    this._FPCService.getAllPFC(this.fp_id).subscribe((res:any)=>{
       this.data = res?.data
+      this.getAllResident()
     })
   }
 
@@ -167,7 +125,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
   onSubmit(){
     if(this.childrenForm.valid){
       this.isSubmitLoading =true
-      this.childrenForm.controls['resident_id'].setValue(this.resident_id)
+      this.childrenForm.controls['fp_id'].setValue(this.fp_id)
       if(this.pfc){
         this.updatePFC()
       }else{
@@ -346,7 +304,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
   }
 
   importFamilyProfileMember() {
-    this._FPCService.saveImportedFCM(this.resident_id,{ familiesMemberData: this.importedFamilyProfileMember }).subscribe({
+    this._FPCService.saveImportedFCM(this.fp_id,{ familiesMemberData: this.importedFamilyProfileMember }).subscribe({
       next:(res:any)=>{
         setTimeout(() => {
           this.toast.success("Successfully Imported!");

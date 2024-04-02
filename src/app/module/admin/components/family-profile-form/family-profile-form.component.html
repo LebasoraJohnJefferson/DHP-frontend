@@ -5,15 +5,29 @@
         class="w-full grid gap-2"
       >
 
-          <div [class]="FPDetails ? 'hidden' : 'w-full'">
+          <div class="w-full">
             <label class="block text-[12px] font-medium text-gray-700"
-              >Resident</label
+              >Father</label
             >
             <div class="mt-1 relative rounded-md w-full">
-              <select formControlName="resident_id" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
-                <option  disabled>Select Province</option>
+              <select formControlName="father_id" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
+                <option  disabled>-Choose one-</option>
                 <option [value]="resident.id" *ngFor="let resident of residents">
-                  {{resident.father}} | {{resident.mother}}
+                  {{resident.first_name+' '+resident.middle_name[0]+'. '+resident.last_name}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="w-full">
+            <label class="block text-[12px] font-medium text-gray-700"
+              >Mother</label
+            >
+            <div class="mt-1 relative rounded-md w-full">
+              <select formControlName="mother_id" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
+                <option  disabled>-Choose one-</option>
+                <option [value]="resident.id" *ngFor="let resident of residents">
+                  {{resident.first_name+' '+resident.middle_name[0]+'. '+resident.last_name}}
                 </option>
               </select>
             </div>
@@ -63,28 +77,6 @@
                       <select formControlName="father_educ_attain" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
                         <option selected disabled>Select Educatioal Attained</option>
                         <option [value]="type" *ngFor="let type of educAttans">{{type}}</option>
-                      </select>
-                    </div>
-                  </div>
-                <div class="w-full" >
-                    <label class="block text-[12px] font-medium text-gray-700"
-                      >Mother`s occupation</label
-                    >
-                    <div class="mt-1 relative rounded-md w-full">
-                      <select formControlName="mother_occupation" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
-                        <option selected disabled>Select occupation</option>
-                        <option [value]="type" *ngFor="let type of occupations">{{type}}</option>
-                      </select>
-                    </div>
-                  </div>
-                <div class="w-full" >
-                    <label class="block text-[12px] font-medium text-gray-700"
-                      >Father`s occupation</label
-                    >
-                    <div class="mt-1 relative rounded-md w-full">
-                      <select formControlName="father_occupation" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
-                        <option selected disabled>Select occupation</option>
-                        <option [value]="type" *ngFor="let type of occupations">{{type}}</option>
                       </select>
                     </div>
                   </div>

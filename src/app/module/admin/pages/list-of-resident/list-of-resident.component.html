@@ -20,15 +20,14 @@
           [rowsPerPageOptions]="[10, 25, 50]"
           styleClass="p-datatable-gridlines"
           [globalFilterFields]="[
-            'father_first_name',
-            'father_last_name',
-            'father_middle_name',
-            'father_suffix',
-            'mother_first_name',
-            'mother_last_name',
-            'mother_middle_name',
-            'father_birthday',
-            'mother_birthday',
+            'first_name',
+            'middle_name',
+            'last_name',
+            'suffix',
+            'birthday',
+            'civil_status',
+            'sex',
+            'occupation',
           ]"
         >
           <ng-template pTemplate="caption">
@@ -89,7 +88,7 @@
                 </div>
 
                 <button
-                  (click)="createResidentModal = true"
+                  (click)="createResident()"
                   class="bg-green-800 text-white text-[12px] md:text-sm font-semibold py-3 px-5 rounded-3xl hover:bg-green-900/80 cursor-pointer transition-all"
                 >
                   <i class="fal fa-file-plus mr-1"></i>
@@ -100,45 +99,56 @@
           </ng-template>
           <ng-template pTemplate="header">
             <tr class="text-sm">
-              <th field="first_name">Household no.</th>
-              <th field="first_name">Father's name</th>
-              <th field="suffix">Father's Birth date</th>
-              <th field="suffix">Father's Place of Birth</th>
-              <th field="middle_name">Mother's name</th>
-              <th field="last_name">Mother's Birth date</th>
-              <th field="suffix">Mother's Place of Birth</th>
+              <th field="first_name">Household no</th>
+              <th field="first_name">First name</th>
+              <th field="middle_name">Middle name</th>
+              <th field="last_name">Last name</th>
+              <th field="suffix">Suffix</th>
+              <th field="birthday">Birthday</th>
+              <th field="civil_status">Civil Status</th>
+              <th field="occupation">Occupation</th>
+              <th field="sex">Gender</th>
               <th>Action</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-resident>
+ 
             <tr class="text-sm" [pSelectableRow]="resident">
-              <td>
-                {{resident.household_no}}
+              <td *ngIf="resident.household_id" class="text-blue-500"
+                routerLink="/admin/baranggay/list-of-resident/details"
+                [queryParams]="{pfId:resident.household_id}"
+              >
+                {{resident.household_no ? resident.household_no  : 'N/A'}}
+              </td>
+              <td *ngIf="!resident.household_id"
+              >
+                {{resident.household_no ? resident.household_no  : 'N/A'}}
               </td>
               <td>
-                {{ resident?.father_first_name + " " + resident?.father_middle_name[0] + ' ' + resident?.father_last_name | titlecase}}
-                {{resident?.father_suffix ?? '' }}
+                {{resident.first_name}}
+              </td>
+            <td>
+                {{resident?.middle_name}}
             </td>
             <td>
-                {{resident?.father_birthday | date: 'mediumDate'}}
+                {{resident?.last_name}}
             </td>
             <td>
-                {{resident?.father_place_birth}}
+                {{ resident?.suffix}}
             </td>
             <td>
-                {{ resident?.mother_first_name + " " + resident?.mother_middle_name[0] + ' ' + resident?.mother_last_name | titlecase}}
+                {{resident?.birthday | date: 'mediumDate'}}
             </td>
             <td>
-                {{resident?.mother_birthday | date: 'mediumDate'}}
+                {{resident?.civil_status}}
             </td>
             <td>
-                {{resident?.mother_place_birth}}
+                {{resident?.sex}}
+            </td>
+            <td>
+                {{resident?.occupation}}
             </td>
               <td class="text-center gap-y-2" >
-                  <div routerLink="/admin/baranggay/list-of-resident/details"
-                  [queryParams]="{ residentId: resident.id }" routerLinkActive="router-link-active"  class="flex items-center gap-1">
-                    <i class="fad fa-eye"></i> View
-                  </div>
                   <div (click)="deleteResident(resident?.id)" class="flex items-center gap-1">
                     <i class="fad fa-trash"></i> Delete
                   </div>
@@ -186,7 +196,7 @@
             >
             <div class="mt-1 relative rounded-md w-full">
               <select [formControlName]="field.formName" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
-                <option selected disabled>Options</option>
+                <option selected disabled>-Choose one-</option>
                 <option [value]="field" *ngFor="let field of excelExistingField">
                     {{field}}
                 </option>

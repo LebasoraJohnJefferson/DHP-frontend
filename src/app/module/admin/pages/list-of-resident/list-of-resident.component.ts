@@ -16,6 +16,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ListOfResidentComponent implements OnInit{
   barangay:string=''
+  baranggayDetails:any
   brgyId:number = 0;
   data:any;
   cols:any
@@ -29,75 +30,54 @@ export class ListOfResidentComponent implements OnInit{
 
   otherFileds:any=[
     {
-      title:'Father`s first name',
-      formName:'father_first_name',
+      title:'First name',
+      formName:'first_name',
     },
     {
-      title:'Father`s middle name',
-      formName:'father_middle_name',
+      title:'Middle name',
+      formName:'middle_name',
     },
     {
-      title:'Father`s last name',
-      formName:'father_last_name',
+      title:'Last name',
+      formName:'last_name',
     },
     {
-      title:'Father`s suffix',
-      formName:'father_suffix',
+      title:'Suffix',
+      formName:'suffix',
     },
     {
-      title:'Father`s citizenship',
-      formName:'father_citizenship',
+      title:'Birthday',
+      formName:'birthday',
     },
     {
-      title:'Father`s place of birth',
-      formName:'father_place_birth',
+      title:'Gender',
+      formName:'sex',
     },
     {
-      title:'Father`s birthday',
-      formName:'father_birthday',
+      title:'Occupation',
+      formName:'occupation',
     },
     {
-      title:'Mother`s first name',
-      formName:'mother_first_name',
+      title:'Citizenship',
+      formName:'citizenship',
     },
     {
-      title:'Mother`s middle name',
-      formName:'mother_middle_name',
-    },
-    {
-      title:'Mother`s last name',
-      formName:'mother_last_name',
-    },
-    {
-      title:'Mother`s birthday',
-      formName:'mother_birthday',
-    },
-    {
-      title:'Mother`s citizenship',
-      formName:'mother_citizenship',
-    },
-    {
-      title:'Mother`s place of birth',
-      formName:'mother_place_birth',
+      title:'Civil Status',
+      formName:'civil_status',
     },
 
   ]
 
   residentForm:FormGroup = this._fb.group({
-    mother_first_name:['',Validators.required],
-    mother_middle_name:['',Validators.required],
-    mother_last_name:['',Validators.required],
-    father_first_name:['',Validators.required],
-    father_middle_name:['',Validators.required],
-    father_last_name:['',Validators.required],
-    father_suffix:[''],
-    father_birthday:['',Validators.required],
-    mother_birthday:['',Validators.required],
-
-    mother_citizenship:['',Validators.required],
-    mother_place_birth:['',Validators.required],
-    father_citizenship:['',Validators.required],
-    father_place_birth:['',Validators.required],
+    sex:['',Validators.required],
+    first_name:['',Validators.required],
+    citizenship:['',Validators.required],
+    middle_name:[''],
+    last_name:['',Validators.required],
+    civil_status:['',Validators.required],
+    occupation:['',Validators.required],
+    suffix:[''],
+    birthday:['',Validators.required],
   });
 
 
@@ -115,11 +95,14 @@ export class ListOfResidentComponent implements OnInit{
       this.getAllResident()
     });
   }
+  
 
   getAllResident(){
     this._residentService.getResident(this.brgyId).subscribe({
       next:(res:any)=>{
+        console.log(res)
         this.barangay = res?.data?.brgyDetails?.baranggay
+        this.baranggayDetails = res?.data?.brgyDetails
         this.data = res?.data?.residents
       },error:(err)=>{
         console.log(err)
@@ -149,30 +132,34 @@ export class ListOfResidentComponent implements OnInit{
     const doc = new jsPDF('p', 'pt',[height, width]);
     let data:any = []
     let columns = [
-      {title:'Household_no',dataKey:'household_no'},
-      {title:'Mother first name',dataKey:'mother_first_name'},
-      {title:'Mother middle name',dataKey:'mother_middle_name'},
-      {title:'Mother last name',dataKey:'mother_last_name'},
-      {title:'Mother birth date',dataKey:'mother_birthday'},
-      {title:'Mother`s citizenship',dataKey:'mother_citizenship'},
-      {title:'Mother`s place of birth',dataKey:'mother_place_birth'},
-      {title:'Father first name',dataKey:'father_first_name'},
-      {title:'Father middle name',dataKey:'father_middle_name'},
-      {title:'Father Last name',dataKey:'father_last_name'},
-      {title:'Father suffix',dataKey:'father_suffix'},
-      {title:'Father birth date',dataKey:'father_birthday'},
-      {title:'Father place of birth',dataKey:'father_place_birth'},
-      {title:'Father citizenship',dataKey:'father_citizenship'},
-
+      {title:'First name',dataKey:'first_name'},
+      {title:'Middle name',dataKey:'middle_name'},
+      {title:'Last name',dataKey:'last_name'},
+      {title:'Suffix',dataKey:'suffix'},
+      {title:'Birthday',dataKey:'birthday'},
+      {title:'Civil Status',dataKey:'civil_status'},
+      {title:'Gender',dataKey:'sex'},
+      {title:'Occupation',dataKey:'occupation'},
+      {title:'Citizenship',dataKey:'citizenship'},
+      {title:'Date accomplished',dataKey:'created_at'},
+      {title:'Address',dataKey:'address'},
+      {title:'Household #',dataKey:'household_no'},
     ];
 
     
 
     this.data?.map((details:any)=>{
-      
-      data.push({...details,
-        mother_birthday:this.birthDayFormat(details.mother_birthday),
-        father_birthday:this.birthDayFormat(details.father_birthday),
+      let address:any;
+      if(this.baranggayDetails){
+        let {province,city,baranggay,purok} = this.baranggayDetails;
+        address = `${province}, ${city}, ${baranggay} ${purok}`
+      }
+      data.push({
+        household_no: details.household_no ? details.household_no : 'N/A',
+        ...details,
+        address:address ? address : 'N/A',
+        birthday:this.birthDayFormat(details.birthday),
+        created_at:this.birthDayFormat(details.created_at),
       })
     })
 
@@ -188,24 +175,15 @@ export class ListOfResidentComponent implements OnInit{
 
   exportExcel(){
     import('xlsx').then((xlsx) => {
+      let address = 'N/A'
+      if(this.baranggayDetails){
+        let {province,city,baranggay,purok} = this.baranggayDetails;
+        address = `${province}, ${city}, ${baranggay} ${purok}`
+      }
       let filteredAlumni  = this.data.map((details:any)=>{
+        let { mother_family_profile, updated_at,id,brgy_id, household_no,...rest } = details; 
 
-        return {
-          household_no:details?.household_no,
-          mother_first_name:details?.mother_first_name,
-          mother_middle_name:details?.mother_middle_name,
-          mother_last_name:details?.mother_last_name,
-          mother_birthday:details?.mother_birthday,
-          father_first_name:details?.father_first_name,
-          father_middle_name:details?.father_middle_name,
-          father_last_name:details?.father_last_name,
-          father_suffix:details?.father_suffix,
-          father_birthday:details?.father_birthday,
-          mother_citizenship:details?.mother_citizenship,
-          mother_place_birth:details?.mother_place_birth,
-          father_citizenship:details?.father_citizenship,
-          father_place_birth:details?.father_place_birth,
-        };
+        return {...rest,address:address,household_no:household_no}
       })
       const worksheet = xlsx.utils.json_to_sheet(filteredAlumni );
       const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
@@ -234,40 +212,36 @@ export class ListOfResidentComponent implements OnInit{
 
   }
 
+  createResident(){
+    this.createResidentModal = true
+    this.resident =null
+  }
+
   onSubmit(){
     if(this.residentForm.valid){
       const data:any = [];
       this.importedResident.map((resident:any)=>{
         const {
-          mother_first_name,
-          mother_middle_name,
-          mother_last_name,
-          father_first_name,
-          father_middle_name,
-          father_last_name,
-          father_suffix,
-          father_birthday,
-          mother_birthday,
-          mother_citizenship,
-          mother_place_birth,
-          father_citizenship,
-          father_place_birth,
+        first_name,
+        middle_name,
+        last_name,
+        suffix,
+        birthday,
+        civil_status,
+        sex,
+        citizenship,
+        occupation,
         } = this.residentForm.value
-
         data.push({
-          mother_first_name:resident[mother_first_name],
-          mother_middle_name:resident[mother_middle_name],
-          mother_last_name:resident[mother_last_name],
-          father_first_name:resident[father_first_name],
-          father_middle_name:resident[father_middle_name],
-          father_last_name:resident[father_last_name],
-          father_suffix:resident[father_suffix],
-          father_birthday:resident[father_birthday],
-          mother_birthday:resident[mother_birthday],
-          mother_citizenship:resident[mother_citizenship],
-          mother_place_birth:resident[mother_place_birth],
-          father_citizenship:resident[father_citizenship],
-          father_place_birth:resident[father_place_birth],
+          first_name:resident[first_name],
+          citizenship:resident[citizenship],
+          middle_name:resident[middle_name],
+          last_name:resident[last_name],
+          suffix:resident[suffix] ? resident[suffix] : null,
+          birthday:resident[birthday],
+          civil_status:resident[civil_status],
+          sex:resident[sex],
+          occupation:resident[occupation],
         })
 
       })
@@ -296,7 +270,6 @@ export class ListOfResidentComponent implements OnInit{
       reader.onload = (event: any) => {
         const wb = read(event.target.result);
         const sheets = wb.SheetNames;
-
         if (sheets.length) {
           const rows:any = utils.sheet_to_json(wb.Sheets[sheets[0]]);
           // with existing data
@@ -304,6 +277,7 @@ export class ListOfResidentComponent implements OnInit{
           if(rows.length > 0){
             // existed column from excel
             this.excelExistingField = Object.keys(rows[0])
+            if(!this.excelExistingField.includes('suffix')) this.excelExistingField.push('suffix')
             this.importResidentModal = true
           }else{
             this.toast.warning("Empty File")
@@ -316,7 +290,6 @@ export class ListOfResidentComponent implements OnInit{
 
   importResident(data:any) {
     this.isSubmitLoading = true
-    console.log(data)
     this._residentService.importResident({ resident: data },this.brgyId).subscribe({
       next:(res:any)=>{
         setTimeout(() => {
