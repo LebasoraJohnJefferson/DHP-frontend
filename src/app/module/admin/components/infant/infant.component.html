@@ -81,8 +81,8 @@
         <ng-template pTemplate="body" let-child>
           <tr class="text-sm" [pSelectableRow]="child">
             <td><a class="text-blue-500 font-bold hover:text-blue-500/80"
-              routerLink="/admin/baranggay/list-of-resident/details"
-              [queryParams]="{residentId:child?.info?.f_p_m?.resident_id}">
+              routerLink="/admin/baranggay/list-of-resident"
+              [queryParams]="{brgyId:child?.brgy_id}">
               {{ child?.info?.f_p_m?.first_name + ' ' + 
                   child?.info?.f_p_m?.middle_name[0] +'. ' + 
                   child?.info?.f_p_m?.last_name + ' ' | titlecase}} 
