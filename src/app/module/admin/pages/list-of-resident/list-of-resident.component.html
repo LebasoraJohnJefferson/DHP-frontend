@@ -104,6 +104,7 @@
               <th field="middle_name">Middle name</th>
               <th field="last_name">Last name</th>
               <th field="suffix">Suffix</th>
+              <th field="age">Age</th>
               <th field="birthday">Birthday</th>
               <th field="civil_status">Civil Status</th>
               <th field="occupation">Occupation</th>
@@ -135,6 +136,9 @@
             </td>
             <td>
                 {{ resident?.suffix}}
+            </td>
+            <td>
+                {{ resident?.age}}
             </td>
             <td>
                 {{resident?.birthday | date: 'mediumDate'}}

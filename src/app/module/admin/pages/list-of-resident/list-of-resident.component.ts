@@ -136,6 +136,7 @@ export class ListOfResidentComponent implements OnInit{
       {title:'Middle name',dataKey:'middle_name'},
       {title:'Last name',dataKey:'last_name'},
       {title:'Suffix',dataKey:'suffix'},
+      {title:'Age',dataKey:'age'},
       {title:'Birthday',dataKey:'birthday'},
       {title:'Civil Status',dataKey:'civil_status'},
       {title:'Gender',dataKey:'sex'},
@@ -181,7 +182,7 @@ export class ListOfResidentComponent implements OnInit{
         address = `${province}, ${city}, ${baranggay} ${purok}`
       }
       let filteredAlumni  = this.data.map((details:any)=>{
-        let { mother_family_profile, updated_at,id,brgy_id, household_no,...rest } = details; 
+        let { mother_family_profile,father_family_profile,resident_member, updated_at,id,brgy_id, household_no,...rest } = details; 
 
         return {...rest,address:address,household_no:household_no}
       })
