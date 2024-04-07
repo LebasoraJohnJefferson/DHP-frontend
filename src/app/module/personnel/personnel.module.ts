@@ -33,6 +33,9 @@ import { NewprenatalComponent } from './pages/newprenatal/newprenatal.component'
 import { EditprenatalComponent } from './pages/editprenatal/editprenatal.component';
 import { NewimmunizationComponent } from './pages/newimmunization/newimmunization.component';
 import { EditimmunizationComponent } from './pages/editimmunization/editimmunization.component';
+import { BrangayComponent } from './pages/brangay/brangay.component';
+import { ListOfResidentComponent } from './pages/list-of-resident/list-of-resident.component';
+import { ResidentFormComponent } from './components/resident-form/resident-form.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +65,9 @@ import { EditimmunizationComponent } from './pages/editimmunization/editimmuniza
     EditprenatalComponent,
     NewimmunizationComponent,
     EditimmunizationComponent,
+    BrangayComponent,
+    ListOfResidentComponent,
+    ResidentFormComponent,
   ],
   imports: [
     ReactiveFormsModule,

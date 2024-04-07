@@ -15,7 +15,7 @@
                 <option [value]="child?.id" *ngFor="let child of children">
                   {{child?.first_name + " " + child?.middle_name[0]+". " + child?.last_name | titlecase}} 
                   {{child?.suffix ?? ''}}
-                  | {{child?.birthDay | date : 'mediumDate'}}
+                  | {{child?.birthday | date : 'mediumDate'}}
                 </option>
             </select>
             </div>

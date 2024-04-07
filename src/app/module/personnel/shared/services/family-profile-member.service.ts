@@ -26,4 +26,16 @@ export class FamilyProfileMemberService {
   deletePFC(FC_id:any):any{
     return this.http.delete(`${BASEURL}/famityProfileMembers/${FC_id}`);
   }
+
+  
+
+
+  updatePFC(PfcId:number,data:any): any {
+    return this.http.put(`${BASEURL}/famityProfileMembers/${PfcId}`,data);
+  }
+
+  saveImportedFCM(FP_id:number,data:any): any {
+    return this.http.post(`${BASEURL}/admin/saveImportedFCM/${FP_id}`,data);
+  }
+
 }

@@ -19,6 +19,10 @@ export class BaranggayService {
     return this.http.get(`${BASEURL}/baranggay`)
   }
 
+  getProvinceAndCity():Observable<any>{
+    return this.http.get(`${BASEURL}/baranggay`)
+  }
+
   createBrgy(data:any):Observable<any>{
     return this.http.post(`${BASEURL}/baranggay`,data)
   }

@@ -80,8 +80,9 @@
           <td>
             <div
               class="cursor-pointer text-center text-blue-500"
-              [routerLink]="'/form/family-profile/details'"
-              [queryParams]="{ residentId: pf.resident_id }"
+              [routerLink]="'/family-profile/details'"
+              [queryParams]="{pfId:pf.id}"
+              
             >
               {{ pf.household_no }}
             </div>

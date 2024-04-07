@@ -73,10 +73,9 @@ export class FamilyProfileFormComponent implements OnInit {
 
 
   familyProfileForm:FormGroup = this._fb.group({
-    resident_id:['',Validators.required],
+    mother_id:['',Validators.required],
+    father_id:['',Validators.required],
     contact_number: ['', [Validators.required, Validators.pattern(/^(09|\+639)\d{9}$/)]],
-    mother_occupation:['',Validators.required],
-    father_occupation:['',Validators.required],
     mother_educ_attain:['',Validators.required],
     father_educ_attain:['',Validators.required],
     //drop down
@@ -120,7 +119,6 @@ export class FamilyProfileFormComponent implements OnInit {
 
   onSubmit():any{
     if(this.familyProfileForm.controls['contact_number'].invalid) return this.toast.warning("Invalid contact number")
-    if(this.FPDetails) this.familyProfileForm.controls['resident_id'].setValue(this.FPDetails.id)
     if(this.familyProfileForm.valid){
       this.isSubmitLoading=true
       this.familyProfileForm.patchValue({
@@ -160,8 +158,9 @@ export class FamilyProfileFormComponent implements OnInit {
 
   getResident(){
     this._residentService.getResidents().subscribe({
-      next:(res:any)=>{
+      next:(res)=>{
         this.residents = res?.data
+        console.log(this.residents)
       }
     })
   }
@@ -210,4 +209,3 @@ export class FamilyProfileFormComponent implements OnInit {
   }
 
 }
-

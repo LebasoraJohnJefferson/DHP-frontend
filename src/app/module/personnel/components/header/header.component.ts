@@ -26,6 +26,11 @@ export class HeaderComponent implements OnInit {
       icon: 'fal fa-chart-line',
     },
     {
+      title: 'Barangay',
+      route: 'barangay',
+      icon: 'fal fa-map',
+    },
+    {
       title: 'Events',
       route: 'events',
       icon: 'fal fa-newspaper',

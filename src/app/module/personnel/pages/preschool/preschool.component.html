@@ -69,8 +69,8 @@
              <ng-template pTemplate="body" let-pfc>
                <tr class="text-sm" [pSelectableRow]="pfc">
                 <td><a class="text-blue-500 font-bold hover:text-blue-500/80"
-                  routerLink="/form/family-profile/details"
-                  [queryParams]="{residentId:pfc?.resident_id}">{{ pfc?.name }}</a></td>
+                  routerLink="/barangay/list-of-resident"
+                  [queryParams]="{brgyId:pfc?.brgy_id}">{{ pfc?.name }}</a></td>
                  <td>{{ pfc?.preDetails?.indigenous_preschool_child==true ? 'Yes' : 'No'}}</td>
                  <td>{{ pfc?.preDetails?.address}}</td>
                  <td>{{ pfc?.age}}</td>

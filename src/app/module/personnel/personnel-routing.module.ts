@@ -18,6 +18,8 @@ import { NewprenatalComponent } from './pages/newprenatal/newprenatal.component'
 import { EditprenatalComponent } from './pages/editprenatal/editprenatal.component';
 import { NewimmunizationComponent } from './pages/newimmunization/newimmunization.component';
 import { EditimmunizationComponent } from './pages/editimmunization/editimmunization.component';
+import { BrangayComponent } from './pages/brangay/brangay.component';
+import { ListOfResidentComponent } from './pages/list-of-resident/list-of-resident.component';
 
 const routes: Routes = [
   {
@@ -27,9 +29,11 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'events', component: EventsComponent },
       { path: 'documents', component: DocumentsComponent },
+      { path: 'barangay', component: BrangayComponent },
+      { path: 'barangay/list-of-resident', component: ListOfResidentComponent },
       { path: 'form/family-profile', component: FamilyProfileComponent },
       {
-        path: 'form/family-profile/details',
+        path: 'family-profile/details',
         component: ProfileFamilyDetailsComponent,
       },
       { path: 'form/infant-records', component: InfantRecordsComponent },
