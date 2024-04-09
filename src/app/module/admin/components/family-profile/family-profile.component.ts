@@ -113,7 +113,7 @@ export class FamilyProfileComponent implements OnInit{
   exportExcel(){
     import('xlsx').then((xlsx) => {
       let filteredAlumni  = this.data.map((FP:any)=>{
-        const {mother_pregnant,father_id,mother_id,familty_planning,using_IFR,using_iodized_salt, ...rest } = FP;
+        const {mother_pregnant,id,father_id,mother_id,familty_planning,using_IFR,using_iodized_salt, ...rest } = FP;
 
         return {
           "mother_pregnant":mother_pregnant ? 'yes' : 'no',
