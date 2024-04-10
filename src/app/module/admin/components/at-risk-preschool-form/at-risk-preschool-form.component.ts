@@ -11,6 +11,7 @@ import { AtRiskPreschoolService } from '../../shared/services/atRiskPreschool.se
 export class AtRiskPreschoolFormComponent {
   @Output() triggerSubmmit:EventEmitter<any> = new EventEmitter()
   isSubmitLoading:boolean = false
+  selectedResident:any=[]
   otherFileds:any=[
     {
       title:'Weight (kg)',
@@ -58,6 +59,13 @@ export class AtRiskPreschoolFormComponent {
         this.children = res?.data
       }
     })
+  }
+
+  getResidentsWithName(): any[] {
+    return this.children.map((child:any) => ({
+        ...child,
+        name: `${child.first_name} ${child.middle_name[0]}. ${child.last_name}`
+    }));
   }
 
 

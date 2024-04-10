@@ -14,6 +14,8 @@ export class FamilyProfileFormComponent implements OnInit {
   isSubmitLoading:boolean =false
   @Input() FPDetails:any={};
   residents:any=[]
+  selectedFatherResident:any;
+  selectedMotherResident:any;
 
   extension:any=[
     {acro:'',meaning:'Not Applicable'},
@@ -151,6 +153,13 @@ export class FamilyProfileFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getResident()
+  }
+
+  getResidentsWithName(): any[] {
+    return this.residents.map((resident:any) => ({
+        ...resident,
+        name: `${resident.first_name} ${resident.middle_name[0]}. ${resident.last_name}`
+    }));
   }
 
   getResident(){

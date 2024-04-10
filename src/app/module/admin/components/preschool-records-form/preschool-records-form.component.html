@@ -5,7 +5,7 @@
         class="w-full grid gap-2"
       >
 
-          <div class="w-full">
+          <!-- <div class="w-full">
             <label class="block text-[12px] font-medium text-gray-700"
               >Child name</label
             >
@@ -20,6 +20,26 @@
                 </option>
               </select>
             </div>
+          </div> -->
+
+          <div class="w-full">
+            <label class="block text-[12px] font-medium text-gray-700"
+              >Child name</label
+            >
+            <div class="card rounded-md  border-gray-300" style="width: 100%;">
+              <p-dropdown [style]="{ minWidth: '100%', width: '100%', 'background-color':'rgba(0,0,0,.01)'}" formControlName="member_id" [options]="getResidentsWithName()" [(ngModel)]="selectedResident" optionLabel="name" optionValue="id" [filter]="true" filterBy="name" [showClear]="true" placeholder="-Choose one-">
+                  <ng-template pTemplate="selectedItem" let-selectedOption>
+                      <div class="flex align-items-center text-[12px] gap-2">
+                          <div>{{selectedOption?.first_name ? selectedOption?.first_name+' '+selectedOption?.middle_name[0]+'. '+selectedOption?.last_name : '-Choose one-'}}</div>
+                      </div>
+                  </ng-template>
+                  <ng-template let-resident pTemplate="item">
+                      <div class="flex align-items-center text-[12px] gap-2">
+                          <div>{{resident?.first_name+' '+resident?.middle_name[0]+'. '+resident?.last_name}}</div>
+                      </div>
+                  </ng-template>
+              </p-dropdown>
+          </div>
           </div>
 
 

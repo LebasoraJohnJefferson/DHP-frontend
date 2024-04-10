@@ -22,7 +22,9 @@ export class AtRiskPreschoolService {
 
 
   createPreschoolAtRisk(data:any):Observable<any>{
-    return this.http.post(`${BASEURL}/preschoolAtRisk`,data)
+    let { member_id, ...rest } = data;
+    let convertData = { member_id: member_id.toString(), ...rest };
+    return this.http.post(`${BASEURL}/preschoolAtRisk`,convertData)
   }
 
 

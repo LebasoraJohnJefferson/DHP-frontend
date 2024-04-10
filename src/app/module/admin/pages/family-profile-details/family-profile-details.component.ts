@@ -25,6 +25,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
   importedFamilyProfileMember:any=[]
   selectdata:any;
   FamDetails:any
+  selectedResident:any
   fp_id:any;
   data:any;
   residents:any;
@@ -81,6 +82,13 @@ export class FamilyProfileDetailsComponent implements OnInit{
       this.getFP()
       this.getAllFPC()
     });
+  }
+
+  getResidentsWithName(): any[] {
+    return this.residents.map((resident:any) => ({
+        ...resident,
+        name: `${resident.first_name} ${resident.middle_name[0]}. ${resident.last_name}`
+    }));
   }
 
 

@@ -12,6 +12,7 @@ export class PreschoolRecordsFormComponent {
   isSubmitLoading:boolean = false
   @Output() triggerSubmit:EventEmitter<any> = new EventEmitter();
   children:any;
+  selectedResident:any=[]
   otherFileds:any=[
     {
       title:'Address',
@@ -64,6 +65,13 @@ export class PreschoolRecordsFormComponent {
         this.children = res?.data
       }
     })
+  }
+
+  getResidentsWithName(): any[] {
+    return this.children.map((child:any) => ({
+        ...child,
+        name: `${child.first_name} ${child.middle_name[0]}. ${child.last_name}`
+    }));
   }
 
   

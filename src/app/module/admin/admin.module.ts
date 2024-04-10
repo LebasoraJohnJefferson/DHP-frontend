@@ -55,6 +55,7 @@ import { NewprenatalComponent } from './pages/newprenatal/newprenatal.component'
 import { EditprenatalComponent } from './pages/editprenatal/editprenatal.component';
 import { NewimmunizationComponent } from './pages/newimmunization/newimmunization.component';
 import { EditimmunizationComponent } from './pages/editimmunization/editimmunization.component';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { EditimmunizationComponent } from './pages/editimmunization/editimmuniza
     EditimmunizationComponent,
   ],
   imports: [
+    DropdownModule,
     PrimengModule,
     FormsModule,
     CommonModule,

@@ -19,7 +19,9 @@ export class InfantService {
   }
 
   addInfantWeight(data:any):Observable<any>{
-    return this.http.post(`${BASEURL}/infant`,data);
+    let { member_id, ...rest } = data;
+    let convertData = { member_id: member_id.toString(), ...rest };
+    return this.http.post(`${BASEURL}/infant`,convertData);
   }
 
   getAllInfantRecords(){

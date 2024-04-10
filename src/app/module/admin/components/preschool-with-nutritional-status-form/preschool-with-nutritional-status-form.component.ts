@@ -12,7 +12,7 @@ import { PreschoolService } from '../../shared/services/preschool.service';
 export class PreschoolWithNutritionalStatusFormComponent implements OnInit{
   @Output() triggerSubmmit:EventEmitter<any> = new EventEmitter();
   isSubmitLoading:boolean = false
-
+  selectedResident:any=[];
   children:any=[];
 
   otherFileds:any=[
@@ -53,6 +53,13 @@ export class PreschoolWithNutritionalStatusFormComponent implements OnInit{
 
   ngOnInit(): void {
     this.getAllPreschoolder()
+  }
+
+  getResidentsWithName(): any[] {
+    return this.children.map((child:any) => ({
+        ...child,
+        name: `${child.first_name} ${child.middle_name[0]}. ${child.last_name}`
+    }));
   }
 
 
