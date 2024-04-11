@@ -29,6 +29,7 @@ export class ProfileFamilyDetailsComponent implements OnInit{
   fp_id:any;
   data:any;
   residents:any;
+  selectedResident:any=[]
   cols:any;
   pfc:any;
   nursingTypes:string[]=['EBF','Mixed feeding','Bottle-fed','Others']
@@ -83,6 +84,14 @@ export class ProfileFamilyDetailsComponent implements OnInit{
       this.getAllFPC()
     });
   }
+
+  getResidentsWithName(): any[] {
+    return this.residents.map((resident:any) => ({
+        ...resident,
+        name: `${resident.first_name} ${resident.middle_name[0]}. ${resident.last_name}`
+    }));
+  }
+
 
 
   getFP(){

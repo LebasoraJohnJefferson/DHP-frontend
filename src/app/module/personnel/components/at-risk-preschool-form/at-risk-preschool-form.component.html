@@ -6,19 +6,23 @@
     >
 
       <div class="w-full">
-          <label class="block text-[12px] font-medium text-gray-700"
+        <label class="block text-[12px] font-medium text-gray-700"
           >Name of child</label
-          >
-          <div class="mt-1 relative rounded-md w-full">
-          <select formControlName="member_id" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50">
-              <option  disabled>Select child</option>
-              <option [value]="child?.id" *ngFor="let child of children">
-                {{child?.first_name + " " + child?.middle_name[0]+". " + child?.last_name | titlecase}} 
-                {{child?.suffix ?? ''}}
-                | {{child?.birthday | date : 'mediumDate'}}
-              </option>
-          </select>
-          </div>
+        >
+        <div class="card rounded-md  border-gray-300" style="width: 100%;">
+          <p-dropdown [style]="{ minWidth: '100%', width: '100%', 'background-color':'rgba(0,0,0,.01)'}" formControlName="member_id" [options]="getResidentsWithName()" [(ngModel)]="selectedResident" optionLabel="name" optionValue="id" [filter]="true" filterBy="name" [showClear]="true" placeholder="-Choose one-">
+              <ng-template pTemplate="selectedItem" let-selectedOption>
+                  <div class="flex align-items-center text-[12px] gap-2">
+                      <div>{{selectedOption?.first_name ? selectedOption?.first_name+' '+selectedOption?.middle_name[0]+'. '+selectedOption?.last_name : '-Choose one-'}}</div>
+                  </div>
+              </ng-template>
+              <ng-template let-resident pTemplate="item">
+                  <div class="flex align-items-center text-[12px] gap-2">
+                      <div>{{resident?.first_name+' '+resident?.middle_name[0]+'. '+resident?.last_name}}</div>
+                  </div>
+              </ng-template>
+          </p-dropdown>
+      </div>
       </div>
 
 

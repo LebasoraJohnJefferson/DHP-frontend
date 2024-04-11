@@ -14,7 +14,7 @@ export class PreschoolWithNutritionalStatusFormComponent implements OnInit{
   isSubmitLoading:boolean = false
 
   children:any=[];
-
+  selectedResident:any=[];
   otherFileds:any=[
     {
       title:'Date of OPT plus',
@@ -53,6 +53,13 @@ export class PreschoolWithNutritionalStatusFormComponent implements OnInit{
 
   ngOnInit(): void {
     this.getAllPreschoolder()
+  }
+
+  getResidentsWithName(): any[] {
+    return this.children.map((child:any) => ({
+        ...child,
+        name: `${child.first_name} ${child.middle_name[0]}. ${child.last_name}`
+    }));
   }
 
 

@@ -36,6 +36,7 @@ import { EditimmunizationComponent } from './pages/editimmunization/editimmuniza
 import { BrangayComponent } from './pages/brangay/brangay.component';
 import { ListOfResidentComponent } from './pages/list-of-resident/list-of-resident.component';
 import { ResidentFormComponent } from './components/resident-form/resident-form.component';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { ResidentFormComponent } from './components/resident-form/resident-form.
     FormsModule,
     PersonnelRoutingModule,
     StepsModule,
+    DropdownModule
   ],
 })
 export class PersonnelModule {}

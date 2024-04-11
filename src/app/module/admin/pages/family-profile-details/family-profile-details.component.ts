@@ -25,7 +25,7 @@ export class FamilyProfileDetailsComponent implements OnInit{
   importedFamilyProfileMember:any=[]
   selectdata:any;
   FamDetails:any
-  selectedResident:any
+  selectedResident:any=[]
   fp_id:any;
   data:any;
   residents:any;

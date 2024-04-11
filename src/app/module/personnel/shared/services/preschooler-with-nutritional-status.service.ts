@@ -18,7 +18,9 @@ export class PreschoolerWithNutritionalStatusService {
 
 
   postPreschool(data:any):Observable<any> {
-    return this.http.post(`${BASEURL}/preschoolWIthNutrionalStatus`,data);
+    let { member_id, ...rest } = data;
+    let convertData = { member_id: member_id.toString(), ...rest };
+    return this.http.post(`${BASEURL}/preschoolWIthNutrionalStatus`,convertData);
   }
 
 

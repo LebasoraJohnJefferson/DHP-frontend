@@ -12,6 +12,7 @@ export class InfantRecordsFormComponent implements OnInit{
   @Output() triggerSubmmit:EventEmitter<any> = new EventEmitter();
   isSubmitLoading:boolean = false
   children:any=[];
+  selectedResident:any=[];
   otherFileds:any=[
     {
       title:'Weight',
@@ -43,6 +44,13 @@ export class InfantRecordsFormComponent implements OnInit{
         this.children = res?.data
       }
     })
+  }
+
+  getResidentsWithName(): any[] {
+    return this.children.map((child:any) => ({
+        ...child,
+        name: `${child.first_name} ${child.middle_name[0]}. ${child.last_name}`
+    }));
   }
 
 
