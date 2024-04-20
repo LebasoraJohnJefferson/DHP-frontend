@@ -85,8 +85,8 @@ export class SidebarComponent implements OnInit {
           link: '/admin/forms/at-risk-preschool',
           label: 'Affected/at risk preschool',
         },
-        { link: '/admin/forms/prenatal', label: 'Prenatal' },
-        { link: '/admin/forms/immunization', label: 'Immunization' },
+        // { link: '/admin/forms/prenatal', label: 'Prenatal' },
+        // { link: '/admin/forms/immunization', label: 'Immunization' },
       ],
     },
     {

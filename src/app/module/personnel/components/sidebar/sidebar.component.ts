@@ -58,16 +58,16 @@ export class SidebarComponent implements OnInit {
       route: '/form/preschool-at-risk',
       icon: 'fal fa-file-invoice',
     },
-    {
-      title: 'Prenatal',
-      route: '/form/prenatal',
-      icon: 'fal fa-file-invoice',
-    },
-    {
-      title: 'Immunization',
-      route: '/form/immunization',
-      icon: 'fal fa-file-invoice',
-    },
+    // {
+    //   title: 'Prenatal',
+    //   route: '/form/prenatal',
+    //   icon: 'fal fa-file-invoice',
+    // },
+    // {
+    //   title: 'Immunization',
+    //   route: '/form/immunization',
+    //   icon: 'fal fa-file-invoice',
+    // },
   ];
 
   constructor(private route: ActivatedRoute, private router: Router) {}
