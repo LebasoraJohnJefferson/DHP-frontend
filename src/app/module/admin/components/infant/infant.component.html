@@ -88,7 +88,7 @@
                   child?.info?.f_p_m?.last_name + ' ' | titlecase}} 
               {{ child?.info?.f_p_m?.suffix ? child?.info?.f_p_m?.suffix : ''}}
             </a></td>
-            <td>{{child?.ageInMoth}}</td>
+            <td>{{child?.ageInMoth}} {{child?.ageInMoth>1 ? 'months' : 'month'}} old</td>
             <td>{{ child?.info?.weight }}</td>
             <td>{{ child?.status }}</td>
 

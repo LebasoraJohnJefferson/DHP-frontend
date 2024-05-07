@@ -79,6 +79,10 @@
                 <div class="text-[10px] md:text-[12px]">
                   {{ dateFormat(log.createdAt) }}
                 </div>
+                <div class="text-[10px] md:text-[12px] font-bold tex-red-500 flex items-center gap-2">
+                  {{log?.User?.name}}
+                  <p class="bg-green-200 text-green-800 font-semibold px-[6px] h-fit text-[8px] md:text-[10px] rounded-md mr-1">Personnel</p>
+                </div>
                 <div class="text-[12px] md:text-sm">{{ log.description }}</div>
               </div>
             </ng-template>

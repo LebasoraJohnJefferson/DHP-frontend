@@ -60,7 +60,6 @@ export class LogsComponent implements OnInit {
       (response: any) => {
         this.logs = response.data;
         this.isLoading = false;
-
       },
       (error: any) => {
         console.log(error);

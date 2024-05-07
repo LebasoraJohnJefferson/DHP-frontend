@@ -67,7 +67,7 @@
               routerLink="/barangay/list-of-resident"
               [queryParams]="{brgyId:child?.brgy_id}"
             >{{ child?.info?.f_p_m?.first_name+' '+ child?.info?.f_p_m?.middle_name[0]+'. '+child?.info?.f_p_m?.last_name | titlecase}} {{child?.suffix ?? '' }}</a></td>
-            <td>{{child?.ageInMoth}}</td>
+            <td>{{child?.ageInMoth}} {{child?.ageInMoth>1 ? 'months' : 'month'}} old</td>
             <td>{{ child?.info?.weight }}</td>
             <td>{{ child?.status }}</td>
 
