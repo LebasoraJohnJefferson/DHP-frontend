@@ -18,7 +18,7 @@
               </ng-template>
               <ng-template let-resident pTemplate="item">
                   <div class="flex align-items-center text-[12px] gap-2">
-                      <div>{{resident?.first_name+' '+resident?.middle_name[0]+'. '+resident?.last_name}}</div>
+                      <div>{{resident?.first_name+' '+resident?.middle_name[0]+'. '+resident?.last_name + ' ' + resident?.suffix}}</div>
                   </div>
               </ng-template>
           </p-dropdown>
